@@ -18,6 +18,7 @@
 		<module>cell-dependencies</module>
 		<module>cell-im</module>
 		<module>cell-gim</module>
+		<module>cell-user</module>
   </modules>
 
 	<properties>

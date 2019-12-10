@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "tech.qijin.cell.im.db.dao",
         sqlSessionFactoryRef = "imSqlSessionFactory",
         sqlSessionTemplateRef = "imSqlSessionTemplate")
-public class ImDatasourceConfig {
+public class CellIMDatasourceConfig {
 
     @Primary
     @Bean("dataSourceIm")

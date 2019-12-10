@@ -9,6 +9,6 @@ import org.springframework.context.annotation.*;
  **/
 @Configuration
 @ComponentScan(value = {"tech.qijin.cell.im.db", "tech.qijin.cell.im.service"})
-@Import(ImDatasourceConfig.class)
-public class ImAutoConfiguration {
+@Import(CellIMDatasourceConfig.class)
+public class CellIMAutoConfiguration {
 }
