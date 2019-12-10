@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author UnitTest
  */
 
-@SpringBootApplication(scanBasePackages = {"tech.qijin.cell.im"})
+@SpringBootApplication(scanBasePackages = {"tech.qijin.cell.gim"})
 @MapperScan("tech.qijin.cell.im.db.dao")
 public class CellDemoTest {
 

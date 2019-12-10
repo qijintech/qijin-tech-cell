@@ -15,13 +15,13 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>cell-dependencies</module>
 		<module>cell-im</module>
 		<module>cell-gim</module>
   </modules>
 
 	<properties>
 		<util4j.project.version>1.0.0</util4j.project.version>
-		<usercenter.client.version>1.0.0-SNAPSHOT</usercenter.client.version>
 	</properties>
 
 	<dependencyManagement>
@@ -55,15 +55,11 @@
 		</dependency>
 		<dependency>
 			<groupId>tech.qijin.util4j</groupId>
-			<artifactId>util4j-mybatis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>tech.qijin.util4j</groupId>
 			<artifactId>util4j-aop</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>tech.qijin.util4j</groupId>
-			<artifactId>util4j-redis</artifactId>
+			<artifactId>util4j-config</artifactId>
 		</dependency>
 	</dependencies>
 

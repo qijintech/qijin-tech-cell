@@ -1,15 +1,31 @@
+
+server:
+  port: 8080
+
+# logging config
+logging:
+  config: classpath:log4j2.xml
+  level:
+    tech.qijin.cell.gim.db: DEBUG
+
 # profile config
 # 参考地址: https://www.baeldung.com/spring-profiles
 spring:
-  profiles:
-    active: @spring.profiles.active@
+  datasource:
+    druid:
+      gim:
+        url: jdbc:mysql://127.0.0.1:3306/cell_gim?useUnicode=true&characterEncoding=utf-8
+        username: admin
+        password: Admin_@123
+        driver-class-name: com.mysql.jdbc.Driver
+        initial-size: 10
+        max-active: 30
+        min-idle: 5
+        max-wait: 60
 
 # mybatis config
 mybatis:
   config-location: classpath:sqlMapConfig.xml
 
-# logging config
-logging:
-  level:
-    tech.qijin.cell.gim.db: DEBUG
+
 

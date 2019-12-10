@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>cell-build</artifactId>
+        <groupId>tech.qijin.cell</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>cell-dependencies</artifactId>
+    <groupId>tech.qijin.cell</groupId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <cell.version>1.0.0-SNAPSHOT</cell.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--================下面是对cell包的依赖配置=============-->
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-im</artifactId>
+                <version>${cell.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-gim</artifactId>
+                <version>${cell.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
