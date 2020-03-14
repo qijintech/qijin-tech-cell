@@ -1,4 +1,4 @@
-package tech.qijin.cell.im.service.bo;
+package tech.qijin.cell.im.base;
 
 import lombok.Data;
 
@@ -8,9 +8,10 @@ import lombok.Data;
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 @Data
-public class ContentAudio extends Content {
-    // 音频地址
+public class ContentSticker extends AbstractContent {
+    // 表情名称
+    private String name;
+
+    // 表情地址
     private String url;
-    // 音频时长
-    private Integer duration;
 }

@@ -1,4 +1,4 @@
-package tech.qijin.cell.im.service.bo;
+package tech.qijin.cell.im.base;
 
 import lombok.Data;
 
@@ -8,6 +8,5 @@ import lombok.Data;
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 @Data
-public class ContentImg extends Content {
-    private String url;
+public abstract class AbstractContent {
 }

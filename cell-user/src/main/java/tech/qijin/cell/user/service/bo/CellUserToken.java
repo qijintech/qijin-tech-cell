@@ -1,13 +1,12 @@
-package tech.qijin.cell.im.service.bo;
+package tech.qijin.cell.user.service.bo;
 
 import lombok.Data;
 
 /**
  * @author michealyang
- * @date 2019-11-15
+ * @date 2020-01-05
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 @Data
-public class ContentVideo extends Content {
-
+public class CellUserToken {
 }
