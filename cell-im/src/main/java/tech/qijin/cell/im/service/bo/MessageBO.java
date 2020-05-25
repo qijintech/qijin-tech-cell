@@ -1,7 +1,8 @@
 package tech.qijin.cell.im.service.bo;
 
+import lombok.Builder;
 import lombok.Data;
-import tech.qijin.cell.im.db.model.ImConversation;
+import tech.qijin.cell.im.db.model.ImMessage;
 
 /**
  * @author michealyang
@@ -9,8 +10,7 @@ import tech.qijin.cell.im.db.model.ImConversation;
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 @Data
-public class ConversationBo {
-    private ImConversation conversation;
-    // 最后一条消息
-    private MessageBO messageBo;
+@Builder
+public class MessageBO {
+    private ImMessage imMessage;
 }

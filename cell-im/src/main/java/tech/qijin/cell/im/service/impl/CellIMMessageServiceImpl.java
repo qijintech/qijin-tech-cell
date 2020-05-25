@@ -1,22 +1,25 @@
 package tech.qijin.cell.im.service.impl;
 
-import lombok.Builder;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.qijin.cell.im.base.MessageSendVo;
-import tech.qijin.cell.im.db.model.ImMessageContent;
-import tech.qijin.cell.im.db.model.ImMessageInfo;
-import tech.qijin.cell.im.service.CellIMConversationService;
+import tech.qijin.cell.im.base.Constants;
+import tech.qijin.cell.im.base.MessageSendVO;
+import tech.qijin.cell.im.db.model.ImConversation;
+import tech.qijin.cell.im.helper.ImConversationHelper;
+import tech.qijin.cell.im.helper.ImMessageHelper;
+import tech.qijin.cell.im.helper.judge.ImJudgeChain;
+import tech.qijin.cell.im.helper.judge.Judgement;
 import tech.qijin.cell.im.service.CellIMMessageService;
-import tech.qijin.cell.im.service.CellIMUnreadService;
-import tech.qijin.cell.im.service.bo.MessageBo;
+import tech.qijin.cell.im.service.bo.MessageBO;
+import tech.qijin.cell.im.service.strategy.ImMessageSendStrategyFactory;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.utils.*;
 
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author michealyang
@@ -27,35 +30,65 @@ import java.util.List;
 @Service
 public class CellIMMessageServiceImpl implements CellIMMessageService {
     @Autowired
-    private CellIMConversationService conversationService;
+    private ImMessageHelper imMessageHelper;
     @Autowired
-    private CellIMUnreadService unreadService;
+    private ImConversationHelper imConversationHelper;
+    @Autowired
+    private ImJudgeChain imJudgeChain;
+    @Autowired
+    private ImMessageSendStrategyFactory imMessageSendStrategyFactory;
 
 
     @Override
-    public Long sendMessage(MessageSendVo messageSendVo) {
-        MAssert.isTrue(ValidationUtil.isValid(messageSendVo), ResEnum.INVALID_PARAM);
-        Date now = DateUtil.now();
-        // 插入消息
-        MessageBo messageBo = insertMessage(messageSendVo, now);
-        // 更新会话信息 - 忽略异常
-        Util.runIgnoreEx(() -> conversationService.insertOrUpdateConversation(messageSendVo.getUid(), messageSendVo.getToUid(), messageBo),
-                "insert or update conversation failed");
-        // 更新未读数 - 异步更新
-        AsyncUtil.submit(() -> unreadService.addUnread(messageSendVo.getUid(), messageSendVo.getToUid(), 1));
-        return null;
-    }
-
-
-    @Override
-    public List<MessageBo> listUnreadMessage(Long uid, Long peerUid, Long lastMsgId, Integer count) {
-        return null;
+    public MessageBO sendMessage(MessageSendVO messageSendVO) {
+        ValidationUtil.validate(messageSendVO);
+        Judgement judgement = imJudgeChain.doJudge(messageSendVO);
+        return imMessageSendStrategyFactory
+                .getStrategy(judgement)
+                .sendMessage(messageSendVO, judgement);
     }
 
     @Override
-    public List<MessageBo> listHistoryMessage(Long uid, Long peerUid, Long lastMsgId, Integer count) {
-        // 要排除删除的消息
-        return null;
+    public List<MessageBO> listUnreadMessage(Long uid, Long peerUid, Long lastMsgId, Integer count) {
+        MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
+        Optional<ImConversation> imConversation = imConversationHelper.getConversationByUid(uid, peerUid);
+        if (!imConversation.isPresent()) {
+            log.info("conversation not exists. uid={}, peerUid={}", uid, peerUid);
+            return Collections.EMPTY_LIST;
+        }
+        if (NumberUtil.nullOrZero(count)) {
+            count = Constants.DEFAULT_PAGE_SIZE;
+        }
+        long minMsgId = lastMsgId != null ? lastMsgId : 0;
+        if (!NumberUtil.nullOrZero(imConversation.get().getLastClearMsg())) {
+            minMsgId = imConversation.get().getLastClearMsg().compareTo(minMsgId) > 0
+                    ? imConversation.get().getLastClearMsg()
+                    : minMsgId;
+        }
+        return imMessageHelper.pageMessage(uid, peerUid, Long.MAX_VALUE, minMsgId, count)
+                .stream()
+                .map(imMessage -> MessageBO.builder().imMessage(imMessage).build())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MessageBO> listHistoryMessage(Long uid, Long peerUid, Long lastMsgId, Integer count) {
+        MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
+        Optional<ImConversation> imConversation = imConversationHelper.getConversationByUid(uid, peerUid);
+        if (!imConversation.isPresent()) {
+            log.info("conversation not exists. uid={}, peerUid={}", uid, peerUid);
+            return Collections.EMPTY_LIST;
+        }
+        if (NumberUtil.nullOrZero(lastMsgId)) {
+            lastMsgId = Long.MAX_VALUE;
+        }
+        if (NumberUtil.nullOrZero(count)) {
+            count = Constants.DEFAULT_PAGE_SIZE;
+        }
+        return imMessageHelper.pageMessage(uid, peerUid, lastMsgId, imConversation.get().getLastClearMsg(), count)
+                .stream()
+                .map(imMessage -> MessageBO.builder().imMessage(imMessage).build())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -83,56 +116,5 @@ public class CellIMMessageServiceImpl implements CellIMMessageService {
     @Override
     public boolean recallMessage(Long uid, Long msgId) {
         return false;
-    }
-
-
-    private MessageBo insertMessage(MessageSendVo messageSendVo, Date now) {
-        // 获取msgId，versionId等
-        MessageIds messageIds = genMessageIds(messageSendVo.getUid(), messageSendVo.getToUid(), now);
-        // 插入消息信息
-        ImMessageInfo messageInfo = insertOrUpdateMessageInfo(messageSendVo, messageIds);
-        // 插入消息内容实体
-        ImMessageContent messageContent = insertMessageContent(messageSendVo, messageIds.getMsgId());
-        // 更新缓存。出现异常不影响主流程
-        Util.runIgnoreEx(() -> refreshMessageCache(), "refresh message cache fail");
-        return MessageBo.builder()
-                .messageInfo(messageInfo)
-                .messageContent(messageContent)
-                .build();
-    }
-
-    @Data
-    @Builder
-    class MessageIds {
-        private Long msgId;
-        private Long versionId;
-    }
-
-    private MessageIds genMessageIds(Long uid, Long peerUid, Date now) {
-        Long msgId = genMsgId(uid, peerUid, now);
-        Long versionId = genVersionId(uid, peerUid, now);
-        return MessageIds.builder()
-                .msgId(msgId)
-                .versionId(versionId)
-                .build();
-    }
-
-    private Long genMsgId(Long uid, Long peerUid, Date now) {
-        return 0L;
-    }
-
-    private Long genVersionId(Long uid, Long peerUid, Date now) {
-        return 0L;
-    }
-
-    private ImMessageContent insertMessageContent(MessageSendVo messageSendVo, Long msgId) {
-        return null;
-    }
-
-    private ImMessageInfo insertOrUpdateMessageInfo(MessageSendVo messageSendVo, MessageIds messageIds) {
-        return null;
-    }
-
-    private void refreshMessageCache() {
     }
 }

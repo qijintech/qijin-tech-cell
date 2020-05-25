@@ -1,8 +1,8 @@
 package tech.qijin.cell.im.db.dao;
 
-import tech.qijin.cell.im.db.mapper.ImMessageInfoMapper;
-import tech.qijin.cell.im.db.mapper.ImMessageInfoSqlProvider;
-import tech.qijin.cell.im.db.model.ImMessageInfo;
+import tech.qijin.cell.im.db.mapper.ImMessageMapper;
+import tech.qijin.cell.im.db.mapper.ImMessageSqlProvider;
+import tech.qijin.cell.im.db.model.ImMessage;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.InsertProvider;
 import com.google.common.collect.Lists;
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
  * @author: SYSTEM
  **/
 
-public interface ImMessageInfoDao extends ImMessageInfoMapper {
+public interface ImMessageDao extends ImMessageMapper {
 
 	@InsertProvider(type = SqlProvider.class, method = "batchInsert")
-	int batchInsert(@Param("records") List<ImMessageInfo> records);
+	int batchInsert(@Param("records") List<ImMessage> records);
 
 	class SqlProvider {
 		private static final String VALUES = "VALUES";
-		ImMessageInfoSqlProvider provider = new ImMessageInfoSqlProvider();
+		ImMessageSqlProvider provider = new ImMessageSqlProvider();
 
 		public String batchInsert(Map<String, Object> param) {
-			List<ImMessageInfo> records = (List<ImMessageInfo>) param.get("records");
+			List<ImMessage> records = (List<ImMessage>) param.get("records");
 			return genSql(records);
 		}
 
-		private String genSql(List<ImMessageInfo> records) {
+		private String genSql(List<ImMessage> records) {
 			List<String> sqls = records.stream()
 					.map(record -> provider.insertSelective(record))
 					.collect(Collectors.toList());

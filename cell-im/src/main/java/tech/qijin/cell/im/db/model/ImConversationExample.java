@@ -165,363 +165,123 @@ public class ImConversationExample {
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdIsNull() {
-            addCriterion("owner_id is null");
+        public Criteria andUidIsNull() {
+            addCriterion("uid is null");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdIsNotNull() {
-            addCriterion("owner_id is not null");
+        public Criteria andUidIsNotNull() {
+            addCriterion("uid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdEqualTo(Long value) {
-            addCriterion("owner_id =", value, "ownerId");
+        public Criteria andUidEqualTo(Long value) {
+            addCriterion("uid =", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdNotEqualTo(Long value) {
-            addCriterion("owner_id <>", value, "ownerId");
+        public Criteria andUidNotEqualTo(Long value) {
+            addCriterion("uid <>", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdGreaterThan(Long value) {
-            addCriterion("owner_id >", value, "ownerId");
+        public Criteria andUidGreaterThan(Long value) {
+            addCriterion("uid >", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("owner_id >=", value, "ownerId");
+        public Criteria andUidGreaterThanOrEqualTo(Long value) {
+            addCriterion("uid >=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdLessThan(Long value) {
-            addCriterion("owner_id <", value, "ownerId");
+        public Criteria andUidLessThan(Long value) {
+            addCriterion("uid <", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdLessThanOrEqualTo(Long value) {
-            addCriterion("owner_id <=", value, "ownerId");
+        public Criteria andUidLessThanOrEqualTo(Long value) {
+            addCriterion("uid <=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdIn(List<Long> values) {
-            addCriterion("owner_id in", values, "ownerId");
+        public Criteria andUidIn(List<Long> values) {
+            addCriterion("uid in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdNotIn(List<Long> values) {
-            addCriterion("owner_id not in", values, "ownerId");
+        public Criteria andUidNotIn(List<Long> values) {
+            addCriterion("uid not in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdBetween(Long value1, Long value2) {
-            addCriterion("owner_id between", value1, value2, "ownerId");
+        public Criteria andUidBetween(Long value1, Long value2) {
+            addCriterion("uid between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdNotBetween(Long value1, Long value2) {
-            addCriterion("owner_id not between", value1, value2, "ownerId");
+        public Criteria andUidNotBetween(Long value1, Long value2) {
+            addCriterion("uid not between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdIsNull() {
-            addCriterion("peer_id is null");
+        public Criteria andPeerUidIsNull() {
+            addCriterion("peer_uid is null");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdIsNotNull() {
-            addCriterion("peer_id is not null");
+        public Criteria andPeerUidIsNotNull() {
+            addCriterion("peer_uid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdEqualTo(Long value) {
-            addCriterion("peer_id =", value, "peerId");
+        public Criteria andPeerUidEqualTo(Long value) {
+            addCriterion("peer_uid =", value, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdNotEqualTo(Long value) {
-            addCriterion("peer_id <>", value, "peerId");
+        public Criteria andPeerUidNotEqualTo(Long value) {
+            addCriterion("peer_uid <>", value, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdGreaterThan(Long value) {
-            addCriterion("peer_id >", value, "peerId");
+        public Criteria andPeerUidGreaterThan(Long value) {
+            addCriterion("peer_uid >", value, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("peer_id >=", value, "peerId");
+        public Criteria andPeerUidGreaterThanOrEqualTo(Long value) {
+            addCriterion("peer_uid >=", value, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdLessThan(Long value) {
-            addCriterion("peer_id <", value, "peerId");
+        public Criteria andPeerUidLessThan(Long value) {
+            addCriterion("peer_uid <", value, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdLessThanOrEqualTo(Long value) {
-            addCriterion("peer_id <=", value, "peerId");
+        public Criteria andPeerUidLessThanOrEqualTo(Long value) {
+            addCriterion("peer_uid <=", value, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdIn(List<Long> values) {
-            addCriterion("peer_id in", values, "peerId");
+        public Criteria andPeerUidIn(List<Long> values) {
+            addCriterion("peer_uid in", values, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdNotIn(List<Long> values) {
-            addCriterion("peer_id not in", values, "peerId");
+        public Criteria andPeerUidNotIn(List<Long> values) {
+            addCriterion("peer_uid not in", values, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdBetween(Long value1, Long value2) {
-            addCriterion("peer_id between", value1, value2, "peerId");
+        public Criteria andPeerUidBetween(Long value1, Long value2) {
+            addCriterion("peer_uid between", value1, value2, "peerUid");
             return (Criteria) this;
         }
 
-        public Criteria andPeerIdNotBetween(Long value1, Long value2) {
-            addCriterion("peer_id not between", value1, value2, "peerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidIsNull() {
-            addCriterion("last_msgid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidIsNotNull() {
-            addCriterion("last_msgid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidEqualTo(Long value) {
-            addCriterion("last_msgid =", value, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidNotEqualTo(Long value) {
-            addCriterion("last_msgid <>", value, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidGreaterThan(Long value) {
-            addCriterion("last_msgid >", value, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidGreaterThanOrEqualTo(Long value) {
-            addCriterion("last_msgid >=", value, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidLessThan(Long value) {
-            addCriterion("last_msgid <", value, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidLessThanOrEqualTo(Long value) {
-            addCriterion("last_msgid <=", value, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidIn(List<Long> values) {
-            addCriterion("last_msgid in", values, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidNotIn(List<Long> values) {
-            addCriterion("last_msgid not in", values, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidBetween(Long value1, Long value2) {
-            addCriterion("last_msgid between", value1, value2, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastMsgidNotBetween(Long value1, Long value2) {
-            addCriterion("last_msgid not between", value1, value2, "lastMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidIsNull() {
-            addCriterion("last_del_msgid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidIsNotNull() {
-            addCriterion("last_del_msgid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidEqualTo(Long value) {
-            addCriterion("last_del_msgid =", value, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidNotEqualTo(Long value) {
-            addCriterion("last_del_msgid <>", value, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidGreaterThan(Long value) {
-            addCriterion("last_del_msgid >", value, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidGreaterThanOrEqualTo(Long value) {
-            addCriterion("last_del_msgid >=", value, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidLessThan(Long value) {
-            addCriterion("last_del_msgid <", value, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidLessThanOrEqualTo(Long value) {
-            addCriterion("last_del_msgid <=", value, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidIn(List<Long> values) {
-            addCriterion("last_del_msgid in", values, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidNotIn(List<Long> values) {
-            addCriterion("last_del_msgid not in", values, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidBetween(Long value1, Long value2) {
-            addCriterion("last_del_msgid between", value1, value2, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastDelMsgidNotBetween(Long value1, Long value2) {
-            addCriterion("last_del_msgid not between", value1, value2, "lastDelMsgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIsNull() {
-            addCriterion("create_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIsNotNull() {
-            addCriterion("create_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterion("create_time =", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterion("create_time <>", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterion("create_time >", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("create_time >=", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeLessThan(Date value) {
-            addCriterion("create_time <", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("create_time <=", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterion("create_time between", value1, value2, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("create_time not between", value1, value2, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeIsNull() {
-            addCriterion("update_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeIsNotNull() {
-            addCriterion("update_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeEqualTo(Date value) {
-            addCriterion("update_time =", value, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeNotEqualTo(Date value) {
-            addCriterion("update_time <>", value, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeGreaterThan(Date value) {
-            addCriterion("update_time >", value, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("update_time >=", value, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeLessThan(Date value) {
-            addCriterion("update_time <", value, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("update_time <=", value, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
-            addCriterion("update_time between", value1, value2, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("update_time not between", value1, value2, "updateTime");
+        public Criteria andPeerUidNotBetween(Long value1, Long value2) {
+            addCriterion("peer_uid not between", value1, value2, "peerUid");
             return (Criteria) this;
         }
 
@@ -585,123 +345,313 @@ public class ImConversationExample {
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusIsNull() {
-            addCriterion("del_status is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusIsNotNull() {
-            addCriterion("del_status is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusEqualTo(Byte value) {
-            addCriterion("del_status =", value, "delStatus");
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusNotEqualTo(Byte value) {
-            addCriterion("del_status <>", value, "delStatus");
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusGreaterThan(Byte value) {
-            addCriterion("del_status >", value, "delStatus");
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("del_status >=", value, "delStatus");
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusLessThan(Byte value) {
-            addCriterion("del_status <", value, "delStatus");
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("del_status <=", value, "delStatus");
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusIn(List<Byte> values) {
-            addCriterion("del_status in", values, "delStatus");
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusNotIn(List<Byte> values) {
-            addCriterion("del_status not in", values, "delStatus");
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusBetween(Byte value1, Byte value2) {
-            addCriterion("del_status between", value1, value2, "delStatus");
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDelStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("del_status not between", value1, value2, "delStatus");
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdIsNull() {
-            addCriterion("sort_id is null");
+        public Criteria andLastMsgIsNull() {
+            addCriterion("last_msg is null");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdIsNotNull() {
-            addCriterion("sort_id is not null");
+        public Criteria andLastMsgIsNotNull() {
+            addCriterion("last_msg is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdEqualTo(Long value) {
-            addCriterion("sort_id =", value, "sortId");
+        public Criteria andLastMsgEqualTo(String value) {
+            addCriterion("last_msg =", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdNotEqualTo(Long value) {
-            addCriterion("sort_id <>", value, "sortId");
+        public Criteria andLastMsgNotEqualTo(String value) {
+            addCriterion("last_msg <>", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdGreaterThan(Long value) {
-            addCriterion("sort_id >", value, "sortId");
+        public Criteria andLastMsgGreaterThan(String value) {
+            addCriterion("last_msg >", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("sort_id >=", value, "sortId");
+        public Criteria andLastMsgGreaterThanOrEqualTo(String value) {
+            addCriterion("last_msg >=", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdLessThan(Long value) {
-            addCriterion("sort_id <", value, "sortId");
+        public Criteria andLastMsgLessThan(String value) {
+            addCriterion("last_msg <", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdLessThanOrEqualTo(Long value) {
-            addCriterion("sort_id <=", value, "sortId");
+        public Criteria andLastMsgLessThanOrEqualTo(String value) {
+            addCriterion("last_msg <=", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdIn(List<Long> values) {
-            addCriterion("sort_id in", values, "sortId");
+        public Criteria andLastMsgLike(String value) {
+            addCriterion("last_msg like", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdNotIn(List<Long> values) {
-            addCriterion("sort_id not in", values, "sortId");
+        public Criteria andLastMsgNotLike(String value) {
+            addCriterion("last_msg not like", value, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdBetween(Long value1, Long value2) {
-            addCriterion("sort_id between", value1, value2, "sortId");
+        public Criteria andLastMsgIn(List<String> values) {
+            addCriterion("last_msg in", values, "lastMsg");
             return (Criteria) this;
         }
 
-        public Criteria andSortIdNotBetween(Long value1, Long value2) {
-            addCriterion("sort_id not between", value1, value2, "sortId");
+        public Criteria andLastMsgNotIn(List<String> values) {
+            addCriterion("last_msg not in", values, "lastMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgBetween(String value1, String value2) {
+            addCriterion("last_msg between", value1, value2, "lastMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgNotBetween(String value1, String value2) {
+            addCriterion("last_msg not between", value1, value2, "lastMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgIsNull() {
+            addCriterion("last_clear_msg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgIsNotNull() {
+            addCriterion("last_clear_msg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgEqualTo(Long value) {
+            addCriterion("last_clear_msg =", value, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgNotEqualTo(Long value) {
+            addCriterion("last_clear_msg <>", value, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgGreaterThan(Long value) {
+            addCriterion("last_clear_msg >", value, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgGreaterThanOrEqualTo(Long value) {
+            addCriterion("last_clear_msg >=", value, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgLessThan(Long value) {
+            addCriterion("last_clear_msg <", value, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgLessThanOrEqualTo(Long value) {
+            addCriterion("last_clear_msg <=", value, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgIn(List<Long> values) {
+            addCriterion("last_clear_msg in", values, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgNotIn(List<Long> values) {
+            addCriterion("last_clear_msg not in", values, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgBetween(Long value1, Long value2) {
+            addCriterion("last_clear_msg between", value1, value2, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastClearMsgNotBetween(Long value1, Long value2) {
+            addCriterion("last_clear_msg not between", value1, value2, "lastClearMsg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNull() {
+            addCriterion("update_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNotNull() {
+            addCriterion("update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualTo(Date value) {
+            addCriterion("update_time =", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
+            addCriterion("update_time <>", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThan(Date value) {
+            addCriterion("update_time >", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_time >=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThan(Date value) {
+            addCriterion("update_time <", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("update_time <=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIn(List<Date> values) {
+            addCriterion("update_time in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
+            addCriterion("update_time not in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("update_time between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
     }

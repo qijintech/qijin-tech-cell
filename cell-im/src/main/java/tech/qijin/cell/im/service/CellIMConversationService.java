@@ -1,6 +1,6 @@
 package tech.qijin.cell.im.service;
 
-import tech.qijin.cell.im.service.bo.MessageBo;
+import tech.qijin.cell.im.service.bo.MessageBO;
 
 /**
  * 会话 Domain
@@ -10,16 +10,7 @@ import tech.qijin.cell.im.service.bo.MessageBo;
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 public interface CellIMConversationService {
-    /**
-     * 插入或者更新会话
-     * <p>当会话不存在时，插入会话，否则更新会话</p>
-     *
-     * @param uid
-     * @param peerUid
-     * @param lastMessage
-     * @return
-     */
-    boolean insertOrUpdateConversation(Long uid, Long peerUid, MessageBo lastMessage);
+
 
     /**
      * 删除会话

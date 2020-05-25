@@ -5,25 +5,21 @@ import java.util.Date;
 public class ImConversation {
     private Long id;
 
-    private Long ownerId;
+    private Long uid;
 
-    private Long peerId;
-
-    private Long lastMsgid;
-
-    private Long lastDelMsgid;
-
-    private Date createTime;
-
-    private Date updateTime;
+    private Long peerUid;
 
     private Long versionId;
 
-    private Byte delStatus;
+    private Integer status;
 
-    private Long sortId;
+    private String lastMsg;
 
-    private byte[] lastMsg;
+    private Long lastClearMsg;
+
+    private Date updateTime;
+
+    private Date createTime;
 
     public Long getId() {
         return id;
@@ -33,52 +29,20 @@ public class ImConversation {
         this.id = id;
     }
 
-    public Long getOwnerId() {
-        return ownerId;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
-    public Long getPeerId() {
-        return peerId;
+    public Long getPeerUid() {
+        return peerUid;
     }
 
-    public void setPeerId(Long peerId) {
-        this.peerId = peerId;
-    }
-
-    public Long getLastMsgid() {
-        return lastMsgid;
-    }
-
-    public void setLastMsgid(Long lastMsgid) {
-        this.lastMsgid = lastMsgid;
-    }
-
-    public Long getLastDelMsgid() {
-        return lastDelMsgid;
-    }
-
-    public void setLastDelMsgid(Long lastDelMsgid) {
-        this.lastDelMsgid = lastDelMsgid;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setPeerUid(Long peerUid) {
+        this.peerUid = peerUid;
     }
 
     public Long getVersionId() {
@@ -89,27 +53,43 @@ public class ImConversation {
         this.versionId = versionId;
     }
 
-    public Byte getDelStatus() {
-        return delStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setDelStatus(Byte delStatus) {
-        this.delStatus = delStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public Long getSortId() {
-        return sortId;
-    }
-
-    public void setSortId(Long sortId) {
-        this.sortId = sortId;
-    }
-
-    public byte[] getLastMsg() {
+    public String getLastMsg() {
         return lastMsg;
     }
 
-    public void setLastMsg(byte[] lastMsg) {
-        this.lastMsg = lastMsg;
+    public void setLastMsg(String lastMsg) {
+        this.lastMsg = lastMsg == null ? null : lastMsg.trim();
+    }
+
+    public Long getLastClearMsg() {
+        return lastClearMsg;
+    }
+
+    public void setLastClearMsg(Long lastClearMsg) {
+        this.lastClearMsg = lastClearMsg;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

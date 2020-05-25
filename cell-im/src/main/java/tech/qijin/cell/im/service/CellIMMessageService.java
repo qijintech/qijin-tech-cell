@@ -1,7 +1,7 @@
 package tech.qijin.cell.im.service;
 
-import tech.qijin.cell.im.base.MessageSendVo;
-import tech.qijin.cell.im.service.bo.MessageBo;
+import tech.qijin.cell.im.base.MessageSendVO;
+import tech.qijin.cell.im.service.bo.MessageBO;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface CellIMMessageService {
      * @param messageSendVo
      * @return msgId
      */
-    Long sendMessage(MessageSendVo messageSendVo);
+    MessageBO sendMessage(MessageSendVO messageSendVo);
 
     /**
      * 未读消息列表
@@ -30,7 +30,7 @@ public interface CellIMMessageService {
      * @param count     获取数量
      * @return
      */
-    List<MessageBo> listUnreadMessage(Long uid, Long peerUid, Long lastMsgId, Integer count);
+    List<MessageBO> listUnreadMessage(Long uid, Long peerUid, Long lastMsgId, Integer count);
 
     /**
      * 历史消息列表
@@ -41,7 +41,7 @@ public interface CellIMMessageService {
      * @param count
      * @return
      */
-    List<MessageBo> listHistoryMessage(Long uid, Long peerUid, Long lastMsgId, Integer count);
+    List<MessageBO> listHistoryMessage(Long uid, Long peerUid, Long lastMsgId, Integer count);
 
     /**
      * 删除消息
@@ -56,4 +56,13 @@ public interface CellIMMessageService {
      * @return
      */
     boolean recallMessage(Long uid, Long msgId);
+
+    /**
+     * 设置消息的已读状态
+     *
+     * @param uid
+     * @param msgId
+     * @return
+     */
+    boolean readMessage(Long uid, Long msgId);
 }

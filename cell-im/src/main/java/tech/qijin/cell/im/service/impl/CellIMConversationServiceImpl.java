@@ -3,7 +3,7 @@ package tech.qijin.cell.im.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tech.qijin.cell.im.service.CellIMConversationService;
-import tech.qijin.cell.im.service.bo.MessageBo;
+import tech.qijin.cell.im.service.bo.MessageBO;
 
 /**
  * @author michealyang
@@ -13,11 +13,6 @@ import tech.qijin.cell.im.service.bo.MessageBo;
 @Slf4j
 @Service
 public class CellIMConversationServiceImpl implements CellIMConversationService {
-    @Override
-    public boolean insertOrUpdateConversation(Long uid, Long peerUid, MessageBo lastMessage) {
-        return false;
-    }
-
     @Override
     public boolean deleteConversation(Long uid, Long peerUid) {
         return false;

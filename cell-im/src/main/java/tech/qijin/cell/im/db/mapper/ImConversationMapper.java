@@ -31,16 +31,14 @@ public interface ImConversationMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into im_conversation (owner_id, peer_id, ",
-        "last_msgid, last_del_msgid, ",
-        "create_time, update_time, ",
-        "version_id, del_status, ",
-        "sort_id, last_msg)",
-        "values (#{ownerId,jdbcType=BIGINT}, #{peerId,jdbcType=BIGINT}, ",
-        "#{lastMsgid,jdbcType=BIGINT}, #{lastDelMsgid,jdbcType=BIGINT}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{versionId,jdbcType=BIGINT}, #{delStatus,jdbcType=TINYINT}, ",
-        "#{sortId,jdbcType=BIGINT}, #{lastMsg,jdbcType=VARBINARY})"
+        "insert into im_conversation (uid, peer_uid, ",
+        "version_id, status, ",
+        "last_msg, last_clear_msg, ",
+        "update_time, create_time)",
+        "values (#{uid,jdbcType=BIGINT}, #{peerUid,jdbcType=BIGINT}, ",
+        "#{versionId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, ",
+        "#{lastMsg,jdbcType=VARCHAR}, #{lastClearMsg,jdbcType=BIGINT}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ImConversation record);
@@ -49,64 +47,42 @@ public interface ImConversationMapper {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(ImConversation record);
 
-    @SelectProvider(type=ImConversationSqlProvider.class, method="selectByExampleWithBLOBs")
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="owner_id", property="ownerId", jdbcType=JdbcType.BIGINT),
-        @Result(column="peer_id", property="peerId", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_msgid", property="lastMsgid", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_del_msgid", property="lastDelMsgid", jdbcType=JdbcType.BIGINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="version_id", property="versionId", jdbcType=JdbcType.BIGINT),
-        @Result(column="del_status", property="delStatus", jdbcType=JdbcType.TINYINT),
-        @Result(column="sort_id", property="sortId", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARBINARY)
-    })
-    List<ImConversation> selectByExampleWithBLOBs(ImConversationExample example);
-
     @SelectProvider(type=ImConversationSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="owner_id", property="ownerId", jdbcType=JdbcType.BIGINT),
-        @Result(column="peer_id", property="peerId", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_msgid", property="lastMsgid", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_del_msgid", property="lastDelMsgid", jdbcType=JdbcType.BIGINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="uid", property="uid", jdbcType=JdbcType.BIGINT),
+        @Result(column="peer_uid", property="peerUid", jdbcType=JdbcType.BIGINT),
         @Result(column="version_id", property="versionId", jdbcType=JdbcType.BIGINT),
-        @Result(column="del_status", property="delStatus", jdbcType=JdbcType.TINYINT),
-        @Result(column="sort_id", property="sortId", jdbcType=JdbcType.BIGINT)
+        @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
+        @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARCHAR),
+        @Result(column="last_clear_msg", property="lastClearMsg", jdbcType=JdbcType.BIGINT),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<ImConversation> selectByExample(ImConversationExample example);
 
     @Select({
         "select",
-        "id, owner_id, peer_id, last_msgid, last_del_msgid, create_time, update_time, ",
-        "version_id, del_status, sort_id, last_msg",
+        "id, uid, peer_uid, version_id, status, last_msg, last_clear_msg, update_time, ",
+        "create_time",
         "from im_conversation",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="owner_id", property="ownerId", jdbcType=JdbcType.BIGINT),
-        @Result(column="peer_id", property="peerId", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_msgid", property="lastMsgid", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_del_msgid", property="lastDelMsgid", jdbcType=JdbcType.BIGINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="uid", property="uid", jdbcType=JdbcType.BIGINT),
+        @Result(column="peer_uid", property="peerUid", jdbcType=JdbcType.BIGINT),
         @Result(column="version_id", property="versionId", jdbcType=JdbcType.BIGINT),
-        @Result(column="del_status", property="delStatus", jdbcType=JdbcType.TINYINT),
-        @Result(column="sort_id", property="sortId", jdbcType=JdbcType.BIGINT),
-        @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARBINARY)
+        @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
+        @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARCHAR),
+        @Result(column="last_clear_msg", property="lastClearMsg", jdbcType=JdbcType.BIGINT),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
     ImConversation selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=ImConversationSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") ImConversation record, @Param("example") ImConversationExample example);
-
-    @UpdateProvider(type=ImConversationSqlProvider.class, method="updateByExampleWithBLOBs")
-    int updateByExampleWithBLOBs(@Param("record") ImConversation record, @Param("example") ImConversationExample example);
 
     @UpdateProvider(type=ImConversationSqlProvider.class, method="updateByExample")
     int updateByExample(@Param("record") ImConversation record, @Param("example") ImConversationExample example);
@@ -116,31 +92,14 @@ public interface ImConversationMapper {
 
     @Update({
         "update im_conversation",
-        "set owner_id = #{ownerId,jdbcType=BIGINT},",
-          "peer_id = #{peerId,jdbcType=BIGINT},",
-          "last_msgid = #{lastMsgid,jdbcType=BIGINT},",
-          "last_del_msgid = #{lastDelMsgid,jdbcType=BIGINT},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP},",
-          "update_time = #{updateTime,jdbcType=TIMESTAMP},",
+        "set uid = #{uid,jdbcType=BIGINT},",
+          "peer_uid = #{peerUid,jdbcType=BIGINT},",
           "version_id = #{versionId,jdbcType=BIGINT},",
-          "del_status = #{delStatus,jdbcType=TINYINT},",
-          "sort_id = #{sortId,jdbcType=BIGINT},",
-          "last_msg = #{lastMsg,jdbcType=VARBINARY}",
-        "where id = #{id,jdbcType=BIGINT}"
-    })
-    int updateByPrimaryKeyWithBLOBs(ImConversation record);
-
-    @Update({
-        "update im_conversation",
-        "set owner_id = #{ownerId,jdbcType=BIGINT},",
-          "peer_id = #{peerId,jdbcType=BIGINT},",
-          "last_msgid = #{lastMsgid,jdbcType=BIGINT},",
-          "last_del_msgid = #{lastDelMsgid,jdbcType=BIGINT},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP},",
+          "status = #{status,jdbcType=INTEGER},",
+          "last_msg = #{lastMsg,jdbcType=VARCHAR},",
+          "last_clear_msg = #{lastClearMsg,jdbcType=BIGINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
-          "version_id = #{versionId,jdbcType=BIGINT},",
-          "del_status = #{delStatus,jdbcType=TINYINT},",
-          "sort_id = #{sortId,jdbcType=BIGINT}",
+          "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ImConversation record);

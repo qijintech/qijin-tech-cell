@@ -1,0 +1,105 @@
+package tech.qijin.cell.im.db.model;
+
+import java.util.Date;
+
+public class ImMessage {
+    private Long id;
+
+    private Long msgId;
+
+    private Long fromUid;
+
+    private String unionId;
+
+    private String content;
+
+    private String extra;
+
+    private Integer status;
+
+    private Byte readStatus;
+
+    private Date updateTime;
+
+    private Date createTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(Long msgId) {
+        this.msgId = msgId;
+    }
+
+    public Long getFromUid() {
+        return fromUid;
+    }
+
+    public void setFromUid(Long fromUid) {
+        this.fromUid = fromUid;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId == null ? null : unionId.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra == null ? null : extra.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Byte getReadStatus() {
+        return readStatus;
+    }
+
+    public void setReadStatus(Byte readStatus) {
+        this.readStatus = readStatus;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+}

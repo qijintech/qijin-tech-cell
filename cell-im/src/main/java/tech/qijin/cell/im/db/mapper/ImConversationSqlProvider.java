@@ -28,71 +28,36 @@ public class ImConversationSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("im_conversation");
         
-        if (record.getOwnerId() != null) {
-            sql.VALUES("owner_id", "#{ownerId,jdbcType=BIGINT}");
+        if (record.getUid() != null) {
+            sql.VALUES("uid", "#{uid,jdbcType=BIGINT}");
         }
         
-        if (record.getPeerId() != null) {
-            sql.VALUES("peer_id", "#{peerId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getLastMsgid() != null) {
-            sql.VALUES("last_msgid", "#{lastMsgid,jdbcType=BIGINT}");
-        }
-        
-        if (record.getLastDelMsgid() != null) {
-            sql.VALUES("last_del_msgid", "#{lastDelMsgid,jdbcType=BIGINT}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getUpdateTime() != null) {
-            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
+        if (record.getPeerUid() != null) {
+            sql.VALUES("peer_uid", "#{peerUid,jdbcType=BIGINT}");
         }
         
         if (record.getVersionId() != null) {
             sql.VALUES("version_id", "#{versionId,jdbcType=BIGINT}");
         }
         
-        if (record.getDelStatus() != null) {
-            sql.VALUES("del_status", "#{delStatus,jdbcType=TINYINT}");
-        }
-        
-        if (record.getSortId() != null) {
-            sql.VALUES("sort_id", "#{sortId,jdbcType=BIGINT}");
+        if (record.getStatus() != null) {
+            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getLastMsg() != null) {
-            sql.VALUES("last_msg", "#{lastMsg,jdbcType=VARBINARY}");
+            sql.VALUES("last_msg", "#{lastMsg,jdbcType=VARCHAR}");
         }
         
-        return sql.toString();
-    }
-
-    public String selectByExampleWithBLOBs(ImConversationExample example) {
-        SQL sql = new SQL();
-        if (example != null && example.isDistinct()) {
-            sql.SELECT_DISTINCT("id");
-        } else {
-            sql.SELECT("id");
+        if (record.getLastClearMsg() != null) {
+            sql.VALUES("last_clear_msg", "#{lastClearMsg,jdbcType=BIGINT}");
         }
-        sql.SELECT("owner_id");
-        sql.SELECT("peer_id");
-        sql.SELECT("last_msgid");
-        sql.SELECT("last_del_msgid");
-        sql.SELECT("create_time");
-        sql.SELECT("update_time");
-        sql.SELECT("version_id");
-        sql.SELECT("del_status");
-        sql.SELECT("sort_id");
-        sql.SELECT("last_msg");
-        sql.FROM("im_conversation");
-        applyWhere(sql, example, false);
         
-        if (example != null && example.getOrderByClause() != null) {
-            sql.ORDER_BY(example.getOrderByClause());
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
         
         return sql.toString();
@@ -105,15 +70,14 @@ public class ImConversationSqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("owner_id");
-        sql.SELECT("peer_id");
-        sql.SELECT("last_msgid");
-        sql.SELECT("last_del_msgid");
-        sql.SELECT("create_time");
-        sql.SELECT("update_time");
+        sql.SELECT("uid");
+        sql.SELECT("peer_uid");
         sql.SELECT("version_id");
-        sql.SELECT("del_status");
-        sql.SELECT("sort_id");
+        sql.SELECT("status");
+        sql.SELECT("last_msg");
+        sql.SELECT("last_clear_msg");
+        sql.SELECT("update_time");
+        sql.SELECT("create_time");
         sql.FROM("im_conversation");
         applyWhere(sql, example, false);
         
@@ -135,67 +99,38 @@ public class ImConversationSqlProvider {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getOwnerId() != null) {
-            sql.SET("owner_id = #{record.ownerId,jdbcType=BIGINT}");
+        if (record.getUid() != null) {
+            sql.SET("uid = #{record.uid,jdbcType=BIGINT}");
         }
         
-        if (record.getPeerId() != null) {
-            sql.SET("peer_id = #{record.peerId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getLastMsgid() != null) {
-            sql.SET("last_msgid = #{record.lastMsgid,jdbcType=BIGINT}");
-        }
-        
-        if (record.getLastDelMsgid() != null) {
-            sql.SET("last_del_msgid = #{record.lastDelMsgid,jdbcType=BIGINT}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getUpdateTime() != null) {
-            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        if (record.getPeerUid() != null) {
+            sql.SET("peer_uid = #{record.peerUid,jdbcType=BIGINT}");
         }
         
         if (record.getVersionId() != null) {
             sql.SET("version_id = #{record.versionId,jdbcType=BIGINT}");
         }
         
-        if (record.getDelStatus() != null) {
-            sql.SET("del_status = #{record.delStatus,jdbcType=TINYINT}");
-        }
-        
-        if (record.getSortId() != null) {
-            sql.SET("sort_id = #{record.sortId,jdbcType=BIGINT}");
+        if (record.getStatus() != null) {
+            sql.SET("status = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getLastMsg() != null) {
-            sql.SET("last_msg = #{record.lastMsg,jdbcType=VARBINARY}");
+            sql.SET("last_msg = #{record.lastMsg,jdbcType=VARCHAR}");
         }
         
-        applyWhere(sql, example, true);
-        return sql.toString();
-    }
-
-    public String updateByExampleWithBLOBs(Map<String, Object> parameter) {
-        SQL sql = new SQL();
-        sql.UPDATE("im_conversation");
+        if (record.getLastClearMsg() != null) {
+            sql.SET("last_clear_msg = #{record.lastClearMsg,jdbcType=BIGINT}");
+        }
         
-        sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("owner_id = #{record.ownerId,jdbcType=BIGINT}");
-        sql.SET("peer_id = #{record.peerId,jdbcType=BIGINT}");
-        sql.SET("last_msgid = #{record.lastMsgid,jdbcType=BIGINT}");
-        sql.SET("last_del_msgid = #{record.lastDelMsgid,jdbcType=BIGINT}");
-        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
-        sql.SET("version_id = #{record.versionId,jdbcType=BIGINT}");
-        sql.SET("del_status = #{record.delStatus,jdbcType=TINYINT}");
-        sql.SET("sort_id = #{record.sortId,jdbcType=BIGINT}");
-        sql.SET("last_msg = #{record.lastMsg,jdbcType=VARBINARY}");
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        }
         
-        ImConversationExample example = (ImConversationExample) parameter.get("example");
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -205,15 +140,14 @@ public class ImConversationSqlProvider {
         sql.UPDATE("im_conversation");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("owner_id = #{record.ownerId,jdbcType=BIGINT}");
-        sql.SET("peer_id = #{record.peerId,jdbcType=BIGINT}");
-        sql.SET("last_msgid = #{record.lastMsgid,jdbcType=BIGINT}");
-        sql.SET("last_del_msgid = #{record.lastDelMsgid,jdbcType=BIGINT}");
-        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("uid = #{record.uid,jdbcType=BIGINT}");
+        sql.SET("peer_uid = #{record.peerUid,jdbcType=BIGINT}");
         sql.SET("version_id = #{record.versionId,jdbcType=BIGINT}");
-        sql.SET("del_status = #{record.delStatus,jdbcType=TINYINT}");
-        sql.SET("sort_id = #{record.sortId,jdbcType=BIGINT}");
+        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("last_msg = #{record.lastMsg,jdbcType=VARCHAR}");
+        sql.SET("last_clear_msg = #{record.lastClearMsg,jdbcType=BIGINT}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
         ImConversationExample example = (ImConversationExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -224,44 +158,36 @@ public class ImConversationSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("im_conversation");
         
-        if (record.getOwnerId() != null) {
-            sql.SET("owner_id = #{ownerId,jdbcType=BIGINT}");
+        if (record.getUid() != null) {
+            sql.SET("uid = #{uid,jdbcType=BIGINT}");
         }
         
-        if (record.getPeerId() != null) {
-            sql.SET("peer_id = #{peerId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getLastMsgid() != null) {
-            sql.SET("last_msgid = #{lastMsgid,jdbcType=BIGINT}");
-        }
-        
-        if (record.getLastDelMsgid() != null) {
-            sql.SET("last_del_msgid = #{lastDelMsgid,jdbcType=BIGINT}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getUpdateTime() != null) {
-            sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
+        if (record.getPeerUid() != null) {
+            sql.SET("peer_uid = #{peerUid,jdbcType=BIGINT}");
         }
         
         if (record.getVersionId() != null) {
             sql.SET("version_id = #{versionId,jdbcType=BIGINT}");
         }
         
-        if (record.getDelStatus() != null) {
-            sql.SET("del_status = #{delStatus,jdbcType=TINYINT}");
-        }
-        
-        if (record.getSortId() != null) {
-            sql.SET("sort_id = #{sortId,jdbcType=BIGINT}");
+        if (record.getStatus() != null) {
+            sql.SET("status = #{status,jdbcType=INTEGER}");
         }
         
         if (record.getLastMsg() != null) {
-            sql.SET("last_msg = #{lastMsg,jdbcType=VARBINARY}");
+            sql.SET("last_msg = #{lastMsg,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLastClearMsg() != null) {
+            sql.SET("last_clear_msg = #{lastClearMsg,jdbcType=BIGINT}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
         }
         
         sql.WHERE("id = #{id,jdbcType=BIGINT}");
