@@ -13,6 +13,8 @@ public class ImConversation {
 
     private Integer status;
 
+    private Long lastMsgId;
+
     private String lastMsg;
 
     private Long lastClearMsg;
@@ -59,6 +61,14 @@ public class ImConversation {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Long getLastMsgId() {
+        return lastMsgId;
+    }
+
+    public void setLastMsgId(Long lastMsgId) {
+        this.lastMsgId = lastMsgId;
     }
 
     public String getLastMsg() {

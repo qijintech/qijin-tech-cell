@@ -405,6 +405,66 @@ public class ImConversationExample {
             return (Criteria) this;
         }
 
+        public Criteria andLastMsgIdIsNull() {
+            addCriterion("last_msg_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdIsNotNull() {
+            addCriterion("last_msg_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdEqualTo(Long value) {
+            addCriterion("last_msg_id =", value, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdNotEqualTo(Long value) {
+            addCriterion("last_msg_id <>", value, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdGreaterThan(Long value) {
+            addCriterion("last_msg_id >", value, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("last_msg_id >=", value, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdLessThan(Long value) {
+            addCriterion("last_msg_id <", value, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdLessThanOrEqualTo(Long value) {
+            addCriterion("last_msg_id <=", value, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdIn(List<Long> values) {
+            addCriterion("last_msg_id in", values, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdNotIn(List<Long> values) {
+            addCriterion("last_msg_id not in", values, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdBetween(Long value1, Long value2) {
+            addCriterion("last_msg_id between", value1, value2, "lastMsgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastMsgIdNotBetween(Long value1, Long value2) {
+            addCriterion("last_msg_id not between", value1, value2, "lastMsgId");
+            return (Criteria) this;
+        }
+
         public Criteria andLastMsgIsNull() {
             addCriterion("last_msg is null");
             return (Criteria) this;

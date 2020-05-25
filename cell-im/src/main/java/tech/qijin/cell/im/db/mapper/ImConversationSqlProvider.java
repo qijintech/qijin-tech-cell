@@ -44,6 +44,10 @@ public class ImConversationSqlProvider {
             sql.VALUES("status", "#{status,jdbcType=INTEGER}");
         }
         
+        if (record.getLastMsgId() != null) {
+            sql.VALUES("last_msg_id", "#{lastMsgId,jdbcType=BIGINT}");
+        }
+        
         if (record.getLastMsg() != null) {
             sql.VALUES("last_msg", "#{lastMsg,jdbcType=VARCHAR}");
         }
@@ -74,6 +78,7 @@ public class ImConversationSqlProvider {
         sql.SELECT("peer_uid");
         sql.SELECT("version_id");
         sql.SELECT("status");
+        sql.SELECT("last_msg_id");
         sql.SELECT("last_msg");
         sql.SELECT("last_clear_msg");
         sql.SELECT("update_time");
@@ -115,6 +120,10 @@ public class ImConversationSqlProvider {
             sql.SET("status = #{record.status,jdbcType=INTEGER}");
         }
         
+        if (record.getLastMsgId() != null) {
+            sql.SET("last_msg_id = #{record.lastMsgId,jdbcType=BIGINT}");
+        }
+        
         if (record.getLastMsg() != null) {
             sql.SET("last_msg = #{record.lastMsg,jdbcType=VARCHAR}");
         }
@@ -144,6 +153,7 @@ public class ImConversationSqlProvider {
         sql.SET("peer_uid = #{record.peerUid,jdbcType=BIGINT}");
         sql.SET("version_id = #{record.versionId,jdbcType=BIGINT}");
         sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("last_msg_id = #{record.lastMsgId,jdbcType=BIGINT}");
         sql.SET("last_msg = #{record.lastMsg,jdbcType=VARCHAR}");
         sql.SET("last_clear_msg = #{record.lastClearMsg,jdbcType=BIGINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -172,6 +182,10 @@ public class ImConversationSqlProvider {
         
         if (record.getStatus() != null) {
             sql.SET("status = #{status,jdbcType=INTEGER}");
+        }
+        
+        if (record.getLastMsgId() != null) {
+            sql.SET("last_msg_id = #{lastMsgId,jdbcType=BIGINT}");
         }
         
         if (record.getLastMsg() != null) {

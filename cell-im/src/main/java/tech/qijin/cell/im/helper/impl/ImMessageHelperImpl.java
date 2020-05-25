@@ -41,10 +41,11 @@ public class ImMessageHelperImpl implements ImMessageHelper {
     }
 
     @Override
-    public boolean saveMessage(ImMessage ImMessage) {
+    public boolean saveMessage(ImMessage imMessage) {
         // TODO 缓存部分数据
+        insertMessageToCache(imMessage);
         // 插入到DB中
-        return imMessageDao.insertSelective(ImMessage) > 0;
+        return insertMessageToDB(imMessage);
     }
 
     @Override
@@ -56,11 +57,20 @@ public class ImMessageHelperImpl implements ImMessageHelper {
     }
 
     @Override
+    public Optional<ImMessage> getMessageByUidAndMsgId(Long uid, Long peerUid, Long msgId) {
+        ImMessageExample example = new ImMessageExample();
+        example.createCriteria()
+                .andUnionIdEqualTo(formatUnionId(uid, peerUid))
+                .andMsgIdEqualTo(msgId);
+        return imMessageDao.selectByExample(example).stream().findFirst();
+    }
+
+    @Override
     public List<ImMessage> pageMessage(Long uid, Long peerUid, Long maxMsgId, Long minMsgId, int count) {
         PageHelper.startPage(0, count);
         List<Integer> statusList = Lists.newArrayList();
         statusList.add(0);
-        statusList.add(uid > peerUid ? MessageUtil.SmallerDelete(0) : MessageUtil.LargerDelete(0));
+        statusList.add(uid > peerUid ? MessageUtil.smallerDelete(0) : MessageUtil.largerDelete(0));
         ImMessageExample example = new ImMessageExample();
         example.setOrderByClause("msg_id desc");
         example.createCriteria()
@@ -71,12 +81,31 @@ public class ImMessageHelperImpl implements ImMessageHelper {
         return imMessageDao.selectByExample(example);
     }
 
-    private boolean insertMessage(ImMessage messageInfo) {
+    @Override
+    public boolean updateMessageStatus(long msgId, int originStatus, int toStatus) {
+        ImMessage message = new ImMessage();
+        message.setStatus(toStatus);
+
+        ImMessageExample example = new ImMessageExample();
+        example.createCriteria().andMsgIdEqualTo(msgId)
+                .andStatusEqualTo(originStatus);
+        return imMessageDao.updateByExampleSelective(message, example) > 0;
+    }
+
+    @Override
+    public Optional<ImMessage> getPreMessage(long uid, long peerUid, long msgId, long minMsgId) {
+        return pageMessage(uid, peerUid, msgId, minMsgId, 1).stream().findFirst();
+    }
+
+    private boolean insertMessageToCache(ImMessage imMessage) {
         // TODO
-        // 存储到数据库
         // 更新缓存。出现异常不影响主流程
 //        Util.runIgnoreEx(() -> refreshMessageCache(), "refresh message cache fail");
         return true;
+    }
+
+    private boolean insertMessageToDB(ImMessage imMessage) {
+        return imMessageDao.insertSelective(imMessage) > 0;
     }
 
     private String formatUnionId(Long uid, Long toUid) {

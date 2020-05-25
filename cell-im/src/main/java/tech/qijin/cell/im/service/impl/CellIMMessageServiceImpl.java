@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import tech.qijin.cell.im.base.Constants;
 import tech.qijin.cell.im.base.MessageSendVO;
 import tech.qijin.cell.im.db.model.ImConversation;
+import tech.qijin.cell.im.db.model.ImMessage;
 import tech.qijin.cell.im.helper.ImConversationHelper;
 import tech.qijin.cell.im.helper.ImMessageHelper;
 import tech.qijin.cell.im.helper.judge.ImJudgeChain;
@@ -13,6 +14,7 @@ import tech.qijin.cell.im.helper.judge.Judgement;
 import tech.qijin.cell.im.service.CellIMMessageService;
 import tech.qijin.cell.im.service.bo.MessageBO;
 import tech.qijin.cell.im.service.strategy.ImMessageSendStrategyFactory;
+import tech.qijin.cell.im.util.MessageUtil;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.utils.*;
 
@@ -109,12 +111,50 @@ public class CellIMMessageServiceImpl implements CellIMMessageService {
      * @return
      */
     @Override
-    public boolean delMessage(Long uid, Long msgId) {
+    public boolean delMessage(Long uid, Long peerUid, Long msgId) {
+        MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
+        MAssert.notNull(msgId, ResEnum.INVALID_PARAM);
+        Optional<ImMessage> imMessage = imMessageHelper.getMessageByUidAndMsgId(uid, peerUid, msgId);
+        Optional<ImConversation> imConversation = imConversationHelper.getConversationByUid(uid, peerUid);
+        if (!imMessage.isPresent() || !imConversation.isPresent()) {
+            log.warn("message or conversation not exists. uid={}, peerUid={}, messageId={}, imMessage={}, imConversatoin={}",
+                    uid, peerUid, msgId, imMessage, imConversation);
+            return false;
+        }
+        int status = 0;
+        if (uid.compareTo(peerUid) > 0) {
+            status = MessageUtil.largerDelete(imMessage.get().getStatus());
+        } else {
+            status = MessageUtil.smallerDelete(imMessage.get().getStatus());
+        }
+        // 更新message状态
+        if (!imMessageHelper.updateMessageStatus(msgId, imMessage.get().getStatus(), status)) {
+            return false;
+        }
+        // 更新conversation最后一条消息
+        if (msgId < imConversation.get().getLastMsgId()) {
+            // do nothing
+            return true;
+        }
+        // 如果删除的是最后一条消息，需要把上一条消息给补充上
+        Optional<ImMessage> preMessageOpt = imMessageHelper.getPreMessage(uid, peerUid, msgId, imConversation.get().getLastClearMsg());
+        ImMessage preMessage;
+        if (preMessageOpt.isPresent()) {
+            preMessage = preMessageOpt.get();
+        }else {
+            preMessage = new ImMessage();
+        }
+        Util.runIgnoreEx(()->imConversationHelper.insertOrUpdateConversation(uid, peerUid, preMessage), "update conversation failed");
+        return true;
+    }
+
+    @Override
+    public boolean recallMessage(Long uid, Long peerUid, Long msgId) {
         return false;
     }
 
     @Override
-    public boolean recallMessage(Long uid, Long msgId) {
+    public boolean readMessage(Long uid, Long peerUid, Long msgId) {
         return false;
     }
 }

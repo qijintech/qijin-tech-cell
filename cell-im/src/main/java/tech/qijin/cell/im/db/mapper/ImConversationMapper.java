@@ -33,12 +33,14 @@ public interface ImConversationMapper {
     @Insert({
         "insert into im_conversation (uid, peer_uid, ",
         "version_id, status, ",
-        "last_msg, last_clear_msg, ",
-        "update_time, create_time)",
+        "last_msg_id, last_msg, ",
+        "last_clear_msg, update_time, ",
+        "create_time)",
         "values (#{uid,jdbcType=BIGINT}, #{peerUid,jdbcType=BIGINT}, ",
         "#{versionId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, ",
-        "#{lastMsg,jdbcType=VARCHAR}, #{lastClearMsg,jdbcType=BIGINT}, ",
-        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
+        "#{lastMsgId,jdbcType=BIGINT}, #{lastMsg,jdbcType=VARCHAR}, ",
+        "#{lastClearMsg,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
+        "#{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ImConversation record);
@@ -54,6 +56,7 @@ public interface ImConversationMapper {
         @Result(column="peer_uid", property="peerUid", jdbcType=JdbcType.BIGINT),
         @Result(column="version_id", property="versionId", jdbcType=JdbcType.BIGINT),
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
+        @Result(column="last_msg_id", property="lastMsgId", jdbcType=JdbcType.BIGINT),
         @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARCHAR),
         @Result(column="last_clear_msg", property="lastClearMsg", jdbcType=JdbcType.BIGINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -63,8 +66,8 @@ public interface ImConversationMapper {
 
     @Select({
         "select",
-        "id, uid, peer_uid, version_id, status, last_msg, last_clear_msg, update_time, ",
-        "create_time",
+        "id, uid, peer_uid, version_id, status, last_msg_id, last_msg, last_clear_msg, ",
+        "update_time, create_time",
         "from im_conversation",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -74,6 +77,7 @@ public interface ImConversationMapper {
         @Result(column="peer_uid", property="peerUid", jdbcType=JdbcType.BIGINT),
         @Result(column="version_id", property="versionId", jdbcType=JdbcType.BIGINT),
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
+        @Result(column="last_msg_id", property="lastMsgId", jdbcType=JdbcType.BIGINT),
         @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARCHAR),
         @Result(column="last_clear_msg", property="lastClearMsg", jdbcType=JdbcType.BIGINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -96,6 +100,7 @@ public interface ImConversationMapper {
           "peer_uid = #{peerUid,jdbcType=BIGINT},",
           "version_id = #{versionId,jdbcType=BIGINT},",
           "status = #{status,jdbcType=INTEGER},",
+          "last_msg_id = #{lastMsgId,jdbcType=BIGINT},",
           "last_msg = #{lastMsg,jdbcType=VARCHAR},",
           "last_clear_msg = #{lastClearMsg,jdbcType=BIGINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",

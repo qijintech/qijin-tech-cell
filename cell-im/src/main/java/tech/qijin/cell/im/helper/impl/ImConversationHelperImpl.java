@@ -45,6 +45,7 @@ public class ImConversationHelperImpl implements ImConversationHelper {
         imConversation.setUid(uid);
         imConversation.setPeerUid(peerUid);
         imConversation.setVersionId(idGenerator.genVersionId(uid, DateUtil.now()));
+        imConversation.setLastMsgId(imMessage.getMsgId());
         imConversation.setLastMsg(JSON.toJSONString(imMessage));
         MAssert.isTrue(imConversationDao.insertSelective(imConversation) > 0, ResEnum.INTERNAL_ERROR);
         return imConversation;
@@ -53,6 +54,7 @@ public class ImConversationHelperImpl implements ImConversationHelper {
     private ImConversation updateConversation(Long uid, Long peerUid, ImMessage imMessage) {
         ImConversation imConversation = new ImConversation();
         imConversation.setVersionId(idGenerator.genVersionId(uid, DateUtil.now()));
+        imConversation.setLastMsgId(imMessage.getMsgId());
         imConversation.setLastMsg(JSON.toJSONString(imMessage));
         ImConversationExample example = new ImConversationExample();
         example.createCriteria()

@@ -9,11 +9,11 @@ public class MessageUtil {
      * @param origin
      * @return
      */
-    public static int SmallerDelete(int origin) {
+    public static int smallerDelete(int origin) {
         return origin | 0x01;
     }
 
-    public static int LargerDelete(int origin) {
+    public static int largerDelete(int origin) {
         return origin | 0x02;
     }
 }

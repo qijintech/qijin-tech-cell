@@ -48,14 +48,14 @@ public interface CellIMMessageService {
      *
      * @return
      */
-    boolean delMessage(Long uid, Long msgId);
+    boolean delMessage(Long uid, Long peerUid, Long msgId);
 
     /**
      * 撤回消息
      *
      * @return
      */
-    boolean recallMessage(Long uid, Long msgId);
+    boolean recallMessage(Long uid, Long peerUid, Long msgId);
 
     /**
      * 设置消息的已读状态
@@ -64,5 +64,5 @@ public interface CellIMMessageService {
      * @param msgId
      * @return
      */
-    boolean readMessage(Long uid, Long msgId);
+    boolean readMessage(Long uid, Long peerUid, Long msgId);
 }

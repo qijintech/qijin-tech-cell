@@ -100,4 +100,44 @@ public class CellIMMessageServiceTest extends BaseTest {
         List<MessageBO> messageBOs = imMessageService.listUnreadMessage(uid, peerUid, 1590334661329000001L, 20);
         log.info("messageBOs={}", messageBOs);
     }
+
+    @Test
+    public void testDelMessage() {
+        // 先发送一条消息，再删除
+        MessageSendVO messageSendVo = MessageSendVO.builder()
+                .uid(uid)
+                .toUid(peerUid)
+                .msgType(MsgType.TEXT)
+                .content(ContentText.builder().text(DateUtil.formatStr(DateUtil.now(), DateUtil.YYYYMMDDHHMMSS)).build())
+                .build();
+        when(imUserJudge.doJudge(any())).thenReturn(
+                new Judgement(Judgement.JudgementType.PASS));
+        MessageBO messageBO = imMessageService.sendMessage(messageSendVo);
+        Assert.assertNotNull(messageBO);
+        Assert.assertNotNull(messageBO.getImMessage());
+        log.info("messageBO={}", messageBO);
+        boolean res = imMessageService.delMessage(uid, peerUid, messageBO.getImMessage().getMsgId());
+        Assert.assertTrue(res);
+    }
+
+    @Test
+    public void testDelMessage2() {
+        // 先发送一条消息，再删除
+        MessageSendVO messageSendVo = MessageSendVO.builder()
+                .uid(uid)
+                .toUid(peerUid)
+                .msgType(MsgType.TEXT)
+                .content(ContentText.builder().text(DateUtil.formatStr(DateUtil.now(), DateUtil.YYYYMMDDHHMMSS)).build())
+                .build();
+        when(imUserJudge.doJudge(any())).thenReturn(
+                new Judgement(Judgement.JudgementType.PASS));
+        MessageBO messageBO = imMessageService.sendMessage(messageSendVo);
+        Assert.assertNotNull(messageBO);
+        Assert.assertNotNull(messageBO.getImMessage());
+        log.info("messageBO={}", messageBO);
+        boolean res = imMessageService.delMessage(uid, peerUid, messageBO.getImMessage().getMsgId());
+        Assert.assertTrue(res);
+        res = imMessageService.delMessage(peerUid, uid, messageBO.getImMessage().getMsgId());
+        Assert.assertTrue(res);
+    }
 }

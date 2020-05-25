@@ -26,8 +26,8 @@ public class ImMessageSendSilentStrategy implements IMessageSendStrategy {
         ImMessage imMessage = messageHelper.convertMessage(messageSendVO);
         // 设置消息的status为本方删除
         int status = messageSendVO.getUid() > messageSendVO.getToUid()
-                ? MessageUtil.LargerDelete(0)
-                : MessageUtil.SmallerDelete(0);
+                ? MessageUtil.largerDelete(0)
+                : MessageUtil.smallerDelete(0);
         imMessage.setStatus(status);
         MAssert.isTrue(messageHelper.saveMessage(imMessage), ResEnum.INTERNAL_ERROR);
 

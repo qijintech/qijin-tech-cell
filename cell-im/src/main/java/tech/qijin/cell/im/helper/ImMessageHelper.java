@@ -19,5 +19,11 @@ public interface ImMessageHelper {
 
     Optional<ImMessage> getMessageByMsgId(Long msgId);
 
+    Optional<ImMessage> getMessageByUidAndMsgId(Long uid, Long peerUid, Long msgId);
+
     List<ImMessage> pageMessage(Long uid, Long peerUid, Long maxMsgId, Long minMsgId, int count);
+
+    boolean updateMessageStatus(long msgId, int originStatus, int toStatus);
+
+    Optional<ImMessage> getPreMessage(long uid, long peerUid, long msgId, long minMsgId);
 }
