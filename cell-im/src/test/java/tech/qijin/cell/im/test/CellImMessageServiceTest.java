@@ -8,10 +8,10 @@ import tech.qijin.cell.im.base.Constants;
 import tech.qijin.cell.im.base.ContentText;
 import tech.qijin.cell.im.base.MessageSendVO;
 import tech.qijin.cell.im.base.MsgType;
-import tech.qijin.cell.im.helper.judge.ImUserJudge;
+import tech.qijin.cell.im.db.model.ImMessage;
+import tech.qijin.cell.im.helper.judge.CellImUserJudge;
 import tech.qijin.cell.im.helper.judge.Judgement;
-import tech.qijin.cell.im.service.bo.MessageBO;
-import tech.qijin.cell.im.service.impl.CellIMMessageServiceImpl;
+import tech.qijin.cell.im.service.impl.CellImMessageServiceImpl;
 import tech.qijin.util4j.lang.exception.ValidateException;
 import tech.qijin.util4j.utils.DateUtil;
 
@@ -26,11 +26,11 @@ import static org.mockito.Mockito.any;
  * @date 2019-12-16
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
-public class CellIMMessageServiceTest extends BaseTest {
+public class CellImMessageServiceTest extends BaseTest {
     @Autowired
-    private CellIMMessageServiceImpl imMessageService;
+    private CellImMessageServiceImpl imMessageService;
     @MockBean
-    private ImUserJudge imUserJudge;
+    private CellImUserJudge cellImUserJudge;
 
     public static long uid = 233333;
     public static long peerUid = 666666;
@@ -43,10 +43,10 @@ public class CellIMMessageServiceTest extends BaseTest {
                 .msgType(MsgType.TEXT)
                 .content(ContentText.builder().text(DateUtil.formatStr(DateUtil.now(), DateUtil.YYYYMMDDHHMMSS)).build())
                 .build();
-        when(imUserJudge.doJudge(any())).thenReturn(
+        when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.PASS));
-        MessageBO messageBO = imMessageService.sendMessage(messageSendVo);
-        log.info("messageBO={}", messageBO);
+        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        log.info("imMessage={}", imMessage);
     }
 
     /**
@@ -60,12 +60,12 @@ public class CellIMMessageServiceTest extends BaseTest {
                 .msgType(MsgType.TEXT)
                 .content(ContentText.builder().text("hehe").build())
                 .build();
-        when(imUserJudge.doJudge(any())).thenReturn(
+        when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Constants.BuzCode.FORBIDDEN.getCode(),
                         Constants.BuzCode.FORBIDDEN.getMessage(),
                         Judgement.JudgementType.FORBIDDEN));
-        MessageBO messageBO = imMessageService.sendMessage(messageSendVo);
-        log.info("messageBO={}", messageBO);
+        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        log.info("imMessage={}", imMessage);
     }
 
     /**
@@ -79,26 +79,25 @@ public class CellIMMessageServiceTest extends BaseTest {
                 .msgType(MsgType.TEXT)
                 .content(ContentText.builder().text("hehe").build())
                 .build();
-        when(imUserJudge.doJudge(any())).thenReturn(
+        when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.SILENT));
-        MessageBO messageBO = imMessageService.sendMessage(messageSendVo);
-        Assert.assertNotNull(messageBO);
-        Assert.assertNotNull(messageBO.getImMessage());
-        Assert.assertEquals((long) messageBO.getImMessage().getStatus(), 1L);
-        log.info("messageBO={}", messageBO);
+        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        Assert.assertNotNull(imMessage);
+        Assert.assertEquals((long) imMessage.getStatus(), 1L);
+        log.info("imMessage={}", imMessage);
 
     }
 
     @Test
     public void testListHistoryMessage() {
-        List<MessageBO> messageBOs = imMessageService.listHistoryMessage(uid, peerUid, 1590334661329000001L ,40);
-        log.info("messageBOs={}", messageBOs);
+        List<ImMessage> imMessages = imMessageService.listMessageHistory(uid, peerUid, 1590334661329000001L, 40);
+        log.info("imMessages={}", imMessages);
     }
 
     @Test
     public void testListUnreadMessage() {
-        List<MessageBO> messageBOs = imMessageService.listUnreadMessage(uid, peerUid, 1590334661329000001L, 20);
-        log.info("messageBOs={}", messageBOs);
+        List<ImMessage> imMessages = imMessageService.listMessageNew(uid, peerUid, 1590334661329000001L, 20);
+        log.info("messageBOs={}", imMessages);
     }
 
     @Test
@@ -110,13 +109,12 @@ public class CellIMMessageServiceTest extends BaseTest {
                 .msgType(MsgType.TEXT)
                 .content(ContentText.builder().text(DateUtil.formatStr(DateUtil.now(), DateUtil.YYYYMMDDHHMMSS)).build())
                 .build();
-        when(imUserJudge.doJudge(any())).thenReturn(
+        when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.PASS));
-        MessageBO messageBO = imMessageService.sendMessage(messageSendVo);
-        Assert.assertNotNull(messageBO);
-        Assert.assertNotNull(messageBO.getImMessage());
-        log.info("messageBO={}", messageBO);
-        boolean res = imMessageService.delMessage(uid, peerUid, messageBO.getImMessage().getMsgId());
+        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        Assert.assertNotNull(imMessage);
+        log.info("imMessage={}", imMessage);
+        boolean res = imMessageService.delMessage(uid, peerUid, imMessage.getMsgId());
         Assert.assertTrue(res);
     }
 
@@ -129,15 +127,14 @@ public class CellIMMessageServiceTest extends BaseTest {
                 .msgType(MsgType.TEXT)
                 .content(ContentText.builder().text(DateUtil.formatStr(DateUtil.now(), DateUtil.YYYYMMDDHHMMSS)).build())
                 .build();
-        when(imUserJudge.doJudge(any())).thenReturn(
+        when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.PASS));
-        MessageBO messageBO = imMessageService.sendMessage(messageSendVo);
-        Assert.assertNotNull(messageBO);
-        Assert.assertNotNull(messageBO.getImMessage());
-        log.info("messageBO={}", messageBO);
-        boolean res = imMessageService.delMessage(uid, peerUid, messageBO.getImMessage().getMsgId());
+        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        Assert.assertNotNull(imMessage);
+        log.info("imMessage={}", imMessage);
+        boolean res = imMessageService.delMessage(uid, peerUid, imMessage.getMsgId());
         Assert.assertTrue(res);
-        res = imMessageService.delMessage(peerUid, uid, messageBO.getImMessage().getMsgId());
+        res = imMessageService.delMessage(peerUid, uid, imMessage.getMsgId());
         Assert.assertTrue(res);
     }
 }

@@ -7,13 +7,12 @@ import tech.qijin.cell.im.base.Constants;
 import tech.qijin.cell.im.base.MessageSendVO;
 import tech.qijin.cell.im.db.model.ImConversation;
 import tech.qijin.cell.im.db.model.ImMessage;
-import tech.qijin.cell.im.helper.ImConversationHelper;
-import tech.qijin.cell.im.helper.ImMessageHelper;
+import tech.qijin.cell.im.helper.CellImConversationHelper;
+import tech.qijin.cell.im.helper.CellImMessageHelper;
 import tech.qijin.cell.im.helper.judge.ImJudgeChain;
 import tech.qijin.cell.im.helper.judge.Judgement;
-import tech.qijin.cell.im.service.CellIMMessageService;
-import tech.qijin.cell.im.service.bo.MessageBO;
-import tech.qijin.cell.im.service.strategy.ImMessageSendStrategyFactory;
+import tech.qijin.cell.im.service.CellImMessageService;
+import tech.qijin.cell.im.service.strategy.CellImMessageSendStrategyFactory;
 import tech.qijin.cell.im.util.MessageUtil;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.utils.*;
@@ -21,7 +20,6 @@ import tech.qijin.util4j.utils.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author michealyang
@@ -30,30 +28,30 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class CellIMMessageServiceImpl implements CellIMMessageService {
+public class CellImMessageServiceImpl implements CellImMessageService {
     @Autowired
-    private ImMessageHelper imMessageHelper;
+    private CellImMessageHelper cellImMessageHelper;
     @Autowired
-    private ImConversationHelper imConversationHelper;
+    private CellImConversationHelper cellImConversationHelper;
     @Autowired
     private ImJudgeChain imJudgeChain;
     @Autowired
-    private ImMessageSendStrategyFactory imMessageSendStrategyFactory;
+    private CellImMessageSendStrategyFactory cellImMessageSendStrategyFactory;
 
 
     @Override
-    public MessageBO sendMessage(MessageSendVO messageSendVO) {
+    public ImMessage sendMessage(MessageSendVO messageSendVO) {
         ValidationUtil.validate(messageSendVO);
         Judgement judgement = imJudgeChain.doJudge(messageSendVO);
-        return imMessageSendStrategyFactory
+        return cellImMessageSendStrategyFactory
                 .getStrategy(judgement)
                 .sendMessage(messageSendVO, judgement);
     }
 
     @Override
-    public List<MessageBO> listUnreadMessage(Long uid, Long peerUid, Long lastMsgId, Integer count) {
+    public List<ImMessage> listMessageNew(Long uid, Long peerUid, Long lastMsgId, Integer count) {
         MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
-        Optional<ImConversation> imConversation = imConversationHelper.getConversationByUid(uid, peerUid);
+        Optional<ImConversation> imConversation = cellImConversationHelper.getConversationByUid(uid, peerUid);
         if (!imConversation.isPresent()) {
             log.info("conversation not exists. uid={}, peerUid={}", uid, peerUid);
             return Collections.EMPTY_LIST;
@@ -67,16 +65,13 @@ public class CellIMMessageServiceImpl implements CellIMMessageService {
                     ? imConversation.get().getLastClearMsg()
                     : minMsgId;
         }
-        return imMessageHelper.pageMessage(uid, peerUid, Long.MAX_VALUE, minMsgId, count)
-                .stream()
-                .map(imMessage -> MessageBO.builder().imMessage(imMessage).build())
-                .collect(Collectors.toList());
+        return cellImMessageHelper.pageMessage(uid, peerUid, Long.MAX_VALUE, minMsgId, count);
     }
 
     @Override
-    public List<MessageBO> listHistoryMessage(Long uid, Long peerUid, Long lastMsgId, Integer count) {
+    public List<ImMessage> listMessageHistory(Long uid, Long peerUid, Long lastMsgId, Integer count) {
         MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
-        Optional<ImConversation> imConversation = imConversationHelper.getConversationByUid(uid, peerUid);
+        Optional<ImConversation> imConversation = cellImConversationHelper.getConversationByUid(uid, peerUid);
         if (!imConversation.isPresent()) {
             log.info("conversation not exists. uid={}, peerUid={}", uid, peerUid);
             return Collections.EMPTY_LIST;
@@ -87,10 +82,7 @@ public class CellIMMessageServiceImpl implements CellIMMessageService {
         if (NumberUtil.nullOrZero(count)) {
             count = Constants.DEFAULT_PAGE_SIZE;
         }
-        return imMessageHelper.pageMessage(uid, peerUid, lastMsgId, imConversation.get().getLastClearMsg(), count)
-                .stream()
-                .map(imMessage -> MessageBO.builder().imMessage(imMessage).build())
-                .collect(Collectors.toList());
+        return cellImMessageHelper.pageMessage(uid, peerUid, lastMsgId, imConversation.get().getLastClearMsg(), count);
     }
 
     /**
@@ -114,8 +106,8 @@ public class CellIMMessageServiceImpl implements CellIMMessageService {
     public boolean delMessage(Long uid, Long peerUid, Long msgId) {
         MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
         MAssert.notNull(msgId, ResEnum.INVALID_PARAM);
-        Optional<ImMessage> imMessage = imMessageHelper.getMessageByUidAndMsgId(uid, peerUid, msgId);
-        Optional<ImConversation> imConversation = imConversationHelper.getConversationByUid(uid, peerUid);
+        Optional<ImMessage> imMessage = cellImMessageHelper.getMessageByUidAndMsgId(uid, peerUid, msgId);
+        Optional<ImConversation> imConversation = cellImConversationHelper.getConversationByUid(uid, peerUid);
         if (!imMessage.isPresent() || !imConversation.isPresent()) {
             log.warn("message or conversation not exists. uid={}, peerUid={}, messageId={}, imMessage={}, imConversatoin={}",
                     uid, peerUid, msgId, imMessage, imConversation);
@@ -128,7 +120,7 @@ public class CellIMMessageServiceImpl implements CellIMMessageService {
             status = MessageUtil.smallerDelete(imMessage.get().getStatus());
         }
         // 更新message状态
-        if (!imMessageHelper.updateMessageStatus(msgId, imMessage.get().getStatus(), status)) {
+        if (!cellImMessageHelper.updateMessageStatus(msgId, imMessage.get().getStatus(), status)) {
             return false;
         }
         // 更新conversation最后一条消息
@@ -137,14 +129,14 @@ public class CellIMMessageServiceImpl implements CellIMMessageService {
             return true;
         }
         // 如果删除的是最后一条消息，需要把上一条消息给补充上
-        Optional<ImMessage> preMessageOpt = imMessageHelper.getPreMessage(uid, peerUid, msgId, imConversation.get().getLastClearMsg());
+        Optional<ImMessage> preMessageOpt = cellImMessageHelper.getPreMessage(uid, peerUid, msgId, imConversation.get().getLastClearMsg());
         ImMessage preMessage;
         if (preMessageOpt.isPresent()) {
             preMessage = preMessageOpt.get();
         }else {
             preMessage = new ImMessage();
         }
-        Util.runIgnoreEx(()->imConversationHelper.insertOrUpdateConversation(uid, peerUid, preMessage), "update conversation failed");
+        Util.runIgnoreEx(()-> cellImConversationHelper.insertOrUpdateConversation(uid, peerUid, preMessage), "update conversation failed");
         return true;
     }
 

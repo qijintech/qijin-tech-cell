@@ -1,6 +1,7 @@
 package tech.qijin.cell.im.service;
 
 import tech.qijin.cell.im.base.MessageSendVO;
+import tech.qijin.cell.im.db.model.ImMessage;
 import tech.qijin.cell.im.service.bo.MessageBO;
 
 import java.util.List;
@@ -12,17 +13,17 @@ import java.util.List;
  * @date 2019-11-04
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
-public interface CellIMMessageService {
+public interface CellImMessageService {
     /**
      * 发送消息
      *
      * @param messageSendVo
      * @return msgId
      */
-    MessageBO sendMessage(MessageSendVO messageSendVo);
+    ImMessage sendMessage(MessageSendVO messageSendVo);
 
     /**
-     * 未读消息列表
+     * 新消息列表
      *
      * @param uid
      * @param peerUid
@@ -30,7 +31,7 @@ public interface CellIMMessageService {
      * @param count     获取数量
      * @return
      */
-    List<MessageBO> listUnreadMessage(Long uid, Long peerUid, Long lastMsgId, Integer count);
+    List<ImMessage> listMessageNew(Long uid, Long peerUid, Long lastMsgId, Integer count);
 
     /**
      * 历史消息列表
@@ -41,7 +42,7 @@ public interface CellIMMessageService {
      * @param count
      * @return
      */
-    List<MessageBO> listHistoryMessage(Long uid, Long peerUid, Long lastMsgId, Integer count);
+    List<ImMessage> listMessageHistory(Long uid, Long peerUid, Long lastMsgId, Integer count);
 
     /**
      * 删除消息

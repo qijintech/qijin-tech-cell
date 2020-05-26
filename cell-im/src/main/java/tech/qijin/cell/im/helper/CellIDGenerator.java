@@ -9,7 +9,7 @@ import tech.qijin.util4j.utils.DateUtil;
 import java.util.Date;
 
 @Service
-public class IDGenerator {
+public class CellIDGenerator {
     @Autowired
     private RedisUtil redisUtil;
     @Value("${cell.im.msg.id.step:10000}")

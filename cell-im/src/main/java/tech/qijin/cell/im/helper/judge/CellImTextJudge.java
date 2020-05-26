@@ -8,7 +8,7 @@ import tech.qijin.cell.im.base.MsgType;
  * 判断是否有敏感词
  */
 @Service
-public class ImTextJudge implements IJudge {
+public class CellImTextJudge implements IJudge {
     @Override
     public Judgement doJudge(MessageSendVO messageVO) {
         if (messageVO.getMsgType() != MsgType.TEXT) {

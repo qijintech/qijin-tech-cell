@@ -7,15 +7,15 @@ import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.utils.MAssert;
 
 @Service
-public class ImMessageSendStrategyFactory {
+public class CellImMessageSendStrategyFactory {
     @Autowired
-    private ImMessageSendNormalStrategy imMessageSendNormalStrategy;
+    private CellImMessageSendNormalStrategyCell imMessageSendNormalStrategy;
     @Autowired
-    private ImMessageSendSilentStrategy imMessageSendSilentStrategy;
+    private CellImMessageSendSilentStrategyCell imMessageSendSilentStrategy;
     @Autowired
-    private ImMessageSendForbiddenStrategy imMessageSendForbiddenStrategy;
+    private CellImMessageSendForbiddenStrategyCell imMessageSendForbiddenStrategy;
 
-    public IMessageSendStrategy getStrategy(Judgement judgement) {
+    public CellIMessageSendStrategy getStrategy(Judgement judgement) {
         switch (judgement.getType()) {
             case PASS:
                 return imMessageSendNormalStrategy;

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ImUserJudge implements IJudge {
+public class CellImUserJudge implements IJudge {
     @Autowired
     private List<IUserJudge> userJudgeChain = Lists.newArrayList();
     @Autowired

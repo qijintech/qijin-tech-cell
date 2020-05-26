@@ -3,10 +3,11 @@ package tech.qijin.cell.im.helper;
 import tech.qijin.cell.im.db.model.ImConversation;
 import tech.qijin.cell.im.db.model.ImMessage;
 
+import java.util.List;
 import java.util.Optional;
 
-public interface ImConversationHelper {
-    Optional<ImConversation> getConversationByUid(Long uid, Long peerUid);
+public interface CellImConversationHelper {
+    Optional<ImConversation> getConversationByUid(long uid, long peerUid);
 
     /**
      * 插入或者更新会话
@@ -17,5 +18,7 @@ public interface ImConversationHelper {
      * @param imMessage
      * @return
      */
-    ImConversation insertOrUpdateConversation(Long uid, Long peerUid, ImMessage imMessage);
+    ImConversation insertOrUpdateConversation(long uid, long peerUid, ImMessage imMessage);
+
+    List<ImConversation> pageConversation(long uid, long minVersionId, long maxVersionId, int count);
 }

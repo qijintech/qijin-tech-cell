@@ -7,10 +7,10 @@ package tech.qijin.cell.im.service;
  * @date 2019-12-19
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
-public interface CellIMUnreadService {
+public interface CellImUnreadService {
 
     // 增加未读数
-    int addUnread(long uid, long peerUid, int count);
+    int incrUnread(long uid, long peerUid, int count);
 
     // 清除未读数
     boolean clearUnread(long uid, long peerUid, Long lastMsgId);

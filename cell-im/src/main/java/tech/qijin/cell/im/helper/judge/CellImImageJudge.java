@@ -5,7 +5,7 @@ import tech.qijin.cell.im.base.MessageSendVO;
 import tech.qijin.cell.im.base.MsgType;
 
 @Service
-public class ImImageJudge implements IJudge{
+public class CellImImageJudge implements IJudge{
     @Override
     public Judgement doJudge(MessageSendVO messageVO) {
         if (messageVO.getMsgType() != MsgType.IMG) {

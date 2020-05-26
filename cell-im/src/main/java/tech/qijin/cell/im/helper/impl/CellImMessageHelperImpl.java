@@ -9,8 +9,8 @@ import tech.qijin.cell.im.base.MessageSendVO;
 import tech.qijin.cell.im.db.dao.ImMessageDao;
 import tech.qijin.cell.im.db.model.ImMessage;
 import tech.qijin.cell.im.db.model.ImMessageExample;
-import tech.qijin.cell.im.helper.IDGenerator;
-import tech.qijin.cell.im.helper.ImMessageHelper;
+import tech.qijin.cell.im.helper.CellIDGenerator;
+import tech.qijin.cell.im.helper.CellImMessageHelper;
 import tech.qijin.cell.im.util.MessageUtil;
 import tech.qijin.util4j.utils.DateUtil;
 
@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ImMessageHelperImpl implements ImMessageHelper {
+public class CellImMessageHelperImpl implements CellImMessageHelper {
     @Autowired
-    private IDGenerator idGenerator;
+    private CellIDGenerator cellIdGenerator;
     @Autowired
     private ImMessageDao imMessageDao;
 
@@ -29,7 +29,7 @@ public class ImMessageHelperImpl implements ImMessageHelper {
     public ImMessage convertMessage(MessageSendVO messageSendVO) {
         Date now = DateUtil.now();
         // 获取msgId，versionId等
-        Long msgId = idGenerator.genMsgId(now);
+        Long msgId = cellIdGenerator.genMsgId(now);
 //        Long seqId = idGenerator.genSeqID(now);
         ImMessage messageInfo = new ImMessage();
         messageInfo.setUnionId(formatUnionId(messageSendVO.getUid(), messageSendVO.getToUid()));

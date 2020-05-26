@@ -13,17 +13,17 @@ public class ImJudgeChain {
     private List<IJudge> judges = Lists.newArrayList();
 
     @Autowired
-    private ImUserJudge imUserJudge;
+    private CellImUserJudge cellImUserJudge;
     @Autowired
-    private ImTextJudge imTextJudge;
+    private CellImTextJudge cellImTextJudge;
     @Autowired
-    private ImImageJudge imImageJudge;
+    private CellImImageJudge cellImImageJudge;
 
     @PostConstruct
     public void init() {
-        judges.add(imUserJudge);
-        judges.add(imTextJudge);
-        judges.add(imImageJudge);
+        judges.add(cellImUserJudge);
+        judges.add(cellImTextJudge);
+        judges.add(cellImImageJudge);
     }
 
     public Judgement doJudge(MessageSendVO messageVO) {
