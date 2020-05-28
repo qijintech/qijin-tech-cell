@@ -28,3 +28,6 @@ spring:
 # mybatis config
 mybatis:
   config-location: classpath:sqlMapConfig.xml
+  configuration:
+    default-enum-type-handler: tech.qijin.util4j.mybatis.handler.EnumValueTypeHandler
+    interceptors:

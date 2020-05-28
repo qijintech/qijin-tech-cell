@@ -11,7 +11,7 @@ import tech.qijin.cell.im.base.MsgType;
 import tech.qijin.cell.im.db.model.ImMessage;
 import tech.qijin.cell.im.helper.judge.CellImUserJudge;
 import tech.qijin.cell.im.helper.judge.Judgement;
-import tech.qijin.cell.im.service.impl.CellImMessageServiceImpl;
+import tech.qijin.cell.im.service.CellImMessageService;
 import tech.qijin.util4j.lang.exception.ValidateException;
 import tech.qijin.util4j.utils.DateUtil;
 
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.any;
  */
 public class CellImMessageServiceTest extends BaseTest {
     @Autowired
-    private CellImMessageServiceImpl imMessageService;
+    private CellImMessageService cellImMessageService;
     @MockBean
     private CellImUserJudge cellImUserJudge;
 
@@ -45,7 +45,7 @@ public class CellImMessageServiceTest extends BaseTest {
                 .build();
         when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.PASS));
-        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        ImMessage imMessage = cellImMessageService.sendMessage(messageSendVo);
         log.info("imMessage={}", imMessage);
     }
 
@@ -64,7 +64,7 @@ public class CellImMessageServiceTest extends BaseTest {
                 new Judgement(Constants.BuzCode.FORBIDDEN.getCode(),
                         Constants.BuzCode.FORBIDDEN.getMessage(),
                         Judgement.JudgementType.FORBIDDEN));
-        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        ImMessage imMessage = cellImMessageService.sendMessage(messageSendVo);
         log.info("imMessage={}", imMessage);
     }
 
@@ -81,7 +81,7 @@ public class CellImMessageServiceTest extends BaseTest {
                 .build();
         when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.SILENT));
-        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        ImMessage imMessage = cellImMessageService.sendMessage(messageSendVo);
         Assert.assertNotNull(imMessage);
         Assert.assertEquals((long) imMessage.getStatus(), 1L);
         log.info("imMessage={}", imMessage);
@@ -90,13 +90,13 @@ public class CellImMessageServiceTest extends BaseTest {
 
     @Test
     public void testListHistoryMessage() {
-        List<ImMessage> imMessages = imMessageService.listMessageHistory(uid, peerUid, 1590334661329000001L, 40);
+        List<ImMessage> imMessages = cellImMessageService.listMessageHistory(uid, peerUid, 1590334661329000001L, 40);
         log.info("imMessages={}", imMessages);
     }
 
     @Test
     public void testListUnreadMessage() {
-        List<ImMessage> imMessages = imMessageService.listMessageNew(uid, peerUid, 1590334661329000001L, 20);
+        List<ImMessage> imMessages = cellImMessageService.listMessageNew(uid, peerUid, 1590334661329000001L, 20);
         log.info("messageBOs={}", imMessages);
     }
 
@@ -111,10 +111,10 @@ public class CellImMessageServiceTest extends BaseTest {
                 .build();
         when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.PASS));
-        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        ImMessage imMessage = cellImMessageService.sendMessage(messageSendVo);
         Assert.assertNotNull(imMessage);
         log.info("imMessage={}", imMessage);
-        boolean res = imMessageService.delMessage(uid, peerUid, imMessage.getMsgId());
+        boolean res = cellImMessageService.delMessage(uid, peerUid, imMessage.getMsgId());
         Assert.assertTrue(res);
     }
 
@@ -129,12 +129,12 @@ public class CellImMessageServiceTest extends BaseTest {
                 .build();
         when(cellImUserJudge.doJudge(any())).thenReturn(
                 new Judgement(Judgement.JudgementType.PASS));
-        ImMessage imMessage = imMessageService.sendMessage(messageSendVo);
+        ImMessage imMessage = cellImMessageService.sendMessage(messageSendVo);
         Assert.assertNotNull(imMessage);
         log.info("imMessage={}", imMessage);
-        boolean res = imMessageService.delMessage(uid, peerUid, imMessage.getMsgId());
+        boolean res = cellImMessageService.delMessage(uid, peerUid, imMessage.getMsgId());
         Assert.assertTrue(res);
-        res = imMessageService.delMessage(peerUid, uid, imMessage.getMsgId());
+        res = cellImMessageService.delMessage(peerUid, uid, imMessage.getMsgId());
         Assert.assertTrue(res);
     }
 }

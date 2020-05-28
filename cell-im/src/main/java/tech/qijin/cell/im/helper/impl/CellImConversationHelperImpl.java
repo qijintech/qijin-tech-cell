@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.qijin.cell.im.base.ConversationStatus;
 import tech.qijin.cell.im.db.dao.ImConversationDao;
 import tech.qijin.cell.im.db.model.ImConversation;
 import tech.qijin.cell.im.db.model.ImConversationExample;
@@ -44,11 +45,17 @@ public class CellImConversationHelperImpl implements CellImConversationHelper {
 
     @Override
     public List<ImConversation> pageConversation(long uid, long minVersionId, long maxVersionId, int count) {
+        // TODO pageConversationFromCache
+        return pageConversationFromDB(uid, minVersionId, maxVersionId, count);
+    }
+
+    private List<ImConversation> pageConversationFromDB(long uid, long minVersionId, long maxVersionId, int count) {
         ImConversationExample example = new ImConversationExample();
         example.setOrderByClause("version_id desc");
         PageHelper.startPage(0, count);
         example.createCriteria()
                 .andUidEqualTo(uid)
+                .andStatusEqualTo(ConversationStatus.NORMAL)
                 .andVersionIdBetween(minVersionId, maxVersionId);
         return imConversationDao.selectByExample(example);
     }

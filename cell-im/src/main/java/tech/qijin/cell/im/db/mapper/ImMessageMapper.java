@@ -31,13 +31,15 @@ public interface ImMessageMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into im_message (msg_id, from_uid, ",
-        "union_id, content, ",
-        "extra, status, read_status, ",
+        "insert into im_message (channel, msg_id, ",
+        "from_uid, union_id, ",
+        "content, extra, ",
+        "status, read_status, ",
         "update_time, create_time)",
-        "values (#{msgId,jdbcType=BIGINT}, #{fromUid,jdbcType=BIGINT}, ",
-        "#{unionId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, ",
-        "#{extra,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{readStatus,jdbcType=TINYINT}, ",
+        "values (#{channel,jdbcType=VARCHAR}, #{msgId,jdbcType=BIGINT}, ",
+        "#{fromUid,jdbcType=BIGINT}, #{unionId,jdbcType=VARCHAR}, ",
+        "#{content,jdbcType=VARCHAR}, #{extra,jdbcType=VARCHAR}, ",
+        "#{status,jdbcType=INTEGER}, #{read_status,jdbcType=TINYINT}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
@@ -50,13 +52,14 @@ public interface ImMessageMapper {
     @SelectProvider(type=ImMessageSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="msg_id", property="msgId", jdbcType=JdbcType.BIGINT),
         @Result(column="from_uid", property="fromUid", jdbcType=JdbcType.BIGINT),
         @Result(column="union_id", property="unionId", jdbcType=JdbcType.VARCHAR),
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
         @Result(column="extra", property="extra", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
-        @Result(column="read_status", property="readStatus", jdbcType=JdbcType.TINYINT),
+        @Result(column="read_status", property="read_status", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -64,20 +67,21 @@ public interface ImMessageMapper {
 
     @Select({
         "select",
-        "id, msg_id, from_uid, union_id, content, extra, status, read_status, update_time, ",
-        "create_time",
+        "id, channel, msg_id, from_uid, union_id, content, extra, status, read_status, ",
+        "update_time, create_time",
         "from im_message",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="msg_id", property="msgId", jdbcType=JdbcType.BIGINT),
         @Result(column="from_uid", property="fromUid", jdbcType=JdbcType.BIGINT),
         @Result(column="union_id", property="unionId", jdbcType=JdbcType.VARCHAR),
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
         @Result(column="extra", property="extra", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
-        @Result(column="read_status", property="readStatus", jdbcType=JdbcType.TINYINT),
+        @Result(column="read_status", property="read_status", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -94,13 +98,14 @@ public interface ImMessageMapper {
 
     @Update({
         "update im_message",
-        "set msg_id = #{msgId,jdbcType=BIGINT},",
+        "set channel = #{channel,jdbcType=VARCHAR},",
+          "msg_id = #{msgId,jdbcType=BIGINT},",
           "from_uid = #{fromUid,jdbcType=BIGINT},",
           "union_id = #{unionId,jdbcType=VARCHAR},",
           "content = #{content,jdbcType=VARCHAR},",
           "extra = #{extra,jdbcType=VARCHAR},",
           "status = #{status,jdbcType=INTEGER},",
-          "read_status = #{readStatus,jdbcType=TINYINT},",
+          "read_status = #{read_status,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

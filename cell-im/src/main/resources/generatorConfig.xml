@@ -46,5 +46,15 @@
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
         </table>
+        <table tableName="im_conversation">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="status" property="status"
+                            javaType="tech.qijin.cell.im.base.ConversationStatus"/>
+        </table>
+        <table tableName="im_message">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="read_status" property="read_status"
+                            javaType="tech.qijin.cell.im.base.MessageReadStatus"/>
+        </table>
     </context>
 </generatorConfiguration>

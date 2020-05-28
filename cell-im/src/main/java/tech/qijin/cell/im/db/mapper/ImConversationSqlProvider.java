@@ -28,6 +28,10 @@ public class ImConversationSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("im_conversation");
         
+        if (record.getChannel() != null) {
+            sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
+        }
+        
         if (record.getUid() != null) {
             sql.VALUES("uid", "#{uid,jdbcType=BIGINT}");
         }
@@ -40,10 +44,6 @@ public class ImConversationSqlProvider {
             sql.VALUES("version_id", "#{versionId,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getLastMsgId() != null) {
             sql.VALUES("last_msg_id", "#{lastMsgId,jdbcType=BIGINT}");
         }
@@ -54,6 +54,10 @@ public class ImConversationSqlProvider {
         
         if (record.getLastClearMsg() != null) {
             sql.VALUES("last_clear_msg", "#{lastClearMsg,jdbcType=BIGINT}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.VALUES("status", "#{status,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -74,13 +78,14 @@ public class ImConversationSqlProvider {
         } else {
             sql.SELECT("id");
         }
+        sql.SELECT("channel");
         sql.SELECT("uid");
         sql.SELECT("peer_uid");
         sql.SELECT("version_id");
-        sql.SELECT("status");
         sql.SELECT("last_msg_id");
         sql.SELECT("last_msg");
         sql.SELECT("last_clear_msg");
+        sql.SELECT("status");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
         sql.FROM("im_conversation");
@@ -104,6 +109,10 @@ public class ImConversationSqlProvider {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
+        if (record.getChannel() != null) {
+            sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        }
+        
         if (record.getUid() != null) {
             sql.SET("uid = #{record.uid,jdbcType=BIGINT}");
         }
@@ -116,10 +125,6 @@ public class ImConversationSqlProvider {
             sql.SET("version_id = #{record.versionId,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
-        }
-        
         if (record.getLastMsgId() != null) {
             sql.SET("last_msg_id = #{record.lastMsgId,jdbcType=BIGINT}");
         }
@@ -130,6 +135,10 @@ public class ImConversationSqlProvider {
         
         if (record.getLastClearMsg() != null) {
             sql.SET("last_clear_msg = #{record.lastClearMsg,jdbcType=BIGINT}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.SET("status = #{record.status,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -149,13 +158,14 @@ public class ImConversationSqlProvider {
         sql.UPDATE("im_conversation");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("uid = #{record.uid,jdbcType=BIGINT}");
         sql.SET("peer_uid = #{record.peerUid,jdbcType=BIGINT}");
         sql.SET("version_id = #{record.versionId,jdbcType=BIGINT}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
         sql.SET("last_msg_id = #{record.lastMsgId,jdbcType=BIGINT}");
         sql.SET("last_msg = #{record.lastMsg,jdbcType=VARCHAR}");
         sql.SET("last_clear_msg = #{record.lastClearMsg,jdbcType=BIGINT}");
+        sql.SET("status = #{record.status,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
@@ -167,6 +177,10 @@ public class ImConversationSqlProvider {
     public String updateByPrimaryKeySelective(ImConversation record) {
         SQL sql = new SQL();
         sql.UPDATE("im_conversation");
+        
+        if (record.getChannel() != null) {
+            sql.SET("channel = #{channel,jdbcType=VARCHAR}");
+        }
         
         if (record.getUid() != null) {
             sql.SET("uid = #{uid,jdbcType=BIGINT}");
@@ -180,10 +194,6 @@ public class ImConversationSqlProvider {
             sql.SET("version_id = #{versionId,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.SET("status = #{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getLastMsgId() != null) {
             sql.SET("last_msg_id = #{lastMsgId,jdbcType=BIGINT}");
         }
@@ -194,6 +204,10 @@ public class ImConversationSqlProvider {
         
         if (record.getLastClearMsg() != null) {
             sql.SET("last_clear_msg = #{lastClearMsg,jdbcType=BIGINT}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.SET("status = #{status,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {

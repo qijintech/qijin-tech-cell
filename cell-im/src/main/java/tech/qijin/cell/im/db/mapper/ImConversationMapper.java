@@ -31,16 +31,16 @@ public interface ImConversationMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into im_conversation (uid, peer_uid, ",
-        "version_id, status, ",
+        "insert into im_conversation (channel, uid, ",
+        "peer_uid, version_id, ",
         "last_msg_id, last_msg, ",
-        "last_clear_msg, update_time, ",
-        "create_time)",
-        "values (#{uid,jdbcType=BIGINT}, #{peerUid,jdbcType=BIGINT}, ",
-        "#{versionId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, ",
+        "last_clear_msg, status, ",
+        "update_time, create_time)",
+        "values (#{channel,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT}, ",
+        "#{peerUid,jdbcType=BIGINT}, #{versionId,jdbcType=BIGINT}, ",
         "#{lastMsgId,jdbcType=BIGINT}, #{lastMsg,jdbcType=VARCHAR}, ",
-        "#{lastClearMsg,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{lastClearMsg,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ImConversation record);
@@ -52,13 +52,14 @@ public interface ImConversationMapper {
     @SelectProvider(type=ImConversationSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="uid", property="uid", jdbcType=JdbcType.BIGINT),
         @Result(column="peer_uid", property="peerUid", jdbcType=JdbcType.BIGINT),
         @Result(column="version_id", property="versionId", jdbcType=JdbcType.BIGINT),
-        @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
         @Result(column="last_msg_id", property="lastMsgId", jdbcType=JdbcType.BIGINT),
         @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARCHAR),
         @Result(column="last_clear_msg", property="lastClearMsg", jdbcType=JdbcType.BIGINT),
+        @Result(column="status", property="status", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -66,20 +67,21 @@ public interface ImConversationMapper {
 
     @Select({
         "select",
-        "id, uid, peer_uid, version_id, status, last_msg_id, last_msg, last_clear_msg, ",
-        "update_time, create_time",
+        "id, channel, uid, peer_uid, version_id, last_msg_id, last_msg, last_clear_msg, ",
+        "status, update_time, create_time",
         "from im_conversation",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="uid", property="uid", jdbcType=JdbcType.BIGINT),
         @Result(column="peer_uid", property="peerUid", jdbcType=JdbcType.BIGINT),
         @Result(column="version_id", property="versionId", jdbcType=JdbcType.BIGINT),
-        @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
         @Result(column="last_msg_id", property="lastMsgId", jdbcType=JdbcType.BIGINT),
         @Result(column="last_msg", property="lastMsg", jdbcType=JdbcType.VARCHAR),
         @Result(column="last_clear_msg", property="lastClearMsg", jdbcType=JdbcType.BIGINT),
+        @Result(column="status", property="status", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -96,13 +98,14 @@ public interface ImConversationMapper {
 
     @Update({
         "update im_conversation",
-        "set uid = #{uid,jdbcType=BIGINT},",
+        "set channel = #{channel,jdbcType=VARCHAR},",
+          "uid = #{uid,jdbcType=BIGINT},",
           "peer_uid = #{peerUid,jdbcType=BIGINT},",
           "version_id = #{versionId,jdbcType=BIGINT},",
-          "status = #{status,jdbcType=INTEGER},",
           "last_msg_id = #{lastMsgId,jdbcType=BIGINT},",
           "last_msg = #{lastMsg,jdbcType=VARCHAR},",
           "last_clear_msg = #{lastClearMsg,jdbcType=BIGINT},",
+          "status = #{status,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

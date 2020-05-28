@@ -1,9 +1,12 @@
 package tech.qijin.cell.im.db.model;
 
 import java.util.Date;
+import tech.qijin.cell.im.base.ConversationStatus;
 
 public class ImConversation {
     private Long id;
+
+    private String channel;
 
     private Long uid;
 
@@ -11,13 +14,13 @@ public class ImConversation {
 
     private Long versionId;
 
-    private Integer status;
-
     private Long lastMsgId;
 
     private String lastMsg;
 
     private Long lastClearMsg;
+
+    private ConversationStatus status;
 
     private Date updateTime;
 
@@ -29,6 +32,14 @@ public class ImConversation {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel == null ? null : channel.trim();
     }
 
     public Long getUid() {
@@ -55,14 +66,6 @@ public class ImConversation {
         this.versionId = versionId;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Long getLastMsgId() {
         return lastMsgId;
     }
@@ -85,6 +88,14 @@ public class ImConversation {
 
     public void setLastClearMsg(Long lastClearMsg) {
         this.lastClearMsg = lastClearMsg;
+    }
+
+    public ConversationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ConversationStatus status) {
+        this.status = status;
     }
 
     public Date getUpdateTime() {
