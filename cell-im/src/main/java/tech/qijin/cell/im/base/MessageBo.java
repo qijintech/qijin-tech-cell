@@ -1,4 +1,4 @@
-package tech.qijin.cell.im.service.bo;
+package tech.qijin.cell.im.base;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +11,6 @@ import tech.qijin.cell.im.db.model.ImMessage;
  */
 @Data
 @Builder
-public class MessageBO {
+public class MessageBo {
     private ImMessage imMessage;
 }

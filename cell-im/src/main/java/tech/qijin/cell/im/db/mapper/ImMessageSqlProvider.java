@@ -36,6 +36,10 @@ public class ImMessageSqlProvider {
             sql.VALUES("msg_id", "#{msgId,jdbcType=BIGINT}");
         }
         
+        if (record.getMsgType() != null) {
+            sql.VALUES("msg_type", "#{msgType,jdbcType=VARCHAR}");
+        }
+        
         if (record.getFromUid() != null) {
             sql.VALUES("from_uid", "#{fromUid,jdbcType=BIGINT}");
         }
@@ -56,8 +60,8 @@ public class ImMessageSqlProvider {
             sql.VALUES("status", "#{status,jdbcType=INTEGER}");
         }
         
-        if (record.getRead_status() != null) {
-            sql.VALUES("read_status", "#{read_status,jdbcType=TINYINT}");
+        if (record.getReadStatus() != null) {
+            sql.VALUES("read_status", "#{readStatus,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -80,6 +84,7 @@ public class ImMessageSqlProvider {
         }
         sql.SELECT("channel");
         sql.SELECT("msg_id");
+        sql.SELECT("msg_type");
         sql.SELECT("from_uid");
         sql.SELECT("union_id");
         sql.SELECT("content");
@@ -117,6 +122,10 @@ public class ImMessageSqlProvider {
             sql.SET("msg_id = #{record.msgId,jdbcType=BIGINT}");
         }
         
+        if (record.getMsgType() != null) {
+            sql.SET("msg_type = #{record.msgType,jdbcType=VARCHAR}");
+        }
+        
         if (record.getFromUid() != null) {
             sql.SET("from_uid = #{record.fromUid,jdbcType=BIGINT}");
         }
@@ -137,8 +146,8 @@ public class ImMessageSqlProvider {
             sql.SET("status = #{record.status,jdbcType=INTEGER}");
         }
         
-        if (record.getRead_status() != null) {
-            sql.SET("read_status = #{record.read_status,jdbcType=TINYINT}");
+        if (record.getReadStatus() != null) {
+            sql.SET("read_status = #{record.readStatus,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -160,12 +169,13 @@ public class ImMessageSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("msg_id = #{record.msgId,jdbcType=BIGINT}");
+        sql.SET("msg_type = #{record.msgType,jdbcType=VARCHAR}");
         sql.SET("from_uid = #{record.fromUid,jdbcType=BIGINT}");
         sql.SET("union_id = #{record.unionId,jdbcType=VARCHAR}");
         sql.SET("content = #{record.content,jdbcType=VARCHAR}");
         sql.SET("extra = #{record.extra,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=INTEGER}");
-        sql.SET("read_status = #{record.read_status,jdbcType=TINYINT}");
+        sql.SET("read_status = #{record.readStatus,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
@@ -184,6 +194,10 @@ public class ImMessageSqlProvider {
         
         if (record.getMsgId() != null) {
             sql.SET("msg_id = #{msgId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getMsgType() != null) {
+            sql.SET("msg_type = #{msgType,jdbcType=VARCHAR}");
         }
         
         if (record.getFromUid() != null) {
@@ -206,8 +220,8 @@ public class ImMessageSqlProvider {
             sql.SET("status = #{status,jdbcType=INTEGER}");
         }
         
-        if (record.getRead_status() != null) {
-            sql.SET("read_status = #{read_status,jdbcType=TINYINT}");
+        if (record.getReadStatus() != null) {
+            sql.SET("read_status = #{readStatus,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {

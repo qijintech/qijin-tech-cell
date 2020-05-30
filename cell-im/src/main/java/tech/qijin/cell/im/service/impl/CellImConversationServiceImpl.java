@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import tech.qijin.cell.im.base.Constants;
 import tech.qijin.cell.im.db.model.ImConversation;
 import tech.qijin.cell.im.helper.CellImConversationHelper;
+import tech.qijin.cell.im.helper.CellImUnreadHelper;
 import tech.qijin.cell.im.service.CellImConversationService;
 import tech.qijin.util4j.utils.NumberUtil;
 

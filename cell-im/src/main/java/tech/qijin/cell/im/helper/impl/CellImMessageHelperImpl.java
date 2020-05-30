@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.qijin.cell.im.base.MessageSendVO;
+import tech.qijin.cell.im.base.MessageSendBo;
 import tech.qijin.cell.im.db.dao.ImMessageDao;
 import tech.qijin.cell.im.db.model.ImMessage;
 import tech.qijin.cell.im.db.model.ImMessageExample;
@@ -26,17 +26,25 @@ public class CellImMessageHelperImpl implements CellImMessageHelper {
     private ImMessageDao imMessageDao;
 
     @Override
-    public ImMessage convertMessage(MessageSendVO messageSendVO) {
+    public ImMessage convertMessage(MessageSendBo messageSendBo) {
         Date now = DateUtil.now();
         // 获取msgId，versionId等
         Long msgId = cellIdGenerator.genMsgId(now);
 //        Long seqId = idGenerator.genSeqID(now);
         ImMessage messageInfo = new ImMessage();
-        messageInfo.setUnionId(formatUnionId(messageSendVO.getUid(), messageSendVO.getToUid()));
-        messageInfo.setFromUid(messageSendVO.getUid());
+        messageInfo.setUnionId(formatUnionId(messageSendBo.getUid(), messageSendBo.getToUid()));
+        messageInfo.setFromUid(messageSendBo.getUid());
         messageInfo.setMsgId(msgId);
-        messageInfo.setContent(JSON.toJSONString(messageSendVO.getContent()));
-        messageInfo.setExtra(JSON.toJSONString(messageSendVO.getExt()));
+        messageInfo.setMsgType(messageSendBo.getMsgType());
+        messageInfo.setContent(JSON.toJSONString(messageSendBo.getContent()));
+        messageInfo.setExtra(JSON.toJSONString(messageSendBo.getExt()));
+        if (messageSendBo.isSilent()) {
+            // 设置消息的status为本方删除
+            int status = messageSendBo.getUid() > messageSendBo.getToUid()
+                    ? MessageUtil.largerDelete(0)
+                    : MessageUtil.smallerDelete(0);
+            messageInfo.setStatus(status);
+        }
         return messageInfo;
     }
 

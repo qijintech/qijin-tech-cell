@@ -53,7 +53,9 @@
         </table>
         <table tableName="im_message">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
-            <columnOverride column="read_status" property="read_status"
+            <columnOverride column="msg_type" property="msgType"
+                            javaType="tech.qijin.cell.im.base.MsgType"/>
+            <columnOverride column="read_status" property="readStatus"
                             javaType="tech.qijin.cell.im.base.MessageReadStatus"/>
         </table>
     </context>

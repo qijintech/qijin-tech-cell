@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tech.qijin.cell.im.base.MessageReadStatus;
+import tech.qijin.cell.im.base.MsgType;
 
 public class ImMessageExample {
     protected String orderByClause;
@@ -293,6 +294,76 @@ public class ImMessageExample {
 
         public Criteria andMsgIdNotBetween(Long value1, Long value2) {
             addCriterion("msg_id not between", value1, value2, "msgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeIsNull() {
+            addCriterion("msg_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeIsNotNull() {
+            addCriterion("msg_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeEqualTo(MsgType value) {
+            addCriterion("msg_type =", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeNotEqualTo(MsgType value) {
+            addCriterion("msg_type <>", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeGreaterThan(MsgType value) {
+            addCriterion("msg_type >", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeGreaterThanOrEqualTo(MsgType value) {
+            addCriterion("msg_type >=", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeLessThan(MsgType value) {
+            addCriterion("msg_type <", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeLessThanOrEqualTo(MsgType value) {
+            addCriterion("msg_type <=", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeLike(MsgType value) {
+            addCriterion("msg_type like", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeNotLike(MsgType value) {
+            addCriterion("msg_type not like", value, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeIn(List<MsgType> values) {
+            addCriterion("msg_type in", values, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeNotIn(List<MsgType> values) {
+            addCriterion("msg_type not in", values, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeBetween(MsgType value1, MsgType value2) {
+            addCriterion("msg_type between", value1, value2, "msgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgTypeNotBetween(MsgType value1, MsgType value2) {
+            addCriterion("msg_type not between", value1, value2, "msgType");
             return (Criteria) this;
         }
 
@@ -626,63 +697,63 @@ public class ImMessageExample {
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusIsNull() {
+        public Criteria andReadStatusIsNull() {
             addCriterion("read_status is null");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusIsNotNull() {
+        public Criteria andReadStatusIsNotNull() {
             addCriterion("read_status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusEqualTo(MessageReadStatus value) {
-            addCriterion("read_status =", value, "read_status");
+        public Criteria andReadStatusEqualTo(MessageReadStatus value) {
+            addCriterion("read_status =", value, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusNotEqualTo(MessageReadStatus value) {
-            addCriterion("read_status <>", value, "read_status");
+        public Criteria andReadStatusNotEqualTo(MessageReadStatus value) {
+            addCriterion("read_status <>", value, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusGreaterThan(MessageReadStatus value) {
-            addCriterion("read_status >", value, "read_status");
+        public Criteria andReadStatusGreaterThan(MessageReadStatus value) {
+            addCriterion("read_status >", value, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusGreaterThanOrEqualTo(MessageReadStatus value) {
-            addCriterion("read_status >=", value, "read_status");
+        public Criteria andReadStatusGreaterThanOrEqualTo(MessageReadStatus value) {
+            addCriterion("read_status >=", value, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusLessThan(MessageReadStatus value) {
-            addCriterion("read_status <", value, "read_status");
+        public Criteria andReadStatusLessThan(MessageReadStatus value) {
+            addCriterion("read_status <", value, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusLessThanOrEqualTo(MessageReadStatus value) {
-            addCriterion("read_status <=", value, "read_status");
+        public Criteria andReadStatusLessThanOrEqualTo(MessageReadStatus value) {
+            addCriterion("read_status <=", value, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusIn(List<MessageReadStatus> values) {
-            addCriterion("read_status in", values, "read_status");
+        public Criteria andReadStatusIn(List<MessageReadStatus> values) {
+            addCriterion("read_status in", values, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusNotIn(List<MessageReadStatus> values) {
-            addCriterion("read_status not in", values, "read_status");
+        public Criteria andReadStatusNotIn(List<MessageReadStatus> values) {
+            addCriterion("read_status not in", values, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusBetween(MessageReadStatus value1, MessageReadStatus value2) {
-            addCriterion("read_status between", value1, value2, "read_status");
+        public Criteria andReadStatusBetween(MessageReadStatus value1, MessageReadStatus value2) {
+            addCriterion("read_status between", value1, value2, "readStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRead_statusNotBetween(MessageReadStatus value1, MessageReadStatus value2) {
-            addCriterion("read_status not between", value1, value2, "read_status");
+        public Criteria andReadStatusNotBetween(MessageReadStatus value1, MessageReadStatus value2) {
+            addCriterion("read_status not between", value1, value2, "readStatus");
             return (Criteria) this;
         }
 

@@ -1,13 +1,13 @@
 package tech.qijin.cell.im.helper;
 
-import tech.qijin.cell.im.base.MessageSendVO;
+import tech.qijin.cell.im.base.MessageSendBo;
 import tech.qijin.cell.im.db.model.ImMessage;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CellImMessageHelper {
-    ImMessage convertMessage(MessageSendVO messageSendVO);
+    ImMessage convertMessage(MessageSendBo messageSendBo);
 
     /**
      * 保存消息

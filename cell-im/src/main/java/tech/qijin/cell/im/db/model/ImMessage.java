@@ -2,6 +2,7 @@ package tech.qijin.cell.im.db.model;
 
 import java.util.Date;
 import tech.qijin.cell.im.base.MessageReadStatus;
+import tech.qijin.cell.im.base.MsgType;
 
 public class ImMessage {
     private Long id;
@@ -9,6 +10,8 @@ public class ImMessage {
     private String channel;
 
     private Long msgId;
+
+    private MsgType msgType;
 
     private Long fromUid;
 
@@ -20,7 +23,7 @@ public class ImMessage {
 
     private Integer status;
 
-    private MessageReadStatus read_status;
+    private MessageReadStatus readStatus;
 
     private Date updateTime;
 
@@ -48,6 +51,14 @@ public class ImMessage {
 
     public void setMsgId(Long msgId) {
         this.msgId = msgId;
+    }
+
+    public MsgType getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(MsgType msgType) {
+        this.msgType = msgType;
     }
 
     public Long getFromUid() {
@@ -90,12 +101,12 @@ public class ImMessage {
         this.status = status;
     }
 
-    public MessageReadStatus getRead_status() {
-        return read_status;
+    public MessageReadStatus getReadStatus() {
+        return readStatus;
     }
 
-    public void setRead_status(MessageReadStatus read_status) {
-        this.read_status = read_status;
+    public void setReadStatus(MessageReadStatus readStatus) {
+        this.readStatus = readStatus;
     }
 
     public Date getUpdateTime() {

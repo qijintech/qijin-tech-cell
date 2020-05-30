@@ -5,7 +5,7 @@ import tech.qijin.util4j.lang.constant.EnumValue;
 /**
  * 会话状态
  */
-public enum ConversationStatus implements EnumValue {
+public enum ConversationStatus implements EnumValue<Integer> {
     NORMAL(0, "正常"), DELETED(1, "被删除");
 
     ConversationStatus(int code, String desc) {
@@ -17,7 +17,7 @@ public enum ConversationStatus implements EnumValue {
     private String desc;
 
     @Override
-    public int value() {
+    public Integer value() {
         return code;
     }
 

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.*;
  * 开始做眼保健操：←_← ↑_↑ →_→ ↓_↓
  **/
 @Configuration
-@ComponentScan(value = {"tech.qijin.cell.im.db", "tech.qijin.cell.im.service"})
+@ComponentScan(value = {"tech.qijin.cell.im.db", "tech.qijin.cell.im.service", "tech.qijin.cell.im.helper"})
 @Import(CellIMDatasourceConfig.class)
 public class CellIMAutoConfiguration {
 }

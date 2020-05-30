@@ -4,22 +4,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.qijin.cell.im.base.Constants;
-import tech.qijin.cell.im.base.MessageSendVO;
+import tech.qijin.cell.im.base.MessageSendBo;
 import tech.qijin.cell.im.db.model.ImConversation;
 import tech.qijin.cell.im.db.model.ImMessage;
 import tech.qijin.cell.im.helper.CellImConversationHelper;
 import tech.qijin.cell.im.helper.CellImMessageHelper;
-import tech.qijin.cell.im.helper.judge.ImJudgeChain;
-import tech.qijin.cell.im.helper.judge.Judgement;
+import tech.qijin.cell.im.helper.CellImUnreadHelper;
 import tech.qijin.cell.im.service.CellImMessageService;
-import tech.qijin.cell.im.service.strategy.CellImMessageSendStrategyFactory;
+import tech.qijin.cell.im.base.CellImMessageBo;
 import tech.qijin.cell.im.util.MessageUtil;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.utils.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author michealyang
@@ -34,22 +35,33 @@ public class CellImMessageServiceImpl implements CellImMessageService {
     @Autowired
     private CellImConversationHelper cellImConversationHelper;
     @Autowired
-    private ImJudgeChain imJudgeChain;
-    @Autowired
-    private CellImMessageSendStrategyFactory cellImMessageSendStrategyFactory;
+    private CellImUnreadHelper cellImUnreadHelper;
 
 
     @Override
-    public ImMessage sendMessage(MessageSendVO messageSendVO) {
-        ValidationUtil.validate(messageSendVO);
-        Judgement judgement = imJudgeChain.doJudge(messageSendVO);
-        return cellImMessageSendStrategyFactory
-                .getStrategy(judgement)
-                .sendMessage(messageSendVO, judgement);
+    public ImMessage sendMessage(MessageSendBo messageSendBo) {
+        ValidationUtil.validate(messageSendBo);
+        // 插入消息
+        ImMessage imMessage = cellImMessageHelper.convertMessage(messageSendBo);
+        MAssert.isTrue(cellImMessageHelper.saveMessage(imMessage), ResEnum.INTERNAL_ERROR);
+
+        // 更新自己的会话信息 - 忽略异常
+        Util.runIgnoreEx(() -> cellImConversationHelper.insertOrUpdateConversation(messageSendBo.getUid(), messageSendBo.getToUid(), imMessage),
+                "insert or update conversation failed");
+        if (!messageSendBo.isSilent()) {
+            // 更新对方的会话信息 - 忽略异常
+            Util.runIgnoreEx(() -> cellImConversationHelper.insertOrUpdateConversation(messageSendBo.getToUid(), messageSendBo.getUid(), imMessage),
+                    "insert or update conversation failed");
+            // 更新未读数 - 异步更新，并忽略异常
+            AsyncUtil.submit(
+                    () -> Util.runIgnoreEx(
+                            () -> cellImUnreadHelper.incrUnread(messageSendBo.getUid(), messageSendBo.getToUid(), 1), "incr unread failed"));
+        }
+        return imMessage;
     }
 
     @Override
-    public List<ImMessage> listMessageNew(Long uid, Long peerUid, Long lastMsgId, Integer count) {
+    public List<CellImMessageBo> listMessageNew(Long uid, Long peerUid, Long lastMsgId, Integer count) {
         MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
         Optional<ImConversation> imConversation = cellImConversationHelper.getConversationByUid(uid, peerUid);
         if (!imConversation.isPresent()) {
@@ -65,11 +77,15 @@ public class CellImMessageServiceImpl implements CellImMessageService {
                     ? imConversation.get().getLastClearMsg()
                     : minMsgId;
         }
-        return cellImMessageHelper.pageMessage(uid, peerUid, Long.MAX_VALUE, minMsgId, count);
+        return cellImMessageHelper.pageMessage(uid, peerUid, Long.MAX_VALUE, minMsgId, count)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(imMessage -> convert(imMessage))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<ImMessage> listMessageHistory(Long uid, Long peerUid, Long lastMsgId, Integer count) {
+    public List<CellImMessageBo> listMessageHistory(Long uid, Long peerUid, Long lastMsgId, Integer count) {
         MAssert.notNull(peerUid, ResEnum.INVALID_PARAM);
         Optional<ImConversation> imConversation = cellImConversationHelper.getConversationByUid(uid, peerUid);
         if (!imConversation.isPresent()) {
@@ -82,7 +98,11 @@ public class CellImMessageServiceImpl implements CellImMessageService {
         if (NumberUtil.nullOrZero(count)) {
             count = Constants.DEFAULT_PAGE_SIZE;
         }
-        return cellImMessageHelper.pageMessage(uid, peerUid, lastMsgId, imConversation.get().getLastClearMsg(), count);
+        return cellImMessageHelper.pageMessage(uid, peerUid, lastMsgId, imConversation.get().getLastClearMsg(), count)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(imMessage -> convert(imMessage))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -133,10 +153,10 @@ public class CellImMessageServiceImpl implements CellImMessageService {
         ImMessage preMessage;
         if (preMessageOpt.isPresent()) {
             preMessage = preMessageOpt.get();
-        }else {
+        } else {
             preMessage = new ImMessage();
         }
-        Util.runIgnoreEx(()-> cellImConversationHelper.insertOrUpdateConversation(uid, peerUid, preMessage), "update conversation failed");
+        Util.runIgnoreEx(() -> cellImConversationHelper.insertOrUpdateConversation(uid, peerUid, preMessage), "update conversation failed");
         return true;
     }
 
@@ -148,5 +168,14 @@ public class CellImMessageServiceImpl implements CellImMessageService {
     @Override
     public boolean readMessage(Long uid, Long peerUid, Long msgId) {
         return false;
+    }
+
+    private CellImMessageBo convert(ImMessage imMessage) {
+        return CellImMessageBo.builder()
+                .imMessage(imMessage)
+                .toUid(MessageUtil.extractToUid(imMessage.getFromUid(), imMessage.getUnionId()))
+                .content(MessageUtil.deserializeContent(imMessage.getMsgType(), imMessage.getContent()))
+                .extra(MessageUtil.deserializeExtra(imMessage.getExtra()))
+                .build();
     }
 }

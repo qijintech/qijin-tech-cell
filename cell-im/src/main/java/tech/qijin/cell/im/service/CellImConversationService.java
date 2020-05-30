@@ -1,7 +1,6 @@
 package tech.qijin.cell.im.service;
 
 import tech.qijin.cell.im.db.model.ImConversation;
-import tech.qijin.cell.im.service.bo.MessageBO;
 
 import java.util.List;
 

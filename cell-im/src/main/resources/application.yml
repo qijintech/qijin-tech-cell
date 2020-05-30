@@ -24,10 +24,3 @@ spring:
         max-active: 30
         min-idle: 5
         max-wait: 60
-
-# mybatis config
-mybatis:
-  config-location: classpath:sqlMapConfig.xml
-  configuration:
-    default-enum-type-handler: tech.qijin.util4j.mybatis.handler.EnumValueTypeHandler
-    interceptors:

@@ -1,4 +1,4 @@
-package tech.qijin.cell.im.service.bo;
+package tech.qijin.cell.im.base;
 
 import lombok.Data;
 import tech.qijin.cell.im.db.model.ImConversation;
@@ -12,5 +12,5 @@ import tech.qijin.cell.im.db.model.ImConversation;
 public class ConversationBo {
     private ImConversation conversation;
     // 最后一条消息
-    private MessageBO messageBo;
+    private MessageBo messageBo;
 }
