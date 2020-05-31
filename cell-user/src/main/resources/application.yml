@@ -15,8 +15,8 @@ spring:
     active: dev
   datasource:
     druid:
-      im:
-        url: jdbc:mysql://127.0.0.1:3306/cell_im?useUnicode=true&characterEncoding=utf-8
+      user:
+        url: jdbc:mysql://127.0.0.1:3306/cell_user?useUnicode=true&characterEncoding=utf-8
         username: admin
         password: Admin_@123
         driver-class-name: com.mysql.jdbc.Driver

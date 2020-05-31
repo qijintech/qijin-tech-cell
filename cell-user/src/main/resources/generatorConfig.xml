@@ -25,16 +25,16 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="tech.qijin.cell.im.db.model" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="tech.qijin.cell.user.db.model" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="tech.qijin.cell.im.db.xml" targetProject="./src/main/java">
+        <sqlMapGenerator targetPackage="tech.qijin.cell.user.db.xml" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="tech.qijin.cell.im.db.mapper" targetProject="./src/main/java">
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="tech.qijin.cell.user.db.mapper" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <table tableName="%">
@@ -43,6 +43,15 @@
                             javaType="java.lang.Boolean"/>
             <columnOverride column="env" property="env"
                             javaType="tech.qijin.util4j.trace.pojo.EnvEnum"/>
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+        </table>
+        <table tableName="user_account">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="status" property="status"
+                            javaType="tech.qijin.cell.user.base.UserStatus"/>
+            <columnOverride column="register_type" property="registerType"
+                            javaType="tech.qijin.cell.user.base.RegisterType"/>
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
         </table>

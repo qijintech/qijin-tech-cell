@@ -38,6 +38,11 @@
             <artifactId>util4j-redis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+        </dependency>
+
         <!--alibaba modules-->
         <dependency>
             <groupId>com.alibaba.spring</groupId>
@@ -88,6 +93,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
         </dependency>
     </dependencies>
 

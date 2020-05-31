@@ -1,4 +1,4 @@
-package tech.qijin.cell.im.test;
+package tech.qijin.cell.user.test;
 
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -29,6 +29,9 @@ import java.util.UUID;
 @ActiveProfiles(profiles = "dev")
 public class BaseTest {
     protected static final Logger log = LoggerFactory.getLogger("TEST");
+
+    public static final String USER_NAME = "michealyang@aliyun.com";
+    public static final String PASSWORD = "abcd123456";
 
     @BeforeClass
     public static void beforeClass() {

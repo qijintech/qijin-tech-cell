@@ -1,8 +1,21 @@
 package tech.qijin.cell.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.qijin.cell.user.base.*;
+import tech.qijin.cell.user.db.model.UserAccount;
+import tech.qijin.cell.user.helper.CellUserAccountHelper;
 import tech.qijin.cell.user.service.CellUserAccountService;
+import tech.qijin.cell.user.service.CellUserTokenService;
+import tech.qijin.util4j.lang.constant.ResEnum;
+import tech.qijin.util4j.utils.DateUtil;
+import tech.qijin.util4j.utils.MAssert;
+import tech.qijin.util4j.utils.ValidationUtil;
+
+import java.util.Optional;
 
 /**
  * @author michealyang
@@ -12,17 +25,77 @@ import tech.qijin.cell.user.service.CellUserAccountService;
 @Slf4j
 @Service
 public class CellUserAccountServiceImpl implements CellUserAccountService {
-    @Override
-    public void registerBySelfDefined() {
+    @Autowired
+    private CellUserAccountHelper cellUserAccountHelper;
+    @Autowired
+    private CellUserTokenService cellUserTokenService;
 
+    @Override
+    public UserSessionBo register(RegisterType registerType,
+                                  AbstractRegisterVo abstractRegisterVo,
+                                  boolean login,
+                                  int expire) {
+        // 校验参数
+        ValidationUtil.validate(abstractRegisterVo);
+
+        String userName = "";
+        switch (registerType) {
+            case EMAIL:
+                userName = ((EmailRegisterVo) abstractRegisterVo).getEmail();
+                break;
+            case MOBILE:
+                userName = ((MobileRegisterVo) abstractRegisterVo).getMobile();
+                break;
+            default:
+                MAssert.isTrue(false, ResEnum.INVALID_PARAM);
+        }
+
+
+        // 检查唯一性
+        MAssert.isTrue(!cellUserAccountHelper.getUserAccountByUserName(userName).isPresent(), Constants.UserBuzCode.DUPLICATED);
+        // 创建账户
+        UserAccount userAccount = new UserAccount();
+        userAccount.setRegisterType(RegisterType.EMAIL);
+        userAccount.setStatus(UserStatus.NORMAL);
+        userAccount.setUserName(userName);
+        userAccount.setPassword(BCrypt.hashpw(abstractRegisterVo.getPassword(), BCrypt.gensalt(11)));
+        userAccount = cellUserAccountHelper.saveUserAccount(userAccount);
+        UserSessionBo userSessionBo = UserSessionBo.builder()
+                .userAccount(userAccount)
+                .build();
+        if (login) {
+            userSessionBo.setUserToken(cellUserTokenService.genUserToken(userAccount.getId(), expire * DateUtil.SECONDS_PER_DAY));
+        }
+        return userSessionBo;
     }
 
     @Override
-    public void registerByMiniWeChat(String code) {
-    }
+    public UserSessionBo login(RegisterType registerType, AbstractRegisterVo abstractRegisterVo, int expire) {
+        // 校验参数
+        ValidationUtil.validate(abstractRegisterVo);
 
-    @Override
-    public void registerByOAuth() {
+        String userName = "";
+        switch (registerType) {
+            case EMAIL:
+                ValidationUtil.validate((EmailRegisterVo) abstractRegisterVo);
+                userName = ((EmailRegisterVo) abstractRegisterVo).getEmail();
+                break;
+            case MOBILE:
+                ValidationUtil.validate((MobileRegisterVo) abstractRegisterVo);
+                userName = ((MobileRegisterVo) abstractRegisterVo).getMobile();
+                break;
+            default:
+                MAssert.isTrue(false, ResEnum.INVALID_PARAM);
+        }
 
+        Optional<UserAccount> userAccount = cellUserAccountHelper.getUserAccountByUserName(userName);
+        MAssert.isTrue(userAccount.isPresent(), Constants.UserBuzCode.USER_WRONG);
+        MAssert.isTrue(BCrypt.checkpw(abstractRegisterVo.getPassword(),
+                userAccount.get().getPassword()), Constants.UserBuzCode.USER_WRONG);
+        UserToken userToken = cellUserTokenService.genUserToken(userAccount.get().getId(), expire);
+        return UserSessionBo.builder()
+                .userAccount(userAccount.get())
+                .userToken(userToken)
+                .build();
     }
 }
