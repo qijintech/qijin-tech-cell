@@ -1,8 +1,7 @@
-package tech.qijin.cell.im.config;
+package tech.qijin.cell.db.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.type.EnumTypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -11,12 +10,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import tech.qijin.util4j.mybatis.handler.EnumValueTypeHandler;
 import tech.qijin.util4j.mybatis.interceptor.ChannelInterceptor;
-import tech.qijin.util4j.mybatis.interceptor.ValidInterceptor;
-import tech.qijin.util4j.trace.pojo.Channel;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -27,30 +23,34 @@ import java.util.Properties;
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 @Configuration
-@MapperScan(basePackages = "tech.qijin.cell.im.db.dao",
-        sqlSessionFactoryRef = "imSqlSessionFactory",
-        sqlSessionTemplateRef = "imSqlSessionTemplate")
-public class CellIMDatasourceConfig {
+@MapperScan(basePackages = "tech.qijin.cell.base.db.dao",
+        sqlSessionFactoryRef = "baseSqlSessionFactory",
+        sqlSessionTemplateRef = "baseSqlSessionTemplate")
+public class CellDbConfiguration {
 
-    @Bean("dataSourceIm")
-    @ConfigurationProperties("spring.datasource.druid.im")
+    @Primary
+    @Bean("baseDataSource")
+    @ConfigurationProperties("spring.datasource.druid.base")
     public DataSource dataSourceOne() {
         return DruidDataSourceBuilder.create().build();
     }
 
-    @Bean(name = "imSqlSessionFactory")
-    public SqlSessionFactory imSqlSessionFactory(@Qualifier("dataSourceIm") DataSource dataSourceOne)
+    @Primary
+    @Bean(name = "baseSqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("baseDataSource") DataSource dataSourceOne)
             throws Exception {
         return getSqlSessionFactory(dataSourceOne);
     }
 
-    @Bean("imSqlSessionTemplate")
-    SqlSessionTemplate sqlSessionTemplate(@Qualifier("imSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Primary
+    @Bean("baseSqlSessionTemplate")
+    SqlSessionTemplate sqlSessionTemplate(@Qualifier("baseSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
-    @Bean(name = "imTransactionManager")
-    public DataSourceTransactionManager imTransactionManager(@Qualifier("dataSourceIm") DataSource dataSourceOne) {
+    @Primary
+    @Bean(name = "baseTransactionManager")
+    public DataSourceTransactionManager transactionManager(@Qualifier("baseDataSource") DataSource dataSourceOne) {
         return new DataSourceTransactionManager(dataSourceOne);
     }
 

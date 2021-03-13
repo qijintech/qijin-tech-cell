@@ -28,14 +28,12 @@ import java.util.Properties;
         sqlSessionTemplateRef = "userSqlSessionTemplate")
 public class CellUserDatasourceConfig {
 
-    @Primary
     @Bean("dataSourceUser")
     @ConfigurationProperties("spring.datasource.druid.user")
     public DataSource dataSourceOne() {
         return DruidDataSourceBuilder.create().build();
     }
 
-    @Primary
     @Bean(name = "userSqlSessionFactory")
     public SqlSessionFactory imSqlSessionFactory(@Qualifier("dataSourceUser") DataSource dataSourceOne)
             throws Exception {
@@ -47,7 +45,6 @@ public class CellUserDatasourceConfig {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
-    @Primary
     @Bean(name = "userTransactionManager")
     public DataSourceTransactionManager imTransactionManager(@Qualifier("dataSourceUser") DataSource dataSourceOne) {
         return new DataSourceTransactionManager(dataSourceOne);

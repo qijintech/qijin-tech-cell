@@ -1,7 +1,6 @@
 package tech.qijin.cell.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,18 +38,30 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         ValidationUtil.validate(abstractRegisterVo);
 
         String userName = "";
+        UserSessionBo userSessionBo = UserSessionBo.builder().build();
         switch (registerType) {
             case EMAIL:
                 userName = ((EmailRegisterVo) abstractRegisterVo).getEmail();
+                userSessionBo = registerForUserName(userName, abstractRegisterVo.getPassword());
                 break;
             case MOBILE:
                 userName = ((MobileRegisterVo) abstractRegisterVo).getMobile();
+                userSessionBo = registerForUserName(userName, abstractRegisterVo.getPassword());
+                break;
+            case MINI_WECHAT:
                 break;
             default:
                 MAssert.isTrue(false, ResEnum.INVALID_PARAM);
         }
 
 
+        if (login) {
+            userSessionBo.setUserToken(cellUserTokenService.genUserToken(userSessionBo.getUserAccount().getId(), expire * DateUtil.SECONDS_PER_DAY));
+        }
+        return userSessionBo;
+    }
+
+    private UserSessionBo registerForUserName(String userName, String password) {
         // 检查唯一性
         MAssert.isTrue(!cellUserAccountHelper.getUserAccountByUserName(userName).isPresent(), Constants.UserBuzCode.DUPLICATED);
         // 创建账户
@@ -58,15 +69,15 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         userAccount.setRegisterType(RegisterType.EMAIL);
         userAccount.setStatus(UserStatus.NORMAL);
         userAccount.setUserName(userName);
-        userAccount.setPassword(BCrypt.hashpw(abstractRegisterVo.getPassword(), BCrypt.gensalt(11)));
+        userAccount.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(11)));
         userAccount = cellUserAccountHelper.saveUserAccount(userAccount);
-        UserSessionBo userSessionBo = UserSessionBo.builder()
+        return UserSessionBo.builder()
                 .userAccount(userAccount)
                 .build();
-        if (login) {
-            userSessionBo.setUserToken(cellUserTokenService.genUserToken(userAccount.getId(), expire * DateUtil.SECONDS_PER_DAY));
-        }
-        return userSessionBo;
+    }
+
+    private UserSessionBo registerForMiniWeChat(String code) {
+        return null;
     }
 
     @Override

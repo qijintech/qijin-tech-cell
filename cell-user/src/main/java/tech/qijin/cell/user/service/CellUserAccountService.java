@@ -2,7 +2,6 @@ package tech.qijin.cell.user.service;
 
 import tech.qijin.cell.user.base.AbstractRegisterVo;
 import tech.qijin.cell.user.base.RegisterType;
-import tech.qijin.cell.user.base.SessionVo;
 import tech.qijin.cell.user.base.UserSessionBo;
 
 /**
