@@ -1,7 +1,7 @@
 package tech.qijin.cell.user.db.model;
 
 import java.util.Date;
-import tech.qijin.cell.user.base.RegisterType;
+import tech.qijin.cell.user.base.AccountType;
 import tech.qijin.cell.user.base.UserStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
@@ -10,9 +10,9 @@ public class UserAccount {
 
     private Channel channel;
 
-    private RegisterType registerType;
+    private AccountType accountType;
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -38,20 +38,20 @@ public class UserAccount {
         this.channel = channel;
     }
 
-    public RegisterType getRegisterType() {
-        return registerType;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setRegisterType(RegisterType registerType) {
-        this.registerType = registerType;
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {

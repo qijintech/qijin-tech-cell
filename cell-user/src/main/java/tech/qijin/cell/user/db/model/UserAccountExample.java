@@ -3,7 +3,7 @@ package tech.qijin.cell.user.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import tech.qijin.cell.user.base.RegisterType;
+import tech.qijin.cell.user.base.AccountType;
 import tech.qijin.cell.user.base.UserStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
@@ -238,143 +238,143 @@ public class UserAccountExample {
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeIsNull() {
-            addCriterion("register_type is null");
+        public Criteria andAccountTypeIsNull() {
+            addCriterion("account_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeIsNotNull() {
-            addCriterion("register_type is not null");
+        public Criteria andAccountTypeIsNotNull() {
+            addCriterion("account_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeEqualTo(RegisterType value) {
-            addCriterion("register_type =", value, "registerType");
+        public Criteria andAccountTypeEqualTo(AccountType value) {
+            addCriterion("account_type =", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeNotEqualTo(RegisterType value) {
-            addCriterion("register_type <>", value, "registerType");
+        public Criteria andAccountTypeNotEqualTo(AccountType value) {
+            addCriterion("account_type <>", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeGreaterThan(RegisterType value) {
-            addCriterion("register_type >", value, "registerType");
+        public Criteria andAccountTypeGreaterThan(AccountType value) {
+            addCriterion("account_type >", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeGreaterThanOrEqualTo(RegisterType value) {
-            addCriterion("register_type >=", value, "registerType");
+        public Criteria andAccountTypeGreaterThanOrEqualTo(AccountType value) {
+            addCriterion("account_type >=", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeLessThan(RegisterType value) {
-            addCriterion("register_type <", value, "registerType");
+        public Criteria andAccountTypeLessThan(AccountType value) {
+            addCriterion("account_type <", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeLessThanOrEqualTo(RegisterType value) {
-            addCriterion("register_type <=", value, "registerType");
+        public Criteria andAccountTypeLessThanOrEqualTo(AccountType value) {
+            addCriterion("account_type <=", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeLike(RegisterType value) {
-            addCriterion("register_type like", value, "registerType");
+        public Criteria andAccountTypeLike(AccountType value) {
+            addCriterion("account_type like", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeNotLike(RegisterType value) {
-            addCriterion("register_type not like", value, "registerType");
+        public Criteria andAccountTypeNotLike(AccountType value) {
+            addCriterion("account_type not like", value, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeIn(List<RegisterType> values) {
-            addCriterion("register_type in", values, "registerType");
+        public Criteria andAccountTypeIn(List<AccountType> values) {
+            addCriterion("account_type in", values, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeNotIn(List<RegisterType> values) {
-            addCriterion("register_type not in", values, "registerType");
+        public Criteria andAccountTypeNotIn(List<AccountType> values) {
+            addCriterion("account_type not in", values, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeBetween(RegisterType value1, RegisterType value2) {
-            addCriterion("register_type between", value1, value2, "registerType");
+        public Criteria andAccountTypeBetween(AccountType value1, AccountType value2) {
+            addCriterion("account_type between", value1, value2, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andRegisterTypeNotBetween(RegisterType value1, RegisterType value2) {
-            addCriterion("register_type not between", value1, value2, "registerType");
+        public Criteria andAccountTypeNotBetween(AccountType value1, AccountType value2) {
+            addCriterion("account_type not between", value1, value2, "accountType");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNull() {
-            addCriterion("user_name is null");
+        public Criteria andUsernameIsNull() {
+            addCriterion("username is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNotNull() {
-            addCriterion("user_name is not null");
+        public Criteria andUsernameIsNotNull() {
+            addCriterion("username is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameEqualTo(String value) {
-            addCriterion("user_name =", value, "userName");
+        public Criteria andUsernameEqualTo(String value) {
+            addCriterion("username =", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotEqualTo(String value) {
-            addCriterion("user_name <>", value, "userName");
+        public Criteria andUsernameNotEqualTo(String value) {
+            addCriterion("username <>", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThan(String value) {
-            addCriterion("user_name >", value, "userName");
+        public Criteria andUsernameGreaterThan(String value) {
+            addCriterion("username >", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
-            addCriterion("user_name >=", value, "userName");
+        public Criteria andUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("username >=", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThan(String value) {
-            addCriterion("user_name <", value, "userName");
+        public Criteria andUsernameLessThan(String value) {
+            addCriterion("username <", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThanOrEqualTo(String value) {
-            addCriterion("user_name <=", value, "userName");
+        public Criteria andUsernameLessThanOrEqualTo(String value) {
+            addCriterion("username <=", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLike(String value) {
-            addCriterion("user_name like", value, "userName");
+        public Criteria andUsernameLike(String value) {
+            addCriterion("username like", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotLike(String value) {
-            addCriterion("user_name not like", value, "userName");
+        public Criteria andUsernameNotLike(String value) {
+            addCriterion("username not like", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIn(List<String> values) {
-            addCriterion("user_name in", values, "userName");
+        public Criteria andUsernameIn(List<String> values) {
+            addCriterion("username in", values, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotIn(List<String> values) {
-            addCriterion("user_name not in", values, "userName");
+        public Criteria andUsernameNotIn(List<String> values) {
+            addCriterion("username not in", values, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameBetween(String value1, String value2) {
-            addCriterion("user_name between", value1, value2, "userName");
+        public Criteria andUsernameBetween(String value1, String value2) {
+            addCriterion("username between", value1, value2, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotBetween(String value1, String value2) {
-            addCriterion("user_name not between", value1, value2, "userName");
+        public Criteria andUsernameNotBetween(String value1, String value2) {
+            addCriterion("username not between", value1, value2, "username");
             return (Criteria) this;
         }
 

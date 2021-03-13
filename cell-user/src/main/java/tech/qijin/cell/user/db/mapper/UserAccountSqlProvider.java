@@ -32,12 +32,12 @@ public class UserAccountSqlProvider {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getRegisterType() != null) {
-            sql.VALUES("register_type", "#{registerType,jdbcType=VARCHAR}");
+        if (record.getAccountType() != null) {
+            sql.VALUES("account_type", "#{accountType,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserName() != null) {
-            sql.VALUES("user_name", "#{userName,jdbcType=VARCHAR}");
+        if (record.getUsername() != null) {
+            sql.VALUES("username", "#{username,jdbcType=VARCHAR}");
         }
         
         if (record.getPassword() != null) {
@@ -67,8 +67,8 @@ public class UserAccountSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("register_type");
-        sql.SELECT("user_name");
+        sql.SELECT("account_type");
+        sql.SELECT("username");
         sql.SELECT("password");
         sql.SELECT("status");
         sql.SELECT("create_time");
@@ -98,12 +98,12 @@ public class UserAccountSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getRegisterType() != null) {
-            sql.SET("register_type = #{record.registerType,jdbcType=VARCHAR}");
+        if (record.getAccountType() != null) {
+            sql.SET("account_type = #{record.accountType,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserName() != null) {
-            sql.SET("user_name = #{record.userName,jdbcType=VARCHAR}");
+        if (record.getUsername() != null) {
+            sql.SET("username = #{record.username,jdbcType=VARCHAR}");
         }
         
         if (record.getPassword() != null) {
@@ -132,8 +132,8 @@ public class UserAccountSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("register_type = #{record.registerType,jdbcType=VARCHAR}");
-        sql.SET("user_name = #{record.userName,jdbcType=VARCHAR}");
+        sql.SET("account_type = #{record.accountType,jdbcType=VARCHAR}");
+        sql.SET("username = #{record.username,jdbcType=VARCHAR}");
         sql.SET("password = #{record.password,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -152,12 +152,12 @@ public class UserAccountSqlProvider {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getRegisterType() != null) {
-            sql.SET("register_type = #{registerType,jdbcType=VARCHAR}");
+        if (record.getAccountType() != null) {
+            sql.SET("account_type = #{accountType,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserName() != null) {
-            sql.SET("user_name = #{userName,jdbcType=VARCHAR}");
+        if (record.getUsername() != null) {
+            sql.SET("username = #{username,jdbcType=VARCHAR}");
         }
         
         if (record.getPassword() != null) {

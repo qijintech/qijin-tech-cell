@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.qijin.cell.user.base.EmailRegisterVo;
-import tech.qijin.cell.user.base.RegisterType;
+import tech.qijin.cell.user.base.AccountType;
 import tech.qijin.cell.user.base.UserSessionBo;
 import tech.qijin.cell.user.service.CellUserAccountService;
 import tech.qijin.cell.user.service.CellUserTokenService;
@@ -25,7 +25,7 @@ public class CellUserTokenServiceTest extends BaseTest{
         EmailRegisterVo emailRegisterVo = new EmailRegisterVo();
         emailRegisterVo.setEmail(USER_NAME);
         emailRegisterVo.setPassword(PASSWORD);
-        UserSessionBo userSessionBo = userAccountService.login(RegisterType.EMAIL, emailRegisterVo, 7 * DateUtil.SECONDS_PER_DAY);
+        UserSessionBo userSessionBo = userAccountService.login(AccountType.EMAIL, emailRegisterVo, 7 * DateUtil.SECONDS_PER_DAY);
         Assert.assertNotNull(userSessionBo);
         Assert.assertNotNull(userSessionBo.getUserToken());
         Assert.assertNotNull(userSessionBo.getUserAccount());

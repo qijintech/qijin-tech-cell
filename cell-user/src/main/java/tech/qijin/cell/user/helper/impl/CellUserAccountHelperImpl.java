@@ -24,16 +24,21 @@ public class CellUserAccountHelperImpl implements CellUserAccountHelper {
         try {
             userAccountDao.insertSelective(userAccount);
         } catch (DuplicateKeyException e) {
-            MAssert.isTrue(false, Constants.UserBuzCode.DUPLICATED);
+            MAssert.isTrue(false, Constants.UserBuzCode.DUPLICATE_ACCOUNT);
         }
         return userAccount;
     }
 
     @Override
-    public Optional<UserAccount> getUserAccountByUserName(String userName) {
+    public Optional<UserAccount> getUserAccountByUserName(String username) {
         UserAccountExample example = new UserAccountExample();
         example.createCriteria()
-                .andUserNameEqualTo(userName);
+                .andUsernameEqualTo(username);
         return userAccountDao.selectByExample(example).stream().findFirst();
+    }
+
+    @Override
+    public boolean isUsernameUnique(String username) {
+        return !getUserAccountByUserName(username).isPresent();
     }
 }

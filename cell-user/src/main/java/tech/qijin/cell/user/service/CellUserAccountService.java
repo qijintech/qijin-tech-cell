@@ -1,7 +1,7 @@
 package tech.qijin.cell.user.service;
 
 import tech.qijin.cell.user.base.AbstractRegisterVo;
-import tech.qijin.cell.user.base.RegisterType;
+import tech.qijin.cell.user.base.AccountType;
 import tech.qijin.cell.user.base.UserSessionBo;
 
 /**
@@ -11,7 +11,9 @@ import tech.qijin.cell.user.base.UserSessionBo;
  */
 public interface CellUserAccountService {
 
-    UserSessionBo register(RegisterType registerType, AbstractRegisterVo abstractRegisterVo, boolean login, int expire);
+    UserSessionBo register(AccountType accountType, AbstractRegisterVo abstractRegisterVo, boolean login, int expire);
 
-    UserSessionBo login(RegisterType registerType, AbstractRegisterVo abstractRegisterVo, int expire);
+    UserSessionBo login(AccountType accountType, AbstractRegisterVo abstractRegisterVo, int expire);
+
+    void sendCaptcha(String mobile);
 }

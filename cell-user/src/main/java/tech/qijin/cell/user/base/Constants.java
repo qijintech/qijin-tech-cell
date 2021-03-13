@@ -13,11 +13,15 @@ public class Constants {
      */
     public static enum UserBuzCode implements BuzCode {
         INVALID_TOKEN(12001, "token已失效"),
-        USER_WRONG(12002, "用户名或密码错误"),
-
-        DUPLICATED(12003, "重复的账号"),
-
-        FORBIDDEN(12006, "禁止操作"),
+        ACCOUNT_MISMATCH(12002, "用户名或密码错误"),
+        DUPLICATE_ACCOUNT(12003, "账号已存在"),
+        DUPLICATE_NICKNAME(12004, "昵称已存在"),
+        EMPTY_USERNAME(12005, "用户名不能为空"),
+        EMPTY_PASSWORD(12006, "密码不能为空"),
+        FORBIDDEN(12007, "禁止操作"),
+        EMPTY_CAPTCHA(12008, "验证码不能为空"),
+        EMPTY_MOBILE(12009, "手机号不能为空"),
+        CAPTCHA_MISMATCH(12010, "验证码不正确或已失效"),
         ;
 
 

@@ -1,6 +1,7 @@
 package tech.qijin.cell.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import tech.qijin.cell.user.helper.CellUserAccountHelper;
 import tech.qijin.cell.user.service.CellUserAccountService;
 import tech.qijin.cell.user.service.CellUserTokenService;
 import tech.qijin.util4j.lang.constant.ResEnum;
+import tech.qijin.util4j.redis.RedisUtil;
+import tech.qijin.util4j.utils.CaptchaUtil;
 import tech.qijin.util4j.utils.DateUtil;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.ValidationUtil;
@@ -28,25 +31,22 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
     private CellUserAccountHelper cellUserAccountHelper;
     @Autowired
     private CellUserTokenService cellUserTokenService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
-    public UserSessionBo register(RegisterType registerType,
+    public UserSessionBo register(AccountType accountType,
                                   AbstractRegisterVo abstractRegisterVo,
                                   boolean login,
                                   int expire) {
         // 校验参数
         ValidationUtil.validate(abstractRegisterVo);
 
-        String userName = "";
+
         UserSessionBo userSessionBo = UserSessionBo.builder().build();
-        switch (registerType) {
+        switch (accountType) {
             case EMAIL:
-                userName = ((EmailRegisterVo) abstractRegisterVo).getEmail();
-                userSessionBo = registerForUserName(userName, abstractRegisterVo.getPassword());
-                break;
-            case MOBILE:
-                userName = ((MobileRegisterVo) abstractRegisterVo).getMobile();
-                userSessionBo = registerForUserName(userName, abstractRegisterVo.getPassword());
+                userSessionBo = registerForEmail(((EmailRegisterVo) abstractRegisterVo).getEmail(), abstractRegisterVo.getPassword());
                 break;
             case MINI_WECHAT:
                 break;
@@ -61,14 +61,15 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         return userSessionBo;
     }
 
-    private UserSessionBo registerForUserName(String userName, String password) {
+    private UserSessionBo registerForUsername(String username, String password) {
         // 检查唯一性
-        MAssert.isTrue(!cellUserAccountHelper.getUserAccountByUserName(userName).isPresent(), Constants.UserBuzCode.DUPLICATED);
+        MAssert.isTrue(!cellUserAccountHelper.isUsernameUnique(username), Constants.UserBuzCode.DUPLICATE_ACCOUNT);
+
         // 创建账户
         UserAccount userAccount = new UserAccount();
-        userAccount.setRegisterType(RegisterType.EMAIL);
+        userAccount.setAccountType(AccountType.USERNAME);
         userAccount.setStatus(UserStatus.NORMAL);
-        userAccount.setUserName(userName);
+        userAccount.setUsername(username);
         userAccount.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(11)));
         userAccount = cellUserAccountHelper.saveUserAccount(userAccount);
         return UserSessionBo.builder()
@@ -76,37 +77,112 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
                 .build();
     }
 
+    private UserSessionBo registerForEmail(String email, String password) {
+        // 检查唯一性
+        MAssert.isTrue(!cellUserAccountHelper.isUsernameUnique(email), Constants.UserBuzCode.DUPLICATE_ACCOUNT);
+        // 创建账户
+        UserAccount userAccount = new UserAccount();
+        userAccount.setAccountType(AccountType.EMAIL);
+        userAccount.setStatus(UserStatus.NORMAL);
+        userAccount.setUsername(email);
+        userAccount.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(11)));
+        userAccount = cellUserAccountHelper.saveUserAccount(userAccount);
+
+        // TODO send email
+
+        return UserSessionBo.builder()
+                .userAccount(userAccount)
+                .build();
+    }
+
+
     private UserSessionBo registerForMiniWeChat(String code) {
         return null;
     }
 
     @Override
-    public UserSessionBo login(RegisterType registerType, AbstractRegisterVo abstractRegisterVo, int expire) {
+    public UserSessionBo login(AccountType accountType, AbstractRegisterVo abstractRegisterVo, int expire) {
         // 校验参数
         ValidationUtil.validate(abstractRegisterVo);
 
-        String userName = "";
-        switch (registerType) {
+        switch (accountType) {
             case EMAIL:
-                ValidationUtil.validate((EmailRegisterVo) abstractRegisterVo);
-                userName = ((EmailRegisterVo) abstractRegisterVo).getEmail();
-                break;
+                EmailRegisterVo emailRegisterVo = (EmailRegisterVo) abstractRegisterVo;
+                return loginByUsername(emailRegisterVo.getEmail(), emailRegisterVo.getPassword(), expire);
+            case USERNAME:
+                UserNameRegisterVo userNameRegisterVo = (UserNameRegisterVo) abstractRegisterVo;
+                return loginByUsername(userNameRegisterVo.getUsername(), userNameRegisterVo.getPassword(), expire);
             case MOBILE:
-                ValidationUtil.validate((MobileRegisterVo) abstractRegisterVo);
-                userName = ((MobileRegisterVo) abstractRegisterVo).getMobile();
-                break;
+                MobileRegisterVo mobileRegisterVo = (MobileRegisterVo) abstractRegisterVo;
+                return loginByMobile(mobileRegisterVo.getMobile(), mobileRegisterVo.getCaptcha(), expire);
             default:
-                MAssert.isTrue(false, ResEnum.INVALID_PARAM);
+                MAssert.isTrue(false, ResEnum.INTERNAL_ERROR);
         }
+        return null;
+    }
 
-        Optional<UserAccount> userAccount = cellUserAccountHelper.getUserAccountByUserName(userName);
-        MAssert.isTrue(userAccount.isPresent(), Constants.UserBuzCode.USER_WRONG);
-        MAssert.isTrue(BCrypt.checkpw(abstractRegisterVo.getPassword(),
-                userAccount.get().getPassword()), Constants.UserBuzCode.USER_WRONG);
+    private UserSessionBo loginByUsername(String username, String password, int expire) {
+        Optional<UserAccount> userAccount = cellUserAccountHelper.getUserAccountByUserName(username);
+        MAssert.isTrue(userAccount.isPresent(), Constants.UserBuzCode.ACCOUNT_MISMATCH);
+        MAssert.isTrue(BCrypt.checkpw(password,
+                userAccount.get().getPassword()), Constants.UserBuzCode.ACCOUNT_MISMATCH);
         UserToken userToken = cellUserTokenService.genUserToken(userAccount.get().getId(), expire);
         return UserSessionBo.builder()
                 .userAccount(userAccount.get())
                 .userToken(userToken)
                 .build();
     }
+
+    /**
+     * 手机号登录或注册
+     *
+     * @param mobile
+     * @param captcha
+     * @return
+     */
+    private UserSessionBo loginByMobile(String mobile, String captcha, int expire) {
+        MAssert.isTrue(StringUtils.isNotBlank(mobile), Constants.UserBuzCode.EMPTY_MOBILE);
+        MAssert.isTrue(StringUtils.isNotBlank(captcha), Constants.UserBuzCode.EMPTY_CAPTCHA);
+        // 校验验证码
+        String key = getCaptchaKey(mobile, captcha);
+        MAssert.isTrue(redisUtil.getLong(key) != null, Constants.UserBuzCode.CAPTCHA_MISMATCH);
+
+        UserAccount userAccount = null;
+        Optional<UserAccount> userAccountOpt = cellUserAccountHelper.getUserAccountByUserName(mobile);
+        if (userAccountOpt.isPresent()) {
+            // 登录
+            userAccount = userAccountOpt.get();
+        } else {
+            // 注册
+            userAccount = new UserAccount();
+            userAccount.setAccountType(AccountType.MOBILE);
+            userAccount.setStatus(UserStatus.NORMAL);
+            userAccount.setUsername(mobile);
+            userAccount = cellUserAccountHelper.saveUserAccount(userAccount);
+
+        }
+        // 删除验证码
+        redisUtil.delete(key);
+        return UserSessionBo.builder()
+                .userAccount(userAccount)
+                .userToken(cellUserTokenService.genUserToken(userAccount.getId(), expire))
+                .build();
+    }
+
+
+    @Override
+    public void sendCaptcha(String mobile) {
+        MAssert.isTrue(StringUtils.isNotBlank(mobile), Constants.UserBuzCode.EMPTY_MOBILE);
+        // 生成验证码
+        String code = CaptchaUtil.genNumberCode(4);
+        String key = getCaptchaKey(mobile, code);
+        // 过期时间 1 min
+        redisUtil.setLong(key, 1L, DateUtil.SECONDS_PER_MINUTE);
+        // TODO send 验证码 短信
+    }
+
+    private String getCaptchaKey(String mobile, String captcha) {
+        return String.format("%s:%s", mobile, captcha);
+    }
+
 }

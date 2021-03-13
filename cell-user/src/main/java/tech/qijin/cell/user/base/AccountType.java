@@ -7,7 +7,7 @@ import tech.qijin.util4j.lang.constant.EnumValue;
  * @date 2020-01-05
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
-public enum RegisterType implements EnumValue<String> {
+public enum AccountType implements EnumValue<String> {
     OAUTH_WECHAT("OAuth-微信"),
     MINI_WECHAT("小程序-微信"),
     MINI_DOUYIN("小程序-抖音"),
@@ -16,7 +16,7 @@ public enum RegisterType implements EnumValue<String> {
     USERNAME("用户名注册");
 
 
-    RegisterType(String description) {
+    AccountType(String description) {
         this.description = description;
     }
 
