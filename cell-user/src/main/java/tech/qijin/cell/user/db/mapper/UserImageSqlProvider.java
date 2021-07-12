@@ -3,30 +3,30 @@ package tech.qijin.cell.user.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.cell.user.db.model.UserProfile;
-import tech.qijin.cell.user.db.model.UserProfileExample.Criteria;
-import tech.qijin.cell.user.db.model.UserProfileExample.Criterion;
-import tech.qijin.cell.user.db.model.UserProfileExample;
+import tech.qijin.cell.user.db.model.UserImage;
+import tech.qijin.cell.user.db.model.UserImageExample.Criteria;
+import tech.qijin.cell.user.db.model.UserImageExample.Criterion;
+import tech.qijin.cell.user.db.model.UserImageExample;
 
-public class UserProfileSqlProvider {
+public class UserImageSqlProvider {
 
-    public String countByExample(UserProfileExample example) {
+    public String countByExample(UserImageExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("user_profile");
+        sql.SELECT("count(*)").FROM("user_image");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(UserProfileExample example) {
+    public String deleteByExample(UserImageExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("user_profile");
+        sql.DELETE_FROM("user_image");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(UserProfile record) {
+    public String insertSelective(UserImage record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("user_profile");
+        sql.INSERT_INTO("user_image");
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
@@ -36,44 +36,12 @@ public class UserProfileSqlProvider {
             sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getName() != null) {
-            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
+        if (record.getUrl() != null) {
+            sql.VALUES("url", "#{url,jdbcType=VARCHAR}");
         }
         
-        if (record.getAvatar() != null) {
-            sql.VALUES("avatar", "#{avatar,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGender() != null) {
-            sql.VALUES("gender", "#{gender,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getMobile() != null) {
-            sql.VALUES("mobile", "#{mobile,jdbcType=CHAR}");
-        }
-        
-        if (record.getBirthday() != null) {
-            sql.VALUES("birthday", "#{birthday,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getBornCity() != null) {
-            sql.VALUES("born_city", "#{bornCity,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getLiveCity() != null) {
-            sql.VALUES("live_city", "#{liveCity,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getEdu() != null) {
-            sql.VALUES("edu", "#{edu,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getEduDegree() != null) {
-            sql.VALUES("edu_degree", "#{eduDegree,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getJob() != null) {
-            sql.VALUES("job", "#{job,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -87,7 +55,7 @@ public class UserProfileSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(UserProfileExample example) {
+    public String selectByExample(UserImageExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -96,19 +64,11 @@ public class UserProfileSqlProvider {
         }
         sql.SELECT("channel");
         sql.SELECT("user_id");
-        sql.SELECT("name");
-        sql.SELECT("avatar");
-        sql.SELECT("gender");
-        sql.SELECT("mobile");
-        sql.SELECT("birthday");
-        sql.SELECT("born_city");
-        sql.SELECT("live_city");
-        sql.SELECT("edu");
-        sql.SELECT("edu_degree");
-        sql.SELECT("job");
+        sql.SELECT("url");
+        sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("user_profile");
+        sql.FROM("user_image");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -119,11 +79,11 @@ public class UserProfileSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        UserProfile record = (UserProfile) parameter.get("record");
-        UserProfileExample example = (UserProfileExample) parameter.get("example");
+        UserImage record = (UserImage) parameter.get("record");
+        UserImageExample example = (UserImageExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("user_profile");
+        sql.UPDATE("user_image");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -137,44 +97,12 @@ public class UserProfileSqlProvider {
             sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         }
         
-        if (record.getName() != null) {
-            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        if (record.getUrl() != null) {
+            sql.SET("url = #{record.url,jdbcType=VARCHAR}");
         }
         
-        if (record.getAvatar() != null) {
-            sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGender() != null) {
-            sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getMobile() != null) {
-            sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
-        }
-        
-        if (record.getBirthday() != null) {
-            sql.SET("birthday = #{record.birthday,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getBornCity() != null) {
-            sql.SET("born_city = #{record.bornCity,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getLiveCity() != null) {
-            sql.SET("live_city = #{record.liveCity,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getEdu() != null) {
-            sql.SET("edu = #{record.edu,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getEduDegree() != null) {
-            sql.SET("edu_degree = #{record.eduDegree,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getJob() != null) {
-            sql.SET("job = #{record.job,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -191,32 +119,24 @@ public class UserProfileSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("user_profile");
+        sql.UPDATE("user_image");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
-        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
-        sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
-        sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
-        sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
-        sql.SET("birthday = #{record.birthday,jdbcType=TIMESTAMP}");
-        sql.SET("born_city = #{record.bornCity,jdbcType=VARCHAR}");
-        sql.SET("live_city = #{record.liveCity,jdbcType=VARCHAR}");
-        sql.SET("edu = #{record.edu,jdbcType=VARCHAR}");
-        sql.SET("edu_degree = #{record.eduDegree,jdbcType=VARCHAR}");
-        sql.SET("job = #{record.job,jdbcType=VARCHAR}");
+        sql.SET("url = #{record.url,jdbcType=VARCHAR}");
+        sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        UserProfileExample example = (UserProfileExample) parameter.get("example");
+        UserImageExample example = (UserImageExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(UserProfile record) {
+    public String updateByPrimaryKeySelective(UserImage record) {
         SQL sql = new SQL();
-        sql.UPDATE("user_profile");
+        sql.UPDATE("user_image");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
@@ -226,44 +146,12 @@ public class UserProfileSqlProvider {
             sql.SET("user_id = #{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getName() != null) {
-            sql.SET("name = #{name,jdbcType=VARCHAR}");
+        if (record.getUrl() != null) {
+            sql.SET("url = #{url,jdbcType=VARCHAR}");
         }
         
-        if (record.getAvatar() != null) {
-            sql.SET("avatar = #{avatar,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGender() != null) {
-            sql.SET("gender = #{gender,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getMobile() != null) {
-            sql.SET("mobile = #{mobile,jdbcType=CHAR}");
-        }
-        
-        if (record.getBirthday() != null) {
-            sql.SET("birthday = #{birthday,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getBornCity() != null) {
-            sql.SET("born_city = #{bornCity,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getLiveCity() != null) {
-            sql.SET("live_city = #{liveCity,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getEdu() != null) {
-            sql.SET("edu = #{edu,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getEduDegree() != null) {
-            sql.SET("edu_degree = #{eduDegree,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getJob() != null) {
-            sql.SET("job = #{job,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.SET("status = #{status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -279,7 +167,7 @@ public class UserProfileSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, UserProfileExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, UserImageExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

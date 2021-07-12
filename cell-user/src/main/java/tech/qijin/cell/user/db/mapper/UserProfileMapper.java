@@ -33,11 +33,17 @@ public interface UserProfileMapper {
     @Insert({
         "insert into user_profile (channel, user_id, ",
         "name, avatar, gender, ",
-        "mobile, create_time, ",
+        "mobile, birthday, ",
+        "born_city, live_city, ",
+        "edu, edu_degree, ",
+        "job, create_time, ",
         "update_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
         "#{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, ",
-        "#{mobile,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{mobile,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
+        "#{bornCity,jdbcType=VARCHAR}, #{liveCity,jdbcType=VARCHAR}, ",
+        "#{edu,jdbcType=VARCHAR}, #{eduDegree,jdbcType=VARCHAR}, ",
+        "#{job,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
@@ -56,6 +62,12 @@ public interface UserProfileMapper {
         @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
         @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
         @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
+        @Result(column="birthday", property="birthday", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="born_city", property="bornCity", jdbcType=JdbcType.VARCHAR),
+        @Result(column="live_city", property="liveCity", jdbcType=JdbcType.VARCHAR),
+        @Result(column="edu", property="edu", jdbcType=JdbcType.VARCHAR),
+        @Result(column="edu_degree", property="eduDegree", jdbcType=JdbcType.VARCHAR),
+        @Result(column="job", property="job", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -63,7 +75,8 @@ public interface UserProfileMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, name, avatar, gender, mobile, create_time, update_time",
+        "id, channel, user_id, name, avatar, gender, mobile, birthday, born_city, live_city, ",
+        "edu, edu_degree, job, create_time, update_time",
         "from user_profile",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -75,6 +88,12 @@ public interface UserProfileMapper {
         @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
         @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
         @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
+        @Result(column="birthday", property="birthday", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="born_city", property="bornCity", jdbcType=JdbcType.VARCHAR),
+        @Result(column="live_city", property="liveCity", jdbcType=JdbcType.VARCHAR),
+        @Result(column="edu", property="edu", jdbcType=JdbcType.VARCHAR),
+        @Result(column="edu_degree", property="eduDegree", jdbcType=JdbcType.VARCHAR),
+        @Result(column="job", property="job", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -97,6 +116,12 @@ public interface UserProfileMapper {
           "avatar = #{avatar,jdbcType=VARCHAR},",
           "gender = #{gender,jdbcType=VARCHAR},",
           "mobile = #{mobile,jdbcType=CHAR},",
+          "birthday = #{birthday,jdbcType=TIMESTAMP},",
+          "born_city = #{bornCity,jdbcType=VARCHAR},",
+          "live_city = #{liveCity,jdbcType=VARCHAR},",
+          "edu = #{edu,jdbcType=VARCHAR},",
+          "edu_degree = #{eduDegree,jdbcType=VARCHAR},",
+          "job = #{job,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

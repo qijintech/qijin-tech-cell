@@ -19,6 +19,18 @@ public class UserProfile {
 
     private String mobile;
 
+    private Date birthday;
+
+    private String bornCity;
+
+    private String liveCity;
+
+    private String edu;
+
+    private String eduDegree;
+
+    private String job;
+
     private Date createTime;
 
     private Date updateTime;
@@ -77,6 +89,54 @@ public class UserProfile {
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getBornCity() {
+        return bornCity;
+    }
+
+    public void setBornCity(String bornCity) {
+        this.bornCity = bornCity == null ? null : bornCity.trim();
+    }
+
+    public String getLiveCity() {
+        return liveCity;
+    }
+
+    public void setLiveCity(String liveCity) {
+        this.liveCity = liveCity == null ? null : liveCity.trim();
+    }
+
+    public String getEdu() {
+        return edu;
+    }
+
+    public void setEdu(String edu) {
+        this.edu = edu == null ? null : edu.trim();
+    }
+
+    public String getEduDegree() {
+        return eduDegree;
+    }
+
+    public void setEduDegree(String eduDegree) {
+        this.eduDegree = eduDegree == null ? null : eduDegree.trim();
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job == null ? null : job.trim();
     }
 
     public Date getCreateTime() {
