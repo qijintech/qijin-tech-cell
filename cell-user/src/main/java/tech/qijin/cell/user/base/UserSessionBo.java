@@ -10,4 +10,5 @@ import tech.qijin.cell.user.db.model.UserAccount;
 public class UserSessionBo {
     private UserAccount userAccount;
     private UserToken userToken;
+    private LoginStatus loginStatus;
 }

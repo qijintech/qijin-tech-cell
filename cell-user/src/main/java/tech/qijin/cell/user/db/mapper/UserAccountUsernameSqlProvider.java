@@ -3,37 +3,41 @@ package tech.qijin.cell.user.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.cell.user.db.model.UserAccount;
-import tech.qijin.cell.user.db.model.UserAccountExample.Criteria;
-import tech.qijin.cell.user.db.model.UserAccountExample.Criterion;
-import tech.qijin.cell.user.db.model.UserAccountExample;
+import tech.qijin.cell.user.db.model.UserAccountUsername;
+import tech.qijin.cell.user.db.model.UserAccountUsernameExample.Criteria;
+import tech.qijin.cell.user.db.model.UserAccountUsernameExample.Criterion;
+import tech.qijin.cell.user.db.model.UserAccountUsernameExample;
 
-public class UserAccountSqlProvider {
+public class UserAccountUsernameSqlProvider {
 
-    public String countByExample(UserAccountExample example) {
+    public String countByExample(UserAccountUsernameExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("user_account");
+        sql.SELECT("count(*)").FROM("user_account_username");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(UserAccountExample example) {
+    public String deleteByExample(UserAccountUsernameExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("user_account");
+        sql.DELETE_FROM("user_account_username");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(UserAccount record) {
+    public String insertSelective(UserAccountUsername record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("user_account");
+        sql.INSERT_INTO("user_account_username");
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getType() != null) {
-            sql.VALUES("type", "#{type,jdbcType=VARCHAR}");
+        if (record.getUsername() != null) {
+            sql.VALUES("username", "#{username,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPassword() != null) {
+            sql.VALUES("password", "#{password,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -51,7 +55,7 @@ public class UserAccountSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(UserAccountExample example) {
+    public String selectByExample(UserAccountUsernameExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -59,11 +63,12 @@ public class UserAccountSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("type");
+        sql.SELECT("username");
+        sql.SELECT("password");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("user_account");
+        sql.FROM("user_account_username");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -74,11 +79,11 @@ public class UserAccountSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        UserAccount record = (UserAccount) parameter.get("record");
-        UserAccountExample example = (UserAccountExample) parameter.get("example");
+        UserAccountUsername record = (UserAccountUsername) parameter.get("record");
+        UserAccountUsernameExample example = (UserAccountUsernameExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("user_account");
+        sql.UPDATE("user_account_username");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -88,8 +93,12 @@ public class UserAccountSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getType() != null) {
-            sql.SET("type = #{record.type,jdbcType=VARCHAR}");
+        if (record.getUsername() != null) {
+            sql.SET("username = #{record.username,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPassword() != null) {
+            sql.SET("password = #{record.password,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -110,30 +119,35 @@ public class UserAccountSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("user_account");
+        sql.UPDATE("user_account_username");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("type = #{record.type,jdbcType=VARCHAR}");
+        sql.SET("username = #{record.username,jdbcType=VARCHAR}");
+        sql.SET("password = #{record.password,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        UserAccountExample example = (UserAccountExample) parameter.get("example");
+        UserAccountUsernameExample example = (UserAccountUsernameExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(UserAccount record) {
+    public String updateByPrimaryKeySelective(UserAccountUsername record) {
         SQL sql = new SQL();
-        sql.UPDATE("user_account");
+        sql.UPDATE("user_account_username");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getType() != null) {
-            sql.SET("type = #{type,jdbcType=VARCHAR}");
+        if (record.getUsername() != null) {
+            sql.SET("username = #{username,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPassword() != null) {
+            sql.SET("password = #{password,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -153,7 +167,7 @@ public class UserAccountSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, UserAccountExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, UserAccountUsernameExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

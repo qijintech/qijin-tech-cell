@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 import tech.qijin.cell.user.db.model.UserProfile;
@@ -24,28 +26,80 @@ public interface UserProfileMapper {
 
     @Delete({
         "delete from user_profile",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
+        "insert into user_profile (channel, user_id, ",
+        "name, avatar, gender, ",
+        "mobile, create_time, ",
+        "update_time)",
+        "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
+        "#{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, ",
+        "#{mobile,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{updateTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserProfile record);
 
     @InsertProvider(type=UserProfileSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(UserProfile record);
 
     @SelectProvider(type=UserProfileSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true)
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
+        @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
+        @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<UserProfile> selectByExample(UserProfileExample example);
+
+    @Select({
+        "select",
+        "id, channel, user_id, name, avatar, gender, mobile, create_time, update_time",
+        "from user_profile",
+        "where id = #{id,jdbcType=BIGINT}"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
+        @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
+        @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+    })
+    UserProfile selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=UserProfileSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") UserProfile record, @Param("example") UserProfileExample example);
 
     @UpdateProvider(type=UserProfileSqlProvider.class, method="updateByExample")
     int updateByExample(@Param("record") UserProfile record, @Param("example") UserProfileExample example);
+
+    @UpdateProvider(type=UserProfileSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(UserProfile record);
+
+    @Update({
+        "update user_profile",
+        "set channel = #{channel,jdbcType=VARCHAR},",
+          "user_id = #{userId,jdbcType=BIGINT},",
+          "name = #{name,jdbcType=VARCHAR},",
+          "avatar = #{avatar,jdbcType=VARCHAR},",
+          "gender = #{gender,jdbcType=VARCHAR},",
+          "mobile = #{mobile,jdbcType=CHAR},",
+          "create_time = #{createTime,jdbcType=TIMESTAMP},",
+          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
+        "where id = #{id,jdbcType=BIGINT}"
+    })
+    int updateByPrimaryKey(UserProfile record);
 }

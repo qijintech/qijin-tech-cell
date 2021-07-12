@@ -1,16 +1,23 @@
 package tech.qijin.cell.user.db.model;
 
 import java.util.Date;
-import tech.qijin.cell.user.base.AccountType;
 import tech.qijin.cell.user.base.UserStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class UserAccount {
+public class UserAccountMini {
     private Long id;
+
+    private Long userId;
 
     private Channel channel;
 
-    private AccountType type;
+    private String openid;
+
+    private String unionid;
+
+    private String sessionKey;
+
+    private String mobile;
 
     private UserStatus status;
 
@@ -26,6 +33,14 @@ public class UserAccount {
         this.id = id;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public Channel getChannel() {
         return channel;
     }
@@ -34,12 +49,36 @@ public class UserAccount {
         this.channel = channel;
     }
 
-    public AccountType getType() {
-        return type;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setType(AccountType type) {
-        this.type = type;
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid == null ? null : unionid.trim();
+    }
+
+    public String getSessionKey() {
+        return sessionKey;
+    }
+
+    public void setSessionKey(String sessionKey) {
+        this.sessionKey = sessionKey == null ? null : sessionKey.trim();
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
     public UserStatus getStatus() {

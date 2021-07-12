@@ -1,16 +1,17 @@
 package tech.qijin.cell.user.db.model;
 
 import java.util.Date;
-import tech.qijin.cell.user.base.AccountType;
 import tech.qijin.cell.user.base.UserStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class UserAccount {
+public class UserAccountUsername {
     private Long id;
 
     private Channel channel;
 
-    private AccountType type;
+    private String username;
+
+    private String password;
 
     private UserStatus status;
 
@@ -34,12 +35,20 @@ public class UserAccount {
         this.channel = channel;
     }
 
-    public AccountType getType() {
-        return type;
+    public String getUsername() {
+        return username;
     }
 
-    public void setType(AccountType type) {
-        this.type = type;
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public UserStatus getStatus() {

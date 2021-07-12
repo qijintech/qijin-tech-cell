@@ -28,6 +28,38 @@ public class UserProfileSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("user_profile");
         
+        if (record.getChannel() != null) {
+            sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getName() != null) {
+            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAvatar() != null) {
+            sql.VALUES("avatar", "#{avatar,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGender() != null) {
+            sql.VALUES("gender", "#{gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMobile() != null) {
+            sql.VALUES("mobile", "#{mobile,jdbcType=CHAR}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
         return sql.toString();
     }
 
@@ -38,6 +70,14 @@ public class UserProfileSqlProvider {
         } else {
             sql.SELECT("id");
         }
+        sql.SELECT("channel");
+        sql.SELECT("user_id");
+        sql.SELECT("name");
+        sql.SELECT("avatar");
+        sql.SELECT("gender");
+        sql.SELECT("mobile");
+        sql.SELECT("create_time");
+        sql.SELECT("update_time");
         sql.FROM("user_profile");
         applyWhere(sql, example, false);
         
@@ -56,7 +96,39 @@ public class UserProfileSqlProvider {
         sql.UPDATE("user_profile");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=INTEGER}");
+            sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        }
+        
+        if (record.getChannel() != null) {
+            sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getName() != null) {
+            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAvatar() != null) {
+            sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGender() != null) {
+            sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMobile() != null) {
+            sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
         applyWhere(sql, example, true);
@@ -67,10 +139,59 @@ public class UserProfileSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("user_profile");
         
-        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
+        sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
+        sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         UserProfileExample example = (UserProfileExample) parameter.get("example");
         applyWhere(sql, example, true);
+        return sql.toString();
+    }
+
+    public String updateByPrimaryKeySelective(UserProfile record) {
+        SQL sql = new SQL();
+        sql.UPDATE("user_profile");
+        
+        if (record.getChannel() != null) {
+            sql.SET("channel = #{channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getName() != null) {
+            sql.SET("name = #{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAvatar() != null) {
+            sql.SET("avatar = #{avatar,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGender() != null) {
+            sql.SET("gender = #{gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMobile() != null) {
+            sql.SET("mobile = #{mobile,jdbcType=CHAR}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
+        
         return sql.toString();
     }
 

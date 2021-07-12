@@ -5,10 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import tech.qijin.cell.user.base.Constants;
+import tech.qijin.cell.user.base.UserStatus;
 import tech.qijin.cell.user.db.dao.UserAccountDao;
+import tech.qijin.cell.user.db.dao.UserAccountMiniDao;
+import tech.qijin.cell.user.db.dao.UserAccountUsernameDao;
 import tech.qijin.cell.user.db.model.UserAccount;
 import tech.qijin.cell.user.db.model.UserAccountExample;
+import tech.qijin.cell.user.db.model.UserAccountMini;
+import tech.qijin.cell.user.db.model.UserAccountMiniExample;
 import tech.qijin.cell.user.helper.CellUserAccountHelper;
+import tech.qijin.util4j.trace.util.ChannelUtil;
 import tech.qijin.util4j.utils.MAssert;
 
 import java.util.Optional;
@@ -17,10 +23,14 @@ import java.util.Optional;
 @Service
 public class CellUserAccountHelperImpl implements CellUserAccountHelper {
     @Autowired
+    private UserAccountUsernameDao userAccountUsernameDao;
+    @Autowired
+    private UserAccountMiniDao userAccountMiniDao;
+    @Autowired
     private UserAccountDao userAccountDao;
 
     @Override
-    public UserAccount saveUserAccount(UserAccount userAccount) {
+    public UserAccount createUserAccount(UserAccount userAccount) {
         try {
             userAccountDao.insertSelective(userAccount);
         } catch (DuplicateKeyException e) {
@@ -30,15 +40,46 @@ public class CellUserAccountHelperImpl implements CellUserAccountHelper {
     }
 
     @Override
+    public UserAccount getUserAccount(Long userId) {
+        return userAccountDao.selectByPrimaryKey(userId);
+    }
+
+    @Override
     public Optional<UserAccount> getUserAccountByUserName(String username) {
-        UserAccountExample example = new UserAccountExample();
-        example.createCriteria()
-                .andUsernameEqualTo(username);
-        return userAccountDao.selectByExample(example).stream().findFirst();
+//        UserAccountExample example = new UserAccountExample();
+//        example.createCriteria()
+//                .andUsernameEqualTo(username);
+//        return userAccountUsernameDao.selectByExample(example).stream().findFirst();
+        return null;
     }
 
     @Override
     public boolean isUsernameUnique(String username) {
         return !getUserAccountByUserName(username).isPresent();
+    }
+
+    @Override
+    public boolean isOpenidExist(String openid) {
+        UserAccountMini userAccountMini = getUserAccountMini(openid);
+        return userAccountMini != null;
+    }
+
+    @Override
+    public UserAccountMini createUserAccountMini(String openid, String sessionKey, Long userId) {
+        UserAccountMini userAccountMini = new UserAccountMini();
+        userAccountMini.setChannel(ChannelUtil.getChannel());
+        userAccountMini.setOpenid(openid);
+        userAccountMini.setSessionKey(sessionKey);
+        userAccountMini.setStatus(UserStatus.NORMAL);
+        userAccountMini.setUserId(userId);
+        userAccountMiniDao.insertSelective(userAccountMini);
+        return userAccountMini;
+    }
+
+    @Override
+    public UserAccountMini getUserAccountMini(String openid) {
+        UserAccountMiniExample example = new UserAccountMiniExample();
+        example.createCriteria().andOpenidEqualTo(openid);
+        return userAccountMiniDao.selectByExample(example).stream().findFirst().orElse(null);
     }
 }

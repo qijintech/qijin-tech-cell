@@ -31,12 +31,10 @@ public interface UserAccountMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into user_account (channel, account_type, ",
-        "username, password, ",
+        "insert into user_account (channel, type, ",
         "status, create_time, ",
         "update_time)",
-        "values (#{channel,jdbcType=VARCHAR}, #{accountType,jdbcType=VARCHAR}, ",
-        "#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, ",
+        "values (#{channel,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
         "#{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
@@ -51,9 +49,7 @@ public interface UserAccountMapper {
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="account_type", property="accountType", jdbcType=JdbcType.VARCHAR),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
@@ -62,16 +58,14 @@ public interface UserAccountMapper {
 
     @Select({
         "select",
-        "id, channel, account_type, username, password, status, create_time, update_time",
+        "id, channel, type, status, create_time, update_time",
         "from user_account",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="account_type", property="accountType", jdbcType=JdbcType.VARCHAR),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
@@ -90,9 +84,7 @@ public interface UserAccountMapper {
     @Update({
         "update user_account",
         "set channel = #{channel,jdbcType=VARCHAR},",
-          "account_type = #{accountType,jdbcType=VARCHAR},",
-          "username = #{username,jdbcType=VARCHAR},",
-          "password = #{password,jdbcType=VARCHAR},",
+          "type = #{type,jdbcType=VARCHAR},",
           "status = #{status,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP}",

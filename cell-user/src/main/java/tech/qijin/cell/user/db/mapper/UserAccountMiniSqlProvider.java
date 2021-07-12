@@ -3,37 +3,53 @@ package tech.qijin.cell.user.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.cell.user.db.model.UserAccount;
-import tech.qijin.cell.user.db.model.UserAccountExample.Criteria;
-import tech.qijin.cell.user.db.model.UserAccountExample.Criterion;
-import tech.qijin.cell.user.db.model.UserAccountExample;
+import tech.qijin.cell.user.db.model.UserAccountMini;
+import tech.qijin.cell.user.db.model.UserAccountMiniExample.Criteria;
+import tech.qijin.cell.user.db.model.UserAccountMiniExample.Criterion;
+import tech.qijin.cell.user.db.model.UserAccountMiniExample;
 
-public class UserAccountSqlProvider {
+public class UserAccountMiniSqlProvider {
 
-    public String countByExample(UserAccountExample example) {
+    public String countByExample(UserAccountMiniExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("user_account");
+        sql.SELECT("count(*)").FROM("user_account_mini");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(UserAccountExample example) {
+    public String deleteByExample(UserAccountMiniExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("user_account");
+        sql.DELETE_FROM("user_account_mini");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(UserAccount record) {
+    public String insertSelective(UserAccountMini record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("user_account");
+        sql.INSERT_INTO("user_account_mini");
+        
+        if (record.getUserId() != null) {
+            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
+        }
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getType() != null) {
-            sql.VALUES("type", "#{type,jdbcType=VARCHAR}");
+        if (record.getOpenid() != null) {
+            sql.VALUES("openid", "#{openid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUnionid() != null) {
+            sql.VALUES("unionid", "#{unionid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSessionKey() != null) {
+            sql.VALUES("session_key", "#{sessionKey,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMobile() != null) {
+            sql.VALUES("mobile", "#{mobile,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -51,19 +67,23 @@ public class UserAccountSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(UserAccountExample example) {
+    public String selectByExample(UserAccountMiniExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
+        sql.SELECT("user_id");
         sql.SELECT("channel");
-        sql.SELECT("type");
+        sql.SELECT("openid");
+        sql.SELECT("unionid");
+        sql.SELECT("session_key");
+        sql.SELECT("mobile");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("user_account");
+        sql.FROM("user_account_mini");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -74,22 +94,38 @@ public class UserAccountSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        UserAccount record = (UserAccount) parameter.get("record");
-        UserAccountExample example = (UserAccountExample) parameter.get("example");
+        UserAccountMini record = (UserAccountMini) parameter.get("record");
+        UserAccountMiniExample example = (UserAccountMiniExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("user_account");
+        sql.UPDATE("user_account_mini");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         }
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getType() != null) {
-            sql.SET("type = #{record.type,jdbcType=VARCHAR}");
+        if (record.getOpenid() != null) {
+            sql.SET("openid = #{record.openid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUnionid() != null) {
+            sql.SET("unionid = #{record.unionid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSessionKey() != null) {
+            sql.SET("session_key = #{record.sessionKey,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMobile() != null) {
+            sql.SET("mobile = #{record.mobile,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -110,30 +146,50 @@ public class UserAccountSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("user_account");
+        sql.UPDATE("user_account_mini");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("type = #{record.type,jdbcType=VARCHAR}");
+        sql.SET("openid = #{record.openid,jdbcType=VARCHAR}");
+        sql.SET("unionid = #{record.unionid,jdbcType=VARCHAR}");
+        sql.SET("session_key = #{record.sessionKey,jdbcType=VARCHAR}");
+        sql.SET("mobile = #{record.mobile,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        UserAccountExample example = (UserAccountExample) parameter.get("example");
+        UserAccountMiniExample example = (UserAccountMiniExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(UserAccount record) {
+    public String updateByPrimaryKeySelective(UserAccountMini record) {
         SQL sql = new SQL();
-        sql.UPDATE("user_account");
+        sql.UPDATE("user_account_mini");
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        }
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getType() != null) {
-            sql.SET("type = #{type,jdbcType=VARCHAR}");
+        if (record.getOpenid() != null) {
+            sql.SET("openid = #{openid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUnionid() != null) {
+            sql.SET("unionid = #{unionid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSessionKey() != null) {
+            sql.SET("session_key = #{sessionKey,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMobile() != null) {
+            sql.SET("mobile = #{mobile,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -153,7 +209,7 @@ public class UserAccountSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, UserAccountExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, UserAccountMiniExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }
