@@ -11,4 +11,8 @@ public interface CellUserImageHelper {
     UserImage insertUserImage(UserImage userImage);
 
     Map<Long, List<UserImage>> mapUserImages(List<Long> userIds);
+
+    boolean updateUserImageUrl(Long userId, Long id, String url);
+
+    boolean deleteUserImage(Long userId, Long id);
 }

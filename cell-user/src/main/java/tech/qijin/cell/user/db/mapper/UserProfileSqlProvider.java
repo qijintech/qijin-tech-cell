@@ -76,6 +76,18 @@ public class UserProfileSqlProvider {
             sql.VALUES("job", "#{job,jdbcType=VARCHAR}");
         }
         
+        if (record.getHeight() != null) {
+            sql.VALUES("height", "#{height,jdbcType=INTEGER}");
+        }
+        
+        if (record.getWeight() != null) {
+            sql.VALUES("weight", "#{weight,jdbcType=INTEGER}");
+        }
+        
+        if (record.getMaritalStatus() != null) {
+            sql.VALUES("marital_status", "#{maritalStatus,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -106,6 +118,9 @@ public class UserProfileSqlProvider {
         sql.SELECT("edu");
         sql.SELECT("edu_degree");
         sql.SELECT("job");
+        sql.SELECT("height");
+        sql.SELECT("weight");
+        sql.SELECT("marital_status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("user_profile");
@@ -177,6 +192,18 @@ public class UserProfileSqlProvider {
             sql.SET("job = #{record.job,jdbcType=VARCHAR}");
         }
         
+        if (record.getHeight() != null) {
+            sql.SET("height = #{record.height,jdbcType=INTEGER}");
+        }
+        
+        if (record.getWeight() != null) {
+            sql.SET("weight = #{record.weight,jdbcType=INTEGER}");
+        }
+        
+        if (record.getMaritalStatus() != null) {
+            sql.SET("marital_status = #{record.maritalStatus,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
@@ -206,6 +233,9 @@ public class UserProfileSqlProvider {
         sql.SET("edu = #{record.edu,jdbcType=VARCHAR}");
         sql.SET("edu_degree = #{record.eduDegree,jdbcType=VARCHAR}");
         sql.SET("job = #{record.job,jdbcType=VARCHAR}");
+        sql.SET("height = #{record.height,jdbcType=INTEGER}");
+        sql.SET("weight = #{record.weight,jdbcType=INTEGER}");
+        sql.SET("marital_status = #{record.maritalStatus,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
@@ -264,6 +294,18 @@ public class UserProfileSqlProvider {
         
         if (record.getJob() != null) {
             sql.SET("job = #{job,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getHeight() != null) {
+            sql.SET("height = #{height,jdbcType=INTEGER}");
+        }
+        
+        if (record.getWeight() != null) {
+            sql.SET("weight = #{weight,jdbcType=INTEGER}");
+        }
+        
+        if (record.getMaritalStatus() != null) {
+            sql.SET("marital_status = #{maritalStatus,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {

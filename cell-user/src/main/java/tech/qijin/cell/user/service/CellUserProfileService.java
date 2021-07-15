@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface CellUserProfileService {
 
-    void updateProfile(UserProfile profile);
+    boolean updateProfile(UserProfile profile);
 
     UserProfile getProfile(Long userId);
 

@@ -987,6 +987,196 @@ public class UserProfileExample {
             return (Criteria) this;
         }
 
+        public Criteria andHeightIsNull() {
+            addCriterion("height is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightIsNotNull() {
+            addCriterion("height is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightEqualTo(Integer value) {
+            addCriterion("height =", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightNotEqualTo(Integer value) {
+            addCriterion("height <>", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightGreaterThan(Integer value) {
+            addCriterion("height >", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightGreaterThanOrEqualTo(Integer value) {
+            addCriterion("height >=", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightLessThan(Integer value) {
+            addCriterion("height <", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightLessThanOrEqualTo(Integer value) {
+            addCriterion("height <=", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightIn(List<Integer> values) {
+            addCriterion("height in", values, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightNotIn(List<Integer> values) {
+            addCriterion("height not in", values, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightBetween(Integer value1, Integer value2) {
+            addCriterion("height between", value1, value2, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightNotBetween(Integer value1, Integer value2) {
+            addCriterion("height not between", value1, value2, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightIsNull() {
+            addCriterion("weight is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightIsNotNull() {
+            addCriterion("weight is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightEqualTo(Integer value) {
+            addCriterion("weight =", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightNotEqualTo(Integer value) {
+            addCriterion("weight <>", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightGreaterThan(Integer value) {
+            addCriterion("weight >", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightGreaterThanOrEqualTo(Integer value) {
+            addCriterion("weight >=", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightLessThan(Integer value) {
+            addCriterion("weight <", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightLessThanOrEqualTo(Integer value) {
+            addCriterion("weight <=", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightIn(List<Integer> values) {
+            addCriterion("weight in", values, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightNotIn(List<Integer> values) {
+            addCriterion("weight not in", values, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightBetween(Integer value1, Integer value2) {
+            addCriterion("weight between", value1, value2, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightNotBetween(Integer value1, Integer value2) {
+            addCriterion("weight not between", value1, value2, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusIsNull() {
+            addCriterion("marital_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusIsNotNull() {
+            addCriterion("marital_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusEqualTo(String value) {
+            addCriterion("marital_status =", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusNotEqualTo(String value) {
+            addCriterion("marital_status <>", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusGreaterThan(String value) {
+            addCriterion("marital_status >", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("marital_status >=", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusLessThan(String value) {
+            addCriterion("marital_status <", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusLessThanOrEqualTo(String value) {
+            addCriterion("marital_status <=", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusLike(String value) {
+            addCriterion("marital_status like", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusNotLike(String value) {
+            addCriterion("marital_status not like", value, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusIn(List<String> values) {
+            addCriterion("marital_status in", values, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusNotIn(List<String> values) {
+            addCriterion("marital_status not in", values, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusBetween(String value1, String value2) {
+            addCriterion("marital_status between", value1, value2, "maritalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaritalStatusNotBetween(String value1, String value2) {
+            addCriterion("marital_status not between", value1, value2, "maritalStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

@@ -26,13 +26,13 @@ public class CellUserProfileServiceImpl implements CellUserProfileService {
     private UserProfileDao userProfileDao;
 
     @Override
-    public void updateProfile(UserProfile profile) {
+    public boolean updateProfile(UserProfile profile) {
         MAssert.isTrue(profile != null && NumberUtil.gtZero(profile.getUserId()),
                 ResEnum.INVALID_PARAM);
         UserProfileExample example = new UserProfileExample();
         example.createCriteria()
                 .andUserIdEqualTo(profile.getUserId());
-        userProfileDao.updateByExampleSelective(profile, example);
+        return userProfileDao.updateByExampleSelective(profile, example) > 0;
     }
 
     @Override

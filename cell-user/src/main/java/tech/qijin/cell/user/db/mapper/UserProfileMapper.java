@@ -36,14 +36,16 @@ public interface UserProfileMapper {
         "mobile, birthday, ",
         "born_city, live_city, ",
         "edu, edu_degree, ",
-        "job, create_time, ",
+        "job, height, weight, ",
+        "marital_status, create_time, ",
         "update_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
         "#{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, ",
         "#{mobile,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
         "#{bornCity,jdbcType=VARCHAR}, #{liveCity,jdbcType=VARCHAR}, ",
         "#{edu,jdbcType=VARCHAR}, #{eduDegree,jdbcType=VARCHAR}, ",
-        "#{job,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{job,jdbcType=VARCHAR}, #{height,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, ",
+        "#{maritalStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
@@ -68,6 +70,9 @@ public interface UserProfileMapper {
         @Result(column="edu", property="edu", jdbcType=JdbcType.VARCHAR),
         @Result(column="edu_degree", property="eduDegree", jdbcType=JdbcType.VARCHAR),
         @Result(column="job", property="job", jdbcType=JdbcType.VARCHAR),
+        @Result(column="height", property="height", jdbcType=JdbcType.INTEGER),
+        @Result(column="weight", property="weight", jdbcType=JdbcType.INTEGER),
+        @Result(column="marital_status", property="maritalStatus", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -76,7 +81,7 @@ public interface UserProfileMapper {
     @Select({
         "select",
         "id, channel, user_id, name, avatar, gender, mobile, birthday, born_city, live_city, ",
-        "edu, edu_degree, job, create_time, update_time",
+        "edu, edu_degree, job, height, weight, marital_status, create_time, update_time",
         "from user_profile",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -94,6 +99,9 @@ public interface UserProfileMapper {
         @Result(column="edu", property="edu", jdbcType=JdbcType.VARCHAR),
         @Result(column="edu_degree", property="eduDegree", jdbcType=JdbcType.VARCHAR),
         @Result(column="job", property="job", jdbcType=JdbcType.VARCHAR),
+        @Result(column="height", property="height", jdbcType=JdbcType.INTEGER),
+        @Result(column="weight", property="weight", jdbcType=JdbcType.INTEGER),
+        @Result(column="marital_status", property="maritalStatus", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -122,6 +130,9 @@ public interface UserProfileMapper {
           "edu = #{edu,jdbcType=VARCHAR},",
           "edu_degree = #{eduDegree,jdbcType=VARCHAR},",
           "job = #{job,jdbcType=VARCHAR},",
+          "height = #{height,jdbcType=INTEGER},",
+          "weight = #{weight,jdbcType=INTEGER},",
+          "marital_status = #{maritalStatus,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

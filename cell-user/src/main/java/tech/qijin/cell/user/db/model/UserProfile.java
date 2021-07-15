@@ -31,6 +31,12 @@ public class UserProfile {
 
     private String job;
 
+    private Integer height;
+
+    private Integer weight;
+
+    private String maritalStatus;
+
     private Date createTime;
 
     private Date updateTime;
@@ -137,6 +143,30 @@ public class UserProfile {
 
     public void setJob(String job) {
         this.job = job == null ? null : job.trim();
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus == null ? null : maritalStatus.trim();
     }
 
     public Date getCreateTime() {

@@ -36,4 +36,14 @@ public class CellUserImageServiceImpl implements CellUserImageService {
         userImage.setUrl(url);
         return cellUserImageHelper.insertUserImage(userImage);
     }
+
+    @Override
+    public boolean replaceImage(Long userId, Long id, String url) {
+        return cellUserImageHelper.updateUserImageUrl(userId, id, url);
+    }
+
+    @Override
+    public boolean deleteImage(Long userId, Long id) {
+        return cellUserImageHelper.deleteUserImage(userId, id);
+    }
 }

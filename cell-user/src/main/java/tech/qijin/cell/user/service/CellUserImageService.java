@@ -11,4 +11,15 @@ public interface CellUserImageService {
     Map<Long, List<UserImage>> mapUserImages(List<Long> userIds);
 
     UserImage addImage(Long userId, String url);
+
+    /**
+     * 替换图片
+     * @param userId
+     * @param id
+     * @param url
+     * @return
+     */
+    boolean replaceImage(Long userId, Long id, String url);
+
+    boolean deleteImage(Long userId, Long id);
 }

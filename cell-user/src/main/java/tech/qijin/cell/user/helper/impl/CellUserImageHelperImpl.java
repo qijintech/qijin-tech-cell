@@ -53,4 +53,26 @@ public class CellUserImageHelperImpl implements CellUserImageHelper {
         userImageDao.insertSelective(userImage);
         return userImage;
     }
+
+    @Override
+    public boolean updateUserImageUrl(Long userId, Long id, String url) {
+        UserImageExample example = new UserImageExample();
+        example.createCriteria()
+                .andIdEqualTo(id)
+                .andUserIdEqualTo(userId);
+        UserImage record = new UserImage();
+        record.setUrl(url);
+        return userImageDao.updateByExampleSelective(record, example) > 0;
+    }
+
+    @Override
+    public boolean deleteUserImage(Long userId, Long id) {
+        UserImageExample example = new UserImageExample();
+        example.createCriteria()
+                .andIdEqualTo(id)
+                .andUserIdEqualTo(userId);
+        UserImage record = new UserImage();
+        record.setStatus(ImageStatus.HIDE);
+        return userImageDao.updateByExampleSelective(record, example) > 0;
+    }
 }

@@ -87,7 +87,7 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
             log.error(LogFormat.builder()
                     .message("JWT auth failed")
                     .put("token", token).build());
-            MAssert.isTrue(false, ResEnum.UNAUTHORIZED);
+                MAssert.isTrue(false, ResEnum.UNAUTHORIZED);
         }
         return null;
     }
