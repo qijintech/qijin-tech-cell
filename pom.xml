@@ -24,6 +24,7 @@
 
 	<properties>
 		<util4j.project.version>1.0.0</util4j.project.version>
+		<sdk.project.version>1.0.0</sdk.project.version>
 	</properties>
 
 	<dependencyManagement>
@@ -32,6 +33,13 @@
 				<groupId>tech.qijin.util4j</groupId>
 				<artifactId>util4j-dependencies</artifactId>
 				<version>${util4j.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>tech.qijin.sdk</groupId>
+				<artifactId>sdk-depdendencies</artifactId>
+				<version>${sdk.version}</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
@@ -103,12 +111,14 @@
 			</activation>
 			<properties>
 				<util4j.version>${util4j.project.version}-SNAPSHOT</util4j.version>
+				<sdk.version>${sdk.project.version}-SNAPSHOT</sdk.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>release</id>
 			<properties>
 				<util4j.version>${util4j.project.version}</util4j.version>
+				<sdk.version>${sdk.project.version}</sdk.version>
 			</properties>
 		</profile>
 	</profiles>
