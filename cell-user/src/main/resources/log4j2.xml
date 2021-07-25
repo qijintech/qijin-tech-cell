@@ -10,7 +10,7 @@
             </PatternLayout>
         </Console>
 
-        <RollingRandomAccessFile name="RootLog" fileName="${log.dir}/cell-im.log"
+        <RollingRandomAccessFile name="RootLog" fileName="${log.dir}/cell-user.log"
                                  filePattern="${log.dir}/cell-im.log.%d{yyyy-MM-dd}">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p][%c{1}] - %m%n</Pattern>
@@ -20,7 +20,7 @@
             </Policies>
         </RollingRandomAccessFile>
 
-        <RollingRandomAccessFile name="CheckAlive" fileName="${log.dir}/cell-im.check.log"
+        <RollingRandomAccessFile name="CheckAlive" fileName="${log.dir}/cell-user.check.log"
                                  filePattern="${log.dir}/cell-im.check.log.%d{yyyy-MM-dd}">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p][%c{1}] - %m%n</Pattern>
@@ -30,7 +30,7 @@
             </Policies>
         </RollingRandomAccessFile>
 
-        <RollingRandomAccessFile name="RequestLog" fileName="${log.dir}/cell-im.request.log"
+        <RollingRandomAccessFile name="RequestLog" fileName="${log.dir}/cell-user.request.log"
                                  filePattern="${log.dir}/cell-im.request.log.%d{yyyy-MM-dd}">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p][%c{1}] - %m%n</Pattern>
