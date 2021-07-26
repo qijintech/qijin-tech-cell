@@ -1,5 +1,6 @@
 package tech.qijin.cell.user.service.impl;
 
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import tech.qijin.util4j.trace.util.ChannelUtil;
 import tech.qijin.util4j.utils.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author michealyang
@@ -247,6 +249,7 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         cellUserAccountHelper.createUserAccount(userAccount);
         cellUserAccountHelper.createUserAccountMini(openid, sessionKey, userAccount.getId());
         UserProfile userProfile = new UserProfile();
+        userProfile.setName(getRandomName());
         userProfile.setUserId(userAccount.getId());
         cellUserProfileHelper.createProfile(userProfile);
         return userAccount;
@@ -258,4 +261,7 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         return cellUserAccountHelper.getUserAccount(userAccountMini.getUserId());
     }
 
+    private String getRandomName() {
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
 }
