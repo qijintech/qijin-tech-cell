@@ -251,6 +251,7 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         UserProfile userProfile = new UserProfile();
         userProfile.setName(getRandomName());
         userProfile.setUserId(userAccount.getId());
+        userProfile.setBirthday(DateUtil.now());
         cellUserProfileHelper.createProfile(userProfile);
         return userAccount;
     }
