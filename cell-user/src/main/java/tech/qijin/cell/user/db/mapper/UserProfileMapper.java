@@ -44,7 +44,7 @@ public interface UserProfileMapper {
         "#{mobile,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
         "#{bornCity,jdbcType=VARCHAR}, #{liveCity,jdbcType=VARCHAR}, ",
         "#{edu,jdbcType=VARCHAR}, #{eduDegree,jdbcType=VARCHAR}, ",
-        "#{job,jdbcType=VARCHAR}, #{height,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, ",
+        "#{job,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, ",
         "#{maritalStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
@@ -70,8 +70,8 @@ public interface UserProfileMapper {
         @Result(column="edu", property="edu", jdbcType=JdbcType.VARCHAR),
         @Result(column="edu_degree", property="eduDegree", jdbcType=JdbcType.VARCHAR),
         @Result(column="job", property="job", jdbcType=JdbcType.VARCHAR),
-        @Result(column="height", property="height", jdbcType=JdbcType.INTEGER),
-        @Result(column="weight", property="weight", jdbcType=JdbcType.INTEGER),
+        @Result(column="height", property="height", jdbcType=JdbcType.VARCHAR),
+        @Result(column="weight", property="weight", jdbcType=JdbcType.VARCHAR),
         @Result(column="marital_status", property="maritalStatus", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
@@ -99,8 +99,8 @@ public interface UserProfileMapper {
         @Result(column="edu", property="edu", jdbcType=JdbcType.VARCHAR),
         @Result(column="edu_degree", property="eduDegree", jdbcType=JdbcType.VARCHAR),
         @Result(column="job", property="job", jdbcType=JdbcType.VARCHAR),
-        @Result(column="height", property="height", jdbcType=JdbcType.INTEGER),
-        @Result(column="weight", property="weight", jdbcType=JdbcType.INTEGER),
+        @Result(column="height", property="height", jdbcType=JdbcType.VARCHAR),
+        @Result(column="weight", property="weight", jdbcType=JdbcType.VARCHAR),
         @Result(column="marital_status", property="maritalStatus", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
@@ -130,8 +130,8 @@ public interface UserProfileMapper {
           "edu = #{edu,jdbcType=VARCHAR},",
           "edu_degree = #{eduDegree,jdbcType=VARCHAR},",
           "job = #{job,jdbcType=VARCHAR},",
-          "height = #{height,jdbcType=INTEGER},",
-          "weight = #{weight,jdbcType=INTEGER},",
+          "height = #{height,jdbcType=VARCHAR},",
+          "weight = #{weight,jdbcType=VARCHAR},",
           "marital_status = #{maritalStatus,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP}",

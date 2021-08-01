@@ -997,52 +997,62 @@ public class UserProfileExample {
             return (Criteria) this;
         }
 
-        public Criteria andHeightEqualTo(Integer value) {
+        public Criteria andHeightEqualTo(String value) {
             addCriterion("height =", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightNotEqualTo(Integer value) {
+        public Criteria andHeightNotEqualTo(String value) {
             addCriterion("height <>", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightGreaterThan(Integer value) {
+        public Criteria andHeightGreaterThan(String value) {
             addCriterion("height >", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andHeightGreaterThanOrEqualTo(String value) {
             addCriterion("height >=", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightLessThan(Integer value) {
+        public Criteria andHeightLessThan(String value) {
             addCriterion("height <", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightLessThanOrEqualTo(Integer value) {
+        public Criteria andHeightLessThanOrEqualTo(String value) {
             addCriterion("height <=", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightIn(List<Integer> values) {
+        public Criteria andHeightLike(String value) {
+            addCriterion("height like", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightNotLike(String value) {
+            addCriterion("height not like", value, "height");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeightIn(List<String> values) {
             addCriterion("height in", values, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightNotIn(List<Integer> values) {
+        public Criteria andHeightNotIn(List<String> values) {
             addCriterion("height not in", values, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightBetween(Integer value1, Integer value2) {
+        public Criteria andHeightBetween(String value1, String value2) {
             addCriterion("height between", value1, value2, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightNotBetween(Integer value1, Integer value2) {
+        public Criteria andHeightNotBetween(String value1, String value2) {
             addCriterion("height not between", value1, value2, "height");
             return (Criteria) this;
         }
@@ -1057,52 +1067,62 @@ public class UserProfileExample {
             return (Criteria) this;
         }
 
-        public Criteria andWeightEqualTo(Integer value) {
+        public Criteria andWeightEqualTo(String value) {
             addCriterion("weight =", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightNotEqualTo(Integer value) {
+        public Criteria andWeightNotEqualTo(String value) {
             addCriterion("weight <>", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightGreaterThan(Integer value) {
+        public Criteria andWeightGreaterThan(String value) {
             addCriterion("weight >", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andWeightGreaterThanOrEqualTo(String value) {
             addCriterion("weight >=", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightLessThan(Integer value) {
+        public Criteria andWeightLessThan(String value) {
             addCriterion("weight <", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightLessThanOrEqualTo(Integer value) {
+        public Criteria andWeightLessThanOrEqualTo(String value) {
             addCriterion("weight <=", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightIn(List<Integer> values) {
+        public Criteria andWeightLike(String value) {
+            addCriterion("weight like", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightNotLike(String value) {
+            addCriterion("weight not like", value, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeightIn(List<String> values) {
             addCriterion("weight in", values, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightNotIn(List<Integer> values) {
+        public Criteria andWeightNotIn(List<String> values) {
             addCriterion("weight not in", values, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightBetween(Integer value1, Integer value2) {
+        public Criteria andWeightBetween(String value1, String value2) {
             addCriterion("weight between", value1, value2, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightNotBetween(Integer value1, Integer value2) {
+        public Criteria andWeightNotBetween(String value1, String value2) {
             addCriterion("weight not between", value1, value2, "weight");
             return (Criteria) this;
         }

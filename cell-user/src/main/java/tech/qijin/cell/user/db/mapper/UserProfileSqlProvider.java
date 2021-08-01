@@ -77,11 +77,11 @@ public class UserProfileSqlProvider {
         }
         
         if (record.getHeight() != null) {
-            sql.VALUES("height", "#{height,jdbcType=INTEGER}");
+            sql.VALUES("height", "#{height,jdbcType=VARCHAR}");
         }
         
         if (record.getWeight() != null) {
-            sql.VALUES("weight", "#{weight,jdbcType=INTEGER}");
+            sql.VALUES("weight", "#{weight,jdbcType=VARCHAR}");
         }
         
         if (record.getMaritalStatus() != null) {
@@ -193,11 +193,11 @@ public class UserProfileSqlProvider {
         }
         
         if (record.getHeight() != null) {
-            sql.SET("height = #{record.height,jdbcType=INTEGER}");
+            sql.SET("height = #{record.height,jdbcType=VARCHAR}");
         }
         
         if (record.getWeight() != null) {
-            sql.SET("weight = #{record.weight,jdbcType=INTEGER}");
+            sql.SET("weight = #{record.weight,jdbcType=VARCHAR}");
         }
         
         if (record.getMaritalStatus() != null) {
@@ -233,8 +233,8 @@ public class UserProfileSqlProvider {
         sql.SET("edu = #{record.edu,jdbcType=VARCHAR}");
         sql.SET("edu_degree = #{record.eduDegree,jdbcType=VARCHAR}");
         sql.SET("job = #{record.job,jdbcType=VARCHAR}");
-        sql.SET("height = #{record.height,jdbcType=INTEGER}");
-        sql.SET("weight = #{record.weight,jdbcType=INTEGER}");
+        sql.SET("height = #{record.height,jdbcType=VARCHAR}");
+        sql.SET("weight = #{record.weight,jdbcType=VARCHAR}");
         sql.SET("marital_status = #{record.maritalStatus,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -297,11 +297,11 @@ public class UserProfileSqlProvider {
         }
         
         if (record.getHeight() != null) {
-            sql.SET("height = #{height,jdbcType=INTEGER}");
+            sql.SET("height = #{height,jdbcType=VARCHAR}");
         }
         
         if (record.getWeight() != null) {
-            sql.SET("weight = #{weight,jdbcType=INTEGER}");
+            sql.SET("weight = #{weight,jdbcType=VARCHAR}");
         }
         
         if (record.getMaritalStatus() != null) {

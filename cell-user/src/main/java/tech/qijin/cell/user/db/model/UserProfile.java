@@ -31,9 +31,9 @@ public class UserProfile {
 
     private String job;
 
-    private Integer height;
+    private String height;
 
-    private Integer weight;
+    private String weight;
 
     private String maritalStatus;
 
@@ -145,20 +145,20 @@ public class UserProfile {
         this.job = job == null ? null : job.trim();
     }
 
-    public Integer getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(Integer height) {
-        this.height = height;
+    public void setHeight(String height) {
+        this.height = height == null ? null : height.trim();
     }
 
-    public Integer getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
-        this.weight = weight;
+    public void setWeight(String weight) {
+        this.weight = weight == null ? null : weight.trim();
     }
 
     public String getMaritalStatus() {
