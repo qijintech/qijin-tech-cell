@@ -4,7 +4,7 @@ mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 
 echo "开始生成Dao文件"
 
-pack=tech.qijin.cell.aaaa
+pack=tech.qijin.cell.iam
 
 pack_path=`echo $pack | sed 's/\./\//g'`
 

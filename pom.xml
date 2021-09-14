@@ -23,6 +23,7 @@
 		<module>cell-user</module>
 		<module>cell-relation</module>
 		<module>cell-message</module>
+		<module>cell-iam</module>
   </modules>
 
 	<properties>
