@@ -36,6 +36,10 @@ public class UserRoleSqlProvider {
             sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
+        if (record.getDataId() != null) {
+            sql.VALUES("data_id", "#{dataId,jdbcType=BIGINT}");
+        }
+        
         if (record.getRole() != null) {
             sql.VALUES("role", "#{role,jdbcType=VARCHAR}");
         }
@@ -64,6 +68,7 @@ public class UserRoleSqlProvider {
         }
         sql.SELECT("channel");
         sql.SELECT("user_id");
+        sql.SELECT("data_id");
         sql.SELECT("role");
         sql.SELECT("valid");
         sql.SELECT("create_time");
@@ -97,6 +102,10 @@ public class UserRoleSqlProvider {
             sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         }
         
+        if (record.getDataId() != null) {
+            sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
+        }
+        
         if (record.getRole() != null) {
             sql.SET("role = #{record.role,jdbcType=VARCHAR}");
         }
@@ -124,6 +133,7 @@ public class UserRoleSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
         sql.SET("role = #{record.role,jdbcType=VARCHAR}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -144,6 +154,10 @@ public class UserRoleSqlProvider {
         
         if (record.getUserId() != null) {
             sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getDataId() != null) {
+            sql.SET("data_id = #{dataId,jdbcType=BIGINT}");
         }
         
         if (record.getRole() != null) {

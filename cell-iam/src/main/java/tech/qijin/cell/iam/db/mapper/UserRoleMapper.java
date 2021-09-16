@@ -32,11 +32,11 @@ public interface UserRoleMapper {
 
     @Insert({
         "insert into user_role (channel, user_id, ",
-        "role, valid, create_time, ",
-        "update_time)",
+        "data_id, role, valid, ",
+        "create_time, update_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
-        "#{role,jdbcType=VARCHAR}, #{valid,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP})"
+        "#{dataId,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{valid,jdbcType=TINYINT}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserRole record);
@@ -50,6 +50,7 @@ public interface UserRoleMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="data_id", property="dataId", jdbcType=JdbcType.BIGINT),
         @Result(column="role", property="role", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
@@ -59,7 +60,7 @@ public interface UserRoleMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, role, valid, create_time, update_time",
+        "id, channel, user_id, data_id, role, valid, create_time, update_time",
         "from user_role",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -67,6 +68,7 @@ public interface UserRoleMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="data_id", property="dataId", jdbcType=JdbcType.BIGINT),
         @Result(column="role", property="role", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
@@ -87,6 +89,7 @@ public interface UserRoleMapper {
         "update user_role",
         "set channel = #{channel,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=BIGINT},",
+          "data_id = #{dataId,jdbcType=BIGINT},",
           "role = #{role,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=TINYINT},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",

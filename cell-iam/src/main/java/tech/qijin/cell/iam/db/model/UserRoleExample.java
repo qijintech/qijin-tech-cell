@@ -297,6 +297,66 @@ public class UserRoleExample {
             return (Criteria) this;
         }
 
+        public Criteria andDataIdIsNull() {
+            addCriterion("data_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdIsNotNull() {
+            addCriterion("data_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdEqualTo(Long value) {
+            addCriterion("data_id =", value, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdNotEqualTo(Long value) {
+            addCriterion("data_id <>", value, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdGreaterThan(Long value) {
+            addCriterion("data_id >", value, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("data_id >=", value, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdLessThan(Long value) {
+            addCriterion("data_id <", value, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdLessThanOrEqualTo(Long value) {
+            addCriterion("data_id <=", value, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdIn(List<Long> values) {
+            addCriterion("data_id in", values, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdNotIn(List<Long> values) {
+            addCriterion("data_id not in", values, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdBetween(Long value1, Long value2) {
+            addCriterion("data_id between", value1, value2, "dataId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataIdNotBetween(Long value1, Long value2) {
+            addCriterion("data_id not between", value1, value2, "dataId");
+            return (Criteria) this;
+        }
+
         public Criteria andRoleIsNull() {
             addCriterion("role is null");
             return (Criteria) this;

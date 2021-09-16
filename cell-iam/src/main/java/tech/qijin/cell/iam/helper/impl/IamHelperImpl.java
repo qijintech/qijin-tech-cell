@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import tech.qijin.cell.iam.base.IamAuth;
 import tech.qijin.cell.iam.base.IamRole;
 import tech.qijin.cell.iam.db.dao.RoleAuthDao;
@@ -61,6 +62,9 @@ public class IamHelperImpl implements IamHelper {
     public List<IamAuth> listAuthByRoles(List<IamRole> roles) {
         if (roles.contains(IamRole.CREATOR)) {
             return Lists.newArrayList(IamAuth.values());
+        }
+        if (CollectionUtils.isEmpty(roles)) {
+            return Lists.newArrayList();
         }
         RoleAuthExample example = new RoleAuthExample();
         example.createCriteria()

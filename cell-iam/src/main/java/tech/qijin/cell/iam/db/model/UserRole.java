@@ -11,6 +11,8 @@ public class UserRole {
 
     private Long userId;
 
+    private Long dataId;
+
     private IamRole role;
 
     private Boolean valid;
@@ -41,6 +43,14 @@ public class UserRole {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getDataId() {
+        return dataId;
+    }
+
+    public void setDataId(Long dataId) {
+        this.dataId = dataId;
     }
 
     public IamRole getRole() {
