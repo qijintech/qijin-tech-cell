@@ -17,8 +17,8 @@ public class IamServiceImpl implements IamService {
     private IamHelper iamHelper;
 
     @Override
-    public List<IamRole> listRole(Long userId) {
-        return iamHelper.listRole(userId);
+    public List<IamRole> listRole(Long userId, Long dataId) {
+        return iamHelper.listRole(userId, dataId);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class IamServiceImpl implements IamService {
     }
 
     @Override
-    public boolean hasAuth(Long userId, IamAuth iamAuth) {
-        return iamHelper.listAuth(userId).contains(iamAuth);
+    public boolean hasAuth(Long userId, Long dataId, IamAuth iamAuth) {
+        return iamHelper.listAuth(userId, dataId).contains(iamAuth);
     }
 }

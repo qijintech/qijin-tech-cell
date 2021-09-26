@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IamService {
 
-    List<IamRole> listRole(Long userId);
+    List<IamRole> listRole(Long userId, Long dataId);
 
 
     /**
@@ -17,7 +17,7 @@ public interface IamService {
      * @param iamAuth
      * @return
      */
-    boolean hasAuth(Long userId, IamAuth iamAuth);
+    boolean hasAuth(Long userId, Long dataId, IamAuth iamAuth);
 
     boolean hasAuth(List<IamRole> roles, IamAuth iamAuth);
 }

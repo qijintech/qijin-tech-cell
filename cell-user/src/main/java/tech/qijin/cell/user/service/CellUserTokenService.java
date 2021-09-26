@@ -8,6 +8,12 @@ import tech.qijin.cell.user.base.UserToken;
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 public interface CellUserTokenService {
+    /**
+     *
+     * @param userId
+     * @param expire 单位秒
+     * @return
+     */
     UserToken genUserToken(Long userId, int expire);
 
     Long auth(String token);

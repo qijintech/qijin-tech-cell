@@ -6,9 +6,9 @@ import tech.qijin.cell.iam.base.IamRole;
 import java.util.List;
 
 public interface IamHelper {
-    List<IamRole> listRole(Long userId);
+    List<IamRole> listRole(Long userId, Long dataId);
 
-    List<IamAuth> listAuth(Long userId);
+    List<IamAuth> listAuth(Long userId, Long dataId);
 
     List<IamAuth> listAuthByRole(IamRole role);
 

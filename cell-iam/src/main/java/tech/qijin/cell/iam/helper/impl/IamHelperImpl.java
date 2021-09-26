@@ -29,10 +29,11 @@ public class IamHelperImpl implements IamHelper {
     private RoleAuthDao roleAuthDao;
 
     @Override
-    public List<IamRole> listRole(Long userId) {
+    public List<IamRole> listRole(Long userId, Long dataId) {
         UserRoleExample example = new UserRoleExample();
         example.createCriteria()
-                .andUserIdEqualTo(userId);
+                .andUserIdEqualTo(userId)
+                .andDataIdEqualTo(dataId);
         return userRoleDao.selectByExample(example)
                 .stream()
                 .map(UserRole::getRole)
@@ -40,8 +41,8 @@ public class IamHelperImpl implements IamHelper {
     }
 
     @Override
-    public List<IamAuth> listAuth(Long userId) {
-        return listAuthByRoles(listRole(userId)
+    public List<IamAuth> listAuth(Long userId, Long dataId) {
+        return listAuthByRoles(listRole(userId, dataId)
                 .stream()
                 .collect(Collectors.toList()));
     }
