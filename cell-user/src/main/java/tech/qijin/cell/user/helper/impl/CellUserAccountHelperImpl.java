@@ -82,4 +82,21 @@ public class CellUserAccountHelperImpl implements CellUserAccountHelper {
         example.createCriteria().andOpenidEqualTo(openid);
         return userAccountMiniDao.selectByExample(example).stream().findFirst().orElse(null);
     }
+
+    @Override
+    public UserAccountMini getUserAccountMini(Long userId) {
+        UserAccountMiniExample example = new UserAccountMiniExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        return userAccountMiniDao.selectByExample(example).stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public boolean updateSessionKey(String openid, String sessionKey) {
+        UserAccountMini record = new UserAccountMini();
+        record.setSessionKey(sessionKey);
+
+        UserAccountMiniExample example = new UserAccountMiniExample();
+        example.createCriteria().andOpenidEqualTo(openid);
+        return userAccountMiniDao.updateByExampleSelective(record, example) > 0;
+    }
 }

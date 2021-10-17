@@ -9,8 +9,8 @@ import tech.qijin.util4j.lang.constant.EnumValue;
  */
 public enum MaritalStatus implements EnumValue<String> {
     SINGLE("单身"),
-    COUPLE("非单身"),
-    MARRIED("已婚"),
+    DIVORCED("离异"),
+    WIDOWED("丧偶"),
     ;
 
 

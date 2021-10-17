@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tech.qijin.cell.user.base.Gender;
+import tech.qijin.cell.user.base.MaritalStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class UserProfileExample {
@@ -577,6 +578,76 @@ public class UserProfileExample {
             return (Criteria) this;
         }
 
+        public Criteria andWechatIsNull() {
+            addCriterion("wechat is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatIsNotNull() {
+            addCriterion("wechat is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatEqualTo(String value) {
+            addCriterion("wechat =", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNotEqualTo(String value) {
+            addCriterion("wechat <>", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatGreaterThan(String value) {
+            addCriterion("wechat >", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatGreaterThanOrEqualTo(String value) {
+            addCriterion("wechat >=", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatLessThan(String value) {
+            addCriterion("wechat <", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatLessThanOrEqualTo(String value) {
+            addCriterion("wechat <=", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatLike(String value) {
+            addCriterion("wechat like", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNotLike(String value) {
+            addCriterion("wechat not like", value, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatIn(List<String> values) {
+            addCriterion("wechat in", values, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNotIn(List<String> values) {
+            addCriterion("wechat not in", values, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatBetween(String value1, String value2) {
+            addCriterion("wechat between", value1, value2, "wechat");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNotBetween(String value1, String value2) {
+            addCriterion("wechat not between", value1, value2, "wechat");
+            return (Criteria) this;
+        }
+
         public Criteria andBirthdayIsNull() {
             addCriterion("birthday is null");
             return (Criteria) this;
@@ -1137,62 +1208,62 @@ public class UserProfileExample {
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusEqualTo(String value) {
+        public Criteria andMaritalStatusEqualTo(MaritalStatus value) {
             addCriterion("marital_status =", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusNotEqualTo(String value) {
+        public Criteria andMaritalStatusNotEqualTo(MaritalStatus value) {
             addCriterion("marital_status <>", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusGreaterThan(String value) {
+        public Criteria andMaritalStatusGreaterThan(MaritalStatus value) {
             addCriterion("marital_status >", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusGreaterThanOrEqualTo(String value) {
+        public Criteria andMaritalStatusGreaterThanOrEqualTo(MaritalStatus value) {
             addCriterion("marital_status >=", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusLessThan(String value) {
+        public Criteria andMaritalStatusLessThan(MaritalStatus value) {
             addCriterion("marital_status <", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusLessThanOrEqualTo(String value) {
+        public Criteria andMaritalStatusLessThanOrEqualTo(MaritalStatus value) {
             addCriterion("marital_status <=", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusLike(String value) {
+        public Criteria andMaritalStatusLike(MaritalStatus value) {
             addCriterion("marital_status like", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusNotLike(String value) {
+        public Criteria andMaritalStatusNotLike(MaritalStatus value) {
             addCriterion("marital_status not like", value, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusIn(List<String> values) {
+        public Criteria andMaritalStatusIn(List<MaritalStatus> values) {
             addCriterion("marital_status in", values, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusNotIn(List<String> values) {
+        public Criteria andMaritalStatusNotIn(List<MaritalStatus> values) {
             addCriterion("marital_status not in", values, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusBetween(String value1, String value2) {
+        public Criteria andMaritalStatusBetween(MaritalStatus value1, MaritalStatus value2) {
             addCriterion("marital_status between", value1, value2, "maritalStatus");
             return (Criteria) this;
         }
 
-        public Criteria andMaritalStatusNotBetween(String value1, String value2) {
+        public Criteria andMaritalStatusNotBetween(MaritalStatus value1, MaritalStatus value2) {
             addCriterion("marital_status not between", value1, value2, "maritalStatus");
             return (Criteria) this;
         }

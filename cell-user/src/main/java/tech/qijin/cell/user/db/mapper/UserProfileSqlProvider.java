@@ -52,6 +52,10 @@ public class UserProfileSqlProvider {
             sql.VALUES("mobile", "#{mobile,jdbcType=CHAR}");
         }
         
+        if (record.getWechat() != null) {
+            sql.VALUES("wechat", "#{wechat,jdbcType=VARCHAR}");
+        }
+        
         if (record.getBirthday() != null) {
             sql.VALUES("birthday", "#{birthday,jdbcType=TIMESTAMP}");
         }
@@ -112,6 +116,7 @@ public class UserProfileSqlProvider {
         sql.SELECT("avatar");
         sql.SELECT("gender");
         sql.SELECT("mobile");
+        sql.SELECT("wechat");
         sql.SELECT("birthday");
         sql.SELECT("born_city");
         sql.SELECT("live_city");
@@ -166,6 +171,10 @@ public class UserProfileSqlProvider {
         
         if (record.getMobile() != null) {
             sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
+        }
+        
+        if (record.getWechat() != null) {
+            sql.SET("wechat = #{record.wechat,jdbcType=VARCHAR}");
         }
         
         if (record.getBirthday() != null) {
@@ -227,6 +236,7 @@ public class UserProfileSqlProvider {
         sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
         sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
         sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
+        sql.SET("wechat = #{record.wechat,jdbcType=VARCHAR}");
         sql.SET("birthday = #{record.birthday,jdbcType=TIMESTAMP}");
         sql.SET("born_city = #{record.bornCity,jdbcType=VARCHAR}");
         sql.SET("live_city = #{record.liveCity,jdbcType=VARCHAR}");
@@ -270,6 +280,10 @@ public class UserProfileSqlProvider {
         
         if (record.getMobile() != null) {
             sql.SET("mobile = #{mobile,jdbcType=CHAR}");
+        }
+        
+        if (record.getWechat() != null) {
+            sql.SET("wechat = #{wechat,jdbcType=VARCHAR}");
         }
         
         if (record.getBirthday() != null) {

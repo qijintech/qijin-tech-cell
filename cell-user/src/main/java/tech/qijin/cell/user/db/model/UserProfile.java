@@ -2,6 +2,7 @@ package tech.qijin.cell.user.db.model;
 
 import java.util.Date;
 import tech.qijin.cell.user.base.Gender;
+import tech.qijin.cell.user.base.MaritalStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class UserProfile {
@@ -19,6 +20,8 @@ public class UserProfile {
 
     private String mobile;
 
+    private String wechat;
+
     private Date birthday;
 
     private String bornCity;
@@ -35,7 +38,7 @@ public class UserProfile {
 
     private String weight;
 
-    private String maritalStatus;
+    private MaritalStatus maritalStatus;
 
     private Date createTime;
 
@@ -95,6 +98,14 @@ public class UserProfile {
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat == null ? null : wechat.trim();
     }
 
     public Date getBirthday() {
@@ -161,12 +172,12 @@ public class UserProfile {
         this.weight = weight == null ? null : weight.trim();
     }
 
-    public String getMaritalStatus() {
+    public MaritalStatus getMaritalStatus() {
         return maritalStatus;
     }
 
-    public void setMaritalStatus(String maritalStatus) {
-        this.maritalStatus = maritalStatus == null ? null : maritalStatus.trim();
+    public void setMaritalStatus(MaritalStatus maritalStatus) {
+        this.maritalStatus = maritalStatus;
     }
 
     public Date getCreateTime() {

@@ -16,4 +16,13 @@ public interface CellUserAccountService {
     UserSessionBo login(AccountType accountType, AbstractRegisterVo abstractRegisterVo, int expire);
 
     void sendCaptcha(String mobile);
+
+    /**
+     * 微信小程序解码手机号
+     * @param userId
+     * @param encryptedData
+     * @param iv
+     * @return
+     */
+    String decodePhoneNumber(Long userId, String encryptedData, String iv);
 }

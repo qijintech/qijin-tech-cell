@@ -33,7 +33,7 @@ public interface UserProfileMapper {
     @Insert({
         "insert into user_profile (channel, user_id, ",
         "name, avatar, gender, ",
-        "mobile, birthday, ",
+        "mobile, wechat, birthday, ",
         "born_city, live_city, ",
         "edu, edu_degree, ",
         "job, height, weight, ",
@@ -41,7 +41,7 @@ public interface UserProfileMapper {
         "update_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
         "#{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, ",
-        "#{mobile,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
+        "#{mobile,jdbcType=CHAR}, #{wechat,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
         "#{bornCity,jdbcType=VARCHAR}, #{liveCity,jdbcType=VARCHAR}, ",
         "#{edu,jdbcType=VARCHAR}, #{eduDegree,jdbcType=VARCHAR}, ",
         "#{job,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, ",
@@ -64,6 +64,7 @@ public interface UserProfileMapper {
         @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
         @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
         @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
+        @Result(column="wechat", property="wechat", jdbcType=JdbcType.VARCHAR),
         @Result(column="birthday", property="birthday", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="born_city", property="bornCity", jdbcType=JdbcType.VARCHAR),
         @Result(column="live_city", property="liveCity", jdbcType=JdbcType.VARCHAR),
@@ -80,8 +81,9 @@ public interface UserProfileMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, name, avatar, gender, mobile, birthday, born_city, live_city, ",
-        "edu, edu_degree, job, height, weight, marital_status, create_time, update_time",
+        "id, channel, user_id, name, avatar, gender, mobile, wechat, birthday, born_city, ",
+        "live_city, edu, edu_degree, job, height, weight, marital_status, create_time, ",
+        "update_time",
         "from user_profile",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -93,6 +95,7 @@ public interface UserProfileMapper {
         @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
         @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
         @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
+        @Result(column="wechat", property="wechat", jdbcType=JdbcType.VARCHAR),
         @Result(column="birthday", property="birthday", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="born_city", property="bornCity", jdbcType=JdbcType.VARCHAR),
         @Result(column="live_city", property="liveCity", jdbcType=JdbcType.VARCHAR),
@@ -124,6 +127,7 @@ public interface UserProfileMapper {
           "avatar = #{avatar,jdbcType=VARCHAR},",
           "gender = #{gender,jdbcType=VARCHAR},",
           "mobile = #{mobile,jdbcType=CHAR},",
+          "wechat = #{wechat,jdbcType=VARCHAR},",
           "birthday = #{birthday,jdbcType=TIMESTAMP},",
           "born_city = #{bornCity,jdbcType=VARCHAR},",
           "live_city = #{liveCity,jdbcType=VARCHAR},",

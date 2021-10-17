@@ -16,6 +16,7 @@ import tech.qijin.cell.user.service.CellUserTokenService;
 import tech.qijin.sdk.tencent.base.TxErrorException;
 import tech.qijin.sdk.tencent.mini.TxMiniAuthService;
 import tech.qijin.sdk.tencent.mini.pojo.TxJscode2SessionResp;
+import tech.qijin.sdk.tencent.mini.pojo.UserPhoneInfo;
 import tech.qijin.util4j.aop.annotation.Log;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.redis.RedisUtil;
@@ -233,6 +234,30 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         // TODO send 验证码 短信
     }
 
+    @Override
+    public String decodePhoneNumber(Long userId, String encryptedData, String iv) {
+        UserAccount account = cellUserAccountHelper.getUserAccount(userId);
+        if (account == null) {
+            log.warn("[decodePhoneNumber] userId not found, userId={}", userId);
+            return "";
+        }
+        if (!AccountType.MINI_WECHAT.equals(account.getType())) {
+            log.warn("[decodePhoneNumber] userId not WeChat mini account, userId={}, type={}", userId, account.getType());
+            return "";
+        }
+        UserAccountMini accountMini = cellUserAccountHelper.getUserAccountMini(userId);
+        if (accountMini == null) {
+            log.error("[decodePhoneNumber] account mimi not found, userId={}", userId);
+            return "";
+        }
+        UserPhoneInfo userPhoneInfo = txMiniAuthService.decodeUserInfo(accountMini.getSessionKey(), encryptedData, iv);
+        if (userPhoneInfo == null) {
+            log.error("[decodePhoneNumber] decodeUserInfo error, userId={}", userId);
+            return "";
+        }
+        return userPhoneInfo.getPurePhoneNumber();
+    }
+
     private String getCaptchaKey(String mobile, String captcha) {
         return String.format("%s:%s", mobile, captcha);
     }
@@ -259,6 +284,7 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
     private UserAccount getUserAccountMini(String openid, String sessionKey) {
         UserAccountMini userAccountMini = cellUserAccountHelper.getUserAccountMini(openid);
         if (userAccountMini == null) return null;
+        cellUserAccountHelper.updateSessionKey(openid, sessionKey);
         return cellUserAccountHelper.getUserAccount(userAccountMini.getUserId());
     }
 

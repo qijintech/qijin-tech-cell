@@ -29,5 +29,14 @@ public interface CellUserAccountHelper {
     UserAccountMini createUserAccountMini(String openid, String sessionKey, Long userId);
 
     UserAccountMini getUserAccountMini(String openid);
+    UserAccountMini getUserAccountMini(Long userId);
+
+    /**
+     * 更新session_key
+     * @param openid
+     * @param sessionKey
+     * @return
+     */
+    boolean updateSessionKey(String openid, String sessionKey);
 
 }
