@@ -33,4 +33,9 @@ public class IamServiceImpl implements IamService {
     public boolean hasAuth(Long userId, Long dataId, IamAuth iamAuth) {
         return iamHelper.listAuth(userId, dataId).contains(iamAuth);
     }
+
+    @Override
+    public boolean addRole(Long userId, Long dataId, IamRole iamRole) {
+        return iamHelper.addRole(userId, dataId, iamRole);
+    }
 }

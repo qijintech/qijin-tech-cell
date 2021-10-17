@@ -18,4 +18,6 @@ public interface IamHelper {
      * @return
      */
     List<IamAuth> listAuthByRoles(List<IamRole> roles);
+
+    boolean addRole(Long userId, Long dataId, IamRole iamRole);
 }

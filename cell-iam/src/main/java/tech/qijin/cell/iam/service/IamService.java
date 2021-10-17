@@ -20,4 +20,13 @@ public interface IamService {
     boolean hasAuth(Long userId, Long dataId, IamAuth iamAuth);
 
     boolean hasAuth(List<IamRole> roles, IamAuth iamAuth);
+
+    /**
+     * 授予权限
+     * @param userId
+     * @param dataId
+     * @param iamRole
+     * @return
+     */
+    boolean addRole(Long userId, Long dataId, IamRole iamRole);
 }

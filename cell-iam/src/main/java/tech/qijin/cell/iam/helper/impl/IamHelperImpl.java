@@ -76,4 +76,14 @@ public class IamHelperImpl implements IamHelper {
                 .collect(Collectors.toSet());
         return Lists.newArrayList(authSet);
     }
+
+    @Override
+    public boolean addRole(Long userId, Long dataId, IamRole iamRole) {
+        UserRole userRole = new UserRole();
+        userRole.setUserId(userId);
+        userRole.setDataId(dataId);
+        userRole.setRole(iamRole);
+        userRole.setValid(true);
+        return userRoleDao.insertSelective(userRole) > 0;
+    }
 }
