@@ -25,6 +25,7 @@
 		<module>cell-message</module>
 		<module>cell-iam</module>
 		<module>cell-misc</module>
+		<module>cell-feed</module>
   </modules>
 
 	<properties>
