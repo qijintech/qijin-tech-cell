@@ -33,7 +33,7 @@ public class FeedImageSqlProvider {
         }
         
         if (record.getFeedItemId() != null) {
-            sql.VALUES("feed_item_id", "#{feedItemId,jdbcType=INTEGER}");
+            sql.VALUES("feed_item_id", "#{feedItemId,jdbcType=BIGINT}");
         }
         
         if (record.getUrl() != null) {
@@ -86,7 +86,7 @@ public class FeedImageSqlProvider {
         sql.UPDATE("feed_image");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=INTEGER}");
+            sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
         if (record.getChannel() != null) {
@@ -94,7 +94,7 @@ public class FeedImageSqlProvider {
         }
         
         if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{record.feedItemId,jdbcType=INTEGER}");
+            sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
         }
         
         if (record.getUrl() != null) {
@@ -121,9 +121,9 @@ public class FeedImageSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("feed_image");
         
-        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("feed_item_id = #{record.feedItemId,jdbcType=INTEGER}");
+        sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
         sql.SET("url = #{record.url,jdbcType=VARCHAR}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -143,7 +143,7 @@ public class FeedImageSqlProvider {
         }
         
         if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{feedItemId,jdbcType=INTEGER}");
+            sql.SET("feed_item_id = #{feedItemId,jdbcType=BIGINT}");
         }
         
         if (record.getUrl() != null) {
@@ -162,7 +162,7 @@ public class FeedImageSqlProvider {
             sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }

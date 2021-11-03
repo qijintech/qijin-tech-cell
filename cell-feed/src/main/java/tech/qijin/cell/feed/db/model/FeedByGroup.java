@@ -4,7 +4,7 @@ import java.util.Date;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class FeedByGroup {
-    private Integer id;
+    private Long id;
 
     private Channel channel;
 
@@ -18,11 +18,11 @@ public class FeedByGroup {
 
     private Date createTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

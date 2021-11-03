@@ -26,30 +26,30 @@ public interface FeedImageMapper {
 
     @Delete({
         "delete from feed_image",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into feed_image (channel, feed_item_id, ",
         "url, valid, update_time, ",
         "create_time)",
-        "values (#{channel,jdbcType=VARCHAR}, #{feedItemId,jdbcType=INTEGER}, ",
+        "values (#{channel,jdbcType=VARCHAR}, #{feedItemId,jdbcType=BIGINT}, ",
         "#{url,jdbcType=VARCHAR}, #{valid,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(FeedImage record);
 
     @InsertProvider(type=FeedImageSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(FeedImage record);
 
     @SelectProvider(type=FeedImageSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.INTEGER),
+        @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.BIGINT),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -61,18 +61,18 @@ public interface FeedImageMapper {
         "select",
         "id, channel, feed_item_id, url, valid, update_time, create_time",
         "from feed_image",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.INTEGER),
+        @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.BIGINT),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    FeedImage selectByPrimaryKey(Integer id);
+    FeedImage selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=FeedImageSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") FeedImage record, @Param("example") FeedImageExample example);
@@ -86,12 +86,12 @@ public interface FeedImageMapper {
     @Update({
         "update feed_image",
         "set channel = #{channel,jdbcType=VARCHAR},",
-          "feed_item_id = #{feedItemId,jdbcType=INTEGER},",
+          "feed_item_id = #{feedItemId,jdbcType=BIGINT},",
           "url = #{url,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(FeedImage record);
 }

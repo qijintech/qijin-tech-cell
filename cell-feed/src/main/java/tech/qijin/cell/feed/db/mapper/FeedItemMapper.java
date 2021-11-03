@@ -26,9 +26,9 @@ public interface FeedItemMapper {
 
     @Delete({
         "delete from feed_item",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into feed_item (channel, user_id, ",
@@ -38,16 +38,16 @@ public interface FeedItemMapper {
         "#{text,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{topicId,jdbcType=INTEGER}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(FeedItem record);
 
     @InsertProvider(type=FeedItemSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(FeedItem record);
 
     @SelectProvider(type=FeedItemSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="text", property="text", jdbcType=JdbcType.VARCHAR),
@@ -62,10 +62,10 @@ public interface FeedItemMapper {
         "select",
         "id, channel, user_id, text, type, topic_id, update_time, create_time",
         "from feed_item",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="text", property="text", jdbcType=JdbcType.VARCHAR),
@@ -74,7 +74,7 @@ public interface FeedItemMapper {
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    FeedItem selectByPrimaryKey(Integer id);
+    FeedItem selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=FeedItemSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") FeedItem record, @Param("example") FeedItemExample example);
@@ -94,7 +94,7 @@ public interface FeedItemMapper {
           "topic_id = #{topicId,jdbcType=INTEGER},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(FeedItem record);
 }

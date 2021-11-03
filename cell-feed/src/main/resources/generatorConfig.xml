@@ -50,7 +50,7 @@
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
-            <columnOverride column="channel" property="channel"
+            <columnOverride column="type" property="type"
                             javaType="tech.qijin.cell.feed.base.FeedItemType"/>
         </table>
         <table tableName="feed_item_like">

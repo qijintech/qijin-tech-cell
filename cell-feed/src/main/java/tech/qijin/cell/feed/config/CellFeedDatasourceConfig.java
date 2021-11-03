@@ -27,14 +27,14 @@ import java.util.Properties;
         sqlSessionTemplateRef = "feedSqlSessionTemplate")
 public class CellFeedDatasourceConfig {
 
-    @Bean("dataSourceTemplate")
+    @Bean("feedDataSourceTemplate")
     @ConfigurationProperties("spring.datasource.druid.feed")
     public DataSource dataSourceOne() {
         return DruidDataSourceBuilder.create().build();
     }
 
     @Bean(name = "feedSqlSessionFactory")
-    public SqlSessionFactory feedSqlSessionFactory(@Qualifier("dataSourceTemplate") DataSource dataSourceOne)
+    public SqlSessionFactory feedSqlSessionFactory(@Qualifier("feedDataSourceTemplate") DataSource dataSourceOne)
             throws Exception {
         return getSqlSessionFactory(dataSourceOne);
     }
@@ -45,7 +45,7 @@ public class CellFeedDatasourceConfig {
     }
 
     @Bean(name = "feedTransactionManager")
-    public DataSourceTransactionManager feedTransactionManager(@Qualifier("dataSourceTemplate") DataSource dataSourceOne) {
+    public DataSourceTransactionManager feedTransactionManager(@Qualifier("feedDataSourceTemplate") DataSource dataSourceOne) {
         return new DataSourceTransactionManager(dataSourceOne);
     }
 

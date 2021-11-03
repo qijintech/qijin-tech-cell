@@ -48,6 +48,11 @@
                 <artifactId>cell-iam</artifactId>
                 <version>${cell.version}</version>
             </dependency>
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-feed</artifactId>
+                <version>${cell.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

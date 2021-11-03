@@ -86,7 +86,7 @@ public class FeedCommentLikeSqlProvider {
         sql.UPDATE("feed_comment_like");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=INTEGER}");
+            sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
         if (record.getChannel() != null) {
@@ -121,7 +121,7 @@ public class FeedCommentLikeSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("feed_comment_like");
         
-        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("comment_id = #{record.commentId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
@@ -162,7 +162,7 @@ public class FeedCommentLikeSqlProvider {
             sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }

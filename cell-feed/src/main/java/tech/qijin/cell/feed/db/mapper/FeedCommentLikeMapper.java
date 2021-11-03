@@ -26,9 +26,9 @@ public interface FeedCommentLikeMapper {
 
     @Delete({
         "delete from feed_comment_like",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into feed_comment_like (channel, comment_id, ",
@@ -38,16 +38,16 @@ public interface FeedCommentLikeMapper {
         "#{userId,jdbcType=BIGINT}, #{valid,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(FeedCommentLike record);
 
     @InsertProvider(type=FeedCommentLikeSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(FeedCommentLike record);
 
     @SelectProvider(type=FeedCommentLikeSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="comment_id", property="commentId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
@@ -61,10 +61,10 @@ public interface FeedCommentLikeMapper {
         "select",
         "id, channel, comment_id, user_id, valid, update_time, create_time",
         "from feed_comment_like",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="comment_id", property="commentId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
@@ -72,7 +72,7 @@ public interface FeedCommentLikeMapper {
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    FeedCommentLike selectByPrimaryKey(Integer id);
+    FeedCommentLike selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=FeedCommentLikeSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") FeedCommentLike record, @Param("example") FeedCommentLikeExample example);
@@ -91,7 +91,7 @@ public interface FeedCommentLikeMapper {
           "valid = #{valid,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(FeedCommentLike record);
 }

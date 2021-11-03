@@ -1,10 +1,11 @@
 package tech.qijin.cell.feed.db.model;
 
 import java.util.Date;
+import tech.qijin.cell.feed.base.FeedItemType;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class FeedItem {
-    private Integer id;
+    private Long id;
 
     private Channel channel;
 
@@ -12,7 +13,7 @@ public class FeedItem {
 
     private String text;
 
-    private String type;
+    private FeedItemType type;
 
     private Integer topicId;
 
@@ -20,11 +21,11 @@ public class FeedItem {
 
     private Date createTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,12 +53,12 @@ public class FeedItem {
         this.text = text == null ? null : text.trim();
     }
 
-    public String getType() {
+    public FeedItemType getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setType(FeedItemType type) {
+        this.type = type;
     }
 
     public Integer getTopicId() {

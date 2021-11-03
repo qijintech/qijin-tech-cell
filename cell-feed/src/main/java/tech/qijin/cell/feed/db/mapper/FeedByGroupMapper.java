@@ -26,9 +26,9 @@ public interface FeedByGroupMapper {
 
     @Delete({
         "delete from feed_by_group",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into feed_by_group (channel, group_id, ",
@@ -38,16 +38,16 @@ public interface FeedByGroupMapper {
         "#{feedItemId,jdbcType=BIGINT}, #{valid,jdbcType=TINYINT}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(FeedByGroup record);
 
     @InsertProvider(type=FeedByGroupSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(FeedByGroup record);
 
     @SelectProvider(type=FeedByGroupSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="group_id", property="groupId", jdbcType=JdbcType.BIGINT),
         @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.BIGINT),
@@ -61,10 +61,10 @@ public interface FeedByGroupMapper {
         "select",
         "id, channel, group_id, feed_item_id, valid, update_time, create_time",
         "from feed_by_group",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="group_id", property="groupId", jdbcType=JdbcType.BIGINT),
         @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.BIGINT),
@@ -72,7 +72,7 @@ public interface FeedByGroupMapper {
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    FeedByGroup selectByPrimaryKey(Integer id);
+    FeedByGroup selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=FeedByGroupSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") FeedByGroup record, @Param("example") FeedByGroupExample example);
@@ -91,7 +91,7 @@ public interface FeedByGroupMapper {
           "valid = #{valid,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(FeedByGroup record);
 }

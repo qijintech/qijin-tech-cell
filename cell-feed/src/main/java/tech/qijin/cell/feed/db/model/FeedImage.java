@@ -4,11 +4,11 @@ import java.util.Date;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class FeedImage {
-    private Integer id;
+    private Long id;
 
     private Channel channel;
 
-    private Integer feedItemId;
+    private Long feedItemId;
 
     private String url;
 
@@ -18,11 +18,11 @@ public class FeedImage {
 
     private Date createTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -34,11 +34,11 @@ public class FeedImage {
         this.channel = channel;
     }
 
-    public Integer getFeedItemId() {
+    public Long getFeedItemId() {
         return feedItemId;
     }
 
-    public void setFeedItemId(Integer feedItemId) {
+    public void setFeedItemId(Long feedItemId) {
         this.feedItemId = feedItemId;
     }
 

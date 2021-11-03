@@ -86,7 +86,7 @@ public class FeedItemLikeSqlProvider {
         sql.UPDATE("feed_item_like");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=INTEGER}");
+            sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
         if (record.getChannel() != null) {
@@ -121,7 +121,7 @@ public class FeedItemLikeSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("feed_item_like");
         
-        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
@@ -162,7 +162,7 @@ public class FeedItemLikeSqlProvider {
             sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }
