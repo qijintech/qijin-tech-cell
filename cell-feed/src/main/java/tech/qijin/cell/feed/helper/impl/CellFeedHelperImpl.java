@@ -4,14 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.qijin.cell.feed.base.FeedItemType;
+import tech.qijin.cell.feed.base.FeedType;
 import tech.qijin.cell.feed.db.dao.FeedByGroupDao;
+import tech.qijin.cell.feed.db.dao.FeedDao;
 import tech.qijin.cell.feed.db.dao.FeedImageDao;
-import tech.qijin.cell.feed.db.dao.FeedItemDao;
 import tech.qijin.cell.feed.db.dao.FeedTopicDao;
 import tech.qijin.cell.feed.db.model.*;
 import tech.qijin.cell.feed.helper.CellFeedHelper;
-import tech.qijin.util4j.lang.vo.PageVo;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class CellFeedHelperImpl implements CellFeedHelper {
     @Autowired
-    private FeedItemDao feedItemDao;
+    private FeedDao feedItemDao;
     @Autowired
     private FeedByGroupDao feedByGroupDao;
     @Autowired
@@ -31,8 +30,8 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     private FeedTopicDao feedTopicDao;
 
     @Override
-    public boolean insertFeed(FeedItem feedItem) {
-        return feedItemDao.insertSelective(feedItem) > 0;
+    public boolean insertFeed(Feed feed) {
+        return feedItemDao.insertSelective(feed) > 0;
     }
 
     @Override
@@ -46,8 +45,8 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     }
 
     @Override
-    public FeedItem getFeedById(Long feedItemId) {
-        return feedItemDao.selectByPrimaryKey(feedItemId);
+    public Feed getFeedById(Long feed) {
+        return feedItemDao.selectByPrimaryKey(feed);
     }
 
     @Override
@@ -56,11 +55,11 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     }
 
     @Override
-    public List<FeedItem> listFeedByIds(List<Long> feedItemIds) {
-        if (CollectionUtils.isEmpty(feedItemIds)) return Collections.emptyList();
-        FeedItemExample example = new FeedItemExample();
+    public List<Feed> listFeedByIds(List<Long> feeIds) {
+        if (CollectionUtils.isEmpty(feeIds)) return Collections.emptyList();
+        FeedExample example = new FeedExample();
         example.createCriteria()
-                .andIdIn(feedItemIds);
+                .andIdIn(feeIds);
         return feedItemDao.selectByExample(example);
     }
 
@@ -85,8 +84,8 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     }
 
     @Override
-    public List<FeedItem> pageFeedByUser(Long userId, FeedItemType type, Integer pageNo, Integer pageSize) {
-        FeedItemExample example = new FeedItemExample();
+    public List<Feed> pageFeedByUser(Long userId, FeedType type, Integer pageNo, Integer pageSize) {
+        FeedExample example = new FeedExample();
         example.setOrderByClause(String.format("create_time desc limit %d, %d", (pageNo - 1) * pageSize, pageSize));
         example.createCriteria()
                 .andTypeEqualTo(type)
@@ -95,18 +94,18 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     }
 
     @Override
-    public List<FeedImage> listFeedImages(List<Long> feedItemIds) {
-        if (CollectionUtils.isEmpty(feedItemIds)) return Collections.emptyList();
+    public List<FeedImage> listFeedImages(List<Long> feedIds) {
+        if (CollectionUtils.isEmpty(feedIds)) return Collections.emptyList();
         FeedImageExample example = new FeedImageExample();
         example.createCriteria()
                 .andValidEqualTo(true)
-                .andFeedItemIdIn(feedItemIds);
+                .andFeedIdIn(feedIds);
         return feedImageDao.selectByExample(example);
     }
 
     @Override
-    public Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedItemIds) {
-        return listFeedImages(feedItemIds).stream()
-                .collect(Collectors.groupingBy(FeedImage::getFeedItemId));
+    public Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds) {
+        return listFeedImages(feedIds).stream()
+                .collect(Collectors.groupingBy(FeedImage::getFeedId));
     }
 }

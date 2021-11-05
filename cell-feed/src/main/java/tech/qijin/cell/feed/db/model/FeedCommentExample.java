@@ -236,63 +236,63 @@ public class FeedCommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdIsNull() {
-            addCriterion("feed_item_Id is null");
+        public Criteria andFeedIdIsNull() {
+            addCriterion("feed_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdIsNotNull() {
-            addCriterion("feed_item_Id is not null");
+        public Criteria andFeedIdIsNotNull() {
+            addCriterion("feed_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdEqualTo(Long value) {
-            addCriterion("feed_item_Id =", value, "feedItemId");
+        public Criteria andFeedIdEqualTo(Long value) {
+            addCriterion("feed_id =", value, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdNotEqualTo(Long value) {
-            addCriterion("feed_item_Id <>", value, "feedItemId");
+        public Criteria andFeedIdNotEqualTo(Long value) {
+            addCriterion("feed_id <>", value, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdGreaterThan(Long value) {
-            addCriterion("feed_item_Id >", value, "feedItemId");
+        public Criteria andFeedIdGreaterThan(Long value) {
+            addCriterion("feed_id >", value, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("feed_item_Id >=", value, "feedItemId");
+        public Criteria andFeedIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("feed_id >=", value, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdLessThan(Long value) {
-            addCriterion("feed_item_Id <", value, "feedItemId");
+        public Criteria andFeedIdLessThan(Long value) {
+            addCriterion("feed_id <", value, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdLessThanOrEqualTo(Long value) {
-            addCriterion("feed_item_Id <=", value, "feedItemId");
+        public Criteria andFeedIdLessThanOrEqualTo(Long value) {
+            addCriterion("feed_id <=", value, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdIn(List<Long> values) {
-            addCriterion("feed_item_Id in", values, "feedItemId");
+        public Criteria andFeedIdIn(List<Long> values) {
+            addCriterion("feed_id in", values, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdNotIn(List<Long> values) {
-            addCriterion("feed_item_Id not in", values, "feedItemId");
+        public Criteria andFeedIdNotIn(List<Long> values) {
+            addCriterion("feed_id not in", values, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdBetween(Long value1, Long value2) {
-            addCriterion("feed_item_Id between", value1, value2, "feedItemId");
+        public Criteria andFeedIdBetween(Long value1, Long value2) {
+            addCriterion("feed_id between", value1, value2, "feedId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdNotBetween(Long value1, Long value2) {
-            addCriterion("feed_item_Id not between", value1, value2, "feedItemId");
+        public Criteria andFeedIdNotBetween(Long value1, Long value2) {
+            addCriterion("feed_id not between", value1, value2, "feedId");
             return (Criteria) this;
         }
 

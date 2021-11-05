@@ -3,17 +3,17 @@ package tech.qijin.cell.feed.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import tech.qijin.cell.feed.base.FeedItemType;
+import tech.qijin.cell.feed.base.FeedType;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class FeedItemExample {
+public class FeedExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public FeedItemExample() {
+    public FeedExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -377,62 +377,62 @@ public class FeedItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(FeedItemType value) {
+        public Criteria andTypeEqualTo(FeedType value) {
             addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(FeedItemType value) {
+        public Criteria andTypeNotEqualTo(FeedType value) {
             addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(FeedItemType value) {
+        public Criteria andTypeGreaterThan(FeedType value) {
             addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(FeedItemType value) {
+        public Criteria andTypeGreaterThanOrEqualTo(FeedType value) {
             addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(FeedItemType value) {
+        public Criteria andTypeLessThan(FeedType value) {
             addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(FeedItemType value) {
+        public Criteria andTypeLessThanOrEqualTo(FeedType value) {
             addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLike(FeedItemType value) {
+        public Criteria andTypeLike(FeedType value) {
             addCriterion("type like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotLike(FeedItemType value) {
+        public Criteria andTypeNotLike(FeedType value) {
             addCriterion("type not like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<FeedItemType> values) {
+        public Criteria andTypeIn(List<FeedType> values) {
             addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<FeedItemType> values) {
+        public Criteria andTypeNotIn(List<FeedType> values) {
             addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(FeedItemType value1, FeedItemType value2) {
+        public Criteria andTypeBetween(FeedType value1, FeedType value2) {
             addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(FeedItemType value1, FeedItemType value2) {
+        public Criteria andTypeNotBetween(FeedType value1, FeedType value2) {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }

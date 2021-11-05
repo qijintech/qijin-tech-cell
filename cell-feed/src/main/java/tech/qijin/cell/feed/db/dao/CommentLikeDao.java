@@ -1,8 +1,8 @@
 package tech.qijin.cell.feed.db.dao;
 
-import tech.qijin.cell.feed.db.mapper.FeedItemLikeMapper;
-import tech.qijin.cell.feed.db.mapper.FeedItemLikeSqlProvider;
-import tech.qijin.cell.feed.db.model.FeedItemLike;
+import tech.qijin.cell.feed.db.mapper.CommentLikeMapper;
+import tech.qijin.cell.feed.db.mapper.CommentLikeSqlProvider;
+import tech.qijin.cell.feed.db.model.CommentLike;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.InsertProvider;
 import com.google.common.collect.Lists;
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
  * @author: SYSTEM
  **/
 
-public interface FeedItemLikeDao extends FeedItemLikeMapper {
+public interface CommentLikeDao extends CommentLikeMapper {
 
 	@InsertProvider(type = SqlProvider.class, method = "batchInsert")
-	int batchInsert(@Param("records") List<FeedItemLike> records);
+	int batchInsert(@Param("records") List<CommentLike> records);
 
 	class SqlProvider {
 		private static final String VALUES = "VALUES";
-		FeedItemLikeSqlProvider provider = new FeedItemLikeSqlProvider();
+		CommentLikeSqlProvider provider = new CommentLikeSqlProvider();
 
 		public String batchInsert(Map<String, Object> param) {
-			List<FeedItemLike> records = (List<FeedItemLike>) param.get("records");
+			List<CommentLike> records = (List<CommentLike>) param.get("records");
 			return genSql(records);
 		}
 
-		private String genSql(List<FeedItemLike> records) {
+		private String genSql(List<CommentLike> records) {
 			List<String> sqls = records.stream()
 					.map(record -> provider.insertSelective(record))
 					.collect(Collectors.toList());

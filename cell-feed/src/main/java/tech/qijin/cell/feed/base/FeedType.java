@@ -2,7 +2,7 @@ package tech.qijin.cell.feed.base;
 
 import tech.qijin.util4j.lang.constant.EnumValue;
 
-public enum FeedItemType implements EnumValue<String> {
+public enum FeedType implements EnumValue<String> {
     PUBLISHED("已发布"),
     DRAFTED("草稿"),
     DELETED("删除"),
@@ -10,7 +10,7 @@ public enum FeedItemType implements EnumValue<String> {
 
     private String description;
 
-    FeedItemType(String description) {
+    FeedType(String description) {
         this.description = description;
     }
 

@@ -8,7 +8,7 @@ public class FeedImage {
 
     private Channel channel;
 
-    private Long feedItemId;
+    private Long feedId;
 
     private String url;
 
@@ -34,12 +34,12 @@ public class FeedImage {
         this.channel = channel;
     }
 
-    public Long getFeedItemId() {
-        return feedItemId;
+    public Long getFeedId() {
+        return feedId;
     }
 
-    public void setFeedItemId(Long feedItemId) {
-        this.feedItemId = feedItemId;
+    public void setFeedId(Long feedId) {
+        this.feedId = feedId;
     }
 
     public String getUrl() {

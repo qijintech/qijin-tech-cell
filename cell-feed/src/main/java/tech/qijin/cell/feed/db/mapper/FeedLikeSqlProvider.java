@@ -3,49 +3,45 @@ package tech.qijin.cell.feed.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.cell.feed.db.model.FeedItem;
-import tech.qijin.cell.feed.db.model.FeedItemExample.Criteria;
-import tech.qijin.cell.feed.db.model.FeedItemExample.Criterion;
-import tech.qijin.cell.feed.db.model.FeedItemExample;
+import tech.qijin.cell.feed.db.model.FeedLike;
+import tech.qijin.cell.feed.db.model.FeedLikeExample.Criteria;
+import tech.qijin.cell.feed.db.model.FeedLikeExample.Criterion;
+import tech.qijin.cell.feed.db.model.FeedLikeExample;
 
-public class FeedItemSqlProvider {
+public class FeedLikeSqlProvider {
 
-    public String countByExample(FeedItemExample example) {
+    public String countByExample(FeedLikeExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("feed_item");
+        sql.SELECT("count(*)").FROM("feed_like");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(FeedItemExample example) {
+    public String deleteByExample(FeedLikeExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("feed_item");
+        sql.DELETE_FROM("feed_like");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(FeedItem record) {
+    public String insertSelective(FeedLike record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("feed_item");
+        sql.INSERT_INTO("feed_like");
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getFeedId() != null) {
+            sql.VALUES("feed_id", "#{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
             sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getText() != null) {
-            sql.VALUES("text", "#{text,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getType() != null) {
-            sql.VALUES("type", "#{type,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getTopicId() != null) {
-            sql.VALUES("topic_id", "#{topicId,jdbcType=INTEGER}");
+        if (record.getValid() != null) {
+            sql.VALUES("valid", "#{valid,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -59,7 +55,7 @@ public class FeedItemSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(FeedItemExample example) {
+    public String selectByExample(FeedLikeExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -67,13 +63,12 @@ public class FeedItemSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
+        sql.SELECT("feed_id");
         sql.SELECT("user_id");
-        sql.SELECT("text");
-        sql.SELECT("type");
-        sql.SELECT("topic_id");
+        sql.SELECT("valid");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
-        sql.FROM("feed_item");
+        sql.FROM("feed_like");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -84,11 +79,11 @@ public class FeedItemSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        FeedItem record = (FeedItem) parameter.get("record");
-        FeedItemExample example = (FeedItemExample) parameter.get("example");
+        FeedLike record = (FeedLike) parameter.get("record");
+        FeedLikeExample example = (FeedLikeExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("feed_item");
+        sql.UPDATE("feed_like");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -98,20 +93,16 @@ public class FeedItemSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getFeedId() != null) {
+            sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
+        }
+        
         if (record.getUserId() != null) {
             sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         }
         
-        if (record.getText() != null) {
-            sql.SET("text = #{record.text,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getType() != null) {
-            sql.SET("type = #{record.type,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getTopicId() != null) {
-            sql.SET("topic_id = #{record.topicId,jdbcType=INTEGER}");
+        if (record.getValid() != null) {
+            sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -128,44 +119,39 @@ public class FeedItemSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("feed_item");
+        sql.UPDATE("feed_like");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
-        sql.SET("text = #{record.text,jdbcType=VARCHAR}");
-        sql.SET("type = #{record.type,jdbcType=VARCHAR}");
-        sql.SET("topic_id = #{record.topicId,jdbcType=INTEGER}");
+        sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
-        FeedItemExample example = (FeedItemExample) parameter.get("example");
+        FeedLikeExample example = (FeedLikeExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(FeedItem record) {
+    public String updateByPrimaryKeySelective(FeedLike record) {
         SQL sql = new SQL();
-        sql.UPDATE("feed_item");
+        sql.UPDATE("feed_like");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getFeedId() != null) {
+            sql.SET("feed_id = #{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
             sql.SET("user_id = #{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getText() != null) {
-            sql.SET("text = #{text,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getType() != null) {
-            sql.SET("type = #{type,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getTopicId() != null) {
-            sql.SET("topic_id = #{topicId,jdbcType=INTEGER}");
+        if (record.getValid() != null) {
+            sql.SET("valid = #{valid,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -181,7 +167,7 @@ public class FeedItemSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, FeedItemExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, FeedLikeExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

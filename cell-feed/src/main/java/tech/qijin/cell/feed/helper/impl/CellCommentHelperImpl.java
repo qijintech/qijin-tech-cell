@@ -21,7 +21,7 @@ public class CellCommentHelperImpl implements CellCommentHelper {
     public Integer countComment(Long feedItemId, Long commentId) {
         FeedCommentExample example = new FeedCommentExample();
         FeedCommentExample.Criteria criteria = example.createCriteria()
-                .andFeedItemIdEqualTo(feedItemId);
+                .andFeedIdEqualTo(feedItemId);
         if (NumberUtil.gtZero(commentId)) {
             criteria.andToCommentIdEqualTo(commentId);
         }
@@ -34,7 +34,7 @@ public class CellCommentHelperImpl implements CellCommentHelper {
         FeedCommentExample example = new FeedCommentExample();
         example.setOrderByClause(String.format("create_time desc limit %d, %d", (pageNo - 1) * pageSize, pageSize));
         FeedCommentExample.Criteria criteria = example.createCriteria()
-                .andFeedItemIdEqualTo(feedItemId);
+                .andFeedIdEqualTo(feedItemId);
         if (NumberUtil.gtZero(commentId)) {
             criteria.andToCommentIdEqualTo(commentId);
         }

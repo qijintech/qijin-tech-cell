@@ -8,7 +8,7 @@ public class FeedComment {
 
     private Channel channel;
 
-    private Long feedItemId;
+    private Long feedId;
 
     private Long userId;
 
@@ -40,12 +40,12 @@ public class FeedComment {
         this.channel = channel;
     }
 
-    public Long getFeedItemId() {
-        return feedItemId;
+    public Long getFeedId() {
+        return feedId;
     }
 
-    public void setFeedItemId(Long feedItemId) {
-        this.feedItemId = feedItemId;
+    public void setFeedId(Long feedId) {
+        this.feedId = feedId;
     }
 
     public Long getUserId() {

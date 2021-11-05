@@ -3,14 +3,14 @@ package tech.qijin.cell.feed.db.model;
 import java.util.Date;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class FeedByGroup {
+public class FeedLike {
     private Long id;
 
     private Channel channel;
 
-    private Long groupId;
-
     private Long feedId;
+
+    private Long userId;
 
     private Boolean valid;
 
@@ -34,20 +34,20 @@ public class FeedByGroup {
         this.channel = channel;
     }
 
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
-    }
-
     public Long getFeedId() {
         return feedId;
     }
 
     public void setFeedId(Long feedId) {
         this.feedId = feedId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Boolean getValid() {

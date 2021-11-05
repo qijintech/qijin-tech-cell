@@ -1,18 +1,21 @@
 package tech.qijin.cell.feed.db.model;
 
 import java.util.Date;
+import tech.qijin.cell.feed.base.FeedType;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class FeedItemLike {
+public class Feed {
     private Long id;
 
     private Channel channel;
 
-    private Long feedItemId;
-
     private Long userId;
 
-    private Boolean valid;
+    private String text;
+
+    private FeedType type;
+
+    private Integer topicId;
 
     private Date updateTime;
 
@@ -34,14 +37,6 @@ public class FeedItemLike {
         this.channel = channel;
     }
 
-    public Long getFeedItemId() {
-        return feedItemId;
-    }
-
-    public void setFeedItemId(Long feedItemId) {
-        this.feedItemId = feedItemId;
-    }
-
     public Long getUserId() {
         return userId;
     }
@@ -50,12 +45,28 @@ public class FeedItemLike {
         this.userId = userId;
     }
 
-    public Boolean getValid() {
-        return valid;
+    public String getText() {
+        return text;
     }
 
-    public void setValid(Boolean valid) {
-        this.valid = valid;
+    public void setText(String text) {
+        this.text = text == null ? null : text.trim();
+    }
+
+    public FeedType getType() {
+        return type;
+    }
+
+    public void setType(FeedType type) {
+        this.type = type;
+    }
+
+    public Integer getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
     }
 
     public Date getUpdateTime() {

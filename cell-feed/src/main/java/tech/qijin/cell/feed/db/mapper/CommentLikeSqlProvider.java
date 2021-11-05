@@ -3,37 +3,37 @@ package tech.qijin.cell.feed.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.cell.feed.db.model.FeedItemLike;
-import tech.qijin.cell.feed.db.model.FeedItemLikeExample.Criteria;
-import tech.qijin.cell.feed.db.model.FeedItemLikeExample.Criterion;
-import tech.qijin.cell.feed.db.model.FeedItemLikeExample;
+import tech.qijin.cell.feed.db.model.CommentLike;
+import tech.qijin.cell.feed.db.model.CommentLikeExample.Criteria;
+import tech.qijin.cell.feed.db.model.CommentLikeExample.Criterion;
+import tech.qijin.cell.feed.db.model.CommentLikeExample;
 
-public class FeedItemLikeSqlProvider {
+public class CommentLikeSqlProvider {
 
-    public String countByExample(FeedItemLikeExample example) {
+    public String countByExample(CommentLikeExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("feed_item_like");
+        sql.SELECT("count(*)").FROM("comment_like");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(FeedItemLikeExample example) {
+    public String deleteByExample(CommentLikeExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("feed_item_like");
+        sql.DELETE_FROM("comment_like");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(FeedItemLike record) {
+    public String insertSelective(CommentLike record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("feed_item_like");
+        sql.INSERT_INTO("comment_like");
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.VALUES("feed_item_id", "#{feedItemId,jdbcType=BIGINT}");
+        if (record.getCommentId() != null) {
+            sql.VALUES("comment_id", "#{commentId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
@@ -55,7 +55,7 @@ public class FeedItemLikeSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(FeedItemLikeExample example) {
+    public String selectByExample(CommentLikeExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -63,12 +63,12 @@ public class FeedItemLikeSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("feed_item_id");
+        sql.SELECT("comment_id");
         sql.SELECT("user_id");
         sql.SELECT("valid");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
-        sql.FROM("feed_item_like");
+        sql.FROM("comment_like");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -79,11 +79,11 @@ public class FeedItemLikeSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        FeedItemLike record = (FeedItemLike) parameter.get("record");
-        FeedItemLikeExample example = (FeedItemLikeExample) parameter.get("example");
+        CommentLike record = (CommentLike) parameter.get("record");
+        CommentLikeExample example = (CommentLikeExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("feed_item_like");
+        sql.UPDATE("comment_like");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -93,8 +93,8 @@ public class FeedItemLikeSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
+        if (record.getCommentId() != null) {
+            sql.SET("comment_id = #{record.commentId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
@@ -119,31 +119,31 @@ public class FeedItemLikeSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("feed_item_like");
+        sql.UPDATE("comment_like");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
+        sql.SET("comment_id = #{record.commentId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
-        FeedItemLikeExample example = (FeedItemLikeExample) parameter.get("example");
+        CommentLikeExample example = (CommentLikeExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(FeedItemLike record) {
+    public String updateByPrimaryKeySelective(CommentLike record) {
         SQL sql = new SQL();
-        sql.UPDATE("feed_item_like");
+        sql.UPDATE("comment_like");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{feedItemId,jdbcType=BIGINT}");
+        if (record.getCommentId() != null) {
+            sql.SET("comment_id = #{commentId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
@@ -167,7 +167,7 @@ public class FeedItemLikeSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, FeedItemLikeExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, CommentLikeExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

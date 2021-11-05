@@ -3,57 +3,49 @@ package tech.qijin.cell.feed.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.cell.feed.db.model.FeedComment;
-import tech.qijin.cell.feed.db.model.FeedCommentExample.Criteria;
-import tech.qijin.cell.feed.db.model.FeedCommentExample.Criterion;
-import tech.qijin.cell.feed.db.model.FeedCommentExample;
+import tech.qijin.cell.feed.db.model.Feed;
+import tech.qijin.cell.feed.db.model.FeedExample.Criteria;
+import tech.qijin.cell.feed.db.model.FeedExample.Criterion;
+import tech.qijin.cell.feed.db.model.FeedExample;
 
-public class FeedCommentSqlProvider {
+public class FeedSqlProvider {
 
-    public String countByExample(FeedCommentExample example) {
+    public String countByExample(FeedExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("feed_comment");
+        sql.SELECT("count(*)").FROM("feed");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(FeedCommentExample example) {
+    public String deleteByExample(FeedExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("feed_comment");
+        sql.DELETE_FROM("feed");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(FeedComment record) {
+    public String insertSelective(Feed record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("feed_comment");
+        sql.INSERT_INTO("feed");
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getFeedId() != null) {
-            sql.VALUES("feed_id", "#{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
             sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getToCommentId() != null) {
-            sql.VALUES("to_comment_id", "#{toCommentId,jdbcType=BIGINT}");
+        if (record.getText() != null) {
+            sql.VALUES("text", "#{text,jdbcType=VARCHAR}");
         }
         
-        if (record.getContentText() != null) {
-            sql.VALUES("content_text", "#{contentText,jdbcType=VARCHAR}");
+        if (record.getType() != null) {
+            sql.VALUES("type", "#{type,jdbcType=VARCHAR}");
         }
         
-        if (record.getContentImage() != null) {
-            sql.VALUES("content_image", "#{contentImage,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getValid() != null) {
-            sql.VALUES("valid", "#{valid,jdbcType=TINYINT}");
+        if (record.getTopicId() != null) {
+            sql.VALUES("topic_id", "#{topicId,jdbcType=INTEGER}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -67,7 +59,7 @@ public class FeedCommentSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(FeedCommentExample example) {
+    public String selectByExample(FeedExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -75,15 +67,13 @@ public class FeedCommentSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("feed_id");
         sql.SELECT("user_id");
-        sql.SELECT("to_comment_id");
-        sql.SELECT("content_text");
-        sql.SELECT("content_image");
-        sql.SELECT("valid");
+        sql.SELECT("text");
+        sql.SELECT("type");
+        sql.SELECT("topic_id");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
-        sql.FROM("feed_comment");
+        sql.FROM("feed");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -94,11 +84,11 @@ public class FeedCommentSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        FeedComment record = (FeedComment) parameter.get("record");
-        FeedCommentExample example = (FeedCommentExample) parameter.get("example");
+        Feed record = (Feed) parameter.get("record");
+        FeedExample example = (FeedExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("feed_comment");
+        sql.UPDATE("feed");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -108,28 +98,20 @@ public class FeedCommentSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getFeedId() != null) {
-            sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
-        }
-        
         if (record.getUserId() != null) {
             sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         }
         
-        if (record.getToCommentId() != null) {
-            sql.SET("to_comment_id = #{record.toCommentId,jdbcType=BIGINT}");
+        if (record.getText() != null) {
+            sql.SET("text = #{record.text,jdbcType=VARCHAR}");
         }
         
-        if (record.getContentText() != null) {
-            sql.SET("content_text = #{record.contentText,jdbcType=VARCHAR}");
+        if (record.getType() != null) {
+            sql.SET("type = #{record.type,jdbcType=VARCHAR}");
         }
         
-        if (record.getContentImage() != null) {
-            sql.SET("content_image = #{record.contentImage,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getValid() != null) {
-            sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
+        if (record.getTopicId() != null) {
+            sql.SET("topic_id = #{record.topicId,jdbcType=INTEGER}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -146,54 +128,44 @@ public class FeedCommentSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("feed_comment");
+        sql.UPDATE("feed");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
-        sql.SET("to_comment_id = #{record.toCommentId,jdbcType=BIGINT}");
-        sql.SET("content_text = #{record.contentText,jdbcType=VARCHAR}");
-        sql.SET("content_image = #{record.contentImage,jdbcType=VARCHAR}");
-        sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
+        sql.SET("text = #{record.text,jdbcType=VARCHAR}");
+        sql.SET("type = #{record.type,jdbcType=VARCHAR}");
+        sql.SET("topic_id = #{record.topicId,jdbcType=INTEGER}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
-        FeedCommentExample example = (FeedCommentExample) parameter.get("example");
+        FeedExample example = (FeedExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(FeedComment record) {
+    public String updateByPrimaryKeySelective(Feed record) {
         SQL sql = new SQL();
-        sql.UPDATE("feed_comment");
+        sql.UPDATE("feed");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getFeedId() != null) {
-            sql.SET("feed_id = #{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
             sql.SET("user_id = #{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getToCommentId() != null) {
-            sql.SET("to_comment_id = #{toCommentId,jdbcType=BIGINT}");
+        if (record.getText() != null) {
+            sql.SET("text = #{text,jdbcType=VARCHAR}");
         }
         
-        if (record.getContentText() != null) {
-            sql.SET("content_text = #{contentText,jdbcType=VARCHAR}");
+        if (record.getType() != null) {
+            sql.SET("type = #{type,jdbcType=VARCHAR}");
         }
         
-        if (record.getContentImage() != null) {
-            sql.SET("content_image = #{contentImage,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getValid() != null) {
-            sql.SET("valid = #{valid,jdbcType=TINYINT}");
+        if (record.getTopicId() != null) {
+            sql.SET("topic_id = #{topicId,jdbcType=INTEGER}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -209,7 +181,7 @@ public class FeedCommentSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, FeedCommentExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, FeedExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

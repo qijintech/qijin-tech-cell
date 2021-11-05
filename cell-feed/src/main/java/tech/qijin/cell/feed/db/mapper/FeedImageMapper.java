@@ -31,10 +31,10 @@ public interface FeedImageMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into feed_image (channel, feed_item_id, ",
+        "insert into feed_image (channel, feed_id, ",
         "url, valid, update_time, ",
         "create_time)",
-        "values (#{channel,jdbcType=VARCHAR}, #{feedItemId,jdbcType=BIGINT}, ",
+        "values (#{channel,jdbcType=VARCHAR}, #{feedId,jdbcType=BIGINT}, ",
         "#{url,jdbcType=VARCHAR}, #{valid,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
     })
@@ -49,7 +49,7 @@ public interface FeedImageMapper {
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.BIGINT),
+        @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -59,14 +59,14 @@ public interface FeedImageMapper {
 
     @Select({
         "select",
-        "id, channel, feed_item_id, url, valid, update_time, create_time",
+        "id, channel, feed_id, url, valid, update_time, create_time",
         "from feed_image",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="feed_item_id", property="feedItemId", jdbcType=JdbcType.BIGINT),
+        @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -86,7 +86,7 @@ public interface FeedImageMapper {
     @Update({
         "update feed_image",
         "set channel = #{channel,jdbcType=VARCHAR},",
-          "feed_item_id = #{feedItemId,jdbcType=BIGINT},",
+          "feed_id = #{feedId,jdbcType=BIGINT},",
           "url = #{url,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",

@@ -32,8 +32,8 @@ public class FeedImageSqlProvider {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.VALUES("feed_item_id", "#{feedItemId,jdbcType=BIGINT}");
+        if (record.getFeedId() != null) {
+            sql.VALUES("feed_id", "#{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getUrl() != null) {
@@ -63,7 +63,7 @@ public class FeedImageSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("feed_item_id");
+        sql.SELECT("feed_id");
         sql.SELECT("url");
         sql.SELECT("valid");
         sql.SELECT("update_time");
@@ -93,8 +93,8 @@ public class FeedImageSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
+        if (record.getFeedId() != null) {
+            sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         }
         
         if (record.getUrl() != null) {
@@ -123,7 +123,7 @@ public class FeedImageSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
+        sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         sql.SET("url = #{record.url,jdbcType=VARCHAR}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -142,8 +142,8 @@ public class FeedImageSqlProvider {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{feedItemId,jdbcType=BIGINT}");
+        if (record.getFeedId() != null) {
+            sql.SET("feed_id = #{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getUrl() != null) {

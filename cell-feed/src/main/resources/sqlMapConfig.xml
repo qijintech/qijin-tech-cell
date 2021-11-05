@@ -10,6 +10,8 @@
                      javaType="tech.qijin.util4j.trace.pojo.EnvEnum" />
         <typeHandler handler="tech.qijin.util4j.mybatis.handler.EnumValueTypeHandler"
                      javaType="tech.qijin.util4j.trace.pojo.Channel" />
+        <typeHandler handler="tech.qijin.util4j.mybatis.handler.EnumValueTypeHandler"
+                     javaType="tech.qijin.cell.feed.base.FeedType" />
     </typeHandlers>
     <plugins>
         <!--自动插入env和更新updated_at-->

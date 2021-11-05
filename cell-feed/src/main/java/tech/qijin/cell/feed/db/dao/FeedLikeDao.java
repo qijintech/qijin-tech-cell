@@ -1,8 +1,8 @@
 package tech.qijin.cell.feed.db.dao;
 
-import tech.qijin.cell.feed.db.mapper.FeedItemMapper;
-import tech.qijin.cell.feed.db.mapper.FeedItemSqlProvider;
-import tech.qijin.cell.feed.db.model.FeedItem;
+import tech.qijin.cell.feed.db.mapper.FeedLikeMapper;
+import tech.qijin.cell.feed.db.mapper.FeedLikeSqlProvider;
+import tech.qijin.cell.feed.db.model.FeedLike;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.InsertProvider;
 import com.google.common.collect.Lists;
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
  * @author: SYSTEM
  **/
 
-public interface FeedItemDao extends FeedItemMapper {
+public interface FeedLikeDao extends FeedLikeMapper {
 
 	@InsertProvider(type = SqlProvider.class, method = "batchInsert")
-	int batchInsert(@Param("records") List<FeedItem> records);
+	int batchInsert(@Param("records") List<FeedLike> records);
 
 	class SqlProvider {
 		private static final String VALUES = "VALUES";
-		FeedItemSqlProvider provider = new FeedItemSqlProvider();
+		FeedLikeSqlProvider provider = new FeedLikeSqlProvider();
 
 		public String batchInsert(Map<String, Object> param) {
-			List<FeedItem> records = (List<FeedItem>) param.get("records");
+			List<FeedLike> records = (List<FeedLike>) param.get("records");
 			return genSql(records);
 		}
 
-		private String genSql(List<FeedItem> records) {
+		private String genSql(List<FeedLike> records) {
 			List<String> sqls = records.stream()
 					.map(record -> provider.insertSelective(record))
 					.collect(Collectors.toList());

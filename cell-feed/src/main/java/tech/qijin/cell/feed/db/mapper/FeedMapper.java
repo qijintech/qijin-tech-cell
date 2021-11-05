@@ -14,24 +14,24 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-import tech.qijin.cell.feed.db.model.FeedItem;
-import tech.qijin.cell.feed.db.model.FeedItemExample;
+import tech.qijin.cell.feed.db.model.Feed;
+import tech.qijin.cell.feed.db.model.FeedExample;
 
-public interface FeedItemMapper {
-    @SelectProvider(type=FeedItemSqlProvider.class, method="countByExample")
-    long countByExample(FeedItemExample example);
+public interface FeedMapper {
+    @SelectProvider(type=FeedSqlProvider.class, method="countByExample")
+    long countByExample(FeedExample example);
 
-    @DeleteProvider(type=FeedItemSqlProvider.class, method="deleteByExample")
-    int deleteByExample(FeedItemExample example);
+    @DeleteProvider(type=FeedSqlProvider.class, method="deleteByExample")
+    int deleteByExample(FeedExample example);
 
     @Delete({
-        "delete from feed_item",
+        "delete from feed",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into feed_item (channel, user_id, ",
+        "insert into feed (channel, user_id, ",
         "text, type, topic_id, ",
         "update_time, create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
@@ -39,13 +39,13 @@ public interface FeedItemMapper {
         "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
-    int insert(FeedItem record);
+    int insert(Feed record);
 
-    @InsertProvider(type=FeedItemSqlProvider.class, method="insertSelective")
+    @InsertProvider(type=FeedSqlProvider.class, method="insertSelective")
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
-    int insertSelective(FeedItem record);
+    int insertSelective(Feed record);
 
-    @SelectProvider(type=FeedItemSqlProvider.class, method="selectByExample")
+    @SelectProvider(type=FeedSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
@@ -56,12 +56,12 @@ public interface FeedItemMapper {
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<FeedItem> selectByExample(FeedItemExample example);
+    List<Feed> selectByExample(FeedExample example);
 
     @Select({
         "select",
         "id, channel, user_id, text, type, topic_id, update_time, create_time",
-        "from feed_item",
+        "from feed",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
@@ -74,19 +74,19 @@ public interface FeedItemMapper {
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    FeedItem selectByPrimaryKey(Long id);
+    Feed selectByPrimaryKey(Long id);
 
-    @UpdateProvider(type=FeedItemSqlProvider.class, method="updateByExampleSelective")
-    int updateByExampleSelective(@Param("record") FeedItem record, @Param("example") FeedItemExample example);
+    @UpdateProvider(type=FeedSqlProvider.class, method="updateByExampleSelective")
+    int updateByExampleSelective(@Param("record") Feed record, @Param("example") FeedExample example);
 
-    @UpdateProvider(type=FeedItemSqlProvider.class, method="updateByExample")
-    int updateByExample(@Param("record") FeedItem record, @Param("example") FeedItemExample example);
+    @UpdateProvider(type=FeedSqlProvider.class, method="updateByExample")
+    int updateByExample(@Param("record") Feed record, @Param("example") FeedExample example);
 
-    @UpdateProvider(type=FeedItemSqlProvider.class, method="updateByPrimaryKeySelective")
-    int updateByPrimaryKeySelective(FeedItem record);
+    @UpdateProvider(type=FeedSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(Feed record);
 
     @Update({
-        "update feed_item",
+        "update feed",
         "set channel = #{channel,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "text = #{text,jdbcType=VARCHAR},",
@@ -96,5 +96,5 @@ public interface FeedItemMapper {
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    int updateByPrimaryKey(FeedItem record);
+    int updateByPrimaryKey(Feed record);
 }

@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.List;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class FeedItemLikeExample {
+public class CommentLikeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public FeedItemLikeExample() {
+    public CommentLikeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -236,63 +236,63 @@ public class FeedItemLikeExample {
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdIsNull() {
-            addCriterion("feed_item_id is null");
+        public Criteria andCommentIdIsNull() {
+            addCriterion("comment_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdIsNotNull() {
-            addCriterion("feed_item_id is not null");
+        public Criteria andCommentIdIsNotNull() {
+            addCriterion("comment_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdEqualTo(Long value) {
-            addCriterion("feed_item_id =", value, "feedItemId");
+        public Criteria andCommentIdEqualTo(Long value) {
+            addCriterion("comment_id =", value, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdNotEqualTo(Long value) {
-            addCriterion("feed_item_id <>", value, "feedItemId");
+        public Criteria andCommentIdNotEqualTo(Long value) {
+            addCriterion("comment_id <>", value, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdGreaterThan(Long value) {
-            addCriterion("feed_item_id >", value, "feedItemId");
+        public Criteria andCommentIdGreaterThan(Long value) {
+            addCriterion("comment_id >", value, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("feed_item_id >=", value, "feedItemId");
+        public Criteria andCommentIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("comment_id >=", value, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdLessThan(Long value) {
-            addCriterion("feed_item_id <", value, "feedItemId");
+        public Criteria andCommentIdLessThan(Long value) {
+            addCriterion("comment_id <", value, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdLessThanOrEqualTo(Long value) {
-            addCriterion("feed_item_id <=", value, "feedItemId");
+        public Criteria andCommentIdLessThanOrEqualTo(Long value) {
+            addCriterion("comment_id <=", value, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdIn(List<Long> values) {
-            addCriterion("feed_item_id in", values, "feedItemId");
+        public Criteria andCommentIdIn(List<Long> values) {
+            addCriterion("comment_id in", values, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdNotIn(List<Long> values) {
-            addCriterion("feed_item_id not in", values, "feedItemId");
+        public Criteria andCommentIdNotIn(List<Long> values) {
+            addCriterion("comment_id not in", values, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdBetween(Long value1, Long value2) {
-            addCriterion("feed_item_id between", value1, value2, "feedItemId");
+        public Criteria andCommentIdBetween(Long value1, Long value2) {
+            addCriterion("comment_id between", value1, value2, "commentId");
             return (Criteria) this;
         }
 
-        public Criteria andFeedItemIdNotBetween(Long value1, Long value2) {
-            addCriterion("feed_item_id not between", value1, value2, "feedItemId");
+        public Criteria andCommentIdNotBetween(Long value1, Long value2) {
+            addCriterion("comment_id not between", value1, value2, "commentId");
             return (Criteria) this;
         }
 

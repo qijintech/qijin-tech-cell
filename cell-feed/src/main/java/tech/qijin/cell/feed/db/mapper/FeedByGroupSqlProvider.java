@@ -36,8 +36,8 @@ public class FeedByGroupSqlProvider {
             sql.VALUES("group_id", "#{groupId,jdbcType=BIGINT}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.VALUES("feed_item_id", "#{feedItemId,jdbcType=BIGINT}");
+        if (record.getFeedId() != null) {
+            sql.VALUES("feed_id", "#{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getValid() != null) {
@@ -64,7 +64,7 @@ public class FeedByGroupSqlProvider {
         }
         sql.SELECT("channel");
         sql.SELECT("group_id");
-        sql.SELECT("feed_item_id");
+        sql.SELECT("feed_id");
         sql.SELECT("valid");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
@@ -97,8 +97,8 @@ public class FeedByGroupSqlProvider {
             sql.SET("group_id = #{record.groupId,jdbcType=BIGINT}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
+        if (record.getFeedId() != null) {
+            sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         }
         
         if (record.getValid() != null) {
@@ -124,7 +124,7 @@ public class FeedByGroupSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("group_id = #{record.groupId,jdbcType=BIGINT}");
-        sql.SET("feed_item_id = #{record.feedItemId,jdbcType=BIGINT}");
+        sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -146,8 +146,8 @@ public class FeedByGroupSqlProvider {
             sql.SET("group_id = #{groupId,jdbcType=BIGINT}");
         }
         
-        if (record.getFeedItemId() != null) {
-            sql.SET("feed_item_id = #{feedItemId,jdbcType=BIGINT}");
+        if (record.getFeedId() != null) {
+            sql.SET("feed_id = #{feedId,jdbcType=BIGINT}");
         }
         
         if (record.getValid() != null) {

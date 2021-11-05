@@ -1,8 +1,8 @@
 package tech.qijin.cell.feed.service;
 
-import tech.qijin.cell.feed.base.FeedItemBo;
+import tech.qijin.cell.feed.base.FeedBo;
+import tech.qijin.cell.feed.db.model.Feed;
 import tech.qijin.cell.feed.db.model.FeedImage;
-import tech.qijin.cell.feed.db.model.FeedItem;
 import tech.qijin.cell.feed.db.model.FeedTopic;
 import tech.qijin.util4j.lang.vo.PageVo;
 
@@ -16,10 +16,10 @@ public interface CellFeedService {
     /**
      * 发布feed
      *
-     * @param feedItemBo
+     * @param feedBo
      * @return
      */
-    boolean createFeedByGroup(FeedItemBo feedItemBo);
+    boolean createFeedByGroup(FeedBo feedBo);
 
     /**
      * 分页返回feed，根据group区分
@@ -27,8 +27,8 @@ public interface CellFeedService {
      * @param pageVo
      * @return
      */
-    List<FeedItem> pageFeedByGroup(Long groupId, PageVo pageVo);
-    List<FeedItem> pageFeedByGroups(List<Long> groupIds, PageVo pageVo);
+    List<Feed> pageFeedByGroup(Long groupId, PageVo pageVo);
+    List<Feed> pageFeedByGroups(List<Long> groupIds, PageVo pageVo);
 
     /**
      * 分页获取单个用户发布的feed
@@ -36,19 +36,20 @@ public interface CellFeedService {
      * @param pageVo
      * @return
      */
-    List<FeedItem> pageFeedByUser(Long userId, PageVo pageVo);
+    List<Feed> pageFeedByUser(Long userId, PageVo pageVo);
 
-    FeedItem getFeedById(Long feedItemId);
+    Feed getFeedById(Long feedId);
 
     FeedTopic getTopicById(Integer topicId);
 
     /**
      * 删除指定feed
-     * @param feedItemId
+     * @param feedId
      * @param userId
      * @return
      */
-    boolean deleteFeed(Long feedItemId, Long userId);
+    boolean deleteFeed(Long feedId, Long userId);
 
-    Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedItemIds);
+    Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds);
+
 }

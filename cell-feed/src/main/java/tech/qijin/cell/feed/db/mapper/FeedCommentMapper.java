@@ -31,12 +31,12 @@ public interface FeedCommentMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into feed_comment (channel, feed_item_Id, ",
+        "insert into feed_comment (channel, feed_id, ",
         "user_id, to_comment_id, ",
         "content_text, content_image, ",
         "valid, update_time, ",
         "create_time)",
-        "values (#{channel,jdbcType=VARCHAR}, #{feedItemId,jdbcType=BIGINT}, ",
+        "values (#{channel,jdbcType=VARCHAR}, #{feedId,jdbcType=BIGINT}, ",
         "#{userId,jdbcType=BIGINT}, #{toCommentId,jdbcType=BIGINT}, ",
         "#{contentText,jdbcType=VARCHAR}, #{contentImage,jdbcType=VARCHAR}, ",
         "#{valid,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
@@ -53,7 +53,7 @@ public interface FeedCommentMapper {
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="feed_item_Id", property="feedItemId", jdbcType=JdbcType.BIGINT),
+        @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="to_comment_id", property="toCommentId", jdbcType=JdbcType.BIGINT),
         @Result(column="content_text", property="contentText", jdbcType=JdbcType.VARCHAR),
@@ -66,15 +66,15 @@ public interface FeedCommentMapper {
 
     @Select({
         "select",
-        "id, channel, feed_item_Id, user_id, to_comment_id, content_text, content_image, ",
-        "valid, update_time, create_time",
+        "id, channel, feed_id, user_id, to_comment_id, content_text, content_image, valid, ",
+        "update_time, create_time",
         "from feed_comment",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
-        @Result(column="feed_item_Id", property="feedItemId", jdbcType=JdbcType.BIGINT),
+        @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="to_comment_id", property="toCommentId", jdbcType=JdbcType.BIGINT),
         @Result(column="content_text", property="contentText", jdbcType=JdbcType.VARCHAR),
@@ -97,7 +97,7 @@ public interface FeedCommentMapper {
     @Update({
         "update feed_comment",
         "set channel = #{channel,jdbcType=VARCHAR},",
-          "feed_item_Id = #{feedItemId,jdbcType=BIGINT},",
+          "feed_id = #{feedId,jdbcType=BIGINT},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "to_comment_id = #{toCommentId,jdbcType=BIGINT},",
           "content_text = #{contentText,jdbcType=VARCHAR},",
