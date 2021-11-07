@@ -4,13 +4,14 @@ import tech.qijin.cell.feed.db.model.CommentLike;
 import tech.qijin.cell.feed.db.model.FeedLike;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CellLikeHelper {
-    FeedLike getFeedLike(Long userId, Long feedItemId);
+    FeedLike getFeedLike(Long userId, Long feedId);
 
     CommentLike getCommentLike(Long userId, Long commentId);
 
-    boolean addFeedLike(Long userId, Long feedItemId);
+    boolean addFeedLike(Long userId, Long feedId);
 
     boolean addCommentLike(Long userId, Long commentId);
 
@@ -22,11 +23,19 @@ public interface CellLikeHelper {
 
     boolean delCommentLikeById(Long id);
 
-    List<FeedLike> pageFeedLike(Long feedItemId, Integer pageNo, Integer pageSize);
+    List<FeedLike> pageFeedLike(Long feedId, Integer pageNo, Integer pageSize);
 
     List<CommentLike> pageCommentLike(Long commentId, Integer pageNo, Integer pageSize);
 
-    Integer countFeedLike(Long feedItemId);
+    Integer countFeedLike(Long feedId);
 
     Integer countCommentLike(Long commentId);
+
+    List<FeedLike> listFeedLikeByFeedIds(Long userId, List<Long> feedIds);
+
+    List<CommentLike> listCommentLikeByFeedIds(Long userId, List<Long> commentIds);
+
+    Map<Long, FeedLike> mapFeedLike(Long userId, List<Long> feedIds);
+
+    Map<Long, CommentLike> mapCommentLike(Long userId, List<Long> commentIds);
 }

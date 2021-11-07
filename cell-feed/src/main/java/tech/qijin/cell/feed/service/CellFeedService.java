@@ -1,6 +1,6 @@
 package tech.qijin.cell.feed.service;
 
-import tech.qijin.cell.feed.base.FeedBo;
+import tech.qijin.cell.feed.base.CellFeedBo;
 import tech.qijin.cell.feed.db.model.Feed;
 import tech.qijin.cell.feed.db.model.FeedImage;
 import tech.qijin.cell.feed.db.model.FeedTopic;
@@ -16,10 +16,10 @@ public interface CellFeedService {
     /**
      * 发布feed
      *
-     * @param feedBo
+     * @param cellFeedBo
      * @return
      */
-    boolean createFeedByGroup(FeedBo feedBo);
+    boolean createFeedByGroup(CellFeedBo cellFeedBo);
 
     /**
      * 分页返回feed，根据group区分
@@ -50,6 +50,7 @@ public interface CellFeedService {
      */
     boolean deleteFeed(Long feedId, Long userId);
 
+    List<FeedImage> getFeedImages(Long feedId);
     Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds);
 
 }

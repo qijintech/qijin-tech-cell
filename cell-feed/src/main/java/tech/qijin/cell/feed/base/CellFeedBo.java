@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class FeedBo {
+public class CellFeedBo {
     private Feed feed;
     private List<String> images;
     private List<Long> groupIds;
