@@ -44,6 +44,10 @@ public class FeedCommentSqlProvider {
             sql.VALUES("to_comment_id", "#{toCommentId,jdbcType=BIGINT}");
         }
         
+        if (record.getToSubCommentId() != null) {
+            sql.VALUES("to_sub_comment_id", "#{toSubCommentId,jdbcType=BIGINT}");
+        }
+        
         if (record.getContentText() != null) {
             sql.VALUES("content_text", "#{contentText,jdbcType=VARCHAR}");
         }
@@ -78,6 +82,7 @@ public class FeedCommentSqlProvider {
         sql.SELECT("feed_id");
         sql.SELECT("user_id");
         sql.SELECT("to_comment_id");
+        sql.SELECT("to_sub_comment_id");
         sql.SELECT("content_text");
         sql.SELECT("content_image");
         sql.SELECT("valid");
@@ -120,6 +125,10 @@ public class FeedCommentSqlProvider {
             sql.SET("to_comment_id = #{record.toCommentId,jdbcType=BIGINT}");
         }
         
+        if (record.getToSubCommentId() != null) {
+            sql.SET("to_sub_comment_id = #{record.toSubCommentId,jdbcType=BIGINT}");
+        }
+        
         if (record.getContentText() != null) {
             sql.SET("content_text = #{record.contentText,jdbcType=VARCHAR}");
         }
@@ -153,6 +162,7 @@ public class FeedCommentSqlProvider {
         sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("to_comment_id = #{record.toCommentId,jdbcType=BIGINT}");
+        sql.SET("to_sub_comment_id = #{record.toSubCommentId,jdbcType=BIGINT}");
         sql.SET("content_text = #{record.contentText,jdbcType=VARCHAR}");
         sql.SET("content_image = #{record.contentImage,jdbcType=VARCHAR}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
@@ -182,6 +192,10 @@ public class FeedCommentSqlProvider {
         
         if (record.getToCommentId() != null) {
             sql.SET("to_comment_id = #{toCommentId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getToSubCommentId() != null) {
+            sql.SET("to_sub_comment_id = #{toSubCommentId,jdbcType=BIGINT}");
         }
         
         if (record.getContentText() != null) {

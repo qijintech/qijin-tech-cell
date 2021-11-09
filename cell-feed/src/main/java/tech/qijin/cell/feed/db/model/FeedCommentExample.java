@@ -416,6 +416,66 @@ public class FeedCommentExample {
             return (Criteria) this;
         }
 
+        public Criteria andToSubCommentIdIsNull() {
+            addCriterion("to_sub_comment_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdIsNotNull() {
+            addCriterion("to_sub_comment_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdEqualTo(Long value) {
+            addCriterion("to_sub_comment_id =", value, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdNotEqualTo(Long value) {
+            addCriterion("to_sub_comment_id <>", value, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdGreaterThan(Long value) {
+            addCriterion("to_sub_comment_id >", value, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("to_sub_comment_id >=", value, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdLessThan(Long value) {
+            addCriterion("to_sub_comment_id <", value, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdLessThanOrEqualTo(Long value) {
+            addCriterion("to_sub_comment_id <=", value, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdIn(List<Long> values) {
+            addCriterion("to_sub_comment_id in", values, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdNotIn(List<Long> values) {
+            addCriterion("to_sub_comment_id not in", values, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdBetween(Long value1, Long value2) {
+            addCriterion("to_sub_comment_id between", value1, value2, "toSubCommentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToSubCommentIdNotBetween(Long value1, Long value2) {
+            addCriterion("to_sub_comment_id not between", value1, value2, "toSubCommentId");
+            return (Criteria) this;
+        }
+
         public Criteria andContentTextIsNull() {
             addCriterion("content_text is null");
             return (Criteria) this;

@@ -14,6 +14,8 @@ public class FeedComment {
 
     private Long toCommentId;
 
+    private Long toSubCommentId;
+
     private String contentText;
 
     private String contentImage;
@@ -62,6 +64,14 @@ public class FeedComment {
 
     public void setToCommentId(Long toCommentId) {
         this.toCommentId = toCommentId;
+    }
+
+    public Long getToSubCommentId() {
+        return toSubCommentId;
+    }
+
+    public void setToSubCommentId(Long toSubCommentId) {
+        this.toSubCommentId = toSubCommentId;
     }
 
     public String getContentText() {

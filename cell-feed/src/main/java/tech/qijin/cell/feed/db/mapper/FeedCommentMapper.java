@@ -33,14 +33,14 @@ public interface FeedCommentMapper {
     @Insert({
         "insert into feed_comment (channel, feed_id, ",
         "user_id, to_comment_id, ",
-        "content_text, content_image, ",
-        "valid, update_time, ",
-        "create_time)",
+        "to_sub_comment_id, content_text, ",
+        "content_image, valid, ",
+        "update_time, create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{feedId,jdbcType=BIGINT}, ",
         "#{userId,jdbcType=BIGINT}, #{toCommentId,jdbcType=BIGINT}, ",
-        "#{contentText,jdbcType=VARCHAR}, #{contentImage,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{toSubCommentId,jdbcType=BIGINT}, #{contentText,jdbcType=VARCHAR}, ",
+        "#{contentImage,jdbcType=VARCHAR}, #{valid,jdbcType=TINYINT}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(FeedComment record);
@@ -56,6 +56,7 @@ public interface FeedCommentMapper {
         @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="to_comment_id", property="toCommentId", jdbcType=JdbcType.BIGINT),
+        @Result(column="to_sub_comment_id", property="toSubCommentId", jdbcType=JdbcType.BIGINT),
         @Result(column="content_text", property="contentText", jdbcType=JdbcType.VARCHAR),
         @Result(column="content_image", property="contentImage", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
@@ -66,8 +67,8 @@ public interface FeedCommentMapper {
 
     @Select({
         "select",
-        "id, channel, feed_id, user_id, to_comment_id, content_text, content_image, valid, ",
-        "update_time, create_time",
+        "id, channel, feed_id, user_id, to_comment_id, to_sub_comment_id, content_text, ",
+        "content_image, valid, update_time, create_time",
         "from feed_comment",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -77,6 +78,7 @@ public interface FeedCommentMapper {
         @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="to_comment_id", property="toCommentId", jdbcType=JdbcType.BIGINT),
+        @Result(column="to_sub_comment_id", property="toSubCommentId", jdbcType=JdbcType.BIGINT),
         @Result(column="content_text", property="contentText", jdbcType=JdbcType.VARCHAR),
         @Result(column="content_image", property="contentImage", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
@@ -100,6 +102,7 @@ public interface FeedCommentMapper {
           "feed_id = #{feedId,jdbcType=BIGINT},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "to_comment_id = #{toCommentId,jdbcType=BIGINT},",
+          "to_sub_comment_id = #{toSubCommentId,jdbcType=BIGINT},",
           "content_text = #{contentText,jdbcType=VARCHAR},",
           "content_image = #{contentImage,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=TINYINT},",
