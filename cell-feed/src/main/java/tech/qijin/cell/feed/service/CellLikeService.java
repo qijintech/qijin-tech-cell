@@ -14,15 +14,16 @@ public interface CellLikeService {
      * @param feedId
      * @param userId
      */
-    void doLikeFeed(Long feedId, Long userId);
-    void cancelLikeFeed(Long feedId, Long userId);
+    FeedLike doLikeFeed(Long feedId, Long userId);
+    FeedLike cancelLikeFeed(Long feedId, Long userId);
 
     /**
      * 点赞评论
      * @param userId
      * @param commentId
      */
-    void doLikeComment(Long userId, Long commentId);
+    CommentLike doLikeComment(Long userId, Long commentId);
+    CommentLike cancelLikeComment(Long userId, Long commentId);
 
     Integer countFeedLike(Long feedId);
 
@@ -37,4 +38,5 @@ public interface CellLikeService {
     boolean hasLikedComment(Long userId, Long commentId);
 
     Map<Long, Boolean> mapFeedLike(Long userId, List<Long> feedIds);
+    Map<Long, Boolean> mapCommentLike(Long userId, List<Long> commentIds);
 }

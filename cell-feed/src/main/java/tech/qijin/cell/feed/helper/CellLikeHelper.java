@@ -11,9 +11,9 @@ public interface CellLikeHelper {
 
     CommentLike getCommentLike(Long userId, Long commentId);
 
-    boolean addFeedLike(Long userId, Long feedId);
+    FeedLike addFeedLike(Long userId, Long feedId);
 
-    boolean addCommentLike(Long userId, Long commentId);
+    CommentLike addCommentLike(Long userId, Long commentId);
 
     boolean enableFeedLikeById(Long id);
 
@@ -33,7 +33,7 @@ public interface CellLikeHelper {
 
     List<FeedLike> listFeedLikeByFeedIds(Long userId, List<Long> feedIds);
 
-    List<CommentLike> listCommentLikeByFeedIds(Long userId, List<Long> commentIds);
+    List<CommentLike> listCommentLikeByCommentIds(Long userId, List<Long> commentIds);
 
     Map<Long, FeedLike> mapFeedLike(Long userId, List<Long> feedIds);
 

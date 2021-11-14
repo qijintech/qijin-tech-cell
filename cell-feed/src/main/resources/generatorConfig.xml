@@ -81,13 +81,6 @@
             <columnOverride column="valid" property="valid"
                             javaType="java.lang.Boolean"/>
         </table>
-        <table tableName="feed_comment_like">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
-            <columnOverride column="channel" property="channel"
-                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
-            <columnOverride column="valid" property="valid"
-                            javaType="java.lang.Boolean"/>
-        </table>
         <table tableName="feed_by_group">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"

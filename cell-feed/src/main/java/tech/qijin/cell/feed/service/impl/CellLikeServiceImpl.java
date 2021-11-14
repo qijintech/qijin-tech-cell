@@ -6,6 +6,7 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.qijin.cell.feed.db.model.CommentLike;
+import tech.qijin.cell.feed.db.model.Feed;
 import tech.qijin.cell.feed.db.model.FeedLike;
 import tech.qijin.cell.feed.helper.CellLikeHelper;
 import tech.qijin.cell.feed.service.CellLikeService;
@@ -25,43 +26,61 @@ public class CellLikeServiceImpl extends CommonService implements CellLikeServic
     private CellLikeHelper cellLikeHelper;
 
     @Override
-    public void doLikeFeed(Long feedId, Long userId) {
+    public FeedLike doLikeFeed(Long feedId, Long userId) {
         FeedLike feedLike = cellLikeHelper.getFeedLike(userId, feedId);
         if (feedLike == null) {
-            cellLikeHelper.addFeedLike(userId, feedId);
-            return;
+            return cellLikeHelper.addFeedLike(userId, feedId);
         }
         if (feedLike.getValid()) {
-            return;
+            return feedLike;
         }
+        feedLike.setValid(true);
         cellLikeHelper.enableFeedLikeById(feedLike.getId());
+        return feedLike;
     }
 
     @Log
     @Override
-    public void cancelLikeFeed(Long feedId, Long userId) {
+    public FeedLike cancelLikeFeed(Long feedId, Long userId) {
         FeedLike feedLike = cellLikeHelper.getFeedLike(userId, feedId);
         if (feedLike == null) {
             log.warn("[CellLikeService] feedLike not found");
-            return;
+            return null;
         }
         if (!feedLike.getValid()) {
-            return;
+            return feedLike;
         }
         cellLikeHelper.delFeedLikeById(feedLike.getId());
+        feedLike.setValid(false);
+        return feedLike;
     }
 
     @Override
-    public void doLikeComment(Long userId, Long commentId) {
+    public CommentLike doLikeComment(Long userId, Long commentId) {
         CommentLike commentLike = cellLikeHelper.getCommentLike(userId, commentId);
         if (commentLike == null) {
-            cellLikeHelper.addCommentLike(userId, commentId);
-            return;
+            return cellLikeHelper.addCommentLike(userId, commentId);
         }
         if (commentLike.getValid()) {
-            return;
+            return commentLike;
         }
         cellLikeHelper.enableCommentLikeById(commentLike.getId());
+        commentLike.setValid(true);
+        return commentLike;
+    }
+
+    @Override
+    public CommentLike cancelLikeComment(Long userId, Long commentId) {
+        CommentLike commentLike = cellLikeHelper.getCommentLike(userId, commentId);
+        if (commentLike == null) {
+            return null;
+        }
+        if (!commentLike.getValid()) {
+            return commentLike;
+        }
+        cellLikeHelper.delCommentLikeById(commentLike.getId());
+        commentLike.setValid(false);
+        return commentLike;
     }
 
     @Override
@@ -104,6 +123,15 @@ public class CellLikeServiceImpl extends CommonService implements CellLikeServic
         Map<Long, FeedLike> feedLikeMap = cellLikeHelper.mapFeedLike(userId, feedIds);
         if (MapUtils.isEmpty(feedLikeMap)) return Collections.emptyMap();
         return feedLikeMap.entrySet().stream()
+                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> isLike(entry.getValue())));
+    }
+
+    @Override
+    public Map<Long, Boolean> mapCommentLike(Long userId, List<Long> commentIds) {
+        if (CollectionUtils.isEmpty(commentIds)) return Collections.emptyMap();
+        Map<Long, CommentLike> commentLikeMap = cellLikeHelper.mapCommentLike(userId, commentIds);
+        if (MapUtils.isEmpty(commentLikeMap)) return Collections.emptyMap();
+        return commentLikeMap.entrySet().stream()
                 .collect(Collectors.toMap(entry -> entry.getKey(), entry -> isLike(entry.getValue())));
     }
 

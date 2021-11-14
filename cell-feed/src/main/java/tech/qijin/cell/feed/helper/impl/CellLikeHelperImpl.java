@@ -46,21 +46,25 @@ public class CellLikeHelperImpl extends CommonHelper implements CellLikeHelper {
     }
 
     @Override
-    public boolean addFeedLike(Long userId, Long feedId) {
+    public FeedLike addFeedLike(Long userId, Long feedId) {
         FeedLike record = new FeedLike();
         record.setFeedId(feedId);
         record.setUserId(userId);
         record.setValid(true);
-        return feedLikeDao.insertSelective(record) > 0;
+        if (feedLikeDao.insertSelective(record) > 0) {
+            return record;
+        }
+        return null;
     }
 
     @Override
-    public boolean addCommentLike(Long userId, Long commentId) {
+    public CommentLike addCommentLike(Long userId, Long commentId) {
         CommentLike record = new CommentLike();
         record.setCommentId(commentId);
         record.setUserId(userId);
         record.setValid(true);
-        return commentLikeDao.insertSelective(record) > 0;
+        commentLikeDao.insertSelective(record);
+        return record;
     }
 
     @Override
@@ -144,7 +148,7 @@ public class CellLikeHelperImpl extends CommonHelper implements CellLikeHelper {
     }
 
     @Override
-    public List<CommentLike> listCommentLikeByFeedIds(Long userId, List<Long> commentIds) {
+    public List<CommentLike> listCommentLikeByCommentIds(Long userId, List<Long> commentIds) {
         if (CollectionUtils.isEmpty(commentIds)) return Collections.emptyList();
         CommentLikeExample example = new CommentLikeExample();
         example.createCriteria()
@@ -161,7 +165,7 @@ public class CellLikeHelperImpl extends CommonHelper implements CellLikeHelper {
 
     @Override
     public Map<Long, CommentLike> mapCommentLike(Long userId, List<Long> commentIds) {
-        return listCommentLikeByFeedIds(userId, commentIds).stream()
+        return listCommentLikeByCommentIds(userId, commentIds).stream()
                 .collect(Collectors.toMap(CommentLike::getCommentId, Function.identity()));
     }
 }
