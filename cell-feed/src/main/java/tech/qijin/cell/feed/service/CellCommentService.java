@@ -30,7 +30,12 @@ public interface CellCommentService {
      * @param commentImage
      * @return
      */
-    boolean replyComment(Long userId, Long feedId, Long commentId, String commentText, String commentImage);
+    boolean replyComment(Long userId,
+                         Long feedId,
+                         Long commentId,
+                         Long subCommentId,
+                         String commentText,
+                         String commentImage);
     /**
      * 返回评论数量
      * @param feeId

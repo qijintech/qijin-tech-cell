@@ -34,7 +34,12 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
     }
 
     @Override
-    public boolean replyComment(Long userId, Long feedId, Long commentId, String commentText, String commentImage) {
+    public boolean replyComment(Long userId,
+                                Long feedId,
+                                Long commentId,
+                                Long subCommentId,
+                                String commentText,
+                                String commentImage) {
         MAssert.isTrue(NumberUtil.gtZero(commentId), ResEnum.INVALID_PARAM);
         FeedComment comment = new FeedComment();
         comment.setUserId(userId);
@@ -42,8 +47,9 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
         comment.setContentText(commentText);
         comment.setContentImage(commentImage);
         comment.setToCommentId(commentId);
+        comment.setToSubCommentId(subCommentId);
         comment.setValid(true);
-        return cellCommentHelper.insertComment(comment);
+        return cellCommentHelper.insertCommentReply(comment);
     }
 
     @Override
@@ -64,7 +70,7 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
 
     @Override
     public List<FeedComment> pageCommentReply(Long commentId, PageVo pageVo) {
-        pageVo = checkPage(pageVo, null);
+        pageVo = checkPage(pageVo, 5);
         return cellCommentHelper.pageCommentReply(commentId, pageVo.getPageNo(), pageVo.getPageSize());
     }
 

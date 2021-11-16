@@ -12,6 +12,7 @@ public interface CellCommentHelper {
      * @return
      */
     boolean insertComment(FeedComment comment);
+    boolean insertCommentReply(FeedComment comment);
 
     Integer countFeedComment(Long feedId);
     Integer countCommentReply(Long commentId);

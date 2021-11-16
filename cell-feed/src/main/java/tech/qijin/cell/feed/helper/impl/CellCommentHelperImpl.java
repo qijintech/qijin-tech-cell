@@ -32,6 +32,12 @@ public class CellCommentHelperImpl implements CellCommentHelper {
     }
 
     @Override
+    public boolean insertCommentReply(FeedComment comment) {
+        checkCommentReply(comment);
+        return feedCommentDao.insertSelective(comment) > 0;
+    }
+
+    @Override
     public Integer countFeedComment(Long feedId) {
         FeedCommentExample example = new FeedCommentExample();
         FeedCommentExample.Criteria criteria = example.createCriteria();
@@ -96,6 +102,13 @@ public class CellCommentHelperImpl implements CellCommentHelper {
         MAssert.isTrue(comment != null, ResEnum.INVALID_PARAM);
         MAssert.isTrue(NumberUtil.gtZero(comment.getUserId()), ResEnum.INVALID_PARAM);
         MAssert.isTrue(NumberUtil.gtZero(comment.getFeedId()), ResEnum.INVALID_PARAM);
+        MAssert.isTrue(StringUtils.isNotBlank(comment.getContentText())
+                || StringUtils.isNotBlank(comment.getContentImage()), ResEnum.INVALID_PARAM);
+
+    }
+    private void checkCommentReply(FeedComment comment) {
+        MAssert.isTrue(comment != null, ResEnum.INVALID_PARAM);
+        MAssert.isTrue(NumberUtil.gtZero(comment.getUserId()), ResEnum.INVALID_PARAM);
         MAssert.isTrue(StringUtils.isNotBlank(comment.getContentText())
                 || StringUtils.isNotBlank(comment.getContentImage()), ResEnum.INVALID_PARAM);
 
