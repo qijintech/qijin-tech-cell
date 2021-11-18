@@ -98,6 +98,11 @@ public class CellCommentHelperImpl implements CellCommentHelper {
                 .collect(Collectors.groupingBy(FeedComment::getToCommentId));
     }
 
+    @Override
+    public FeedComment getComment(Long id) {
+        return feedCommentDao.selectByPrimaryKey(id);
+    }
+
     private void checkComment(FeedComment comment) {
         MAssert.isTrue(comment != null, ResEnum.INVALID_PARAM);
         MAssert.isTrue(NumberUtil.gtZero(comment.getUserId()), ResEnum.INVALID_PARAM);

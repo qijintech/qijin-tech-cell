@@ -19,7 +19,7 @@ public interface CellCommentService {
      * @param commentImage
      * @return
      */
-    boolean addFeedComment(Long userId, Long feedId, String commentText, String commentImage);
+    FeedComment addFeedComment(Long userId, Long feedId, String commentText, String commentImage);
 
     /**
      * 评论回复
@@ -30,7 +30,7 @@ public interface CellCommentService {
      * @param commentImage
      * @return
      */
-    boolean replyComment(Long userId,
+    FeedComment replyComment(Long userId,
                          Long feedId,
                          Long commentId,
                          Long subCommentId,
@@ -63,4 +63,6 @@ public interface CellCommentService {
     Map<Long, FeedComment> mapComment(List<Long> commentIds);
 
     Map<Long, List<FeedComment>> mapCommentReplies(List<Long> toCommentIds);
+
+    FeedComment getCommentById(Long commentId);
 }

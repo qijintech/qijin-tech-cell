@@ -9,6 +9,7 @@ import tech.qijin.cell.feed.service.CellCommentService;
 import tech.qijin.cell.feed.service.CommonService;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.lang.vo.PageVo;
+import tech.qijin.util4j.utils.DateUtil;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
 
@@ -23,18 +24,22 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
     private CellCommentHelper cellCommentHelper;
 
     @Override
-    public boolean addFeedComment(Long userId, Long feedId, String commentText, String commentImage) {
+    public FeedComment addFeedComment(Long userId, Long feedId, String commentText, String commentImage) {
         FeedComment comment = new FeedComment();
         comment.setUserId(userId);
         comment.setFeedId(feedId);
         comment.setContentText(commentText);
         comment.setContentImage(commentImage);
         comment.setValid(true);
-        return cellCommentHelper.insertComment(comment);
+        comment.setCreateTime(DateUtil.now());
+        if (cellCommentHelper.insertComment(comment)) {
+            return comment;
+        }
+        return null;
     }
 
     @Override
-    public boolean replyComment(Long userId,
+    public FeedComment replyComment(Long userId,
                                 Long feedId,
                                 Long commentId,
                                 Long subCommentId,
@@ -49,7 +54,11 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
         comment.setToCommentId(commentId);
         comment.setToSubCommentId(subCommentId);
         comment.setValid(true);
-        return cellCommentHelper.insertCommentReply(comment);
+        comment.setCreateTime(DateUtil.now());
+        if (cellCommentHelper.insertCommentReply(comment)) {
+            return comment;
+        }
+        return null;
     }
 
     @Override
@@ -83,4 +92,10 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
     public Map<Long, List<FeedComment>> mapCommentReplies(List<Long> toCommentIds) {
         return cellCommentHelper.mapCommentReplies(toCommentIds);
     }
+
+    @Override
+    public FeedComment getCommentById(Long commentId) {
+        return cellCommentHelper.getComment(commentId);
+    }
+
 }
