@@ -31,4 +31,9 @@ public interface CellFeedHelper {
 
     List<FeedImage> listFeedImages(List<Long> feedIds);
     Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds);
+
+    /**
+     * ============= topic =============
+     */
+    List<FeedTopic> pageFeedTopic(Integer pageNo, Integer pageSize);
 }

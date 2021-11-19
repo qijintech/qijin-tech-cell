@@ -8,9 +8,13 @@ public class FeedTopic {
 
     private Channel channel;
 
+    private String cover;
+
     private String text;
 
     private Boolean valid;
+
+    private String description;
 
     private Date updateTime;
 
@@ -32,6 +36,14 @@ public class FeedTopic {
         this.channel = channel;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover == null ? null : cover.trim();
+    }
+
     public String getText() {
         return text;
     }
@@ -46,6 +58,14 @@ public class FeedTopic {
 
     public void setValid(Boolean valid) {
         this.valid = valid;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Date getUpdateTime() {

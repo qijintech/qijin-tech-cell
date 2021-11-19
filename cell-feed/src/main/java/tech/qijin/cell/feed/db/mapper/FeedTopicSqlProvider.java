@@ -32,12 +32,20 @@ public class FeedTopicSqlProvider {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getCover() != null) {
+            sql.VALUES("cover", "#{cover,jdbcType=VARCHAR}");
+        }
+        
         if (record.getText() != null) {
             sql.VALUES("text", "#{text,jdbcType=VARCHAR}");
         }
         
         if (record.getValid() != null) {
             sql.VALUES("valid", "#{valid,jdbcType=TINYINT}");
+        }
+        
+        if (record.getDescription() != null) {
+            sql.VALUES("description", "#{description,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -59,8 +67,10 @@ public class FeedTopicSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
+        sql.SELECT("cover");
         sql.SELECT("text");
         sql.SELECT("valid");
+        sql.SELECT("description");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
         sql.FROM("feed_topic");
@@ -88,12 +98,20 @@ public class FeedTopicSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getCover() != null) {
+            sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
+        }
+        
         if (record.getText() != null) {
             sql.SET("text = #{record.text,jdbcType=VARCHAR}");
         }
         
         if (record.getValid() != null) {
             sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
+        }
+        
+        if (record.getDescription() != null) {
+            sql.SET("description = #{record.description,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -114,8 +132,10 @@ public class FeedTopicSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
         sql.SET("text = #{record.text,jdbcType=VARCHAR}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
+        sql.SET("description = #{record.description,jdbcType=VARCHAR}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
@@ -132,12 +152,20 @@ public class FeedTopicSqlProvider {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getCover() != null) {
+            sql.SET("cover = #{cover,jdbcType=VARCHAR}");
+        }
+        
         if (record.getText() != null) {
             sql.SET("text = #{text,jdbcType=VARCHAR}");
         }
         
         if (record.getValid() != null) {
             sql.SET("valid = #{valid,jdbcType=TINYINT}");
+        }
+        
+        if (record.getDescription() != null) {
+            sql.SET("description = #{description,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {

@@ -31,12 +31,12 @@ public interface FeedTopicMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into feed_topic (channel, text, ",
-        "valid, update_time, ",
-        "create_time)",
-        "values (#{channel,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "insert into feed_topic (channel, cover, ",
+        "text, valid, description, ",
+        "update_time, create_time)",
+        "values (#{channel,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, ",
+        "#{text,jdbcType=VARCHAR}, #{valid,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
     int insert(FeedTopic record);
@@ -49,8 +49,10 @@ public interface FeedTopicMapper {
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
+        @Result(column="cover", property="cover", jdbcType=JdbcType.VARCHAR),
         @Result(column="text", property="text", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -58,15 +60,17 @@ public interface FeedTopicMapper {
 
     @Select({
         "select",
-        "id, channel, text, valid, update_time, create_time",
+        "id, channel, cover, text, valid, description, update_time, create_time",
         "from feed_topic",
         "where id = #{id,jdbcType=INTEGER}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
+        @Result(column="cover", property="cover", jdbcType=JdbcType.VARCHAR),
         @Result(column="text", property="text", jdbcType=JdbcType.VARCHAR),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -84,8 +88,10 @@ public interface FeedTopicMapper {
     @Update({
         "update feed_topic",
         "set channel = #{channel,jdbcType=VARCHAR},",
+          "cover = #{cover,jdbcType=VARCHAR},",
           "text = #{text,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=TINYINT},",
+          "description = #{description,jdbcType=VARCHAR},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=INTEGER}"

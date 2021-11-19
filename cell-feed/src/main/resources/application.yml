@@ -16,7 +16,7 @@ spring:
   datasource:
     druid:
       feed:
-        url: jdbc:mysql://127.0.0.1:3306/cell_feed?useUnicode=true&characterEncoding=utf-8
+        url: jdbc:mysql://49.233.184.252:3306/cell_feed?useUnicode=true&characterEncoding=utf-8
         username: admin
         password: Admin_@123
         driver-class-name: com.mysql.jdbc.Driver

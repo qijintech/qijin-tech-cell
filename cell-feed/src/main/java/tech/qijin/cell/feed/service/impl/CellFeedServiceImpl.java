@@ -22,6 +22,7 @@ import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -78,7 +79,9 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
         List<FeedByGroup> feedByGroups = cellFeedHelper.pageFeedByGroups(groupIds, pageVo.getPageNo(), pageVo.getPageSize());
         if (CollectionUtils.isEmpty(feedByGroups)) return Collections.emptyList();
         List<Long> feedIds = feedByGroups.stream().map(FeedByGroup::getFeedId).collect(Collectors.toList());
-        return cellFeedHelper.listFeedByIds(feedIds);
+        List<Feed> feeds = cellFeedHelper.listFeedByIds(feedIds);
+        feeds.sort(Comparator.comparing(Feed::getCreateTime).reversed());
+        return feeds;
     }
 
     @Override
@@ -110,6 +113,12 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
     @Override
     public Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds) {
         return cellFeedHelper.mapFeedImages(feedIds);
+    }
+
+    @Override
+    public List<FeedTopic> pageFeedTopic(PageVo pageVo) {
+        pageVo = checkPage(pageVo, 100);
+        return cellFeedHelper.pageFeedTopic(pageVo.getPageNo(), pageVo.getPageSize());
     }
 
     private void checkFeedItem(CellFeedBo cellFeedBo) {

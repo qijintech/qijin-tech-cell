@@ -53,4 +53,9 @@ public interface CellFeedService {
     List<FeedImage> getFeedImages(Long feedId);
     Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds);
 
+    /**
+     * ============= topic =============
+     */
+    List<FeedTopic> pageFeedTopic(PageVo pageVo);
+
 }

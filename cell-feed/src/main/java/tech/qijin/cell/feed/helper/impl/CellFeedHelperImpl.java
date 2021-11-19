@@ -108,4 +108,13 @@ public class CellFeedHelperImpl implements CellFeedHelper {
         return listFeedImages(feedIds).stream()
                 .collect(Collectors.groupingBy(FeedImage::getFeedId));
     }
+
+    @Override
+    public List<FeedTopic> pageFeedTopic(Integer pageNo, Integer pageSize) {
+        FeedTopicExample example = new FeedTopicExample();
+        example.createCriteria()
+                .andValidEqualTo(true);
+        return feedTopicDao.selectByExample(example);
+    }
+
 }
