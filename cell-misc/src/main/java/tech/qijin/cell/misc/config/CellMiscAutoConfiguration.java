@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
  **/
 @Slf4j
 @Configuration
-@ComponentScan(value = {"tech.qijin.cell.misc.db", "tech.qijin.cell.misc.service", "tech.qijin.cell.misc.helper"})
+@ComponentScan(value = {"tech.qijin.cell.misc.db", "tech.qijin.cell.misc.service", "tech.qijin.cell.misc.helper", "tech.qijin.cell.misc.server"})
 @Import(CellMiscDatasourceConfig.class)
 public class CellMiscAutoConfiguration {
     @PostConstruct

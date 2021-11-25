@@ -1,6 +1,7 @@
 package tech.qijin.cell.misc.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.google.common.collect.Lists;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,14 +28,14 @@ import java.util.Properties;
         sqlSessionTemplateRef = "miscSqlSessionTemplate")
 public class CellMiscDatasourceConfig {
 
-    @Bean("dataSourceTemplate")
+    @Bean("miscDataSourceTemplate")
     @ConfigurationProperties("spring.datasource.druid.misc")
     public DataSource dataSourceOne() {
         return DruidDataSourceBuilder.create().build();
     }
 
     @Bean(name = "miscSqlSessionFactory")
-    public SqlSessionFactory miscSqlSessionFactory(@Qualifier("dataSourceTemplate") DataSource dataSourceOne)
+    public SqlSessionFactory miscSqlSessionFactory(@Qualifier("miscDataSourceTemplate") DataSource dataSourceOne)
             throws Exception {
         return getSqlSessionFactory(dataSourceOne);
     }
@@ -45,7 +46,7 @@ public class CellMiscDatasourceConfig {
     }
 
     @Bean(name = "miscTransactionManager")
-    public DataSourceTransactionManager miscTransactionManager(@Qualifier("dataSourceTemplate") DataSource dataSourceOne) {
+    public DataSourceTransactionManager miscTransactionManager(@Qualifier("miscDataSourceTemplate") DataSource dataSourceOne) {
         return new DataSourceTransactionManager(dataSourceOne);
     }
 
@@ -58,6 +59,7 @@ public class CellMiscDatasourceConfig {
         ChannelInterceptor channelInterceptor = new ChannelInterceptor();
         Properties channelProperties = new Properties();
         channelProperties.put("tenantColumnName", "channel");
+        channelProperties.put("excludedTables", "misc_university");
         channelInterceptor.setProperties(channelProperties);
         configuration.addInterceptor(channelInterceptor);
         sqlSessionFactoryBean.setConfiguration(configuration);
