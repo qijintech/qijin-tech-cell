@@ -8,6 +8,7 @@ import tech.qijin.util4j.lang.constant.EnumValue;
  * @relax: 开始眼保健操 ←_← ↓_↓ →_→ ↑_↑
  */
 public enum AccountType implements EnumValue<String> {
+    ORG("官方"),
     OAUTH_WECHAT("OAuth-微信"),
     MINI_WECHAT("小程序-微信"),
     MINI_DOUYIN("小程序-抖音"),
