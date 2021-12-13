@@ -26,6 +26,8 @@
 		<module>cell-iam</module>
 		<module>cell-misc</module>
 		<module>cell-feed</module>
+		<module>cell-task</module>
+		<module>cell-counting</module>
   </modules>
 
 	<properties>
