@@ -14,7 +14,11 @@ import javax.annotation.PostConstruct;
  **/
 @Slf4j
 @Configuration
-@ComponentScan(value = {"tech.qijin.cell.task.db", "tech.qijin.cell.task.service", "tech.qijin.cell.task.helper", "tech.qijin.cell.task.server"})
+@ComponentScan(value = {"tech.qijin.cell.task.db",
+        "tech.qijin.cell.task.service",
+        "tech.qijin.cell.task.helper",
+        "tech.qijin.cell.task.server",
+        "tech.qijin.cell.task.listener"})
 @Import(CellTaskDatasourceConfig.class)
 public class CellTaskAutoConfiguration {
     @PostConstruct

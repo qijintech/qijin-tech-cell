@@ -9,7 +9,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import tech.qijin.cell.user.test.CellDemoTest;
 import tech.qijin.util4j.trace.pojo.Channel;
 import tech.qijin.util4j.trace.pojo.EnvEnum;
 import tech.qijin.util4j.trace.util.ChannelUtil;
@@ -24,7 +23,6 @@ import java.util.UUID;
  * 开始做眼保健操：←_← ↑_↑ →_→ ↓_↓
  **/
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CellDemoTest.class)
 @Transactional
 @Rollback(value = false)
 @ActiveProfiles(profiles = "dev")

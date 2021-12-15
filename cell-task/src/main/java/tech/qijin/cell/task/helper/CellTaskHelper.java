@@ -1,0 +1,58 @@
+package tech.qijin.cell.task.helper;
+
+import tech.qijin.cell.task.base.TaskRecordStatus;
+import tech.qijin.cell.task.db.model.Task;
+import tech.qijin.cell.task.db.model.TaskRecord;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public interface CellTaskHelper {
+    /**
+     * 返回所有的Task
+     *
+     * @return
+     */
+    List<Task> listTasks();
+
+    /**
+     * 返回Task中用到的countingCode
+     *
+     * @return
+     */
+    Set<String> listCountingCode();
+
+    /**
+     * 返回countingCode和关联Tasks的映射
+     *
+     * @return
+     */
+    Map<String, List<Task>> mapCountingCodeAndTasks();
+
+    /**
+     * 与 {@link #mapCountingCodeAndTasks()} 类似
+     *
+     * @param countingCode
+     * @return
+     */
+    List<Task> listTasksByCountingCode(String countingCode);
+
+    /**
+     * 获取任务记录
+     *
+     * @param userId
+     * @param taskId
+     * @return
+     */
+    TaskRecord getTaskRecord(Long userId, Long taskId);
+
+    /**
+     * 更改任务状态
+     *
+     * @param record
+     * @param toStatus
+     * @return
+     */
+    boolean updateTaskStatus(TaskRecord record, TaskRecordStatus toStatus);
+}

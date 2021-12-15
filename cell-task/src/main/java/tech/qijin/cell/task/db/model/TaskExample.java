@@ -1,20 +1,20 @@
-package tech.qijin.cell.counting.db.model;
+package tech.qijin.cell.task.db.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import tech.qijin.cell.counting.base.CountingMode;
-import tech.qijin.cell.counting.base.OnTargetMode;
+import tech.qijin.cell.task.base.RewardType;
+import tech.qijin.cell.task.base.TaskKind;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class CountingTemplateExample {
+public class TaskExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CountingTemplateExample() {
+    public TaskExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -308,213 +308,73 @@ public class CountingTemplateExample {
             return (Criteria) this;
         }
 
-        public Criteria andCodeIsNull() {
-            addCriterion("code is null");
+        public Criteria andKindIsNull() {
+            addCriterion("kind is null");
             return (Criteria) this;
         }
 
-        public Criteria andCodeIsNotNull() {
-            addCriterion("code is not null");
+        public Criteria andKindIsNotNull() {
+            addCriterion("kind is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCodeEqualTo(String value) {
-            addCriterion("code =", value, "code");
+        public Criteria andKindEqualTo(TaskKind value) {
+            addCriterion("kind =", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotEqualTo(String value) {
-            addCriterion("code <>", value, "code");
+        public Criteria andKindNotEqualTo(TaskKind value) {
+            addCriterion("kind <>", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThan(String value) {
-            addCriterion("code >", value, "code");
+        public Criteria andKindGreaterThan(TaskKind value) {
+            addCriterion("kind >", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("code >=", value, "code");
+        public Criteria andKindGreaterThanOrEqualTo(TaskKind value) {
+            addCriterion("kind >=", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThan(String value) {
-            addCriterion("code <", value, "code");
+        public Criteria andKindLessThan(TaskKind value) {
+            addCriterion("kind <", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThanOrEqualTo(String value) {
-            addCriterion("code <=", value, "code");
+        public Criteria andKindLessThanOrEqualTo(TaskKind value) {
+            addCriterion("kind <=", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLike(String value) {
-            addCriterion("code like", value, "code");
+        public Criteria andKindLike(TaskKind value) {
+            addCriterion("kind like", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotLike(String value) {
-            addCriterion("code not like", value, "code");
+        public Criteria andKindNotLike(TaskKind value) {
+            addCriterion("kind not like", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeIn(List<String> values) {
-            addCriterion("code in", values, "code");
+        public Criteria andKindIn(List<TaskKind> values) {
+            addCriterion("kind in", values, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotIn(List<String> values) {
-            addCriterion("code not in", values, "code");
+        public Criteria andKindNotIn(List<TaskKind> values) {
+            addCriterion("kind not in", values, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeBetween(String value1, String value2) {
-            addCriterion("code between", value1, value2, "code");
+        public Criteria andKindBetween(TaskKind value1, TaskKind value2) {
+            addCriterion("kind between", value1, value2, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotBetween(String value1, String value2) {
-            addCriterion("code not between", value1, value2, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeIsNull() {
-            addCriterion("mode is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeIsNotNull() {
-            addCriterion("mode is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeEqualTo(CountingMode value) {
-            addCriterion("mode =", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeNotEqualTo(CountingMode value) {
-            addCriterion("mode <>", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeGreaterThan(CountingMode value) {
-            addCriterion("mode >", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeGreaterThanOrEqualTo(CountingMode value) {
-            addCriterion("mode >=", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeLessThan(CountingMode value) {
-            addCriterion("mode <", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeLessThanOrEqualTo(CountingMode value) {
-            addCriterion("mode <=", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeLike(CountingMode value) {
-            addCriterion("mode like", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeNotLike(CountingMode value) {
-            addCriterion("mode not like", value, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeIn(List<CountingMode> values) {
-            addCriterion("mode in", values, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeNotIn(List<CountingMode> values) {
-            addCriterion("mode not in", values, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeBetween(CountingMode value1, CountingMode value2) {
-            addCriterion("mode between", value1, value2, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andModeNotBetween(CountingMode value1, CountingMode value2) {
-            addCriterion("mode not between", value1, value2, "mode");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventIsNull() {
-            addCriterion("event is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventIsNotNull() {
-            addCriterion("event is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventEqualTo(String value) {
-            addCriterion("event =", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventNotEqualTo(String value) {
-            addCriterion("event <>", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventGreaterThan(String value) {
-            addCriterion("event >", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventGreaterThanOrEqualTo(String value) {
-            addCriterion("event >=", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventLessThan(String value) {
-            addCriterion("event <", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventLessThanOrEqualTo(String value) {
-            addCriterion("event <=", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventLike(String value) {
-            addCriterion("event like", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventNotLike(String value) {
-            addCriterion("event not like", value, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventIn(List<String> values) {
-            addCriterion("event in", values, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventNotIn(List<String> values) {
-            addCriterion("event not in", values, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventBetween(String value1, String value2) {
-            addCriterion("event between", value1, value2, "event");
-            return (Criteria) this;
-        }
-
-        public Criteria andEventNotBetween(String value1, String value2) {
-            addCriterion("event not between", value1, value2, "event");
+        public Criteria andKindNotBetween(TaskKind value1, TaskKind value2) {
+            addCriterion("kind not between", value1, value2, "kind");
             return (Criteria) this;
         }
 
@@ -528,123 +388,313 @@ public class CountingTemplateExample {
             return (Criteria) this;
         }
 
-        public Criteria andTargetEqualTo(Long value) {
+        public Criteria andTargetEqualTo(Integer value) {
             addCriterion("target =", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotEqualTo(Long value) {
+        public Criteria andTargetNotEqualTo(Integer value) {
             addCriterion("target <>", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThan(Long value) {
+        public Criteria andTargetGreaterThan(Integer value) {
             addCriterion("target >", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThanOrEqualTo(Long value) {
+        public Criteria andTargetGreaterThanOrEqualTo(Integer value) {
             addCriterion("target >=", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThan(Long value) {
+        public Criteria andTargetLessThan(Integer value) {
             addCriterion("target <", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThanOrEqualTo(Long value) {
+        public Criteria andTargetLessThanOrEqualTo(Integer value) {
             addCriterion("target <=", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetIn(List<Long> values) {
+        public Criteria andTargetIn(List<Integer> values) {
             addCriterion("target in", values, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotIn(List<Long> values) {
+        public Criteria andTargetNotIn(List<Integer> values) {
             addCriterion("target not in", values, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetBetween(Long value1, Long value2) {
+        public Criteria andTargetBetween(Integer value1, Integer value2) {
             addCriterion("target between", value1, value2, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotBetween(Long value1, Long value2) {
+        public Criteria andTargetNotBetween(Integer value1, Integer value2) {
             addCriterion("target not between", value1, value2, "target");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeIsNull() {
-            addCriterion("on_target_mode is null");
+        public Criteria andCountingCodeIsNull() {
+            addCriterion("counting_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeIsNotNull() {
-            addCriterion("on_target_mode is not null");
+        public Criteria andCountingCodeIsNotNull() {
+            addCriterion("counting_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeEqualTo(OnTargetMode value) {
-            addCriterion("on_target_mode =", value, "onTargetMode");
+        public Criteria andCountingCodeEqualTo(String value) {
+            addCriterion("counting_code =", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeNotEqualTo(OnTargetMode value) {
-            addCriterion("on_target_mode <>", value, "onTargetMode");
+        public Criteria andCountingCodeNotEqualTo(String value) {
+            addCriterion("counting_code <>", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeGreaterThan(OnTargetMode value) {
-            addCriterion("on_target_mode >", value, "onTargetMode");
+        public Criteria andCountingCodeGreaterThan(String value) {
+            addCriterion("counting_code >", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeGreaterThanOrEqualTo(OnTargetMode value) {
-            addCriterion("on_target_mode >=", value, "onTargetMode");
+        public Criteria andCountingCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("counting_code >=", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeLessThan(OnTargetMode value) {
-            addCriterion("on_target_mode <", value, "onTargetMode");
+        public Criteria andCountingCodeLessThan(String value) {
+            addCriterion("counting_code <", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeLessThanOrEqualTo(OnTargetMode value) {
-            addCriterion("on_target_mode <=", value, "onTargetMode");
+        public Criteria andCountingCodeLessThanOrEqualTo(String value) {
+            addCriterion("counting_code <=", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeLike(OnTargetMode value) {
-            addCriterion("on_target_mode like", value, "onTargetMode");
+        public Criteria andCountingCodeLike(String value) {
+            addCriterion("counting_code like", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeNotLike(OnTargetMode value) {
-            addCriterion("on_target_mode not like", value, "onTargetMode");
+        public Criteria andCountingCodeNotLike(String value) {
+            addCriterion("counting_code not like", value, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeIn(List<OnTargetMode> values) {
-            addCriterion("on_target_mode in", values, "onTargetMode");
+        public Criteria andCountingCodeIn(List<String> values) {
+            addCriterion("counting_code in", values, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeNotIn(List<OnTargetMode> values) {
-            addCriterion("on_target_mode not in", values, "onTargetMode");
+        public Criteria andCountingCodeNotIn(List<String> values) {
+            addCriterion("counting_code not in", values, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeBetween(OnTargetMode value1, OnTargetMode value2) {
-            addCriterion("on_target_mode between", value1, value2, "onTargetMode");
+        public Criteria andCountingCodeBetween(String value1, String value2) {
+            addCriterion("counting_code between", value1, value2, "countingCode");
             return (Criteria) this;
         }
 
-        public Criteria andOnTargetModeNotBetween(OnTargetMode value1, OnTargetMode value2) {
-            addCriterion("on_target_mode not between", value1, value2, "onTargetMode");
+        public Criteria andCountingCodeNotBetween(String value1, String value2) {
+            addCriterion("counting_code not between", value1, value2, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeIsNull() {
+            addCriterion("reward_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeIsNotNull() {
+            addCriterion("reward_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeEqualTo(RewardType value) {
+            addCriterion("reward_type =", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotEqualTo(RewardType value) {
+            addCriterion("reward_type <>", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeGreaterThan(RewardType value) {
+            addCriterion("reward_type >", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeGreaterThanOrEqualTo(RewardType value) {
+            addCriterion("reward_type >=", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeLessThan(RewardType value) {
+            addCriterion("reward_type <", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeLessThanOrEqualTo(RewardType value) {
+            addCriterion("reward_type <=", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeLike(RewardType value) {
+            addCriterion("reward_type like", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotLike(RewardType value) {
+            addCriterion("reward_type not like", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeIn(List<RewardType> values) {
+            addCriterion("reward_type in", values, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotIn(List<RewardType> values) {
+            addCriterion("reward_type not in", values, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeBetween(RewardType value1, RewardType value2) {
+            addCriterion("reward_type between", value1, value2, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotBetween(RewardType value1, RewardType value2) {
+            addCriterion("reward_type not between", value1, value2, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdIsNull() {
+            addCriterion("reward_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdIsNotNull() {
+            addCriterion("reward_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdEqualTo(Long value) {
+            addCriterion("reward_id =", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdNotEqualTo(Long value) {
+            addCriterion("reward_id <>", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdGreaterThan(Long value) {
+            addCriterion("reward_id >", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("reward_id >=", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdLessThan(Long value) {
+            addCriterion("reward_id <", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdLessThanOrEqualTo(Long value) {
+            addCriterion("reward_id <=", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdIn(List<Long> values) {
+            addCriterion("reward_id in", values, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdNotIn(List<Long> values) {
+            addCriterion("reward_id not in", values, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdBetween(Long value1, Long value2) {
+            addCriterion("reward_id between", value1, value2, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdNotBetween(Long value1, Long value2) {
+            addCriterion("reward_id not between", value1, value2, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIsNull() {
+            addCriterion("order is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIsNotNull() {
+            addCriterion("order is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderEqualTo(Integer value) {
+            addCriterion("order =", value, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNotEqualTo(Integer value) {
+            addCriterion("order <>", value, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderGreaterThan(Integer value) {
+            addCriterion("order >", value, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderGreaterThanOrEqualTo(Integer value) {
+            addCriterion("order >=", value, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderLessThan(Integer value) {
+            addCriterion("order <", value, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderLessThanOrEqualTo(Integer value) {
+            addCriterion("order <=", value, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIn(List<Integer> values) {
+            addCriterion("order in", values, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNotIn(List<Integer> values) {
+            addCriterion("order not in", values, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderBetween(Integer value1, Integer value2) {
+            addCriterion("order between", value1, value2, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNotBetween(Integer value1, Integer value2) {
+            addCriterion("order not between", value1, value2, "order");
             return (Criteria) this;
         }
 

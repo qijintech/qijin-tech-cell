@@ -1,20 +1,22 @@
 package tech.qijin.cell.counting.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import tech.qijin.cell.counting.db.model.CountingRecord;
 import tech.qijin.cell.counting.db.model.CountingTemplate;
-import tech.qijin.cell.counting.helper.CountingHelper;
-import tech.qijin.cell.counting.helper.CountingRecordHelper;
-import tech.qijin.cell.counting.service.CountingService;
+import tech.qijin.cell.counting.helper.CellCountingHelper;
+import tech.qijin.cell.counting.helper.CellCountingRecordHelper;
+import tech.qijin.cell.counting.service.CellCountingService;
+import tech.qijin.util4j.aop.util.CasAssert;
 import tech.qijin.util4j.lang.constant.ResEnum;
+import tech.qijin.util4j.lang.event.CountingEvent;
 import tech.qijin.util4j.lang.event.EventBase;
 import tech.qijin.util4j.utils.DateUtil;
 import tech.qijin.util4j.utils.MAssert;
@@ -26,16 +28,20 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class CountingServiceImpl implements CountingService {
+public class CellCountingServiceImpl implements CellCountingService {
     @Autowired
-    private CountingHelper countingHelper;
+    private CellCountingHelper cellCountingHelper;
     @Autowired
-    private CountingRecordHelper countingRecordHelper;
+    private CellCountingRecordHelper cellCountingRecordHelper;
+    @Autowired
+    private ApplicationContext applicationContext;
+    @Autowired
+    private CellCountingService cellCountingService;
 
     @Override
     public void onEvent(EventBase event) {
         checkEvent(event);
-        Map<String, List<CountingTemplate>> eventTemplatesMap = countingHelper.mapEventTemplates();
+        Map<String, List<CountingTemplate>> eventTemplatesMap = cellCountingHelper.mapEventTemplates();
         if (MapUtils.isEmpty(eventTemplatesMap)) {
             log.warn("CountingService unbound event, event={}", event);
             return;
@@ -46,8 +52,22 @@ public class CountingServiceImpl implements CountingService {
             return;
         }
         templates.stream().forEach(template -> {
-            //
+            cellCountingService.incr(event.getUserId(), event, template);
         });
+    }
+
+    @Override
+    public Long query(Long userId, String countingCode) {
+        CountingTemplate template = cellCountingHelper.getTemplateByCode(countingCode);
+        if (template == null) {
+            log.error("CountingService invalid countingCode={}, userId={}", countingCode, userId);
+            return 0L;
+        }
+        String countingFormat = getCountingFormat(userId, template);
+        CountingRecord record = cellCountingRecordHelper.getRecordByCountingFormat(countingFormat);
+        // record 不存在，说明没有计数，也就是计数是0
+        if (record == null) return 0L;
+        return record.getCurr();
     }
 
     @Override
@@ -67,7 +87,7 @@ public class CountingServiceImpl implements CountingService {
             log.error("CountingService invalid countingTemplate={}", countingTemplate);
             return;
         }
-        CountingRecord record = countingRecordHelper.getRecordByCountingFormat(countingTemplate);
+        CountingRecord record = cellCountingRecordHelper.getRecordByCountingFormat(countingTemplate);
         if (record == null) {
             record = new CountingRecord();
             record.setCountingCode(template.getCode());
@@ -75,24 +95,23 @@ public class CountingServiceImpl implements CountingService {
             record.setCountingFormat(countingTemplate);
             record.setTarget(template.getTarget());
             if (checkTarget(event, template, record)) {
-                // TODO trigger
+                applicationContext.publishEvent(new CountingEvent(this,
+                        userId,
+                        template.getCode(),
+                        template.getTarget()));
             }
-            if (!countingRecordHelper.insertRecord(record)) {
-                log.error("CountingService insert record fail, record={}", JSON.toJSONString(record));
-                return;
-            }
-
+            CasAssert.isTrue(cellCountingRecordHelper.insertRecord(record));
         } else {
             if (isAlreadyOnTarget(record)) {
                 return;
             }
             if (checkTarget(event, template, record)) {
-                // TODO trigger
+                applicationContext.publishEvent(new CountingEvent(this,
+                        userId,
+                        template.getCode(),
+                        template.getTarget()));
             }
-            if (!countingRecordHelper.updateRecord(record)) {
-                log.error("CountingService insert record fail, record={}", JSON.toJSONString(record));
-                return;
-            }
+            CasAssert.isTrue(cellCountingRecordHelper.updateRecord(record));
         }
     }
 

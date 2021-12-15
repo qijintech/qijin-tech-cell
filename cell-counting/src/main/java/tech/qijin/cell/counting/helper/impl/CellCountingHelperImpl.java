@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import tech.qijin.cell.counting.db.dao.CountingTemplateDao;
 import tech.qijin.cell.counting.db.model.CountingTemplate;
 import tech.qijin.cell.counting.db.model.CountingTemplateExample;
-import tech.qijin.cell.counting.helper.CountingHelper;
-import tech.qijin.util4j.lang.event.EventBase;
-import tech.qijin.util4j.utils.ConvertUtil;
+import tech.qijin.cell.counting.helper.CellCountingHelper;
+import tech.qijin.util4j.trace.pojo.Channel;
+import tech.qijin.util4j.trace.util.ChannelUtil;
 import tech.qijin.util4j.utils.DateUtil;
 
 import javax.annotation.PostConstruct;
@@ -20,14 +20,16 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class CountingHelperImpl implements CountingHelper {
+public class CellCountingHelperImpl implements CellCountingHelper {
     private Date lastUpdateAt = Date.from(Instant.EPOCH);
     private List<CountingTemplate> templates = Lists.newArrayList();
     private Map<String, List<CountingTemplate>> eventCountingMap = Maps.newHashMap();
+    private Map<String, CountingTemplate> codeTemplateMap = Maps.newHashMap();
 
     @Autowired
     private CountingTemplateDao countingTemplateDao;
@@ -36,14 +38,21 @@ public class CountingHelperImpl implements CountingHelper {
     @PostConstruct
     @Scheduled(fixedDelay = 5000)
     public void reload() {
+        ChannelUtil.setChannel(Channel.TEST);
         Date updateAt = countingTemplateDao.getLastUpdatedAt();
         if (null == updateAt
                 || updateAt.after(lastUpdateAt)
                 || Math.abs(DateUtil.getMinusSeconds(DateUtil.now(), updateAt).longValue()) < 10) {
-            templates = listAllTemplates();
-            eventCountingMap = templates.stream().collect(Collectors.groupingBy(template -> template.getEvent().getKind().name()));
+            templates = listAllTemplatesFromDB();
+            eventCountingMap = templates.stream().collect(Collectors.groupingBy(template -> template.getEvent()));
+            codeTemplateMap = templates.stream().collect(Collectors.toMap(CountingTemplate::getCode, Function.identity()));
             lastUpdateAt = updateAt;
         }
+    }
+
+    @Override
+    public CountingTemplate getTemplateByCode(String countingCode) {
+        return codeTemplateMap.get(countingCode);
     }
 
     @Override

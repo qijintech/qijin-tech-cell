@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import tech.qijin.cell.counting.db.dao.CountingRecordDao;
 import tech.qijin.cell.counting.db.model.CountingRecord;
 import tech.qijin.cell.counting.db.model.CountingRecordExample;
-import tech.qijin.cell.counting.helper.CountingRecordHelper;
+import tech.qijin.cell.counting.helper.CellCountingRecordHelper;
 import tech.qijin.util4j.utils.NumberUtil;
 
 @Slf4j
 @Service
-public class CountingRecordHelperImpl implements CountingRecordHelper {
+public class CellCountingRecordHelperImpl implements CellCountingRecordHelper {
     @Autowired
     private CountingRecordDao countingRecordDao;
 

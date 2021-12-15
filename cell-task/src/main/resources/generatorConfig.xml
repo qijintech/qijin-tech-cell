@@ -46,5 +46,21 @@
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
         </table>
+        <table tableName="task">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="kind" property="kind"
+                            javaType="tech.qijin.cell.task.base.TaskKind"/>
+            <columnOverride column="reward_type" property="rewardType"
+                            javaType="tech.qijin.cell.task.base.RewardType"/>
+        </table>
+        <table tableName="task_record">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="status" property="status"
+                            javaType="tech.qijin.cell.task.base.TaskRecordStatus"/>
+        </table>
     </context>
 </generatorConfiguration>

@@ -3,7 +3,6 @@ package tech.qijin.cell.counting.db.model;
 import java.util.Date;
 import tech.qijin.cell.counting.base.CountingMode;
 import tech.qijin.cell.counting.base.OnTargetMode;
-import tech.qijin.util4j.lang.event.EventBase;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class CountingTemplate {
@@ -17,7 +16,7 @@ public class CountingTemplate {
 
     private CountingMode mode;
 
-    private EventBase event;
+    private String event;
 
     private Long target;
 
@@ -67,12 +66,12 @@ public class CountingTemplate {
         this.mode = mode;
     }
 
-    public EventBase getEvent() {
+    public String getEvent() {
         return event;
     }
 
-    public void setEvent(EventBase event) {
-        this.event = event;
+    public void setEvent(String event) {
+        this.event = event == null ? null : event.trim();
     }
 
     public Long getTarget() {

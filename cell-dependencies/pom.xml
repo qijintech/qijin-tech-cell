@@ -58,6 +58,16 @@
                 <artifactId>cell-misc</artifactId>
                 <version>${cell.version}</version>
             </dependency>
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-task</artifactId>
+                <version>${cell.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-counting</artifactId>
+                <version>${cell.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

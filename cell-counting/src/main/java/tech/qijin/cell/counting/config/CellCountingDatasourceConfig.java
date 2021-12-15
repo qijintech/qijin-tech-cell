@@ -58,6 +58,7 @@ public class CellCountingDatasourceConfig {
         ChannelInterceptor channelInterceptor = new ChannelInterceptor();
         Properties channelProperties = new Properties();
         channelProperties.put("tenantColumnName", "channel");
+        channelProperties.put("excludedTables", "counting_template");
         channelInterceptor.setProperties(channelProperties);
         configuration.addInterceptor(channelInterceptor);
         sqlSessionFactoryBean.setConfiguration(configuration);

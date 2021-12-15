@@ -1,9 +1,9 @@
-package tech.qijin.cell.counting.db.dao;
+package tech.qijin.cell.task.db.dao;
 
 import org.apache.ibatis.annotations.Select;
-import tech.qijin.cell.counting.db.mapper.CountingTemplateMapper;
-import tech.qijin.cell.counting.db.mapper.CountingTemplateSqlProvider;
-import tech.qijin.cell.counting.db.model.CountingTemplate;
+import tech.qijin.cell.task.db.mapper.TaskMapper;
+import tech.qijin.cell.task.db.mapper.TaskSqlProvider;
+import tech.qijin.cell.task.db.model.Task;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.InsertProvider;
 import com.google.common.collect.Lists;
@@ -18,26 +18,26 @@ import java.util.stream.Collectors;
  * @author: SYSTEM
  **/
 
-public interface CountingTemplateDao extends CountingTemplateMapper {
+public interface TaskDao extends TaskMapper {
 
 	@Select({
-			"select max(update_time) from counting_template"
+			"select max(update_time) from task"
 	})
 	Date getLastUpdatedAt();
 
 	@InsertProvider(type = SqlProvider.class, method = "batchInsert")
-	int batchInsert(@Param("records") List<CountingTemplate> records);
+	int batchInsert(@Param("records") List<Task> records);
 
 	class SqlProvider {
 		private static final String VALUES = "VALUES";
-		CountingTemplateSqlProvider provider = new CountingTemplateSqlProvider();
+		TaskSqlProvider provider = new TaskSqlProvider();
 
 		public String batchInsert(Map<String, Object> param) {
-			List<CountingTemplate> records = (List<CountingTemplate>) param.get("records");
+			List<Task> records = (List<Task>) param.get("records");
 			return genSql(records);
 		}
 
-		private String genSql(List<CountingTemplate> records) {
+		private String genSql(List<Task> records) {
 			List<String> sqls = records.stream()
 					.map(record -> provider.insertSelective(record))
 					.collect(Collectors.toList());
