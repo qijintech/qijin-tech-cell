@@ -33,7 +33,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getName() != null) {
-            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
+            sql.VALUES("`name`", "#{name,jdbcType=VARCHAR}");
         }
         
         if (record.getKind() != null) {
@@ -41,7 +41,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getTarget() != null) {
-            sql.VALUES("target", "#{target,jdbcType=INTEGER}");
+            sql.VALUES("target", "#{target,jdbcType=BIGINT}");
         }
         
         if (record.getCountingCode() != null) {
@@ -57,7 +57,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getOrder() != null) {
-            sql.VALUES("order", "#{order,jdbcType=INTEGER}");
+            sql.VALUES("`order`", "#{order,jdbcType=INTEGER}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -79,13 +79,13 @@ public class TaskSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("name");
+        sql.SELECT("`name`");
         sql.SELECT("kind");
         sql.SELECT("target");
         sql.SELECT("counting_code");
         sql.SELECT("reward_type");
         sql.SELECT("reward_id");
-        sql.SELECT("order");
+        sql.SELECT("`order`");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
         sql.FROM("task");
@@ -114,7 +114,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getName() != null) {
-            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+            sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
         }
         
         if (record.getKind() != null) {
@@ -122,7 +122,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getTarget() != null) {
-            sql.SET("target = #{record.target,jdbcType=INTEGER}");
+            sql.SET("target = #{record.target,jdbcType=BIGINT}");
         }
         
         if (record.getCountingCode() != null) {
@@ -138,7 +138,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getOrder() != null) {
-            sql.SET("order = #{record.order,jdbcType=INTEGER}");
+            sql.SET("`order` = #{record.order,jdbcType=INTEGER}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -159,13 +159,13 @@ public class TaskSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
         sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
-        sql.SET("target = #{record.target,jdbcType=INTEGER}");
+        sql.SET("target = #{record.target,jdbcType=BIGINT}");
         sql.SET("counting_code = #{record.countingCode,jdbcType=CHAR}");
         sql.SET("reward_type = #{record.rewardType,jdbcType=VARCHAR}");
         sql.SET("reward_id = #{record.rewardId,jdbcType=BIGINT}");
-        sql.SET("order = #{record.order,jdbcType=INTEGER}");
+        sql.SET("`order` = #{record.order,jdbcType=INTEGER}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
@@ -183,7 +183,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getName() != null) {
-            sql.SET("name = #{name,jdbcType=VARCHAR}");
+            sql.SET("`name` = #{name,jdbcType=VARCHAR}");
         }
         
         if (record.getKind() != null) {
@@ -191,7 +191,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getTarget() != null) {
-            sql.SET("target = #{target,jdbcType=INTEGER}");
+            sql.SET("target = #{target,jdbcType=BIGINT}");
         }
         
         if (record.getCountingCode() != null) {
@@ -207,7 +207,7 @@ public class TaskSqlProvider {
         }
         
         if (record.getOrder() != null) {
-            sql.SET("order = #{order,jdbcType=INTEGER}");
+            sql.SET("`order` = #{order,jdbcType=INTEGER}");
         }
         
         if (record.getUpdateTime() != null) {

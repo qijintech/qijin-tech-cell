@@ -13,9 +13,11 @@ public class TaskRecord {
 
     private Long taskId;
 
+    private String countingCode;
+
     private String taskFormat;
 
-    private Integer target;
+    private Long target;
 
     private Date startTime;
 
@@ -61,6 +63,14 @@ public class TaskRecord {
         this.taskId = taskId;
     }
 
+    public String getCountingCode() {
+        return countingCode;
+    }
+
+    public void setCountingCode(String countingCode) {
+        this.countingCode = countingCode == null ? null : countingCode.trim();
+    }
+
     public String getTaskFormat() {
         return taskFormat;
     }
@@ -69,11 +79,11 @@ public class TaskRecord {
         this.taskFormat = taskFormat == null ? null : taskFormat.trim();
     }
 
-    public Integer getTarget() {
+    public Long getTarget() {
         return target;
     }
 
-    public void setTarget(Integer target) {
+    public void setTarget(Long target) {
         this.target = target;
     }
 

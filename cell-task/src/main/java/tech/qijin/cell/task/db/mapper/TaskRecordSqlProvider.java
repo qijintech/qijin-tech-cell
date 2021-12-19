@@ -40,12 +40,16 @@ public class TaskRecordSqlProvider {
             sql.VALUES("task_id", "#{taskId,jdbcType=BIGINT}");
         }
         
+        if (record.getCountingCode() != null) {
+            sql.VALUES("counting_code", "#{countingCode,jdbcType=VARCHAR}");
+        }
+        
         if (record.getTaskFormat() != null) {
             sql.VALUES("task_format", "#{taskFormat,jdbcType=VARCHAR}");
         }
         
         if (record.getTarget() != null) {
-            sql.VALUES("target", "#{target,jdbcType=INTEGER}");
+            sql.VALUES("target", "#{target,jdbcType=BIGINT}");
         }
         
         if (record.getStartTime() != null) {
@@ -57,7 +61,7 @@ public class TaskRecordSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
+            sql.VALUES("`status`", "#{status,jdbcType=VARCHAR}");
         }
         
         if (record.getVersion() != null) {
@@ -85,11 +89,12 @@ public class TaskRecordSqlProvider {
         sql.SELECT("channel");
         sql.SELECT("user_id");
         sql.SELECT("task_id");
+        sql.SELECT("counting_code");
         sql.SELECT("task_format");
         sql.SELECT("target");
         sql.SELECT("start_time");
         sql.SELECT("end_time");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("version");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
@@ -126,12 +131,16 @@ public class TaskRecordSqlProvider {
             sql.SET("task_id = #{record.taskId,jdbcType=BIGINT}");
         }
         
+        if (record.getCountingCode() != null) {
+            sql.SET("counting_code = #{record.countingCode,jdbcType=VARCHAR}");
+        }
+        
         if (record.getTaskFormat() != null) {
             sql.SET("task_format = #{record.taskFormat,jdbcType=VARCHAR}");
         }
         
         if (record.getTarget() != null) {
-            sql.SET("target = #{record.target,jdbcType=INTEGER}");
+            sql.SET("target = #{record.target,jdbcType=BIGINT}");
         }
         
         if (record.getStartTime() != null) {
@@ -143,7 +152,7 @@ public class TaskRecordSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=VARCHAR}");
+            sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
         }
         
         if (record.getVersion() != null) {
@@ -170,11 +179,12 @@ public class TaskRecordSqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("task_id = #{record.taskId,jdbcType=BIGINT}");
+        sql.SET("counting_code = #{record.countingCode,jdbcType=VARCHAR}");
         sql.SET("task_format = #{record.taskFormat,jdbcType=VARCHAR}");
-        sql.SET("target = #{record.target,jdbcType=INTEGER}");
+        sql.SET("target = #{record.target,jdbcType=BIGINT}");
         sql.SET("start_time = #{record.startTime,jdbcType=TIMESTAMP}");
         sql.SET("end_time = #{record.endTime,jdbcType=TIMESTAMP}");
-        sql.SET("status = #{record.status,jdbcType=VARCHAR}");
+        sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
         sql.SET("version = #{record.version,jdbcType=INTEGER}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -200,12 +210,16 @@ public class TaskRecordSqlProvider {
             sql.SET("task_id = #{taskId,jdbcType=BIGINT}");
         }
         
+        if (record.getCountingCode() != null) {
+            sql.SET("counting_code = #{countingCode,jdbcType=VARCHAR}");
+        }
+        
         if (record.getTaskFormat() != null) {
             sql.SET("task_format = #{taskFormat,jdbcType=VARCHAR}");
         }
         
         if (record.getTarget() != null) {
-            sql.SET("target = #{target,jdbcType=INTEGER}");
+            sql.SET("target = #{target,jdbcType=BIGINT}");
         }
         
         if (record.getStartTime() != null) {
@@ -217,7 +231,7 @@ public class TaskRecordSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{status,jdbcType=VARCHAR}");
+            sql.SET("`status` = #{status,jdbcType=VARCHAR}");
         }
         
         if (record.getVersion() != null) {

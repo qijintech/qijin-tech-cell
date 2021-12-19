@@ -11,6 +11,18 @@
     <groupId>tech.qijin.cell</groupId>
     <packaging>jar</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-dependencies</artifactId>
+                <version>${project.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <dependency>
@@ -41,6 +53,10 @@
         <dependency>
             <groupId>tech.qijin.sdk</groupId>
             <artifactId>sdk-tencent-mini</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.qijin.cell</groupId>
+            <artifactId>cell-counting</artifactId>
         </dependency>
 
         <dependency>

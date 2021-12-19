@@ -357,6 +357,76 @@ public class TaskRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andCountingCodeIsNull() {
+            addCriterion("counting_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeIsNotNull() {
+            addCriterion("counting_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeEqualTo(String value) {
+            addCriterion("counting_code =", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeNotEqualTo(String value) {
+            addCriterion("counting_code <>", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeGreaterThan(String value) {
+            addCriterion("counting_code >", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("counting_code >=", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeLessThan(String value) {
+            addCriterion("counting_code <", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeLessThanOrEqualTo(String value) {
+            addCriterion("counting_code <=", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeLike(String value) {
+            addCriterion("counting_code like", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeNotLike(String value) {
+            addCriterion("counting_code not like", value, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeIn(List<String> values) {
+            addCriterion("counting_code in", values, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeNotIn(List<String> values) {
+            addCriterion("counting_code not in", values, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeBetween(String value1, String value2) {
+            addCriterion("counting_code between", value1, value2, "countingCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountingCodeNotBetween(String value1, String value2) {
+            addCriterion("counting_code not between", value1, value2, "countingCode");
+            return (Criteria) this;
+        }
+
         public Criteria andTaskFormatIsNull() {
             addCriterion("task_format is null");
             return (Criteria) this;
@@ -437,52 +507,52 @@ public class TaskRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andTargetEqualTo(Integer value) {
+        public Criteria andTargetEqualTo(Long value) {
             addCriterion("target =", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotEqualTo(Integer value) {
+        public Criteria andTargetNotEqualTo(Long value) {
             addCriterion("target <>", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThan(Integer value) {
+        public Criteria andTargetGreaterThan(Long value) {
             addCriterion("target >", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTargetGreaterThanOrEqualTo(Long value) {
             addCriterion("target >=", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThan(Integer value) {
+        public Criteria andTargetLessThan(Long value) {
             addCriterion("target <", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThanOrEqualTo(Integer value) {
+        public Criteria andTargetLessThanOrEqualTo(Long value) {
             addCriterion("target <=", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetIn(List<Integer> values) {
+        public Criteria andTargetIn(List<Long> values) {
             addCriterion("target in", values, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotIn(List<Integer> values) {
+        public Criteria andTargetNotIn(List<Long> values) {
             addCriterion("target not in", values, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetBetween(Integer value1, Integer value2) {
+        public Criteria andTargetBetween(Long value1, Long value2) {
             addCriterion("target between", value1, value2, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotBetween(Integer value1, Integer value2) {
+        public Criteria andTargetNotBetween(Long value1, Long value2) {
             addCriterion("target not between", value1, value2, "target");
             return (Criteria) this;
         }
@@ -608,72 +678,72 @@ public class TaskRecordExample {
         }
 
         public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+            addCriterion("`status` is null");
             return (Criteria) this;
         }
 
         public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+            addCriterion("`status` is not null");
             return (Criteria) this;
         }
 
         public Criteria andStatusEqualTo(TaskRecordStatus value) {
-            addCriterion("status =", value, "status");
+            addCriterion("`status` =", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotEqualTo(TaskRecordStatus value) {
-            addCriterion("status <>", value, "status");
+            addCriterion("`status` <>", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusGreaterThan(TaskRecordStatus value) {
-            addCriterion("status >", value, "status");
+            addCriterion("`status` >", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusGreaterThanOrEqualTo(TaskRecordStatus value) {
-            addCriterion("status >=", value, "status");
+            addCriterion("`status` >=", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusLessThan(TaskRecordStatus value) {
-            addCriterion("status <", value, "status");
+            addCriterion("`status` <", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusLessThanOrEqualTo(TaskRecordStatus value) {
-            addCriterion("status <=", value, "status");
+            addCriterion("`status` <=", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusLike(TaskRecordStatus value) {
-            addCriterion("status like", value, "status");
+            addCriterion("`status` like", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotLike(TaskRecordStatus value) {
-            addCriterion("status not like", value, "status");
+            addCriterion("`status` not like", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusIn(List<TaskRecordStatus> values) {
-            addCriterion("status in", values, "status");
+            addCriterion("`status` in", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotIn(List<TaskRecordStatus> values) {
-            addCriterion("status not in", values, "status");
+            addCriterion("`status` not in", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusBetween(TaskRecordStatus value1, TaskRecordStatus value2) {
-            addCriterion("status between", value1, value2, "status");
+            addCriterion("`status` between", value1, value2, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotBetween(TaskRecordStatus value1, TaskRecordStatus value2) {
-            addCriterion("status not between", value1, value2, "status");
+            addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
 

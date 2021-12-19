@@ -24,6 +24,6 @@ public class TaskCountingEventListener {
         }
         log.info("onCountingReachTarget, event={}", countingEvent);
         // 说明Task完成了
-        cellTaskService.onFinishTask(countingEvent.getUserId());
+        cellTaskService.onFinishTask(countingEvent.getUserId(), countingEvent.getCountingCode());
     }
 }

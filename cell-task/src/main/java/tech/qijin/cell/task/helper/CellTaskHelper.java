@@ -14,7 +14,9 @@ public interface CellTaskHelper {
      *
      * @return
      */
-    List<Task> listTasks();
+    List<Task> listAllTask();
+
+    Map<Long, Task> mapAllTask();
 
     /**
      * 返回Task中用到的countingCode
@@ -39,6 +41,12 @@ public interface CellTaskHelper {
     List<Task> listTasksByCountingCode(String countingCode);
 
     /**
+     * 创建任务记录
+     * @param record
+     * @return
+     */
+    boolean insertTaskRecord(TaskRecord record);
+    /**
      * 获取任务记录
      *
      * @param userId
@@ -48,6 +56,13 @@ public interface CellTaskHelper {
     TaskRecord getTaskRecord(Long userId, Long taskId);
 
     /**
+     * 获取用户任务列表
+     * @param userId
+     * @return
+     */
+    List<TaskRecord> listTaskRecord(Long userId);
+
+    /**
      * 更改任务状态
      *
      * @param record
@@ -55,4 +70,6 @@ public interface CellTaskHelper {
      * @return
      */
     boolean updateTaskStatus(TaskRecord record, TaskRecordStatus toStatus);
+
+    String getTaskFormat(Long userId, Task task);
 }

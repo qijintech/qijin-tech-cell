@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import tech.qijin.cell.task.helper.CellTaskHelper;
 import tech.qijin.util4j.trace.pojo.Channel;
 import tech.qijin.util4j.trace.util.ChannelUtil;
 import tech.qijin.util4j.utils.DateUtil;
+import tech.qijin.util4j.utils.NumberUtil;
 
 import javax.annotation.PostConstruct;
 import java.time.Instant;
@@ -26,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -60,9 +63,14 @@ public class CellTaskHelperImpl implements CellTaskHelper {
     }
 
     @Override
-    public List<Task> listTasks() {
+    public List<Task> listAllTask() {
         if (CollectionUtils.isNotEmpty(tasks)) return tasks;
         return listTaskFromDB();
+    }
+
+    @Override
+    public Map<Long, Task> mapAllTask() {
+        return listAllTask().stream().collect(Collectors.toMap(Task::getId, Function.identity()));
     }
 
     @Override
@@ -81,6 +89,16 @@ public class CellTaskHelperImpl implements CellTaskHelper {
     }
 
     @Override
+    public boolean insertTaskRecord(TaskRecord record) {
+        String checkRes = checkTaskRecord(record);
+        if (StringUtils.isNotBlank(checkRes)) {
+            log.error("insertTaskRecord invalid param, res={}, record={}", checkRes, record);
+            return false;
+        }
+        return taskRecordDao.insertSelective(record) > 0;
+    }
+
+    @Override
     public TaskRecord getTaskRecord(Long userId, Long taskId) {
         TaskRecordExample example = new TaskRecordExample();
         example.setOrderByClause("start_time desc limit 1");
@@ -88,6 +106,16 @@ public class CellTaskHelperImpl implements CellTaskHelper {
                 .andUserIdEqualTo(userId)
                 .andTaskIdEqualTo(taskId);
         return taskRecordDao.selectByExample(example).stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public List<TaskRecord> listTaskRecord(Long userId) {
+        Date now = DateUtil.now();
+        TaskRecordExample example = new TaskRecordExample();
+        example.createCriteria().andUserIdEqualTo(userId)
+                .andStartTimeLessThanOrEqualTo(now)
+                .andEndTimeGreaterThanOrEqualTo(now);
+        return taskRecordDao.selectByExample(example);
     }
 
     @Override
@@ -106,8 +134,37 @@ public class CellTaskHelperImpl implements CellTaskHelper {
         return taskRecordDao.updateByExampleSelective(update, example) > 0;
     }
 
+    public String getTaskFormat(Long userId, Task task) {
+        Date now = DateUtil.now();
+        switch (task.getKind()) {
+            case ONCE:
+                return String.format("task:once:%d:%d", task.getId(), userId);
+            case DAILY:
+                return String.format("task:daily:%d:%d:%s", task.getId(), userId, DateUtil.formatStr(now, "yyyyMMdd"));
+            case WEEKLY:
+                return String.format("task:weekly:%d:%d:%s", task.getId(), userId, DateUtil.getCurrentWeek());
+            case MONTHLY:
+                return String.format("task:monthly:%d:%d:%s", task.getId(), userId, DateUtil.formatStr(now, "yyyyMM"));
+            case YEARLY:
+                return String.format("task:yearly:%d:%d:%s", task.getId(), userId, DateUtil.formatStr(now, "yyyy"));
+            default:
+                return "";
+        }
+    }
+
     private List<Task> listTaskFromDB() {
         TaskExample example = new TaskExample();
         return taskDao.selectByExample(example);
+    }
+
+    private String checkTaskRecord(TaskRecord record) {
+        if (!NumberUtil.gtZero(record.getUserId())) return "userId";
+        if (!NumberUtil.gtZero(record.getTaskId())) return "taskId";
+        if (!NumberUtil.gtZero(record.getTarget())) return "target";
+        if (StringUtils.isBlank(record.getCountingCode())) return "countingCode";
+        if (StringUtils.isBlank(record.getTaskFormat())) return "taskFormat";
+        if (record.getStartTime() == null) return "startTime";
+        if (record.getEndTime() == null) return "endTime";
+        return "";
     }
 }

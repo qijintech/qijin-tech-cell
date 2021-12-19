@@ -32,17 +32,17 @@ public interface TaskRecordMapper {
 
     @Insert({
         "insert into task_record (channel, user_id, ",
-        "task_id, task_format, ",
-        "target, start_time, ",
-        "end_time, status, ",
-        "version, update_time, ",
-        "create_time)",
+        "task_id, counting_code, ",
+        "task_format, target, ",
+        "start_time, end_time, ",
+        "`status`, version, ",
+        "update_time, create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
-        "#{taskId,jdbcType=BIGINT}, #{taskFormat,jdbcType=VARCHAR}, ",
-        "#{target,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, ",
-        "#{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, ",
-        "#{version,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{taskId,jdbcType=BIGINT}, #{countingCode,jdbcType=VARCHAR}, ",
+        "#{taskFormat,jdbcType=VARCHAR}, #{target,jdbcType=BIGINT}, ",
+        "#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, ",
+        "#{status,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(TaskRecord record);
@@ -57,8 +57,9 @@ public interface TaskRecordMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="task_id", property="taskId", jdbcType=JdbcType.BIGINT),
+        @Result(column="counting_code", property="countingCode", jdbcType=JdbcType.VARCHAR),
         @Result(column="task_format", property="taskFormat", jdbcType=JdbcType.VARCHAR),
-        @Result(column="target", property="target", jdbcType=JdbcType.INTEGER),
+        @Result(column="target", property="target", jdbcType=JdbcType.BIGINT),
         @Result(column="start_time", property="startTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
@@ -70,8 +71,8 @@ public interface TaskRecordMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, task_id, task_format, target, start_time, end_time, status, ",
-        "version, update_time, create_time",
+        "id, channel, user_id, task_id, counting_code, task_format, target, start_time, ",
+        "end_time, `status`, version, update_time, create_time",
         "from task_record",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -80,8 +81,9 @@ public interface TaskRecordMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="task_id", property="taskId", jdbcType=JdbcType.BIGINT),
+        @Result(column="counting_code", property="countingCode", jdbcType=JdbcType.VARCHAR),
         @Result(column="task_format", property="taskFormat", jdbcType=JdbcType.VARCHAR),
-        @Result(column="target", property="target", jdbcType=JdbcType.INTEGER),
+        @Result(column="target", property="target", jdbcType=JdbcType.BIGINT),
         @Result(column="start_time", property="startTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
@@ -105,11 +107,12 @@ public interface TaskRecordMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "task_id = #{taskId,jdbcType=BIGINT},",
+          "counting_code = #{countingCode,jdbcType=VARCHAR},",
           "task_format = #{taskFormat,jdbcType=VARCHAR},",
-          "target = #{target,jdbcType=INTEGER},",
+          "target = #{target,jdbcType=BIGINT},",
           "start_time = #{startTime,jdbcType=TIMESTAMP},",
           "end_time = #{endTime,jdbcType=TIMESTAMP},",
-          "status = #{status,jdbcType=VARCHAR},",
+          "`status` = #{status,jdbcType=VARCHAR},",
           "version = #{version,jdbcType=INTEGER},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",

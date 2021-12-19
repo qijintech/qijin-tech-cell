@@ -31,13 +31,13 @@ public interface TaskMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into task (channel, name, ",
+        "insert into task (channel, `name`, ",
         "kind, target, counting_code, ",
         "reward_type, reward_id, ",
-        "order, update_time, ",
+        "`order`, update_time, ",
         "create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, ",
-        "#{kind,jdbcType=VARCHAR}, #{target,jdbcType=INTEGER}, #{countingCode,jdbcType=CHAR}, ",
+        "#{kind,jdbcType=VARCHAR}, #{target,jdbcType=BIGINT}, #{countingCode,jdbcType=CHAR}, ",
         "#{rewardType,jdbcType=VARCHAR}, #{rewardId,jdbcType=BIGINT}, ",
         "#{order,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
@@ -55,7 +55,7 @@ public interface TaskMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
-        @Result(column="target", property="target", jdbcType=JdbcType.INTEGER),
+        @Result(column="target", property="target", jdbcType=JdbcType.BIGINT),
         @Result(column="counting_code", property="countingCode", jdbcType=JdbcType.CHAR),
         @Result(column="reward_type", property="rewardType", jdbcType=JdbcType.VARCHAR),
         @Result(column="reward_id", property="rewardId", jdbcType=JdbcType.BIGINT),
@@ -67,7 +67,7 @@ public interface TaskMapper {
 
     @Select({
         "select",
-        "id, channel, name, kind, target, counting_code, reward_type, reward_id, order, ",
+        "id, channel, `name`, kind, target, counting_code, reward_type, reward_id, `order`, ",
         "update_time, create_time",
         "from task",
         "where id = #{id,jdbcType=BIGINT}"
@@ -77,7 +77,7 @@ public interface TaskMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
-        @Result(column="target", property="target", jdbcType=JdbcType.INTEGER),
+        @Result(column="target", property="target", jdbcType=JdbcType.BIGINT),
         @Result(column="counting_code", property="countingCode", jdbcType=JdbcType.CHAR),
         @Result(column="reward_type", property="rewardType", jdbcType=JdbcType.VARCHAR),
         @Result(column="reward_id", property="rewardId", jdbcType=JdbcType.BIGINT),
@@ -99,13 +99,13 @@ public interface TaskMapper {
     @Update({
         "update task",
         "set channel = #{channel,jdbcType=VARCHAR},",
-          "name = #{name,jdbcType=VARCHAR},",
+          "`name` = #{name,jdbcType=VARCHAR},",
           "kind = #{kind,jdbcType=VARCHAR},",
-          "target = #{target,jdbcType=INTEGER},",
+          "target = #{target,jdbcType=BIGINT},",
           "counting_code = #{countingCode,jdbcType=CHAR},",
           "reward_type = #{rewardType,jdbcType=VARCHAR},",
           "reward_id = #{rewardId,jdbcType=BIGINT},",
-          "order = #{order,jdbcType=INTEGER},",
+          "`order` = #{order,jdbcType=INTEGER},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

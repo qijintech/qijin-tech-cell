@@ -14,7 +14,7 @@ public class Task {
 
     private TaskKind kind;
 
-    private Integer target;
+    private Long target;
 
     private String countingCode;
 
@@ -60,11 +60,11 @@ public class Task {
         this.kind = kind;
     }
 
-    public Integer getTarget() {
+    public Long getTarget() {
         return target;
     }
 
-    public void setTarget(Integer target) {
+    public void setTarget(Long target) {
         this.target = target;
     }
 

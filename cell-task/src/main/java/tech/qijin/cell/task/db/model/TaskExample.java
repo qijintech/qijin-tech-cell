@@ -239,72 +239,72 @@ public class TaskExample {
         }
 
         public Criteria andNameIsNull() {
-            addCriterion("name is null");
+            addCriterion("`name` is null");
             return (Criteria) this;
         }
 
         public Criteria andNameIsNotNull() {
-            addCriterion("name is not null");
+            addCriterion("`name` is not null");
             return (Criteria) this;
         }
 
         public Criteria andNameEqualTo(String value) {
-            addCriterion("name =", value, "name");
+            addCriterion("`name` =", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameNotEqualTo(String value) {
-            addCriterion("name <>", value, "name");
+            addCriterion("`name` <>", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameGreaterThan(String value) {
-            addCriterion("name >", value, "name");
+            addCriterion("`name` >", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("name >=", value, "name");
+            addCriterion("`name` >=", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameLessThan(String value) {
-            addCriterion("name <", value, "name");
+            addCriterion("`name` <", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("name <=", value, "name");
+            addCriterion("`name` <=", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameLike(String value) {
-            addCriterion("name like", value, "name");
+            addCriterion("`name` like", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameNotLike(String value) {
-            addCriterion("name not like", value, "name");
+            addCriterion("`name` not like", value, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
+            addCriterion("`name` in", values, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
+            addCriterion("`name` not in", values, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("name between", value1, value2, "name");
+            addCriterion("`name` between", value1, value2, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("name not between", value1, value2, "name");
+            addCriterion("`name` not between", value1, value2, "name");
             return (Criteria) this;
         }
 
@@ -388,52 +388,52 @@ public class TaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andTargetEqualTo(Integer value) {
+        public Criteria andTargetEqualTo(Long value) {
             addCriterion("target =", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotEqualTo(Integer value) {
+        public Criteria andTargetNotEqualTo(Long value) {
             addCriterion("target <>", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThan(Integer value) {
+        public Criteria andTargetGreaterThan(Long value) {
             addCriterion("target >", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTargetGreaterThanOrEqualTo(Long value) {
             addCriterion("target >=", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThan(Integer value) {
+        public Criteria andTargetLessThan(Long value) {
             addCriterion("target <", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThanOrEqualTo(Integer value) {
+        public Criteria andTargetLessThanOrEqualTo(Long value) {
             addCriterion("target <=", value, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetIn(List<Integer> values) {
+        public Criteria andTargetIn(List<Long> values) {
             addCriterion("target in", values, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotIn(List<Integer> values) {
+        public Criteria andTargetNotIn(List<Long> values) {
             addCriterion("target not in", values, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetBetween(Integer value1, Integer value2) {
+        public Criteria andTargetBetween(Long value1, Long value2) {
             addCriterion("target between", value1, value2, "target");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotBetween(Integer value1, Integer value2) {
+        public Criteria andTargetNotBetween(Long value1, Long value2) {
             addCriterion("target not between", value1, value2, "target");
             return (Criteria) this;
         }
@@ -639,62 +639,62 @@ public class TaskExample {
         }
 
         public Criteria andOrderIsNull() {
-            addCriterion("order is null");
+            addCriterion("`order` is null");
             return (Criteria) this;
         }
 
         public Criteria andOrderIsNotNull() {
-            addCriterion("order is not null");
+            addCriterion("`order` is not null");
             return (Criteria) this;
         }
 
         public Criteria andOrderEqualTo(Integer value) {
-            addCriterion("order =", value, "order");
+            addCriterion("`order` =", value, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderNotEqualTo(Integer value) {
-            addCriterion("order <>", value, "order");
+            addCriterion("`order` <>", value, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderGreaterThan(Integer value) {
-            addCriterion("order >", value, "order");
+            addCriterion("`order` >", value, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderGreaterThanOrEqualTo(Integer value) {
-            addCriterion("order >=", value, "order");
+            addCriterion("`order` >=", value, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderLessThan(Integer value) {
-            addCriterion("order <", value, "order");
+            addCriterion("`order` <", value, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderLessThanOrEqualTo(Integer value) {
-            addCriterion("order <=", value, "order");
+            addCriterion("`order` <=", value, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderIn(List<Integer> values) {
-            addCriterion("order in", values, "order");
+            addCriterion("`order` in", values, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderNotIn(List<Integer> values) {
-            addCriterion("order not in", values, "order");
+            addCriterion("`order` not in", values, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderBetween(Integer value1, Integer value2) {
-            addCriterion("order between", value1, value2, "order");
+            addCriterion("`order` between", value1, value2, "order");
             return (Criteria) this;
         }
 
         public Criteria andOrderNotBetween(Integer value1, Integer value2) {
-            addCriterion("order not between", value1, value2, "order");
+            addCriterion("`order` not between", value1, value2, "order");
             return (Criteria) this;
         }
 
