@@ -28,6 +28,7 @@
 		<module>cell-feed</module>
 		<module>cell-task</module>
 		<module>cell-counting</module>
+		<module>cell-account</module>
   </modules>
 
 	<properties>

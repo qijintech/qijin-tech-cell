@@ -10,11 +10,6 @@
     <properties resource="mbg.properties"></properties>
 
     <context id="MySqlTables" targetRuntime="MyBatis3">
-        <!-- 数据库关键字冲突,自动处理 -->
-        <property name="autoDelimitKeywords" value="true"/>
-        <!-- 用反引号`包裹,默认是双引号"-->
-        <property name="beginningDelimiter" value="`"/>
-        <property name="endingDelimiter" value="`"/>
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
@@ -30,16 +25,16 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="tech.qijin.cell.aaaa.db.model" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="tech.qijin.cell.account.db.model" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="tech.qijin.cell.aaaa.db.xml" targetProject="./src/main/java">
+        <sqlMapGenerator targetPackage="tech.qijin.cell.account.db.xml" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="tech.qijin.cell.aaaa.db.mapper" targetProject="./src/main/java">
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="tech.qijin.cell.account.db.mapper" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <table tableName="%">
