@@ -3,63 +3,67 @@ package tech.qijin.cell.message.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.cell.message.db.model.UserMessage;
-import tech.qijin.cell.message.db.model.UserMessageExample.Criteria;
-import tech.qijin.cell.message.db.model.UserMessageExample.Criterion;
-import tech.qijin.cell.message.db.model.UserMessageExample;
+import tech.qijin.cell.message.db.model.MessageDrops;
+import tech.qijin.cell.message.db.model.MessageDropsExample.Criteria;
+import tech.qijin.cell.message.db.model.MessageDropsExample.Criterion;
+import tech.qijin.cell.message.db.model.MessageDropsExample;
 
-public class UserMessageSqlProvider {
+public class MessageDropsSqlProvider {
 
-    public String countByExample(UserMessageExample example) {
+    public String countByExample(MessageDropsExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("user_message");
+        sql.SELECT("count(*)").FROM("message_drops");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(UserMessageExample example) {
+    public String deleteByExample(MessageDropsExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("user_message");
+        sql.DELETE_FROM("message_drops");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(UserMessage record) {
+    public String insertSelective(MessageDrops record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("user_message");
+        sql.INSERT_INTO("message_drops");
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
+        if (record.getMessageId() != null) {
+            sql.VALUES("message_id", "#{messageId,jdbcType=BIGINT}");
         }
         
-        if (record.getContent() != null) {
-            sql.VALUES("content", "#{content,jdbcType=VARCHAR}");
+        if (record.getDropsId() != null) {
+            sql.VALUES("drops_id", "#{dropsId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getStatementSrc() != null) {
+            sql.VALUES("statement_src", "#{statementSrc,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDataId() != null) {
+            sql.VALUES("data_id", "#{dataId,jdbcType=BIGINT}");
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getValid() != null) {
-            sql.VALUES("valid", "#{valid,jdbcType=TINYINT}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
+            sql.VALUES("`status`", "#{status,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
+        }
+        
         return sql.toString();
     }
 
-    public String selectByExample(UserMessageExample example) {
+    public String selectByExample(MessageDropsExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -67,13 +71,14 @@ public class UserMessageSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("user_id");
-        sql.SELECT("content");
-        sql.SELECT("status");
-        sql.SELECT("valid");
-        sql.SELECT("create_time");
+        sql.SELECT("message_id");
+        sql.SELECT("drops_id");
+        sql.SELECT("statement_src");
+        sql.SELECT("data_id");
+        sql.SELECT("`status`");
         sql.SELECT("update_time");
-        sql.FROM("user_message");
+        sql.SELECT("create_time");
+        sql.FROM("message_drops");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -84,11 +89,11 @@ public class UserMessageSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        UserMessage record = (UserMessage) parameter.get("record");
-        UserMessageExample example = (UserMessageExample) parameter.get("example");
+        MessageDrops record = (MessageDrops) parameter.get("record");
+        MessageDropsExample example = (MessageDropsExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("user_message");
+        sql.UPDATE("message_drops");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -98,28 +103,32 @@ public class UserMessageSqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        if (record.getMessageId() != null) {
+            sql.SET("message_id = #{record.messageId,jdbcType=BIGINT}");
         }
         
-        if (record.getContent() != null) {
-            sql.SET("content = #{record.content,jdbcType=VARCHAR}");
+        if (record.getDropsId() != null) {
+            sql.SET("drops_id = #{record.dropsId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getStatementSrc() != null) {
+            sql.SET("statement_src = #{record.statementSrc,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDataId() != null) {
+            sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getValid() != null) {
-            sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+            sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
         
         applyWhere(sql, example, true);
@@ -128,52 +137,57 @@ public class UserMessageSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("user_message");
+        sql.UPDATE("message_drops");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
-        sql.SET("content = #{record.content,jdbcType=VARCHAR}");
-        sql.SET("status = #{record.status,jdbcType=VARCHAR}");
-        sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
-        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("message_id = #{record.messageId,jdbcType=BIGINT}");
+        sql.SET("drops_id = #{record.dropsId,jdbcType=BIGINT}");
+        sql.SET("statement_src = #{record.statementSrc,jdbcType=VARCHAR}");
+        sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
+        sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
-        UserMessageExample example = (UserMessageExample) parameter.get("example");
+        MessageDropsExample example = (MessageDropsExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(UserMessage record) {
+    public String updateByPrimaryKeySelective(MessageDrops record) {
         SQL sql = new SQL();
-        sql.UPDATE("user_message");
+        sql.UPDATE("message_drops");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        if (record.getMessageId() != null) {
+            sql.SET("message_id = #{messageId,jdbcType=BIGINT}");
         }
         
-        if (record.getContent() != null) {
-            sql.SET("content = #{content,jdbcType=VARCHAR}");
+        if (record.getDropsId() != null) {
+            sql.SET("drops_id = #{dropsId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getStatementSrc() != null) {
+            sql.SET("statement_src = #{statementSrc,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDataId() != null) {
+            sql.SET("data_id = #{dataId,jdbcType=BIGINT}");
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{status,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getValid() != null) {
-            sql.SET("valid = #{valid,jdbcType=TINYINT}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
+            sql.SET("`status` = #{status,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {
             sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
         }
         
         sql.WHERE("id = #{id,jdbcType=BIGINT}");
@@ -181,7 +195,7 @@ public class UserMessageSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, UserMessageExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, MessageDropsExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

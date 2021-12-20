@@ -1,8 +1,8 @@
 package tech.qijin.cell.message.db.dao;
 
-import tech.qijin.cell.message.db.mapper.UserMessageMapper;
-import tech.qijin.cell.message.db.mapper.UserMessageSqlProvider;
-import tech.qijin.cell.message.db.model.UserMessage;
+import tech.qijin.cell.message.db.mapper.MessageDropsMapper;
+import tech.qijin.cell.message.db.mapper.MessageDropsSqlProvider;
+import tech.qijin.cell.message.db.model.MessageDrops;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.InsertProvider;
 import com.google.common.collect.Lists;
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
  * @author: SYSTEM
  **/
 
-public interface UserMessageDao extends UserMessageMapper {
+public interface MessageDropsDao extends MessageDropsMapper {
 
 	@InsertProvider(type = SqlProvider.class, method = "batchInsert")
-	int batchInsert(@Param("records") List<UserMessage> records);
+	int batchInsert(@Param("records") List<MessageDrops> records);
 
 	class SqlProvider {
 		private static final String VALUES = "VALUES";
-		UserMessageSqlProvider provider = new UserMessageSqlProvider();
+		MessageDropsSqlProvider provider = new MessageDropsSqlProvider();
 
 		public String batchInsert(Map<String, Object> param) {
-			List<UserMessage> records = (List<UserMessage>) param.get("records");
+			List<MessageDrops> records = (List<MessageDrops>) param.get("records");
 			return genSql(records);
 		}
 
-		private String genSql(List<UserMessage> records) {
+		private String genSql(List<MessageDrops> records) {
 			List<String> sqls = records.stream()
 					.map(record -> provider.insertSelective(record))
 					.collect(Collectors.toList());

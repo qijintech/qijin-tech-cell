@@ -14,11 +14,11 @@ import javax.annotation.PostConstruct;
  **/
 @Slf4j
 @Configuration
-@ComponentScan(value = {"tech.qijin.cell.message.db", "tech.qijin.cell.message.service", "tech.qijin.cell.message.helper"})
+@ComponentScan(value = {"tech.qijin.cell.message.db", "tech.qijin.cell.message.service", "tech.qijin.cell.message.helper", "tech.qijin.cell.message.server"})
 @Import(CellMessageDatasourceConfig.class)
 public class CellMessageAutoConfiguration {
     @PostConstruct
     public void init() {
-        log.info("======= loading Cell relation =======");
+        log.info("======= loading Cell message =======");
     }
 }
