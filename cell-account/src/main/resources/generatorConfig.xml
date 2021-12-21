@@ -64,6 +64,8 @@
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="kind" property="kind"
                             javaType="tech.qijin.cell.account.base.AccountKind"/>
+            <columnOverride column="statement_src" property="statementSrc"
+                            javaType="tech.qijin.cell.account.base.StatementSrc"/>
         </table>
         <table tableName="item">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
