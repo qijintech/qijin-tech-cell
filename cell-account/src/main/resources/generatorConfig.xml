@@ -10,6 +10,11 @@
     <properties resource="mbg.properties"></properties>
 
     <context id="MySqlTables" targetRuntime="MyBatis3">
+        <!-- 数据库关键字冲突,自动处理 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <!-- 用反引号`包裹,默认是双引号"-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
@@ -45,6 +50,33 @@
                             javaType="tech.qijin.util4j.trace.pojo.EnvEnum"/>
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+        </table>
+        <table tableName="account">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="kind" property="kind"
+                            javaType="tech.qijin.cell.account.base.AccountKind"/>
+        </table>
+        <table tableName="account_statement">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="kind" property="kind"
+                            javaType="tech.qijin.cell.account.base.AccountKind"/>
+        </table>
+        <table tableName="item">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="stackable" property="stackable"
+                            javaType="java.lang.Boolean"/>
+            <columnOverride column="auto_use" property="autoUse"
+                            javaType="java.lang.Boolean"/>
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="kind" property="kind"
+                            javaType="tech.qijin.cell.account.base.ItemKind"/>
+            <columnOverride column="status" property="status"
+                            javaType="tech.qijin.cell.account.base.ItemStatus"/>
         </table>
     </context>
 </generatorConfiguration>
