@@ -6,7 +6,8 @@ import tech.qijin.util4j.lang.constant.EnumValue;
  * 账户类型
  */
 public enum AccountKind implements EnumValue<String> {
-    ITEM("道具"),
+    CASH("现金"),
+    PEACH_BLOSSOM("桃花"),
     ;
 
 

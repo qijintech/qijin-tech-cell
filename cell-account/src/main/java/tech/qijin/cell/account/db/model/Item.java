@@ -1,7 +1,7 @@
 package tech.qijin.cell.account.db.model;
 
 import java.util.Date;
-import tech.qijin.cell.account.base.ItemKind;
+import tech.qijin.cell.account.base.AccountKind;
 import tech.qijin.cell.account.base.ItemStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
@@ -12,7 +12,7 @@ public class Item {
 
     private String name;
 
-    private ItemKind kind;
+    private AccountKind kind;
 
     private ItemStatus status;
 
@@ -50,11 +50,11 @@ public class Item {
         this.name = name == null ? null : name.trim();
     }
 
-    public ItemKind getKind() {
+    public AccountKind getKind() {
         return kind;
     }
 
-    public void setKind(ItemKind kind) {
+    public void setKind(AccountKind kind) {
         this.kind = kind;
     }
 

@@ -55,6 +55,8 @@
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="is_item" property="isItem"
+                            javaType="java.lang.Boolean"/>
             <columnOverride column="kind" property="kind"
                             javaType="tech.qijin.cell.account.base.AccountKind"/>
         </table>
@@ -76,7 +78,7 @@
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="kind" property="kind"
-                            javaType="tech.qijin.cell.account.base.ItemKind"/>
+                            javaType="tech.qijin.cell.account.base.AccountKind"/>
             <columnOverride column="status" property="status"
                             javaType="tech.qijin.cell.account.base.ItemStatus"/>
         </table>

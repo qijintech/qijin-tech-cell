@@ -3,7 +3,7 @@ package tech.qijin.cell.account.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import tech.qijin.cell.account.base.ItemKind;
+import tech.qijin.cell.account.base.AccountKind;
 import tech.qijin.cell.account.base.ItemStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
@@ -318,62 +318,62 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andKindEqualTo(ItemKind value) {
+        public Criteria andKindEqualTo(AccountKind value) {
             addCriterion("kind =", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotEqualTo(ItemKind value) {
+        public Criteria andKindNotEqualTo(AccountKind value) {
             addCriterion("kind <>", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindGreaterThan(ItemKind value) {
+        public Criteria andKindGreaterThan(AccountKind value) {
             addCriterion("kind >", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindGreaterThanOrEqualTo(ItemKind value) {
+        public Criteria andKindGreaterThanOrEqualTo(AccountKind value) {
             addCriterion("kind >=", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindLessThan(ItemKind value) {
+        public Criteria andKindLessThan(AccountKind value) {
             addCriterion("kind <", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindLessThanOrEqualTo(ItemKind value) {
+        public Criteria andKindLessThanOrEqualTo(AccountKind value) {
             addCriterion("kind <=", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindLike(ItemKind value) {
+        public Criteria andKindLike(AccountKind value) {
             addCriterion("kind like", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotLike(ItemKind value) {
+        public Criteria andKindNotLike(AccountKind value) {
             addCriterion("kind not like", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindIn(List<ItemKind> values) {
+        public Criteria andKindIn(List<AccountKind> values) {
             addCriterion("kind in", values, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotIn(List<ItemKind> values) {
+        public Criteria andKindNotIn(List<AccountKind> values) {
             addCriterion("kind not in", values, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindBetween(ItemKind value1, ItemKind value2) {
+        public Criteria andKindBetween(AccountKind value1, AccountKind value2) {
             addCriterion("kind between", value1, value2, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotBetween(ItemKind value1, ItemKind value2) {
+        public Criteria andKindNotBetween(AccountKind value1, AccountKind value2) {
             addCriterion("kind not between", value1, value2, "kind");
             return (Criteria) this;
         }

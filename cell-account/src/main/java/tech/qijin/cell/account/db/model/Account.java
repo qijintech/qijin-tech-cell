@@ -13,6 +13,10 @@ public class Account {
 
     private AccountKind kind;
 
+    private String name;
+
+    private Boolean isItem;
+
     private Long balance;
 
     private Integer version;
@@ -51,6 +55,22 @@ public class Account {
 
     public void setKind(AccountKind kind) {
         this.kind = kind;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Boolean getIsItem() {
+        return isItem;
+    }
+
+    public void setIsItem(Boolean isItem) {
+        this.isItem = isItem;
     }
 
     public Long getBalance() {

@@ -32,10 +32,12 @@ public interface AccountMapper {
 
     @Insert({
         "insert into account (channel, user_id, ",
-        "kind, balance, version, ",
+        "kind, `name`, is_item, ",
+        "balance, version, ",
         "update_time, create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
-        "#{kind,jdbcType=VARCHAR}, #{balance,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, ",
+        "#{kind,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{isItem,jdbcType=TINYINT}, ",
+        "#{balance,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
@@ -51,6 +53,8 @@ public interface AccountMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
+        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="is_item", property="isItem", jdbcType=JdbcType.TINYINT),
         @Result(column="balance", property="balance", jdbcType=JdbcType.BIGINT),
         @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -60,7 +64,8 @@ public interface AccountMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, kind, balance, version, update_time, create_time",
+        "id, channel, user_id, kind, `name`, is_item, balance, version, update_time, ",
+        "create_time",
         "from account",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -69,6 +74,8 @@ public interface AccountMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
+        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="is_item", property="isItem", jdbcType=JdbcType.TINYINT),
         @Result(column="balance", property="balance", jdbcType=JdbcType.BIGINT),
         @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -90,6 +97,8 @@ public interface AccountMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "kind = #{kind,jdbcType=VARCHAR},",
+          "`name` = #{name,jdbcType=VARCHAR},",
+          "is_item = #{isItem,jdbcType=TINYINT},",
           "balance = #{balance,jdbcType=BIGINT},",
           "version = #{version,jdbcType=INTEGER},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
