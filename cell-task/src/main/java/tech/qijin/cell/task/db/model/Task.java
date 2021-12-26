@@ -22,7 +22,13 @@ public class Task {
 
     private Long rewardId;
 
+    private Boolean claimableWhenCreate;
+
     private Integer order;
+
+    private String forwardText;
+
+    private String forward;
 
     private Date updateTime;
 
@@ -92,12 +98,36 @@ public class Task {
         this.rewardId = rewardId;
     }
 
+    public Boolean getClaimableWhenCreate() {
+        return claimableWhenCreate;
+    }
+
+    public void setClaimableWhenCreate(Boolean claimableWhenCreate) {
+        this.claimableWhenCreate = claimableWhenCreate;
+    }
+
     public Integer getOrder() {
         return order;
     }
 
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    public String getForwardText() {
+        return forwardText;
+    }
+
+    public void setForwardText(String forwardText) {
+        this.forwardText = forwardText == null ? null : forwardText.trim();
+    }
+
+    public String getForward() {
+        return forward;
+    }
+
+    public void setForward(String forward) {
+        this.forward = forward == null ? null : forward.trim();
     }
 
     public Date getUpdateTime() {

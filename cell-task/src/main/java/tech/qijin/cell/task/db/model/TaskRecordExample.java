@@ -3,6 +3,7 @@ package tech.qijin.cell.task.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import tech.qijin.cell.task.base.RewardType;
 import tech.qijin.cell.task.base.TaskRecordStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
@@ -744,6 +745,136 @@ public class TaskRecordExample {
 
         public Criteria andStatusNotBetween(TaskRecordStatus value1, TaskRecordStatus value2) {
             addCriterion("`status` not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeIsNull() {
+            addCriterion("reward_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeIsNotNull() {
+            addCriterion("reward_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeEqualTo(RewardType value) {
+            addCriterion("reward_type =", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotEqualTo(RewardType value) {
+            addCriterion("reward_type <>", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeGreaterThan(RewardType value) {
+            addCriterion("reward_type >", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeGreaterThanOrEqualTo(RewardType value) {
+            addCriterion("reward_type >=", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeLessThan(RewardType value) {
+            addCriterion("reward_type <", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeLessThanOrEqualTo(RewardType value) {
+            addCriterion("reward_type <=", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeLike(RewardType value) {
+            addCriterion("reward_type like", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotLike(RewardType value) {
+            addCriterion("reward_type not like", value, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeIn(List<RewardType> values) {
+            addCriterion("reward_type in", values, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotIn(List<RewardType> values) {
+            addCriterion("reward_type not in", values, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeBetween(RewardType value1, RewardType value2) {
+            addCriterion("reward_type between", value1, value2, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardTypeNotBetween(RewardType value1, RewardType value2) {
+            addCriterion("reward_type not between", value1, value2, "rewardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdIsNull() {
+            addCriterion("reward_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdIsNotNull() {
+            addCriterion("reward_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdEqualTo(Long value) {
+            addCriterion("reward_id =", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdNotEqualTo(Long value) {
+            addCriterion("reward_id <>", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdGreaterThan(Long value) {
+            addCriterion("reward_id >", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("reward_id >=", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdLessThan(Long value) {
+            addCriterion("reward_id <", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdLessThanOrEqualTo(Long value) {
+            addCriterion("reward_id <=", value, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdIn(List<Long> values) {
+            addCriterion("reward_id in", values, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdNotIn(List<Long> values) {
+            addCriterion("reward_id not in", values, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdBetween(Long value1, Long value2) {
+            addCriterion("reward_id between", value1, value2, "rewardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardIdNotBetween(Long value1, Long value2) {
+            addCriterion("reward_id not between", value1, value2, "rewardId");
             return (Criteria) this;
         }
 

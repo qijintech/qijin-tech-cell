@@ -1,6 +1,7 @@
 package tech.qijin.cell.account.service;
 
 import tech.qijin.cell.account.base.AccountKind;
+import tech.qijin.cell.account.base.StatementSrc;
 import tech.qijin.cell.account.db.model.Account;
 
 import java.util.List;
@@ -20,4 +21,15 @@ public interface CellAccountService {
      * @return
      */
     List<Account> listAccount(Long userId);
+
+    /**
+     * 更新账户
+     * @param userId
+     * @param kind
+     * @param amount
+     * @param src
+     * @param dataId
+     * @return
+     */
+    boolean updateAccount(Long userId, AccountKind kind, Long amount, StatementSrc src, Long dataId);
 }

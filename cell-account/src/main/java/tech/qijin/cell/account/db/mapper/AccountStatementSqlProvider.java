@@ -40,8 +40,8 @@ public class AccountStatementSqlProvider {
             sql.VALUES("kind", "#{kind,jdbcType=VARCHAR}");
         }
         
-        if (record.getDataSrc() != null) {
-            sql.VALUES("data_src", "#{dataSrc,jdbcType=VARCHAR}");
+        if (record.getStatementSrc() != null) {
+            sql.VALUES("statement_src", "#{statementSrc,jdbcType=VARCHAR}");
         }
         
         if (record.getDataId() != null) {
@@ -73,7 +73,7 @@ public class AccountStatementSqlProvider {
         sql.SELECT("channel");
         sql.SELECT("user_id");
         sql.SELECT("kind");
-        sql.SELECT("data_src");
+        sql.SELECT("statement_src");
         sql.SELECT("data_id");
         sql.SELECT("amount");
         sql.SELECT("update_time");
@@ -111,8 +111,8 @@ public class AccountStatementSqlProvider {
             sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
         }
         
-        if (record.getDataSrc() != null) {
-            sql.SET("data_src = #{record.dataSrc,jdbcType=VARCHAR}");
+        if (record.getStatementSrc() != null) {
+            sql.SET("statement_src = #{record.statementSrc,jdbcType=VARCHAR}");
         }
         
         if (record.getDataId() != null) {
@@ -143,7 +143,7 @@ public class AccountStatementSqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
-        sql.SET("data_src = #{record.dataSrc,jdbcType=VARCHAR}");
+        sql.SET("statement_src = #{record.statementSrc,jdbcType=VARCHAR}");
         sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
         sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -170,8 +170,8 @@ public class AccountStatementSqlProvider {
             sql.SET("kind = #{kind,jdbcType=VARCHAR}");
         }
         
-        if (record.getDataSrc() != null) {
-            sql.SET("data_src = #{dataSrc,jdbcType=VARCHAR}");
+        if (record.getStatementSrc() != null) {
+            sql.SET("statement_src = #{statementSrc,jdbcType=VARCHAR}");
         }
         
         if (record.getDataId() != null) {

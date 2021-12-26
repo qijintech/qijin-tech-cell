@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tech.qijin.cell.account.base.AccountKind;
+import tech.qijin.cell.account.base.StatementSrc;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class AccountStatementExample {
@@ -367,73 +368,73 @@ public class AccountStatementExample {
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcIsNull() {
-            addCriterion("data_src is null");
+        public Criteria andStatementSrcIsNull() {
+            addCriterion("statement_src is null");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcIsNotNull() {
-            addCriterion("data_src is not null");
+        public Criteria andStatementSrcIsNotNull() {
+            addCriterion("statement_src is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcEqualTo(String value) {
-            addCriterion("data_src =", value, "dataSrc");
+        public Criteria andStatementSrcEqualTo(StatementSrc value) {
+            addCriterion("statement_src =", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcNotEqualTo(String value) {
-            addCriterion("data_src <>", value, "dataSrc");
+        public Criteria andStatementSrcNotEqualTo(StatementSrc value) {
+            addCriterion("statement_src <>", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcGreaterThan(String value) {
-            addCriterion("data_src >", value, "dataSrc");
+        public Criteria andStatementSrcGreaterThan(StatementSrc value) {
+            addCriterion("statement_src >", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcGreaterThanOrEqualTo(String value) {
-            addCriterion("data_src >=", value, "dataSrc");
+        public Criteria andStatementSrcGreaterThanOrEqualTo(StatementSrc value) {
+            addCriterion("statement_src >=", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcLessThan(String value) {
-            addCriterion("data_src <", value, "dataSrc");
+        public Criteria andStatementSrcLessThan(StatementSrc value) {
+            addCriterion("statement_src <", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcLessThanOrEqualTo(String value) {
-            addCriterion("data_src <=", value, "dataSrc");
+        public Criteria andStatementSrcLessThanOrEqualTo(StatementSrc value) {
+            addCriterion("statement_src <=", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcLike(String value) {
-            addCriterion("data_src like", value, "dataSrc");
+        public Criteria andStatementSrcLike(StatementSrc value) {
+            addCriterion("statement_src like", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcNotLike(String value) {
-            addCriterion("data_src not like", value, "dataSrc");
+        public Criteria andStatementSrcNotLike(StatementSrc value) {
+            addCriterion("statement_src not like", value, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcIn(List<String> values) {
-            addCriterion("data_src in", values, "dataSrc");
+        public Criteria andStatementSrcIn(List<StatementSrc> values) {
+            addCriterion("statement_src in", values, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcNotIn(List<String> values) {
-            addCriterion("data_src not in", values, "dataSrc");
+        public Criteria andStatementSrcNotIn(List<StatementSrc> values) {
+            addCriterion("statement_src not in", values, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcBetween(String value1, String value2) {
-            addCriterion("data_src between", value1, value2, "dataSrc");
+        public Criteria andStatementSrcBetween(StatementSrc value1, StatementSrc value2) {
+            addCriterion("statement_src between", value1, value2, "statementSrc");
             return (Criteria) this;
         }
 
-        public Criteria andDataSrcNotBetween(String value1, String value2) {
-            addCriterion("data_src not between", value1, value2, "dataSrc");
+        public Criteria andStatementSrcNotBetween(StatementSrc value1, StatementSrc value2) {
+            addCriterion("statement_src not between", value1, value2, "statementSrc");
             return (Criteria) this;
         }
 

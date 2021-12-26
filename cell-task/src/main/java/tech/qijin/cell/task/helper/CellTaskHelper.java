@@ -16,6 +16,8 @@ public interface CellTaskHelper {
      */
     List<Task> listAllTask();
 
+    Task getTask(Long taskId);
+
     Map<Long, Task> mapAllTask();
 
     /**
@@ -42,12 +44,14 @@ public interface CellTaskHelper {
 
     /**
      * 创建任务记录
+     *
      * @param record
      * @return
      */
     boolean insertTaskRecord(TaskRecord record);
+
     /**
-     * 获取任务记录
+     * 获取一个任务记录
      *
      * @param userId
      * @param taskId
@@ -55,8 +59,11 @@ public interface CellTaskHelper {
      */
     TaskRecord getTaskRecord(Long userId, Long taskId);
 
+    TaskRecord getTaskRecord(Long taskRecordId);
+
     /**
      * 获取用户任务列表
+     *
      * @param userId
      * @return
      */

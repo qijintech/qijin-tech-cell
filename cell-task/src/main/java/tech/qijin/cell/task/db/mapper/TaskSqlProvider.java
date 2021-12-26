@@ -56,8 +56,20 @@ public class TaskSqlProvider {
             sql.VALUES("reward_id", "#{rewardId,jdbcType=BIGINT}");
         }
         
+        if (record.getClaimableWhenCreate() != null) {
+            sql.VALUES("claimable_when_create", "#{claimableWhenCreate,jdbcType=TINYINT}");
+        }
+        
         if (record.getOrder() != null) {
             sql.VALUES("`order`", "#{order,jdbcType=INTEGER}");
+        }
+        
+        if (record.getForwardText() != null) {
+            sql.VALUES("forward_text", "#{forwardText,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getForward() != null) {
+            sql.VALUES("`forward`", "#{forward,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -85,7 +97,10 @@ public class TaskSqlProvider {
         sql.SELECT("counting_code");
         sql.SELECT("reward_type");
         sql.SELECT("reward_id");
+        sql.SELECT("claimable_when_create");
         sql.SELECT("`order`");
+        sql.SELECT("forward_text");
+        sql.SELECT("`forward`");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
         sql.FROM("task");
@@ -137,8 +152,20 @@ public class TaskSqlProvider {
             sql.SET("reward_id = #{record.rewardId,jdbcType=BIGINT}");
         }
         
+        if (record.getClaimableWhenCreate() != null) {
+            sql.SET("claimable_when_create = #{record.claimableWhenCreate,jdbcType=TINYINT}");
+        }
+        
         if (record.getOrder() != null) {
             sql.SET("`order` = #{record.order,jdbcType=INTEGER}");
+        }
+        
+        if (record.getForwardText() != null) {
+            sql.SET("forward_text = #{record.forwardText,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getForward() != null) {
+            sql.SET("`forward` = #{record.forward,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -165,7 +192,10 @@ public class TaskSqlProvider {
         sql.SET("counting_code = #{record.countingCode,jdbcType=CHAR}");
         sql.SET("reward_type = #{record.rewardType,jdbcType=VARCHAR}");
         sql.SET("reward_id = #{record.rewardId,jdbcType=BIGINT}");
+        sql.SET("claimable_when_create = #{record.claimableWhenCreate,jdbcType=TINYINT}");
         sql.SET("`order` = #{record.order,jdbcType=INTEGER}");
+        sql.SET("forward_text = #{record.forwardText,jdbcType=VARCHAR}");
+        sql.SET("`forward` = #{record.forward,jdbcType=VARCHAR}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
@@ -206,8 +236,20 @@ public class TaskSqlProvider {
             sql.SET("reward_id = #{rewardId,jdbcType=BIGINT}");
         }
         
+        if (record.getClaimableWhenCreate() != null) {
+            sql.SET("claimable_when_create = #{claimableWhenCreate,jdbcType=TINYINT}");
+        }
+        
         if (record.getOrder() != null) {
             sql.SET("`order` = #{order,jdbcType=INTEGER}");
+        }
+        
+        if (record.getForwardText() != null) {
+            sql.SET("forward_text = #{forwardText,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getForward() != null) {
+            sql.SET("`forward` = #{forward,jdbcType=VARCHAR}");
         }
         
         if (record.getUpdateTime() != null) {

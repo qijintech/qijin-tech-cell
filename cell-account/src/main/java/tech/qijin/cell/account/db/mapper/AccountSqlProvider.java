@@ -40,14 +40,6 @@ public class AccountSqlProvider {
             sql.VALUES("kind", "#{kind,jdbcType=VARCHAR}");
         }
         
-        if (record.getName() != null) {
-            sql.VALUES("`name`", "#{name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getIsItem() != null) {
-            sql.VALUES("is_item", "#{isItem,jdbcType=TINYINT}");
-        }
-        
         if (record.getBalance() != null) {
             sql.VALUES("balance", "#{balance,jdbcType=BIGINT}");
         }
@@ -77,8 +69,6 @@ public class AccountSqlProvider {
         sql.SELECT("channel");
         sql.SELECT("user_id");
         sql.SELECT("kind");
-        sql.SELECT("`name`");
-        sql.SELECT("is_item");
         sql.SELECT("balance");
         sql.SELECT("version");
         sql.SELECT("update_time");
@@ -116,14 +106,6 @@ public class AccountSqlProvider {
             sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
         }
         
-        if (record.getName() != null) {
-            sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getIsItem() != null) {
-            sql.SET("is_item = #{record.isItem,jdbcType=TINYINT}");
-        }
-        
         if (record.getBalance() != null) {
             sql.SET("balance = #{record.balance,jdbcType=BIGINT}");
         }
@@ -152,8 +134,6 @@ public class AccountSqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
-        sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
-        sql.SET("is_item = #{record.isItem,jdbcType=TINYINT}");
         sql.SET("balance = #{record.balance,jdbcType=BIGINT}");
         sql.SET("version = #{record.version,jdbcType=INTEGER}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -178,14 +158,6 @@ public class AccountSqlProvider {
         
         if (record.getKind() != null) {
             sql.SET("kind = #{kind,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getName() != null) {
-            sql.SET("`name` = #{name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getIsItem() != null) {
-            sql.SET("is_item = #{isItem,jdbcType=TINYINT}");
         }
         
         if (record.getBalance() != null) {

@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import tech.qijin.cell.account.base.StatementSrc;
+import tech.qijin.cell.account.db.model.Drops;
+import tech.qijin.cell.account.service.CellDropsService;
+import tech.qijin.cell.account.service.bo.DropsBo;
 import tech.qijin.cell.counting.service.CellCountingService;
 import tech.qijin.cell.task.base.CacheKey;
 import tech.qijin.cell.task.base.TaskKind;
@@ -14,12 +18,16 @@ import tech.qijin.cell.task.base.TaskRecordStatus;
 import tech.qijin.cell.task.db.model.Task;
 import tech.qijin.cell.task.db.model.TaskRecord;
 import tech.qijin.cell.task.helper.CellTaskHelper;
+import tech.qijin.cell.task.server.vo.TaskReqVo;
 import tech.qijin.cell.task.service.CellTaskService;
 import tech.qijin.cell.task.service.bo.TaskBo;
 import tech.qijin.util4j.aop.util.CasAssert;
+import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.redis.RedisUtil;
 import tech.qijin.util4j.utils.AsyncUtil;
 import tech.qijin.util4j.utils.DateUtil;
+import tech.qijin.util4j.utils.MAssert;
+import tech.qijin.util4j.web.util.UserUtil;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +44,8 @@ public class CellTaskServiceImpl implements CellTaskService {
     private CellCountingService cellCountingService;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private CellDropsService cellDropsService;
 
     @Override
     public void triggerTask(Long userId) {
@@ -119,8 +129,15 @@ public class CellTaskServiceImpl implements CellTaskService {
     }
 
     @Override
-    public void claimTaskReward(Long userId, Long taskRecordId) {
-
+    public DropsBo claimTaskReward(Long userId, Long taskRecordId) {
+        TaskRecord record = cellTaskHelper.getTaskRecord(taskRecordId);
+        MAssert.notNull(record, ResEnum.INVALID_PARAM);
+        MAssert.isTrue(record.getUserId().equals(UserUtil.getUserId()), ResEnum.FORBIDDEN);
+        DropsBo dropsBo = doClaimReward(userId, record);
+        if (dropsBo != null) {
+            cellTaskHelper.updateTaskStatus(record, TaskRecordStatus.FINISH_CLAIMED);
+        }
+        return dropsBo;
     }
 
     public void triggerOneTask(Long userId, Task task) {
@@ -158,6 +175,9 @@ public class CellTaskServiceImpl implements CellTaskService {
         record.setStartTime(startTime);
         record.setEndTime(endTime);
         record.setStatus(TaskRecordStatus.PROCESSING);
+        if (task.getClaimableWhenCreate()) {
+            record.setStatus(TaskRecordStatus.FINISH_UNCLAIMED);
+        }
         cellTaskHelper.insertTaskRecord(record);
     }
 
@@ -212,6 +232,15 @@ public class CellTaskServiceImpl implements CellTaskService {
                     cellTaskHelper.updateTaskStatus(taskBo.getTaskRecord(), TaskRecordStatus.FINISH_UNCLAIMED);
 //                    AsyncUtil.submit(() -> cellTaskHelper.updateTaskStatus(taskBo.getTaskRecord(), TaskRecordStatus.FINISH_UNCLAIMED));
                 });
+    }
+
+    private DropsBo doClaimReward(Long userId, TaskRecord record) {
+        switch (record.getRewardType()) {
+            case DROPS:
+                return cellDropsService.grantDropsToUser(userId, record.getRewardId(), StatementSrc.TASK, record.getId());
+            default:
+                throw new UnsupportedOperationException();
+        }
     }
 
     private boolean isTaskTriggered(Long userId) {

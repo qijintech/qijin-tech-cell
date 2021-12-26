@@ -21,6 +21,7 @@ import tech.qijin.util4j.trace.pojo.Channel;
 import tech.qijin.util4j.trace.util.ChannelUtil;
 import tech.qijin.util4j.utils.DateUtil;
 import tech.qijin.util4j.utils.NumberUtil;
+import tech.qijin.util4j.web.pojo.LocalCacheAgent;
 
 import javax.annotation.PostConstruct;
 import java.time.Instant;
@@ -28,16 +29,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class CellTaskHelperImpl implements CellTaskHelper {
-    private List<Task> tasks = Lists.newArrayList();
+    private LocalCacheAgent tasksCache = new LocalCacheAgent<Task>();
     private Set<String> countingCodeSet = Sets.newHashSet();
     private Date lastUpdateAt = Date.from(Instant.EPOCH);
     private Map<String, List<Task>> countingCodeTasksMap = Maps.newHashMap();
+    private Map<Long, Task> taskMap = Maps.newHashMap();
 
     @Autowired
     private TaskDao taskDao;
@@ -48,24 +51,28 @@ public class CellTaskHelperImpl implements CellTaskHelper {
     @Scheduled(fixedDelay = 5000)
     public void reload() {
         ChannelUtil.setChannel(Channel.TEST);
-        Date updateAt = taskDao.getLastUpdatedAt();
-        if (null == updateAt
-                || updateAt.after(lastUpdateAt)
-                || Math.abs(DateUtil.getMinusSeconds(DateUtil.now(), updateAt).longValue()) < 10) {
-            tasks = listTaskFromDB();
-            countingCodeSet = tasks.stream()
-                    .map(Task::getCountingCode)
-                    .collect(Collectors.toSet());
-            countingCodeTasksMap = tasks.stream()
-                    .collect(Collectors.groupingBy(Task::getCountingCode));
-            lastUpdateAt = updateAt;
-        }
+        tasksCache.process(
+                () -> taskDao.getLastUpdatedAt(),
+                () -> listTaskFromDB())
+                .callback((Consumer<List<Task>>) tasks -> {
+                    countingCodeSet = tasks.stream()
+                            .map(Task::getCountingCode)
+                            .collect(Collectors.toSet());
+                    countingCodeTasksMap = tasks.stream()
+                            .collect(Collectors.groupingBy(Task::getCountingCode));
+                    taskMap = tasks.stream().collect(Collectors.toMap(Task::getId, Function.identity()));
+                });
     }
 
     @Override
     public List<Task> listAllTask() {
-        if (CollectionUtils.isNotEmpty(tasks)) return tasks;
+        if (CollectionUtils.isNotEmpty(tasksCache.get())) return tasksCache.get();
         return listTaskFromDB();
+    }
+
+    @Override
+    public Task getTask(Long taskId) {
+        return taskMap.get(taskId);
     }
 
     @Override
@@ -106,6 +113,11 @@ public class CellTaskHelperImpl implements CellTaskHelper {
                 .andUserIdEqualTo(userId)
                 .andTaskIdEqualTo(taskId);
         return taskRecordDao.selectByExample(example).stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public TaskRecord getTaskRecord(Long taskRecordId) {
+        return taskRecordDao.selectByPrimaryKey(taskRecordId);
     }
 
     @Override

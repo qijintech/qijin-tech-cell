@@ -48,6 +48,10 @@ public class DropsItemSqlProvider {
             sql.VALUES("drops_id", "#{dropsId,jdbcType=BIGINT}");
         }
         
+        if (record.getAmount() != null) {
+            sql.VALUES("amount", "#{amount,jdbcType=BIGINT}");
+        }
+        
         if (record.getUpdateTime() != null) {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
@@ -71,6 +75,7 @@ public class DropsItemSqlProvider {
         sql.SELECT("kind");
         sql.SELECT("item_id");
         sql.SELECT("drops_id");
+        sql.SELECT("amount");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
         sql.FROM("drops_item");
@@ -114,6 +119,10 @@ public class DropsItemSqlProvider {
             sql.SET("drops_id = #{record.dropsId,jdbcType=BIGINT}");
         }
         
+        if (record.getAmount() != null) {
+            sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
+        }
+        
         if (record.getUpdateTime() != null) {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
@@ -136,6 +145,7 @@ public class DropsItemSqlProvider {
         sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
         sql.SET("item_id = #{record.itemId,jdbcType=BIGINT}");
         sql.SET("drops_id = #{record.dropsId,jdbcType=BIGINT}");
+        sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
@@ -166,6 +176,10 @@ public class DropsItemSqlProvider {
         
         if (record.getDropsId() != null) {
             sql.SET("drops_id = #{dropsId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getAmount() != null) {
+            sql.SET("amount = #{amount,jdbcType=BIGINT}");
         }
         
         if (record.getUpdateTime() != null) {

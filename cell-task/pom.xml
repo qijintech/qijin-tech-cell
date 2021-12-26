@@ -58,6 +58,10 @@
             <groupId>tech.qijin.cell</groupId>
             <artifactId>cell-counting</artifactId>
         </dependency>
+        <dependency>
+            <groupId>tech.qijin.cell</groupId>
+            <artifactId>cell-account</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.mindrot</groupId>

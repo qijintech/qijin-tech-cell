@@ -34,13 +34,15 @@ public interface TaskMapper {
         "insert into task (channel, `name`, ",
         "kind, target, counting_code, ",
         "reward_type, reward_id, ",
-        "`order`, update_time, ",
-        "create_time)",
+        "claimable_when_create, `order`, ",
+        "forward_text, `forward`, ",
+        "update_time, create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, ",
         "#{kind,jdbcType=VARCHAR}, #{target,jdbcType=BIGINT}, #{countingCode,jdbcType=CHAR}, ",
         "#{rewardType,jdbcType=VARCHAR}, #{rewardId,jdbcType=BIGINT}, ",
-        "#{order,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{claimableWhenCreate,jdbcType=TINYINT}, #{order,jdbcType=INTEGER}, ",
+        "#{forwardText,jdbcType=VARCHAR}, #{forward,jdbcType=VARCHAR}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(Task record);
@@ -59,7 +61,10 @@ public interface TaskMapper {
         @Result(column="counting_code", property="countingCode", jdbcType=JdbcType.CHAR),
         @Result(column="reward_type", property="rewardType", jdbcType=JdbcType.VARCHAR),
         @Result(column="reward_id", property="rewardId", jdbcType=JdbcType.BIGINT),
+        @Result(column="claimable_when_create", property="claimableWhenCreate", jdbcType=JdbcType.TINYINT),
         @Result(column="order", property="order", jdbcType=JdbcType.INTEGER),
+        @Result(column="forward_text", property="forwardText", jdbcType=JdbcType.VARCHAR),
+        @Result(column="forward", property="forward", jdbcType=JdbcType.VARCHAR),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -67,8 +72,8 @@ public interface TaskMapper {
 
     @Select({
         "select",
-        "id, channel, `name`, kind, target, counting_code, reward_type, reward_id, `order`, ",
-        "update_time, create_time",
+        "id, channel, `name`, kind, target, counting_code, reward_type, reward_id, claimable_when_create, ",
+        "`order`, forward_text, `forward`, update_time, create_time",
         "from task",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -81,7 +86,10 @@ public interface TaskMapper {
         @Result(column="counting_code", property="countingCode", jdbcType=JdbcType.CHAR),
         @Result(column="reward_type", property="rewardType", jdbcType=JdbcType.VARCHAR),
         @Result(column="reward_id", property="rewardId", jdbcType=JdbcType.BIGINT),
+        @Result(column="claimable_when_create", property="claimableWhenCreate", jdbcType=JdbcType.TINYINT),
         @Result(column="order", property="order", jdbcType=JdbcType.INTEGER),
+        @Result(column="forward_text", property="forwardText", jdbcType=JdbcType.VARCHAR),
+        @Result(column="forward", property="forward", jdbcType=JdbcType.VARCHAR),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -105,7 +113,10 @@ public interface TaskMapper {
           "counting_code = #{countingCode,jdbcType=CHAR},",
           "reward_type = #{rewardType,jdbcType=VARCHAR},",
           "reward_id = #{rewardId,jdbcType=BIGINT},",
+          "claimable_when_create = #{claimableWhenCreate,jdbcType=TINYINT},",
           "`order` = #{order,jdbcType=INTEGER},",
+          "forward_text = #{forwardText,jdbcType=VARCHAR},",
+          "`forward` = #{forward,jdbcType=VARCHAR},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

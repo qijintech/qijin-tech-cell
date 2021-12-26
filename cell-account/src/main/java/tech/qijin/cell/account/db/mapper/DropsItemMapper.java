@@ -33,10 +33,12 @@ public interface DropsItemMapper {
     @Insert({
         "insert into drops_item (channel, `name`, ",
         "kind, item_id, drops_id, ",
-        "update_time, create_time)",
+        "amount, update_time, ",
+        "create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, ",
         "#{kind,jdbcType=VARCHAR}, #{itemId,jdbcType=BIGINT}, #{dropsId,jdbcType=BIGINT}, ",
-        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
+        "#{amount,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
+        "#{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(DropsItem record);
@@ -53,6 +55,7 @@ public interface DropsItemMapper {
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
         @Result(column="item_id", property="itemId", jdbcType=JdbcType.BIGINT),
         @Result(column="drops_id", property="dropsId", jdbcType=JdbcType.BIGINT),
+        @Result(column="amount", property="amount", jdbcType=JdbcType.BIGINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -60,7 +63,7 @@ public interface DropsItemMapper {
 
     @Select({
         "select",
-        "id, channel, `name`, kind, item_id, drops_id, update_time, create_time",
+        "id, channel, `name`, kind, item_id, drops_id, amount, update_time, create_time",
         "from drops_item",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -71,6 +74,7 @@ public interface DropsItemMapper {
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
         @Result(column="item_id", property="itemId", jdbcType=JdbcType.BIGINT),
         @Result(column="drops_id", property="dropsId", jdbcType=JdbcType.BIGINT),
+        @Result(column="amount", property="amount", jdbcType=JdbcType.BIGINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -92,6 +96,7 @@ public interface DropsItemMapper {
           "kind = #{kind,jdbcType=VARCHAR},",
           "item_id = #{itemId,jdbcType=BIGINT},",
           "drops_id = #{dropsId,jdbcType=BIGINT},",
+          "amount = #{amount,jdbcType=BIGINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

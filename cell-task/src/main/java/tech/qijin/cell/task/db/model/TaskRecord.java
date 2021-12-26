@@ -1,6 +1,7 @@
 package tech.qijin.cell.task.db.model;
 
 import java.util.Date;
+import tech.qijin.cell.task.base.RewardType;
 import tech.qijin.cell.task.base.TaskRecordStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
@@ -24,6 +25,10 @@ public class TaskRecord {
     private Date endTime;
 
     private TaskRecordStatus status;
+
+    private RewardType rewardType;
+
+    private Long rewardId;
 
     private Integer version;
 
@@ -109,6 +114,22 @@ public class TaskRecord {
 
     public void setStatus(TaskRecordStatus status) {
         this.status = status;
+    }
+
+    public RewardType getRewardType() {
+        return rewardType;
+    }
+
+    public void setRewardType(RewardType rewardType) {
+        this.rewardType = rewardType;
+    }
+
+    public Long getRewardId() {
+        return rewardId;
+    }
+
+    public void setRewardId(Long rewardId) {
+        this.rewardId = rewardId;
     }
 
     public Integer getVersion() {

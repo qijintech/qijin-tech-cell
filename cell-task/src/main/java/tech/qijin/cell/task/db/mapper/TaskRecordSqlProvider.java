@@ -64,6 +64,14 @@ public class TaskRecordSqlProvider {
             sql.VALUES("`status`", "#{status,jdbcType=VARCHAR}");
         }
         
+        if (record.getRewardType() != null) {
+            sql.VALUES("reward_type", "#{rewardType,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRewardId() != null) {
+            sql.VALUES("reward_id", "#{rewardId,jdbcType=BIGINT}");
+        }
+        
         if (record.getVersion() != null) {
             sql.VALUES("version", "#{version,jdbcType=INTEGER}");
         }
@@ -95,6 +103,8 @@ public class TaskRecordSqlProvider {
         sql.SELECT("start_time");
         sql.SELECT("end_time");
         sql.SELECT("`status`");
+        sql.SELECT("reward_type");
+        sql.SELECT("reward_id");
         sql.SELECT("version");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
@@ -155,6 +165,14 @@ public class TaskRecordSqlProvider {
             sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
         }
         
+        if (record.getRewardType() != null) {
+            sql.SET("reward_type = #{record.rewardType,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRewardId() != null) {
+            sql.SET("reward_id = #{record.rewardId,jdbcType=BIGINT}");
+        }
+        
         if (record.getVersion() != null) {
             sql.SET("version = #{record.version,jdbcType=INTEGER}");
         }
@@ -185,6 +203,8 @@ public class TaskRecordSqlProvider {
         sql.SET("start_time = #{record.startTime,jdbcType=TIMESTAMP}");
         sql.SET("end_time = #{record.endTime,jdbcType=TIMESTAMP}");
         sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
+        sql.SET("reward_type = #{record.rewardType,jdbcType=VARCHAR}");
+        sql.SET("reward_id = #{record.rewardId,jdbcType=BIGINT}");
         sql.SET("version = #{record.version,jdbcType=INTEGER}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -232,6 +252,14 @@ public class TaskRecordSqlProvider {
         
         if (record.getStatus() != null) {
             sql.SET("`status` = #{status,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRewardType() != null) {
+            sql.SET("reward_type = #{rewardType,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRewardId() != null) {
+            sql.SET("reward_id = #{rewardId,jdbcType=BIGINT}");
         }
         
         if (record.getVersion() != null) {

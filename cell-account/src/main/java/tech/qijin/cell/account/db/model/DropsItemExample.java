@@ -3,6 +3,7 @@ package tech.qijin.cell.account.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import tech.qijin.cell.account.base.DropsItemKind;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class DropsItemExample {
@@ -316,62 +317,62 @@ public class DropsItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andKindEqualTo(String value) {
+        public Criteria andKindEqualTo(DropsItemKind value) {
             addCriterion("kind =", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotEqualTo(String value) {
+        public Criteria andKindNotEqualTo(DropsItemKind value) {
             addCriterion("kind <>", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindGreaterThan(String value) {
+        public Criteria andKindGreaterThan(DropsItemKind value) {
             addCriterion("kind >", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindGreaterThanOrEqualTo(String value) {
+        public Criteria andKindGreaterThanOrEqualTo(DropsItemKind value) {
             addCriterion("kind >=", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindLessThan(String value) {
+        public Criteria andKindLessThan(DropsItemKind value) {
             addCriterion("kind <", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindLessThanOrEqualTo(String value) {
+        public Criteria andKindLessThanOrEqualTo(DropsItemKind value) {
             addCriterion("kind <=", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindLike(String value) {
+        public Criteria andKindLike(DropsItemKind value) {
             addCriterion("kind like", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotLike(String value) {
+        public Criteria andKindNotLike(DropsItemKind value) {
             addCriterion("kind not like", value, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindIn(List<String> values) {
+        public Criteria andKindIn(List<DropsItemKind> values) {
             addCriterion("kind in", values, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotIn(List<String> values) {
+        public Criteria andKindNotIn(List<DropsItemKind> values) {
             addCriterion("kind not in", values, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindBetween(String value1, String value2) {
+        public Criteria andKindBetween(DropsItemKind value1, DropsItemKind value2) {
             addCriterion("kind between", value1, value2, "kind");
             return (Criteria) this;
         }
 
-        public Criteria andKindNotBetween(String value1, String value2) {
+        public Criteria andKindNotBetween(DropsItemKind value1, DropsItemKind value2) {
             addCriterion("kind not between", value1, value2, "kind");
             return (Criteria) this;
         }
@@ -493,6 +494,66 @@ public class DropsItemExample {
 
         public Criteria andDropsIdNotBetween(Long value1, Long value2) {
             addCriterion("drops_id not between", value1, value2, "dropsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountIsNull() {
+            addCriterion("amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountIsNotNull() {
+            addCriterion("amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountEqualTo(Long value) {
+            addCriterion("amount =", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountNotEqualTo(Long value) {
+            addCriterion("amount <>", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountGreaterThan(Long value) {
+            addCriterion("amount >", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountGreaterThanOrEqualTo(Long value) {
+            addCriterion("amount >=", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountLessThan(Long value) {
+            addCriterion("amount <", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountLessThanOrEqualTo(Long value) {
+            addCriterion("amount <=", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountIn(List<Long> values) {
+            addCriterion("amount in", values, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountNotIn(List<Long> values) {
+            addCriterion("amount not in", values, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountBetween(Long value1, Long value2) {
+            addCriterion("amount between", value1, value2, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountNotBetween(Long value1, Long value2) {
+            addCriterion("amount not between", value1, value2, "amount");
             return (Criteria) this;
         }
 

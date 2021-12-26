@@ -1,6 +1,7 @@
 package tech.qijin.cell.account.db.model;
 
 import java.util.Date;
+import tech.qijin.cell.account.base.DropsItemKind;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class DropsItem {
@@ -10,11 +11,13 @@ public class DropsItem {
 
     private String name;
 
-    private String kind;
+    private DropsItemKind kind;
 
     private Long itemId;
 
     private Long dropsId;
+
+    private Long amount;
 
     private Date updateTime;
 
@@ -44,12 +47,12 @@ public class DropsItem {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getKind() {
+    public DropsItemKind getKind() {
         return kind;
     }
 
-    public void setKind(String kind) {
-        this.kind = kind == null ? null : kind.trim();
+    public void setKind(DropsItemKind kind) {
+        this.kind = kind;
     }
 
     public Long getItemId() {
@@ -66,6 +69,14 @@ public class DropsItem {
 
     public void setDropsId(Long dropsId) {
         this.dropsId = dropsId;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     public Date getUpdateTime() {

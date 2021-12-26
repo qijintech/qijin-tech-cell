@@ -1,18 +1,21 @@
-package tech.qijin.cell.task.base;
+package tech.qijin.cell.account.base;
 
 import tech.qijin.util4j.lang.constant.EnumValue;
 
 /**
- * 奖励类型
+ * 掉落的类型
  */
-public enum RewardType implements EnumValue<String> {
-    NONE("没有奖励"),
-    DROPS("掉落奖励"),
+public enum DropsItemKind implements EnumValue<String> {
+    ITEM("道具"),
+    // 支持嵌套掉落
+    DROPS("掉落"),
     ;
 
-    RewardType(String description) {
+
+    DropsItemKind(String description) {
         this.description = description;
     }
+
 
     private String description;
 

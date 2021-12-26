@@ -1,6 +1,7 @@
 package tech.qijin.cell.account.helper;
 
 import tech.qijin.cell.account.base.AccountKind;
+import tech.qijin.cell.account.base.StatementSrc;
 import tech.qijin.cell.account.db.model.Account;
 
 import java.util.List;
@@ -14,6 +15,14 @@ public interface CellAccountHelper {
      * @return
      */
     boolean insertAccount(Account account);
+
+    /**
+     * 更新账户
+     * @param account
+     * @param amount
+     * @return
+     */
+    boolean updateAccount(Account account, Long amount);
 
     /**
      * 获取指定 {@link AccountKind} 的账户信息
@@ -40,4 +49,16 @@ public interface CellAccountHelper {
      * @return
      */
     Map<AccountKind, Account> mapAccountByKinds(Long userId, List<AccountKind> kinds);
+
+    /**
+     * 添加流水
+     *
+     * @param userId
+     * @param kind
+     * @param amount
+     * @param src
+     * @param dataId
+     * @return
+     */
+    boolean insertAccountStatement(Long userId, AccountKind kind, Long amount, StatementSrc src, Long dataId);
 }

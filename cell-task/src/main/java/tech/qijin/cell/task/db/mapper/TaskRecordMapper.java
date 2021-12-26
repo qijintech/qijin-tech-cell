@@ -35,13 +35,15 @@ public interface TaskRecordMapper {
         "task_id, counting_code, ",
         "task_format, target, ",
         "start_time, end_time, ",
-        "`status`, version, ",
+        "`status`, reward_type, ",
+        "reward_id, version, ",
         "update_time, create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
         "#{taskId,jdbcType=BIGINT}, #{countingCode,jdbcType=VARCHAR}, ",
         "#{taskFormat,jdbcType=VARCHAR}, #{target,jdbcType=BIGINT}, ",
         "#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, ",
-        "#{status,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, ",
+        "#{status,jdbcType=VARCHAR}, #{rewardType,jdbcType=VARCHAR}, ",
+        "#{rewardId,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
@@ -63,6 +65,8 @@ public interface TaskRecordMapper {
         @Result(column="start_time", property="startTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
+        @Result(column="reward_type", property="rewardType", jdbcType=JdbcType.VARCHAR),
+        @Result(column="reward_id", property="rewardId", jdbcType=JdbcType.BIGINT),
         @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -72,7 +76,7 @@ public interface TaskRecordMapper {
     @Select({
         "select",
         "id, channel, user_id, task_id, counting_code, task_format, target, start_time, ",
-        "end_time, `status`, version, update_time, create_time",
+        "end_time, `status`, reward_type, reward_id, version, update_time, create_time",
         "from task_record",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -87,6 +91,8 @@ public interface TaskRecordMapper {
         @Result(column="start_time", property="startTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
+        @Result(column="reward_type", property="rewardType", jdbcType=JdbcType.VARCHAR),
+        @Result(column="reward_id", property="rewardId", jdbcType=JdbcType.BIGINT),
         @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -113,6 +119,8 @@ public interface TaskRecordMapper {
           "start_time = #{startTime,jdbcType=TIMESTAMP},",
           "end_time = #{endTime,jdbcType=TIMESTAMP},",
           "`status` = #{status,jdbcType=VARCHAR},",
+          "reward_type = #{rewardType,jdbcType=VARCHAR},",
+          "reward_id = #{rewardId,jdbcType=BIGINT},",
           "version = #{version,jdbcType=INTEGER},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",

@@ -638,6 +638,66 @@ public class TaskExample {
             return (Criteria) this;
         }
 
+        public Criteria andClaimableWhenCreateIsNull() {
+            addCriterion("claimable_when_create is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateIsNotNull() {
+            addCriterion("claimable_when_create is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateEqualTo(Boolean value) {
+            addCriterion("claimable_when_create =", value, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateNotEqualTo(Boolean value) {
+            addCriterion("claimable_when_create <>", value, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateGreaterThan(Boolean value) {
+            addCriterion("claimable_when_create >", value, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("claimable_when_create >=", value, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateLessThan(Boolean value) {
+            addCriterion("claimable_when_create <", value, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateLessThanOrEqualTo(Boolean value) {
+            addCriterion("claimable_when_create <=", value, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateIn(List<Boolean> values) {
+            addCriterion("claimable_when_create in", values, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateNotIn(List<Boolean> values) {
+            addCriterion("claimable_when_create not in", values, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateBetween(Boolean value1, Boolean value2) {
+            addCriterion("claimable_when_create between", value1, value2, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
+        public Criteria andClaimableWhenCreateNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("claimable_when_create not between", value1, value2, "claimableWhenCreate");
+            return (Criteria) this;
+        }
+
         public Criteria andOrderIsNull() {
             addCriterion("`order` is null");
             return (Criteria) this;
@@ -695,6 +755,146 @@ public class TaskExample {
 
         public Criteria andOrderNotBetween(Integer value1, Integer value2) {
             addCriterion("`order` not between", value1, value2, "order");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextIsNull() {
+            addCriterion("forward_text is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextIsNotNull() {
+            addCriterion("forward_text is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextEqualTo(String value) {
+            addCriterion("forward_text =", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextNotEqualTo(String value) {
+            addCriterion("forward_text <>", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextGreaterThan(String value) {
+            addCriterion("forward_text >", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextGreaterThanOrEqualTo(String value) {
+            addCriterion("forward_text >=", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextLessThan(String value) {
+            addCriterion("forward_text <", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextLessThanOrEqualTo(String value) {
+            addCriterion("forward_text <=", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextLike(String value) {
+            addCriterion("forward_text like", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextNotLike(String value) {
+            addCriterion("forward_text not like", value, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextIn(List<String> values) {
+            addCriterion("forward_text in", values, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextNotIn(List<String> values) {
+            addCriterion("forward_text not in", values, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextBetween(String value1, String value2) {
+            addCriterion("forward_text between", value1, value2, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardTextNotBetween(String value1, String value2) {
+            addCriterion("forward_text not between", value1, value2, "forwardText");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardIsNull() {
+            addCriterion("`forward` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardIsNotNull() {
+            addCriterion("`forward` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardEqualTo(String value) {
+            addCriterion("`forward` =", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardNotEqualTo(String value) {
+            addCriterion("`forward` <>", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardGreaterThan(String value) {
+            addCriterion("`forward` >", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardGreaterThanOrEqualTo(String value) {
+            addCriterion("`forward` >=", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardLessThan(String value) {
+            addCriterion("`forward` <", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardLessThanOrEqualTo(String value) {
+            addCriterion("`forward` <=", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardLike(String value) {
+            addCriterion("`forward` like", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardNotLike(String value) {
+            addCriterion("`forward` not like", value, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardIn(List<String> values) {
+            addCriterion("`forward` in", values, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardNotIn(List<String> values) {
+            addCriterion("`forward` not in", values, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardBetween(String value1, String value2) {
+            addCriterion("`forward` between", value1, value2, "forward");
+            return (Criteria) this;
+        }
+
+        public Criteria andForwardNotBetween(String value1, String value2) {
+            addCriterion("`forward` not between", value1, value2, "forward");
             return (Criteria) this;
         }
 

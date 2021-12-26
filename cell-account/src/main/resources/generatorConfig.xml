@@ -69,6 +69,18 @@
             <columnOverride column="statement_src" property="statementSrc"
                             javaType="tech.qijin.cell.account.base.StatementSrc"/>
         </table>
+        <table tableName="drops">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+        </table>
+        <table tableName="drops_item">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="kind" property="kind"
+                            javaType="tech.qijin.cell.account.base.DropsItemKind"/>
+        </table>
         <table tableName="item">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="stackable" property="stackable"

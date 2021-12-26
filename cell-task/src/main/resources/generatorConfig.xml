@@ -59,6 +59,8 @@
                             javaType="tech.qijin.cell.task.base.TaskKind"/>
             <columnOverride column="reward_type" property="rewardType"
                             javaType="tech.qijin.cell.task.base.RewardType"/>
+            <columnOverride column="claimable_when_create" property="claimableWhenCreate"
+                            javaType="java.lang.Boolean"/>
         </table>
         <table tableName="task_record">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
@@ -66,6 +68,8 @@
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="status" property="status"
                             javaType="tech.qijin.cell.task.base.TaskRecordStatus"/>
+            <columnOverride column="reward_type" property="rewardType"
+                            javaType="tech.qijin.cell.task.base.RewardType"/>
         </table>
     </context>
 </generatorConfiguration>

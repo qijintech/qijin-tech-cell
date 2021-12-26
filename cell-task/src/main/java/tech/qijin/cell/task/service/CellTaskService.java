@@ -1,5 +1,6 @@
 package tech.qijin.cell.task.service;
 
+import tech.qijin.cell.account.service.bo.DropsBo;
 import tech.qijin.cell.task.db.model.Task;
 import tech.qijin.cell.task.db.model.TaskRecord;
 import tech.qijin.cell.task.service.bo.TaskBo;
@@ -59,5 +60,5 @@ public interface CellTaskService {
      * @param userId
      * @param taskRecordId
      */
-    void claimTaskReward(Long userId, Long taskRecordId);
+    DropsBo claimTaskReward(Long userId, Long taskRecordId);
 }

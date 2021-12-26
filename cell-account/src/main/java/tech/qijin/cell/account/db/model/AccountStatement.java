@@ -2,6 +2,7 @@ package tech.qijin.cell.account.db.model;
 
 import java.util.Date;
 import tech.qijin.cell.account.base.AccountKind;
+import tech.qijin.cell.account.base.StatementSrc;
 import tech.qijin.util4j.trace.pojo.Channel;
 
 public class AccountStatement {
@@ -13,7 +14,7 @@ public class AccountStatement {
 
     private AccountKind kind;
 
-    private String dataSrc;
+    private StatementSrc statementSrc;
 
     private Long dataId;
 
@@ -55,12 +56,12 @@ public class AccountStatement {
         this.kind = kind;
     }
 
-    public String getDataSrc() {
-        return dataSrc;
+    public StatementSrc getStatementSrc() {
+        return statementSrc;
     }
 
-    public void setDataSrc(String dataSrc) {
-        this.dataSrc = dataSrc == null ? null : dataSrc.trim();
+    public void setStatementSrc(StatementSrc statementSrc) {
+        this.statementSrc = statementSrc;
     }
 
     public Long getDataId() {

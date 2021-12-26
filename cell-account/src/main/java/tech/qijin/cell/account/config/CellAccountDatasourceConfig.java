@@ -58,6 +58,7 @@ public class CellAccountDatasourceConfig {
         ChannelInterceptor channelInterceptor = new ChannelInterceptor();
         Properties channelProperties = new Properties();
         channelProperties.put("tenantColumnName", "channel");
+        channelProperties.put("excludedTables", "drops,item,drops_item");
         channelInterceptor.setProperties(channelProperties);
         configuration.addInterceptor(channelInterceptor);
         sqlSessionFactoryBean.setConfiguration(configuration);
