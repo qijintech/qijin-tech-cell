@@ -174,6 +174,8 @@ public class CellTaskServiceImpl implements CellTaskService {
         }
         record.setStartTime(startTime);
         record.setEndTime(endTime);
+        record.setRewardId(task.getRewardId());
+        record.setRewardType(task.getRewardType());
         record.setStatus(TaskRecordStatus.PROCESSING);
         if (task.getClaimableWhenCreate()) {
             record.setStatus(TaskRecordStatus.FINISH_UNCLAIMED);
