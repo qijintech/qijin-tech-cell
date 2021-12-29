@@ -3,6 +3,7 @@ package tech.qijin.cell.account.helper;
 import tech.qijin.cell.account.base.AccountKind;
 import tech.qijin.cell.account.base.StatementSrc;
 import tech.qijin.cell.account.db.model.Account;
+import tech.qijin.cell.account.db.model.AccountStatement;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ public interface CellAccountHelper {
 
     /**
      * 更新账户
+     *
      * @param account
      * @param amount
      * @return
@@ -61,4 +63,18 @@ public interface CellAccountHelper {
      * @return
      */
     boolean insertAccountStatement(Long userId, AccountKind kind, Long amount, StatementSrc src, Long dataId);
+
+    /**
+     * 分页查询流水
+     *
+     * @param userId
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    List<AccountStatement> pageStatement(Long userId, Integer pageNo, Integer pageSize);
+
+    List<AccountStatement> pageStatement(Long userId, AccountKind kind, Integer pageNo, Integer pageSize);
+
+    List<AccountStatement> pageStatement(Long userId, List<AccountKind> kinds, Integer pageNo, Integer pageSize);
 }

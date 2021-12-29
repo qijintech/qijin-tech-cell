@@ -14,6 +14,8 @@ public class AccountStatement {
 
     private AccountKind kind;
 
+    private String format;
+
     private StatementSrc statementSrc;
 
     private Long dataId;
@@ -54,6 +56,14 @@ public class AccountStatement {
 
     public void setKind(AccountKind kind) {
         this.kind = kind;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format == null ? null : format.trim();
     }
 
     public StatementSrc getStatementSrc() {

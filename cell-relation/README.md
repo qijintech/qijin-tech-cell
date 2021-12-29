@@ -1,2 +1,4 @@
-## cell-relation
-关系服务
+## cell-message
+
+### 包含功能
+* 站内信

@@ -40,6 +40,10 @@ public class AccountStatementSqlProvider {
             sql.VALUES("kind", "#{kind,jdbcType=VARCHAR}");
         }
         
+        if (record.getFormat() != null) {
+            sql.VALUES("format", "#{format,jdbcType=VARCHAR}");
+        }
+        
         if (record.getStatementSrc() != null) {
             sql.VALUES("statement_src", "#{statementSrc,jdbcType=VARCHAR}");
         }
@@ -73,6 +77,7 @@ public class AccountStatementSqlProvider {
         sql.SELECT("channel");
         sql.SELECT("user_id");
         sql.SELECT("kind");
+        sql.SELECT("format");
         sql.SELECT("statement_src");
         sql.SELECT("data_id");
         sql.SELECT("amount");
@@ -111,6 +116,10 @@ public class AccountStatementSqlProvider {
             sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
         }
         
+        if (record.getFormat() != null) {
+            sql.SET("format = #{record.format,jdbcType=VARCHAR}");
+        }
+        
         if (record.getStatementSrc() != null) {
             sql.SET("statement_src = #{record.statementSrc,jdbcType=VARCHAR}");
         }
@@ -143,6 +152,7 @@ public class AccountStatementSqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("kind = #{record.kind,jdbcType=VARCHAR}");
+        sql.SET("format = #{record.format,jdbcType=VARCHAR}");
         sql.SET("statement_src = #{record.statementSrc,jdbcType=VARCHAR}");
         sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
         sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
@@ -168,6 +178,10 @@ public class AccountStatementSqlProvider {
         
         if (record.getKind() != null) {
             sql.SET("kind = #{kind,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getFormat() != null) {
+            sql.SET("format = #{format,jdbcType=VARCHAR}");
         }
         
         if (record.getStatementSrc() != null) {

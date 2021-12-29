@@ -10,6 +10,11 @@
     <properties resource="mbg.properties"></properties>
 
     <context id="MySqlTables" targetRuntime="MyBatis3">
+        <!-- 数据库关键字冲突,自动处理 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <!-- 用反引号`包裹,默认是双引号"-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
@@ -43,11 +48,6 @@
                             javaType="java.lang.Boolean"/>
             <columnOverride column="env" property="env"
                             javaType="tech.qijin.util4j.trace.pojo.EnvEnum"/>
-            <columnOverride column="channel" property="channel"
-                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
-        </table>
-        <table tableName="user_relation">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
         </table>

@@ -27,14 +27,14 @@ import java.util.Properties;
         sqlSessionTemplateRef = "relationSqlSessionTemplate")
 public class CellRelationDatasourceConfig {
 
-    @Bean("dataSourceRelation")
+    @Bean("relationDataSourceTemplate")
     @ConfigurationProperties("spring.datasource.druid.relation")
     public DataSource dataSourceOne() {
         return DruidDataSourceBuilder.create().build();
     }
 
     @Bean(name = "relationSqlSessionFactory")
-    public SqlSessionFactory imSqlSessionFactory(@Qualifier("dataSourceRelation") DataSource dataSourceOne)
+    public SqlSessionFactory relationSqlSessionFactory(@Qualifier("relationDataSourceTemplate") DataSource dataSourceOne)
             throws Exception {
         return getSqlSessionFactory(dataSourceOne);
     }
@@ -45,7 +45,7 @@ public class CellRelationDatasourceConfig {
     }
 
     @Bean(name = "relationTransactionManager")
-    public DataSourceTransactionManager imTransactionManager(@Qualifier("dataSourceRelation") DataSource dataSourceOne) {
+    public DataSourceTransactionManager relationTransactionManager(@Qualifier("relationDataSourceTemplate") DataSource dataSourceOne) {
         return new DataSourceTransactionManager(dataSourceOne);
     }
 

@@ -66,7 +66,7 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     @Override
     public List<FeedByGroup> pageFeedByGroup(Long groupId, Integer pageNo, Integer pageSize) {
         FeedByGroupExample example = new FeedByGroupExample();
-        example.setOrderByClause(String.format("by create_time desc limit %d, %d", (pageNo - 1) * pageSize, pageSize));
+        example.setOrderByClause(String.format("create_time desc limit %d, %d", (pageNo - 1) * pageSize, pageSize));
         example.createCriteria()
                 .andGroupIdEqualTo(groupId)
                 .andValidEqualTo(true);

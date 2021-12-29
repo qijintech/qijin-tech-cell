@@ -15,7 +15,7 @@ spring:
     active: dev
   datasource:
     druid:
-      user:
+      relation:
         url: jdbc:mysql://127.0.0.1:3306/cell_relation?useUnicode=true&characterEncoding=utf-8
         username: admin
         password: Admin_@123

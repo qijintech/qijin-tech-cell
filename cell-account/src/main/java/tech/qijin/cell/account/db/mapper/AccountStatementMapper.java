@@ -32,11 +32,11 @@ public interface AccountStatementMapper {
 
     @Insert({
         "insert into account_statement (channel, user_id, ",
-        "kind, statement_src, ",
+        "kind, format, statement_src, ",
         "data_id, amount, update_time, ",
         "create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
-        "#{kind,jdbcType=VARCHAR}, #{statementSrc,jdbcType=VARCHAR}, ",
+        "#{kind,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR}, #{statementSrc,jdbcType=VARCHAR}, ",
         "#{dataId,jdbcType=BIGINT}, #{amount,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
     })
@@ -53,6 +53,7 @@ public interface AccountStatementMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
+        @Result(column="format", property="format", jdbcType=JdbcType.VARCHAR),
         @Result(column="statement_src", property="statementSrc", jdbcType=JdbcType.VARCHAR),
         @Result(column="data_id", property="dataId", jdbcType=JdbcType.BIGINT),
         @Result(column="amount", property="amount", jdbcType=JdbcType.BIGINT),
@@ -63,7 +64,8 @@ public interface AccountStatementMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, kind, statement_src, data_id, amount, update_time, create_time",
+        "id, channel, user_id, kind, format, statement_src, data_id, amount, update_time, ",
+        "create_time",
         "from account_statement",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -72,6 +74,7 @@ public interface AccountStatementMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="kind", property="kind", jdbcType=JdbcType.VARCHAR),
+        @Result(column="format", property="format", jdbcType=JdbcType.VARCHAR),
         @Result(column="statement_src", property="statementSrc", jdbcType=JdbcType.VARCHAR),
         @Result(column="data_id", property="dataId", jdbcType=JdbcType.BIGINT),
         @Result(column="amount", property="amount", jdbcType=JdbcType.BIGINT),
@@ -94,6 +97,7 @@ public interface AccountStatementMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "kind = #{kind,jdbcType=VARCHAR},",
+          "format = #{format,jdbcType=VARCHAR},",
           "statement_src = #{statementSrc,jdbcType=VARCHAR},",
           "data_id = #{dataId,jdbcType=BIGINT},",
           "amount = #{amount,jdbcType=BIGINT},",
