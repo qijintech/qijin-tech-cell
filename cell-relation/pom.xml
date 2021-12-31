@@ -11,8 +11,19 @@
     <groupId>tech.qijin.cell</groupId>
     <packaging>jar</packaging>
 
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-dependencies</artifactId>
+                <version>${project.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -36,6 +47,10 @@
         <dependency>
             <groupId>tech.qijin.util4j</groupId>
             <artifactId>util4j-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.qijin.cell</groupId>
+            <artifactId>cell-user</artifactId>
         </dependency>
 
         <dependency>

@@ -51,5 +51,14 @@
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
         </table>
+        <table tableName="relation">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="kind" property="kind"
+                            javaType="tech.qijin.cell.relation.base.RelationKind"/>
+            <columnOverride column="status" property="status"
+                            javaType="tech.qijin.cell.relation.base.RelationStatus"/>
+        </table>
     </context>
 </generatorConfiguration>

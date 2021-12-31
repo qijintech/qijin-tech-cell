@@ -41,6 +41,8 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
         Optional<String> jwtSecretOpt = kmsBean.getRaw("jwt", "secret");
         MAssert.isTrue(jwtSecretOpt.isPresent(), ResEnum.BAD_GATEWAY);
         Date expireAt = null;
+        // 过期时间是10天
+        expire = 10 * DateUtil.SECONDS_PER_DAY;
         if (expire > 0) {
             expireAt = new Date(DateUtil.now().getTime() + expire * DateUtil.MILLI_PER_SECOND);
         }
