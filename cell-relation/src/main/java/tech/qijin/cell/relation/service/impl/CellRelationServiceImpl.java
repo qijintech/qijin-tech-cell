@@ -63,6 +63,11 @@ public class CellRelationServiceImpl implements CellRelationService {
     }
 
     @Override
+    public Relation lastedRelation(Long userId, RelationKind kind, Integer n) {
+        return cellRelationHelper.pageRelation(userId, kind, 1, n).stream().findFirst().orElse(null);
+    }
+
+    @Override
     public Long countRelation(Long userId, RelationKind kind) {
         return cellRelationHelper.countRelation(userId, kind);
     }

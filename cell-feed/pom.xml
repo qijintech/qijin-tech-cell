@@ -11,6 +11,18 @@
     <groupId>tech.qijin.cell</groupId>
     <packaging>jar</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tech.qijin.cell</groupId>
+                <artifactId>cell-dependencies</artifactId>
+                <version>${project.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <dependency>
@@ -26,6 +38,11 @@
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>tech.qijin.cell</groupId>
+            <artifactId>cell-counting</artifactId>
         </dependency>
 
         <!-- util4j dependencies -->

@@ -27,6 +27,15 @@ public interface CellRelationService {
     List<Relation> pageRelation(Long userId, RelationKind kind, PageVo pageVo);
 
     /**
+     * 最近的n个人
+     *
+     * @param userId
+     * @param kind
+     * @return
+     */
+    Relation lastedRelation(Long userId, RelationKind kind, Integer n);
+
+    /**
      * 计算数量
      *
      * @param userId

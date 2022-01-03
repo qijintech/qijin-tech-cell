@@ -14,7 +14,7 @@ public interface CellMessageService {
      * @param userId
      * @param messageWrapper
      */
-    void sendMessage(Long userId, MessageWrapper messageWrapper);
+    boolean sendMessage(Long userId, MessageWrapper messageWrapper);
 
     /**
      * 分页获取站内信
@@ -26,6 +26,14 @@ public interface CellMessageService {
     List<MessageBo> pageMessage(Long userId, PageVo pageVo);
 
     /**
+     * 消息总数
+     *
+     * @param userId
+     * @return
+     */
+    Long countMessage(Long userId);
+
+    /**
      * 查看是否还有更多消息
      *
      * @param messages
@@ -33,5 +41,27 @@ public interface CellMessageService {
      * @return
      */
     boolean hasMore(List<MessageBo> messages, PageVo pageVo);
+
+    /**
+     * 增加未读数
+     *
+     * @param userId
+     */
+    void addUnread(Long userId);
+
+    /**
+     * 清除未读数
+     *
+     * @param userId
+     */
+    void clearUnread(Long userId);
+
+    /**
+     * 获取未读数
+     *
+     * @param userId
+     * @return
+     */
+    Long countUnread(Long userId);
 
 }

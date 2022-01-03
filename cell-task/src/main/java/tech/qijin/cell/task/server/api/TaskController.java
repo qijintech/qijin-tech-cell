@@ -53,6 +53,10 @@ public class TaskController {
     @GetMapping("/claimable")
     public TaskVo claimableTask() {
         TaskBo taskBo = cellTaskService.getClaimableTask(UserUtil.getUserId());
+        if (taskBo == null) {
+            cellTaskService.triggerTask(UserUtil.getUserId());
+            taskBo = cellTaskService.getClaimableTask(UserUtil.getUserId());
+        }
         DropsBo dropsBo = cellDropsService.getDropsDetail(taskBo.getTaskRecord().getRewardId());
         TaskVo taskVo = TaskVo.from(taskBo);
         if (taskVo != null && dropsBo != null) {

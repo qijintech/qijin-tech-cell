@@ -28,6 +28,14 @@ public interface CellMessageHelper {
     List<Message> pageMessage(Long userId, Integer pageNo, Integer pageSize);
 
     /**
+     * 消息总数
+     *
+     * @param userId
+     * @return
+     */
+    Long countMessage(Long userId);
+
+    /**
      * 查询message content
      *
      * @param messageId
@@ -52,6 +60,7 @@ public interface CellMessageHelper {
 
     /**
      * 获取message对应的奖励
+     *
      * @param messageIds
      * @return
      */

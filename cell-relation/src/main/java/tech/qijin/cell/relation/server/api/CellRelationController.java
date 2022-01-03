@@ -1,5 +1,7 @@
 package tech.qijin.cell.relation.server.api;
 
+import com.google.common.collect.Maps;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.qijin.cell.relation.base.RelationKind;
@@ -33,12 +35,40 @@ public class CellRelationController {
         MAssert.notNull(kind, ResEnum.INVALID_PARAM);
         List<Relation> relations = cellRelationService.pageRelation(UserUtil.getUserId(), kind, pageVo);
         List<Long> userIds = relations.stream()
-                .map(Relation::getUserId)
+                .map(Relation::getPeerUserId)
                 .collect(Collectors.toList());
         Map<Long, UserProfile> profileMap = cellUserProfileService.mapProfile(userIds);
         return RelationsVo.builder()
                 .relations(RelationVo.from(relations, profileMap))
                 .build();
+    }
+
+    @GetMapping("/summary")
+    public RelationsVo summary(RelationKind kind) {
+        MAssert.notNull(kind, ResEnum.INVALID_PARAM);
+        Relation relation = cellRelationService.lastedRelation(UserUtil.getUserId(), kind, 1);
+        UserProfile profile = new UserProfile();
+        if (relation != null) {
+            profile = cellUserProfileService.getProfile(relation.getPeerUserId());
+        }
+        Long count = cellRelationService.countRelation(UserUtil.getUserId(), kind);
+        Long unread = cellRelationService.countUnread(UserUtil.getUserId(), kind);
+        return RelationsVo
+                .builder()
+                .relation(RelationVo.from(relation, profile))
+                .count(count)
+                .unreadCount(unread)
+                .build();
+    }
+
+    @GetMapping("/summary/map")
+    public Map<RelationKind, RelationsVo> summaryMap(@RequestParam List<RelationKind> kinds) {
+        MAssert.isTrue(CollectionUtils.isNotEmpty(kinds), ResEnum.INVALID_PARAM);
+        Map<RelationKind, RelationsVo> res = Maps.newHashMap();
+        for (RelationKind kind : kinds) {
+            res.put(kind, summary(kind));
+        }
+        return res;
     }
 
     @PostMapping("/add")

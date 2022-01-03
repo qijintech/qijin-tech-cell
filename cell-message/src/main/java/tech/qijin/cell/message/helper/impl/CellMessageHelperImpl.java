@@ -73,6 +73,15 @@ public class CellMessageHelperImpl implements CellMessageHelper {
     }
 
     @Override
+    public Long countMessage(Long userId) {
+        MessageExample example = new MessageExample();
+        example.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andStatusEqualTo(MessageStatus.NORMAL);
+        return messageDao.countByExample(example);
+    }
+
+    @Override
     public MessageContent getMessageContent(Long messageId) {
         MessageContentExample example = new MessageContentExample();
         example.createCriteria()

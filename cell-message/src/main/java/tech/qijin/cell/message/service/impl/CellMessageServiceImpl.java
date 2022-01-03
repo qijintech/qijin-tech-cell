@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.qijin.cell.message.base.CacheKey;
 import tech.qijin.cell.message.base.MessageBo;
 import tech.qijin.cell.message.base.MessageWrapper;
 import tech.qijin.cell.message.db.model.Message;
@@ -13,6 +14,7 @@ import tech.qijin.cell.message.db.model.MessageDrops;
 import tech.qijin.cell.message.helper.CellMessageHelper;
 import tech.qijin.cell.message.service.CellMessageService;
 import tech.qijin.util4j.lang.vo.PageVo;
+import tech.qijin.util4j.redis.RedisUtil;
 import tech.qijin.util4j.utils.NumberUtil;
 
 import java.util.Collections;
@@ -27,9 +29,11 @@ public class CellMessageServiceImpl implements CellMessageService {
     private Integer defaultPageSize = 10;
     @Autowired
     private CellMessageHelper cellMessageHelper;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
-    public void sendMessage(Long userId, MessageWrapper messageWrapper) {
+    public boolean sendMessage(Long userId, MessageWrapper messageWrapper) {
         Message message = new Message();
         message.setUserId(userId);
         message.setKind(messageWrapper.getKind());
@@ -48,7 +52,10 @@ public class CellMessageServiceImpl implements CellMessageService {
         content.setContent(messageWrapper.getContent());
         if (!cellMessageHelper.insertMessage(message, content, messageDrops)) {
             log.error("sendMessage fail, userId={}, message={}", userId, messageWrapper);
+            return false;
         }
+        addUnread(userId);
+        return true;
     }
 
     @Override
@@ -58,7 +65,15 @@ public class CellMessageServiceImpl implements CellMessageService {
         if (CollectionUtils.isEmpty(messages)) return Collections.emptyList();
         List<MessageBo> messageBos = wrapWithContent(messages);
         wrapWithDrops(messageBos);
+        if (pageVo.isFirstPage()) {
+            clearUnread(userId);
+        }
         return messageBos;
+    }
+
+    @Override
+    public Long countMessage(Long userId) {
+        return cellMessageHelper.countMessage(userId);
     }
 
     @Override
@@ -66,6 +81,25 @@ public class CellMessageServiceImpl implements CellMessageService {
         if (CollectionUtils.isEmpty(messages)) return false;
         if (messages.size() < pageVo.getPageSize()) return false;
         return true;
+    }
+
+    @Override
+    public void addUnread(Long userId) {
+        String key = CacheKey.INSTANCE.unreadCountKey(userId);
+        redisUtil.increment(key, 1L);
+    }
+
+    @Override
+    public void clearUnread(Long userId) {
+        String key = CacheKey.INSTANCE.unreadCountKey(userId);
+        redisUtil.delete(key);
+    }
+
+    @Override
+    public Long countUnread(Long userId) {
+        String key = CacheKey.INSTANCE.unreadCountKey(userId);
+        Long count = redisUtil.getLong(key);
+        return count == null ? 0L : count;
     }
 
     private List<MessageBo> wrapWithContent(List<Message> messages) {

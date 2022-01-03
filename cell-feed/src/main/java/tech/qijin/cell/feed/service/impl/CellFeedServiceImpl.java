@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tech.qijin.cell.counting.service.CellCountingService;
 import tech.qijin.cell.feed.base.CellFeedBo;
 import tech.qijin.cell.feed.base.FeedType;
 import tech.qijin.cell.feed.db.model.Feed;
@@ -17,6 +18,7 @@ import tech.qijin.cell.feed.helper.CellFeedHelper;
 import tech.qijin.cell.feed.service.CellFeedService;
 import tech.qijin.cell.feed.service.CommonService;
 import tech.qijin.util4j.lang.constant.ResEnum;
+import tech.qijin.util4j.lang.event.FeedPublishEvent;
 import tech.qijin.util4j.lang.vo.PageVo;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
@@ -32,6 +34,8 @@ import java.util.stream.Collectors;
 public class CellFeedServiceImpl extends CommonService implements CellFeedService {
     @Autowired
     private CellFeedHelper cellFeedHelper;
+    @Autowired
+    private CellCountingService cellCountingService;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -60,6 +64,10 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
             group.setGroupId(groupId);
             MAssert.isTrue(cellFeedHelper.insertFeedGroup(group), ResEnum.BAD_GATEWAY);
         });
+
+        cellCountingService.onEvent(FeedPublishEvent.builder()
+                .userId(cellFeedBo.getFeed().getUserId())
+                .build());
 
         return true;
     }

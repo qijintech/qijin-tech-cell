@@ -53,4 +53,29 @@ public interface CellAccountService {
      * @return
      */
     boolean updateAccount(Long userId, AccountKind kind, Long amount, StatementSrc src, Long dataId);
+
+    /**
+     * 账户更新小红点
+     *
+     * @param userId
+     * @param kind
+     */
+    void addRedPoint(Long userId, AccountKind kind);
+
+    /**
+     * 清除账户小红点
+     *
+     * @param userId
+     * @param kind
+     */
+    void clearRedPoint(Long userId, AccountKind kind);
+
+    /**
+     * 是否还有小红点
+     *
+     * @param userId
+     * @param kind
+     * @return
+     */
+    boolean hasRedPoint(Long userId, AccountKind kind);
 }

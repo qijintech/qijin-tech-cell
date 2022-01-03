@@ -41,7 +41,7 @@ public class RelationVo {
     public static List<RelationVo> from(List<Relation> relations, Map<Long, UserProfile> profileMap) {
         if (CollectionUtils.isEmpty(relations)) return Collections.emptyList();
         return relations.stream()
-                .map(relation -> RelationVo.from(relation, profileMap.get(relation.getUserId())))
+                .map(relation -> RelationVo.from(relation, profileMap.get(relation.getPeerUserId())))
                 .collect(Collectors.toList());
     }
 }

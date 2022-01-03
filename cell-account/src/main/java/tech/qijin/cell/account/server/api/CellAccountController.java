@@ -36,7 +36,8 @@ public class CellAccountController {
         Map<AccountKind, Account> accountMap = cellAccountService.mapAccount(UserUtil.getUserId(), kindList);
         return accountMap.entrySet()
                 .stream()
-                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> AccountVo.from(entry.getValue())));
+                .collect(Collectors.toMap(entry -> entry.getKey(), entry ->
+                        AccountVo.from(entry.getValue(), cellAccountService.hasRedPoint(UserUtil.getUserId(), entry.getKey()))));
     }
 
     @RequestMapping("/statement")
