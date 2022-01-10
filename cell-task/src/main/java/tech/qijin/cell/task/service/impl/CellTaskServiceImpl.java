@@ -239,7 +239,11 @@ public class CellTaskServiceImpl implements CellTaskService {
     private DropsBo doClaimReward(Long userId, TaskRecord record) {
         switch (record.getRewardType()) {
             case DROPS:
-                return cellDropsService.grantDropsToUser(userId, record.getRewardId(), StatementSrc.TASK, record.getId());
+                return cellDropsService.grantDropsToUser(userId,
+                        record.getRewardId(),
+                        StatementSrc.TASK,
+                        record.getId(),
+                        record.getTaskId());
             default:
                 throw new UnsupportedOperationException();
         }

@@ -91,13 +91,16 @@ public class CellAccountHelperImpl implements CellAccountHelper {
                                           AccountKind kind,
                                           Long amount,
                                           StatementSrc src,
-                                          Long dataId) {
+                                          Long dataId,
+                                          Long dataShowId) {
+        if (!NumberUtil.gtZero(dataShowId)) dataShowId = dataId;
         AccountStatement statement = new AccountStatement();
         statement.setUserId(userId);
         statement.setKind(kind);
         statement.setAmount(amount);
         statement.setStatementSrc(src);
         statement.setDataId(dataId);
+        statement.setDataShowId(dataShowId);
         statement.setFormat(formatStatement(userId, kind, src, dataId));
         try {
             return accountStatementDao.insertSelective(statement) > 0;

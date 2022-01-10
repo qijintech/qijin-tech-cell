@@ -36,12 +36,28 @@ public interface CellMessageHelper {
     Long countMessage(Long userId);
 
     /**
+     * 单条消息
+     *
+     * @param messageId
+     * @return
+     */
+    Message getMessage(Long messageId);
+
+    /**
      * 查询message content
      *
      * @param messageId
      * @return
      */
     MessageContent getMessageContent(Long messageId);
+
+    /**
+     * 单个消息已读
+     *
+     * @param messageId
+     * @return
+     */
+    boolean updateMessageRead(Long messageId);
 
     /**
      * 查询message内容

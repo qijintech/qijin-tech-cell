@@ -33,11 +33,13 @@ public interface AccountStatementMapper {
     @Insert({
         "insert into account_statement (channel, user_id, ",
         "kind, format, statement_src, ",
-        "data_id, amount, update_time, ",
+        "data_id, data_show_id, ",
+        "amount, update_time, ",
         "create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
         "#{kind,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR}, #{statementSrc,jdbcType=VARCHAR}, ",
-        "#{dataId,jdbcType=BIGINT}, #{amount,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
+        "#{dataId,jdbcType=BIGINT}, #{dataShowId,jdbcType=BIGINT}, ",
+        "#{amount,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
@@ -56,6 +58,7 @@ public interface AccountStatementMapper {
         @Result(column="format", property="format", jdbcType=JdbcType.VARCHAR),
         @Result(column="statement_src", property="statementSrc", jdbcType=JdbcType.VARCHAR),
         @Result(column="data_id", property="dataId", jdbcType=JdbcType.BIGINT),
+        @Result(column="data_show_id", property="dataShowId", jdbcType=JdbcType.BIGINT),
         @Result(column="amount", property="amount", jdbcType=JdbcType.BIGINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -64,8 +67,8 @@ public interface AccountStatementMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, kind, format, statement_src, data_id, amount, update_time, ",
-        "create_time",
+        "id, channel, user_id, kind, format, statement_src, data_id, data_show_id, amount, ",
+        "update_time, create_time",
         "from account_statement",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -77,6 +80,7 @@ public interface AccountStatementMapper {
         @Result(column="format", property="format", jdbcType=JdbcType.VARCHAR),
         @Result(column="statement_src", property="statementSrc", jdbcType=JdbcType.VARCHAR),
         @Result(column="data_id", property="dataId", jdbcType=JdbcType.BIGINT),
+        @Result(column="data_show_id", property="dataShowId", jdbcType=JdbcType.BIGINT),
         @Result(column="amount", property="amount", jdbcType=JdbcType.BIGINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -100,6 +104,7 @@ public interface AccountStatementMapper {
           "format = #{format,jdbcType=VARCHAR},",
           "statement_src = #{statementSrc,jdbcType=VARCHAR},",
           "data_id = #{dataId,jdbcType=BIGINT},",
+          "data_show_id = #{dataShowId,jdbcType=BIGINT},",
           "amount = #{amount,jdbcType=BIGINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",

@@ -18,7 +18,8 @@ import javax.annotation.PostConstruct;
         "tech.qijin.cell.task.service",
         "tech.qijin.cell.task.helper",
         "tech.qijin.cell.task.server",
-        "tech.qijin.cell.task.listener"})
+        "tech.qijin.cell.task.listener",
+        "tech.qijin.cell.task.spi"})
 @Import(CellTaskDatasourceConfig.class)
 public class CellTaskAutoConfiguration {
     @PostConstruct

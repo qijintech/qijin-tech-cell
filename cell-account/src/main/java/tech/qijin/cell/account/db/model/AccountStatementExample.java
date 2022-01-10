@@ -568,6 +568,66 @@ public class AccountStatementExample {
             return (Criteria) this;
         }
 
+        public Criteria andDataShowIdIsNull() {
+            addCriterion("data_show_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdIsNotNull() {
+            addCriterion("data_show_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdEqualTo(Long value) {
+            addCriterion("data_show_id =", value, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdNotEqualTo(Long value) {
+            addCriterion("data_show_id <>", value, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdGreaterThan(Long value) {
+            addCriterion("data_show_id >", value, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("data_show_id >=", value, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdLessThan(Long value) {
+            addCriterion("data_show_id <", value, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdLessThanOrEqualTo(Long value) {
+            addCriterion("data_show_id <=", value, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdIn(List<Long> values) {
+            addCriterion("data_show_id in", values, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdNotIn(List<Long> values) {
+            addCriterion("data_show_id not in", values, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdBetween(Long value1, Long value2) {
+            addCriterion("data_show_id between", value1, value2, "dataShowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataShowIdNotBetween(Long value1, Long value2) {
+            addCriterion("data_show_id not between", value1, value2, "dataShowId");
+            return (Criteria) this;
+        }
+
         public Criteria andAmountIsNull() {
             addCriterion("amount is null");
             return (Criteria) this;

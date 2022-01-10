@@ -82,11 +82,24 @@ public class CellMessageHelperImpl implements CellMessageHelper {
     }
 
     @Override
+    public Message getMessage(Long messageId) {
+        return messageDao.selectByPrimaryKey(messageId);
+    }
+
+    @Override
     public MessageContent getMessageContent(Long messageId) {
         MessageContentExample example = new MessageContentExample();
         example.createCriteria()
                 .andMessageIdEqualTo(messageId);
         return messageContentDao.selectByExampleWithBLOBs(example).stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public boolean updateMessageRead(Long messageId) {
+        Message update = new Message();
+        update.setId(messageId);
+        update.setRead(true);
+        return messageDao.updateByPrimaryKeySelective(update) > 0;
     }
 
     @Override

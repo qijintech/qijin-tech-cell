@@ -62,7 +62,12 @@ public interface CellAccountHelper {
      * @param dataId
      * @return
      */
-    boolean insertAccountStatement(Long userId, AccountKind kind, Long amount, StatementSrc src, Long dataId);
+    boolean insertAccountStatement(Long userId,
+                                   AccountKind kind,
+                                   Long amount,
+                                   StatementSrc src,
+                                   Long dataId,
+                                   Long dataShowId);
 
     /**
      * 分页查询流水

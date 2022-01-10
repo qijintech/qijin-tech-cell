@@ -16,7 +16,7 @@ public interface CellDropsService {
      * @param src
      * @param dataId
      */
-    DropsBo grantDropsToUser(Long userId, Long dropsId, StatementSrc src, Long dataId);
+    DropsBo grantDropsToUser(Long userId, Long dropsId, StatementSrc src, Long dataId, Long dataShowId);
 
     /**
      * 查看掉落详情

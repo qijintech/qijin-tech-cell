@@ -52,6 +52,10 @@ public class AccountStatementSqlProvider {
             sql.VALUES("data_id", "#{dataId,jdbcType=BIGINT}");
         }
         
+        if (record.getDataShowId() != null) {
+            sql.VALUES("data_show_id", "#{dataShowId,jdbcType=BIGINT}");
+        }
+        
         if (record.getAmount() != null) {
             sql.VALUES("amount", "#{amount,jdbcType=BIGINT}");
         }
@@ -80,6 +84,7 @@ public class AccountStatementSqlProvider {
         sql.SELECT("format");
         sql.SELECT("statement_src");
         sql.SELECT("data_id");
+        sql.SELECT("data_show_id");
         sql.SELECT("amount");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
@@ -128,6 +133,10 @@ public class AccountStatementSqlProvider {
             sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
         }
         
+        if (record.getDataShowId() != null) {
+            sql.SET("data_show_id = #{record.dataShowId,jdbcType=BIGINT}");
+        }
+        
         if (record.getAmount() != null) {
             sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
         }
@@ -155,6 +164,7 @@ public class AccountStatementSqlProvider {
         sql.SET("format = #{record.format,jdbcType=VARCHAR}");
         sql.SET("statement_src = #{record.statementSrc,jdbcType=VARCHAR}");
         sql.SET("data_id = #{record.dataId,jdbcType=BIGINT}");
+        sql.SET("data_show_id = #{record.dataShowId,jdbcType=BIGINT}");
         sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -190,6 +200,10 @@ public class AccountStatementSqlProvider {
         
         if (record.getDataId() != null) {
             sql.SET("data_id = #{dataId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getDataShowId() != null) {
+            sql.SET("data_show_id = #{dataShowId,jdbcType=BIGINT}");
         }
         
         if (record.getAmount() != null) {

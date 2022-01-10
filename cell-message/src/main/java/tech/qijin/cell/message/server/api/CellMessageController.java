@@ -11,6 +11,7 @@ import tech.qijin.cell.message.service.CellMessageService;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.lang.vo.PageVo;
 import tech.qijin.util4j.utils.MAssert;
+import tech.qijin.util4j.utils.NumberUtil;
 import tech.qijin.util4j.web.util.UserUtil;
 
 import java.util.List;
@@ -36,6 +37,13 @@ public class CellMessageController {
                 .message(MessageVo.from(messageBos))
                 .hasMore(cellMessageService.hasMore(messageBos, pageVo))
                 .build();
+    }
+
+    @GetMapping("/detail")
+    public MessageVo messageDetail(Long messageId) {
+        MAssert.isTrue(NumberUtil.gtZero(messageId), ResEnum.INVALID_PARAM);
+        MessageBo messageBo = cellMessageService.messageDetail(UserUtil.getUserId(), messageId);
+        return MessageVo.from(messageBo);
     }
 
     @PostMapping("/send")

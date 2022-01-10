@@ -8,18 +8,16 @@ import tech.qijin.cell.message.base.MessageStatus;
 import tech.qijin.cell.message.db.model.Message;
 import tech.qijin.util4j.trace.pojo.Channel;
 import tech.qijin.util4j.utils.ConvertUtil;
+import tech.qijin.util4j.utils.DateUtil;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 public class MessageVo {
     private Long id;
-
-    private Channel channel;
-
-    private Long userId;
 
     private MessageKind kind;
 
@@ -29,11 +27,13 @@ public class MessageVo {
 
     private String brief;
 
-    private MessageStatus status;
-
     private Boolean read;
 
     private String content;
+
+    private Date createTime;
+
+    private String createTimeStr;
 
     public static MessageVo from(MessageBo messageBo) {
         MessageVo messageVo = ConvertUtil.convert(messageBo.getMessage(), MessageVo.class);
@@ -42,6 +42,7 @@ public class MessageVo {
             messageVo.setIcon(message.getKind().icon());
             messageVo.setTitle(message.getKind().title());
             messageVo.setContent(messageBo.getMessageContent().getContent());
+            messageVo.setCreateTimeStr(DateUtil.formatStr(message.getCreateTime(), DateUtil.DATETIME_FORMAT));
         }
         return messageVo;
     }

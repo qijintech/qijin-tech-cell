@@ -26,6 +26,14 @@ public interface CellMessageService {
     List<MessageBo> pageMessage(Long userId, PageVo pageVo);
 
     /**
+     * 消息详情
+     *
+     * @param messageId
+     * @return
+     */
+    MessageBo messageDetail(Long userId, Long messageId);
+
+    /**
      * 消息总数
      *
      * @param userId
@@ -63,5 +71,4 @@ public interface CellMessageService {
      * @return
      */
     Long countUnread(Long userId);
-
 }

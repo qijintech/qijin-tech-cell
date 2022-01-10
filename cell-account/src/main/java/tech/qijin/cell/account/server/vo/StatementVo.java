@@ -21,11 +21,18 @@ public class StatementVo {
 
     private StatementSrc statementSrc;
 
+    private Long dataId;
+
+    private Long dataShowId;
+
     private Long amount;
 
     private Date createTime;
 
     private String createTimeStr;
+
+    // 流水来源前端展示的名称
+    private String statementSrcName;
 
     public static StatementVo from(AccountStatement statement) {
         StatementVo statementVo = ConvertUtil.convert(statement, StatementVo.class);

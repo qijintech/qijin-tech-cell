@@ -37,7 +37,7 @@ public class CellDropsServiceImpl implements CellDropsService {
     private CellItemHelper cellItemHelper;
 
     @Override
-    public DropsBo grantDropsToUser(Long userId, Long dropsId, StatementSrc src, Long dataId) {
+    public DropsBo grantDropsToUser(Long userId, Long dropsId, StatementSrc src, Long dataId, Long dataShowId) {
         DropsBo dropsBo = getDropsDetail(dropsId);
         if (dropsBo == null) {
             log.error("grantDropsToUser failed, dropsBo is null, userId={}, dropsId={}", userId, dropsId);
@@ -52,7 +52,9 @@ public class CellDropsServiceImpl implements CellDropsService {
                                 dropsItemBo.getItem().getKind(),
                                 dropsItemBo.getDropsItem().getAmount(),
                                 src,
-                                dataId)) {
+                                dataId,
+                                dataShowId
+                                )) {
                             log.error("grantDropsToUser failed, userId={}, dropsId={}, src={}, dataId={}, item={}, amount={}",
                                     userId, dropsId, src, dataId, dropsItemBo.getItem().getKind(), dropsItemBo.getDropsItem().getAmount());
                         }

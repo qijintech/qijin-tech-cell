@@ -20,6 +20,8 @@ public class AccountStatement {
 
     private Long dataId;
 
+    private Long dataShowId;
+
     private Long amount;
 
     private Date updateTime;
@@ -80,6 +82,14 @@ public class AccountStatement {
 
     public void setDataId(Long dataId) {
         this.dataId = dataId;
+    }
+
+    public Long getDataShowId() {
+        return dataShowId;
+    }
+
+    public void setDataShowId(Long dataShowId) {
+        this.dataShowId = dataShowId;
     }
 
     public Long getAmount() {

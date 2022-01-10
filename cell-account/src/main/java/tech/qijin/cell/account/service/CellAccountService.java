@@ -52,7 +52,12 @@ public interface CellAccountService {
      * @param dataId
      * @return
      */
-    boolean updateAccount(Long userId, AccountKind kind, Long amount, StatementSrc src, Long dataId);
+    boolean updateAccount(Long userId,
+                          AccountKind kind,
+                          Long amount,
+                          StatementSrc src,
+                          Long dataId,
+                          Long dataShowId);
 
     /**
      * 账户更新小红点

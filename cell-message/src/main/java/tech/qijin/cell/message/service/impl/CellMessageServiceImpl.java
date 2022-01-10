@@ -7,15 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.qijin.cell.message.base.CacheKey;
 import tech.qijin.cell.message.base.MessageBo;
+import tech.qijin.cell.message.base.MessageKind;
 import tech.qijin.cell.message.base.MessageWrapper;
 import tech.qijin.cell.message.db.model.Message;
 import tech.qijin.cell.message.db.model.MessageContent;
 import tech.qijin.cell.message.db.model.MessageDrops;
 import tech.qijin.cell.message.helper.CellMessageHelper;
 import tech.qijin.cell.message.service.CellMessageService;
+import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.lang.vo.PageVo;
 import tech.qijin.util4j.redis.RedisUtil;
+import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
+import tech.qijin.util4j.web.util.UserUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -72,8 +76,26 @@ public class CellMessageServiceImpl implements CellMessageService {
     }
 
     @Override
+    public MessageBo messageDetail(Long userId, Long messageId) {
+        Message message = cellMessageHelper.getMessage(messageId);
+        if (message == null) return null;
+        MAssert.isTrue(message.getUserId().equals(userId), ResEnum.FORBIDDEN);
+        MessageContent content = cellMessageHelper.getMessageContent(messageId);
+        cellMessageHelper.updateMessageRead(messageId);
+        return MessageBo.builder()
+                .message(message)
+                .messageContent(content).build();
+    }
+
+    @Override
     public Long countMessage(Long userId) {
-        return cellMessageHelper.countMessage(userId);
+        Long count = cellMessageHelper.countMessage(userId);
+        // 如果没有任何消息，则插入一条欢迎消息
+        if (!NumberUtil.gtZero(count)) {
+            sendMessage(userId, MessageWrapper.welcome());
+            count = 1L;
+        }
+        return count;
     }
 
     @Override
@@ -104,7 +126,7 @@ public class CellMessageServiceImpl implements CellMessageService {
 
     private List<MessageBo> wrapWithContent(List<Message> messages) {
         Set<Long> messageIds = messages.stream().map(Message::getId).collect(Collectors.toSet());
-        Map<Long, MessageContent> contentMap =  cellMessageHelper.mapMessageContent(Lists.newArrayList(messageIds));
+        Map<Long, MessageContent> contentMap = cellMessageHelper.mapMessageContent(Lists.newArrayList(messageIds));
         return messages.stream()
                 .map(message -> MessageBo.builder()
                         .message(message)

@@ -79,7 +79,8 @@ public class CellAccountServiceImpl implements CellAccountService {
                                  AccountKind kind,
                                  Long amount,
                                  StatementSrc src,
-                                 Long dataId) {
+                                 Long dataId,
+                                 Long dataShowId) {
         if (!NumberUtil.gtZero(amount)) return false;
 
         // 增加小红点
@@ -87,7 +88,7 @@ public class CellAccountServiceImpl implements CellAccountService {
 
         check(src, amount);
 
-        if (!cellAccountHelper.insertAccountStatement(userId, kind, amount, src, dataId)) {
+        if (!cellAccountHelper.insertAccountStatement(userId, kind, amount, src, dataId, dataShowId)) {
             log.warn("updateAccount duplicate, userId={}, kind={}, amount={}, src={}, dataId={}",
                     userId, kind, amount, src, dataId);
             return false;
