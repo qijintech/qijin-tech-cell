@@ -4,6 +4,7 @@ import tech.qijin.cell.feed.base.CellFeedBo;
 import tech.qijin.cell.feed.db.model.Feed;
 import tech.qijin.cell.feed.db.model.FeedImage;
 import tech.qijin.cell.feed.db.model.FeedTopic;
+import tech.qijin.cell.feed.service.bo.FeedBo;
 import tech.qijin.util4j.lang.vo.PageVo;
 
 import java.util.List;
@@ -58,4 +59,5 @@ public interface CellFeedService {
      */
     List<FeedTopic> pageFeedTopic(PageVo pageVo);
 
+    List<FeedBo> withFeedImage(List<Feed> feeds);
 }

@@ -16,7 +16,9 @@ import tech.qijin.cell.feed.db.model.FeedImage;
 import tech.qijin.cell.feed.db.model.FeedTopic;
 import tech.qijin.cell.feed.helper.CellFeedHelper;
 import tech.qijin.cell.feed.service.CellFeedService;
+import tech.qijin.cell.feed.service.CellLikeService;
 import tech.qijin.cell.feed.service.CommonService;
+import tech.qijin.cell.feed.service.bo.FeedBo;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.lang.event.FeedPublishEvent;
 import tech.qijin.util4j.lang.vo.PageVo;
@@ -36,6 +38,8 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
     private CellFeedHelper cellFeedHelper;
     @Autowired
     private CellCountingService cellCountingService;
+    @Autowired
+    private CellLikeService cellLikeService;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -127,6 +131,21 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
     public List<FeedTopic> pageFeedTopic(PageVo pageVo) {
         pageVo = checkPage(pageVo, 100);
         return cellFeedHelper.pageFeedTopic(pageVo.getPageNo(), pageVo.getPageSize());
+    }
+
+    @Override
+    public List<FeedBo> withFeedImage(List<Feed> feeds) {
+        if (CollectionUtils.isEmpty(feeds)) return Collections.emptyList();
+        List<Long> feedIds = feeds.stream()
+                .map(Feed::getId)
+                .collect(Collectors.toList());
+        Map<Long, List<FeedImage>> feedImagesMap = mapFeedImages(feedIds);
+        return feeds.stream().map(feed ->
+                FeedBo.builder()
+                        .feed(feed)
+                        .images(feedImagesMap.get(feed.getId()))
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private void checkFeedItem(CellFeedBo cellFeedBo) {

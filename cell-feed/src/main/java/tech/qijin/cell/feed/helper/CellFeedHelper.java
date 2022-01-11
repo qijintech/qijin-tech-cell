@@ -23,6 +23,8 @@ public interface CellFeedHelper {
 
     List<Feed> listFeedByIds(List<Long> feedIds);
 
+    Map<Long, Feed> mapFeedByIds(List<Long> feedIds);
+
     List<FeedByGroup> pageFeedByGroup(Long groupId, Integer pageNo, Integer pageSize);
 
     List<FeedByGroup> pageFeedByGroups(List<Long> groupIds, Integer pageNo, Integer pageSize);

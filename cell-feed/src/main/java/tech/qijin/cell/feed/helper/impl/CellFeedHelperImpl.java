@@ -15,6 +15,7 @@ import tech.qijin.cell.feed.helper.CellFeedHelper;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -61,6 +62,12 @@ public class CellFeedHelperImpl implements CellFeedHelper {
         example.createCriteria()
                 .andIdIn(feeIds);
         return feedItemDao.selectByExample(example);
+    }
+
+    @Override
+    public Map<Long, Feed> mapFeedByIds(List<Long> feedIds) {
+        return listFeedByIds(feedIds).stream()
+                .collect(Collectors.toMap(Feed::getId, Function.identity()));
     }
 
     @Override
