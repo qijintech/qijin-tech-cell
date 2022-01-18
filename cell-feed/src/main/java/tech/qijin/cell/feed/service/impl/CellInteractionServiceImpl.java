@@ -21,6 +21,7 @@ import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.lang.vo.PageVo;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
+import tech.qijin.util4j.web.util.UserUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,14 +50,23 @@ public class CellInteractionServiceImpl implements CellInteractionService {
 
         Feed feed = cellFeedHelper.getFeedById(feedId);
         MAssert.notNull(feed, ResEnum.INVALID_PARAM);
-        String format = format(kind, feed.getUserId(), fromUserId, feedId, commentId);
+        return addInteraction(kind, feedId, feed.getUserId(), fromUserId, commentId);
+    }
+
+    @Override
+    public boolean addInteraction(FeedInteractionKind kind,
+                                  Long feedId,
+                                  Long userId,
+                                  Long fromUserId,
+                                  Long commentId) {
+        String format = format(kind, userId, fromUserId, feedId, commentId);
         FeedInteraction interaction = cellInteractionHelper.getInteraction(format);
         if (interaction != null) {
             if (interaction.getValid()) return true;
             return cellInteractionHelper.updateInteractionValid(interaction.getId(), true);
         }
         interaction = new FeedInteraction();
-        interaction.setUserId(feed.getUserId());
+        interaction.setUserId(userId);
         interaction.setFromUserId(fromUserId);
         interaction.setFeedId(feedId);
         interaction.setCommentId(commentId);
@@ -80,18 +90,22 @@ public class CellInteractionServiceImpl implements CellInteractionService {
     }
 
     @Override
-    public boolean delInteraction(Long id, Long fromUserId) {
-        return true;
-    }
-
-    @Override
     public boolean delInteraction(FeedInteractionKind kind,
                                   Long feedId,
                                   Long fromUserId,
                                   Long commentId) {
         Feed feed = cellFeedHelper.getFeedById(feedId);
         MAssert.notNull(feed, ResEnum.INVALID_PARAM);
-        String format = format(kind, feed.getUserId(), fromUserId, feedId, commentId);
+        return delInteraction(kind, feedId, feed.getUserId(), fromUserId, commentId);
+    }
+
+    @Override
+    public boolean delInteraction(FeedInteractionKind kind,
+                                  Long feedId,
+                                  Long userId,
+                                  Long fromUserId,
+                                  Long commentId) {
+        String format = format(kind, userId, fromUserId, feedId, commentId);
         FeedInteraction interaction = cellInteractionHelper.getInteraction(format);
         if (interaction == null) return true;
         if (!interaction.getValid()) return true;

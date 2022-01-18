@@ -25,4 +25,6 @@ public interface CellCommentHelper {
     Map<Long, List<FeedComment>> mapCommentReplies(List<Long> toCommentIds);
 
     FeedComment getComment(Long id);
+
+    boolean delComment(Long id);
 }

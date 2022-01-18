@@ -103,6 +103,14 @@ public class CellCommentHelperImpl implements CellCommentHelper {
         return feedCommentDao.selectByPrimaryKey(id);
     }
 
+    @Override
+    public boolean delComment(Long id) {
+        FeedComment update = new FeedComment();
+        update.setId(id);
+        update.setValid(false);
+        return feedCommentDao.updateByPrimaryKeySelective(update) > 0;
+    }
+
     private void checkComment(FeedComment comment) {
         MAssert.isTrue(comment != null, ResEnum.INVALID_PARAM);
         MAssert.isTrue(NumberUtil.gtZero(comment.getUserId()), ResEnum.INVALID_PARAM);

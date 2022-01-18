@@ -19,12 +19,22 @@ public interface CellInteractionService {
                            Long fromUserId,
                            Long commentId);
 
+    boolean addInteraction(FeedInteractionKind kind,
+                           Long feedId,
+                           Long userId,
+                           Long fromUserId,
+                           Long commentId);
+
     boolean delInteraction(FeedInteractionKind kind,
                            Long feedId,
                            Long fromUserId,
                            Long commentId);
 
-    boolean delInteraction(Long id, Long fromUserId);
+    boolean delInteraction(FeedInteractionKind kind,
+                           Long feedId,
+                           Long userId,
+                           Long fromUserId,
+                           Long commentId);
 
     List<FeedInteractionBo> pageInteraction(Long userId, PageVo pageVo);
 
