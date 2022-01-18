@@ -61,6 +61,7 @@ public class CellInteractionServiceImpl implements CellInteractionService {
         interaction.setFeedId(feedId);
         interaction.setCommentId(commentId);
         interaction.setFormat(format);
+        interaction.setKind(kind);
         return cellInteractionHelper.addInteraction(interaction);
     }
 

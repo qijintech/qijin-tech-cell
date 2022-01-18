@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import tech.qijin.util4j.mybatis.handler.EnumValueTypeHandler;
 import tech.qijin.util4j.mybatis.interceptor.ChannelInterceptor;
+import tech.qijin.util4j.mybatis.interceptor.SqlInfoInterceptor;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -60,6 +61,8 @@ public class CellFeedDatasourceConfig {
         channelProperties.put("tenantColumnName", "channel");
         channelInterceptor.setProperties(channelProperties);
         configuration.addInterceptor(channelInterceptor);
+        SqlInfoInterceptor sqlInfoInterceptor = new SqlInfoInterceptor();
+        configuration.addInterceptor(sqlInfoInterceptor);
         sqlSessionFactoryBean.setConfiguration(configuration);
         return sqlSessionFactoryBean.getObject();
     }
