@@ -6,6 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.qijin.cell.feed.base.CacheKey;
 import tech.qijin.cell.feed.base.FeedInteractionKind;
 import tech.qijin.cell.feed.db.model.Feed;
 import tech.qijin.cell.feed.db.model.FeedComment;
@@ -19,14 +20,15 @@ import tech.qijin.cell.feed.service.bo.FeedBo;
 import tech.qijin.cell.feed.service.bo.FeedInteractionBo;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.lang.vo.PageVo;
+import tech.qijin.util4j.redis.RedisUtil;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
-import tech.qijin.util4j.web.util.UserUtil;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,8 @@ public class CellInteractionServiceImpl implements CellInteractionService {
     private CellFeedService cellFeedService;
     @Autowired
     private CellCommentService cellCommentService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public boolean addInteraction(FeedInteractionKind kind,
@@ -59,6 +63,8 @@ public class CellInteractionServiceImpl implements CellInteractionService {
                                   Long userId,
                                   Long fromUserId,
                                   Long commentId) {
+
+        incrUnread(userId);
         String format = format(kind, userId, fromUserId, feedId, commentId);
         FeedInteraction interaction = cellInteractionHelper.getInteraction(format);
         if (interaction != null) {
@@ -105,6 +111,7 @@ public class CellInteractionServiceImpl implements CellInteractionService {
                                   Long userId,
                                   Long fromUserId,
                                   Long commentId) {
+        decrUnread(userId);
         String format = format(kind, userId, fromUserId, feedId, commentId);
         FeedInteraction interaction = cellInteractionHelper.getInteraction(format);
         if (interaction == null) return true;
@@ -129,6 +136,8 @@ public class CellInteractionServiceImpl implements CellInteractionService {
                 .collect(Collectors.toSet());
         Map<Long, FeedComment> commentMap = cellCommentService.mapComment(Lists.newArrayList(commentIds));
 
+        clearUnread(userId);
+
         return interactions.stream().map(interaction ->
                 FeedInteractionBo.builder()
                         .interaction(interaction)
@@ -136,5 +145,36 @@ public class CellInteractionServiceImpl implements CellInteractionService {
                         .comment(commentMap.get(interaction.getCommentId()))
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long countUnread(Long userId) {
+        String key = CacheKey.INSTANCE.interactionUnreadCountKey(userId);
+        Long value = redisUtil.getLong(key);
+        return NumberUtil.gtZero(value) ? value : 0L;
+    }
+
+    @Override
+    public boolean incrUnread(Long userId) {
+        String key = CacheKey.INSTANCE.interactionUnreadCountKey(userId);
+        redisUtil.increment(key, 1L);
+        redisUtil.setExpire(key, 100, TimeUnit.DAYS);
+        return true;
+    }
+
+    @Override
+    public boolean decrUnread(Long userId) {
+        String key = CacheKey.INSTANCE.interactionUnreadCountKey(userId);
+        Long value = redisUtil.decrement(key, 1L);
+        if (!NumberUtil.gtZero(value)) {
+            redisUtil.delete(key);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean clearUnread(Long userId) {
+        String key = CacheKey.INSTANCE.interactionUnreadCountKey(userId);
+        return redisUtil.delete(key);
     }
 }

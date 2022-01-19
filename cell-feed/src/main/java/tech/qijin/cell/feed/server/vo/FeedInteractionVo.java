@@ -2,6 +2,7 @@ package tech.qijin.cell.feed.server.vo;
 
 import lombok.Builder;
 import lombok.Data;
+import tech.qijin.cell.feed.base.FeedInteractionKind;
 import tech.qijin.cell.feed.service.bo.FeedInteractionBo;
 import tech.qijin.cell.user.db.model.UserProfile;
 import tech.qijin.cell.user.server.vo.ProfileVo;
@@ -25,7 +26,7 @@ public class FeedInteractionVo {
                 .feedId(interactionBo.getFeedBo().getFeed().getId())
                 .fromUser(ProfileVo.from(profileMap.get(interactionBo.getInteraction().getFromUserId())))
                 .feed(FeedVo.from(interactionBo.getFeedBo(), null))
-                .isLike(interactionBo.getComment() == null)
+                .isLike(interactionBo.getInteraction().getKind().isLike())
                 .comment(FeedCommentVo.from(interactionBo.getComment(), null))
                 .build();
     }
@@ -35,5 +36,4 @@ public class FeedInteractionVo {
                 .map(interactionBo -> FeedInteractionVo.from(interactionBo, profileMap))
                 .collect(Collectors.toList());
     }
-
 }

@@ -45,6 +45,7 @@ public class ProfileVo {
 
     public static ProfileVo from(UserProfile profile) {
         ProfileVo profileVo = ConvertUtil.convert(profile, ProfileVo.class);
+        if (profileVo == null) return null;
         if (profile.getBirthday() != null) {
             profileVo.setBirthday(DateUtil.formatStr(profile.getBirthday(), DateUtil.DATE_FORMAT));
             profileVo.setBirthdayYear(DateUtil.formatStr(profile.getBirthday(), "yyyy"));

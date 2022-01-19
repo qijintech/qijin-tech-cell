@@ -46,7 +46,7 @@ public class CellInteractionHelperImpl extends CommonHelper implements CellInter
     @Override
     public List<FeedInteraction> pageInteraction(Long userId, Integer pageNo, Integer pageSize) {
         FeedInteractionExample example = new FeedInteractionExample();
-        example.setOrderByClause(orderBy("createTime", "desc", pageNo, pageSize));
+        example.setOrderByClause(orderBy("create_time", "desc", pageNo, pageSize));
         example.createCriteria()
                 .andUserIdEqualTo(userId);
         return feedInteractionDao.selectByExample(example);

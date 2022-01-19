@@ -38,5 +38,11 @@ public interface CellInteractionService {
 
     List<FeedInteractionBo> pageInteraction(Long userId, PageVo pageVo);
 
+    Long countUnread(Long userId);
 
+    boolean incrUnread(Long userId);
+
+    boolean decrUnread(Long userId);
+
+    boolean clearUnread(Long userId);
 }
