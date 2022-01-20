@@ -11,8 +11,8 @@ public enum IamRole implements EnumValue<String> {
     CREATOR("造物主"),
 
     // SOCIAL
-    GROUP_CREATOR("俱乐部创建者"),
-    GROUP_ADMIN("俱乐部管理员"),
+    GROUP_CREATOR("群组创建者"),
+    GROUP_ADMIN("群组管理员"),
     ACTIVITY_ADMIN("活动管理员"),
     ;
 

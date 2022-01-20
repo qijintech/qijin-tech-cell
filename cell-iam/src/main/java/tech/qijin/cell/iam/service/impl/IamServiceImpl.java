@@ -35,6 +35,11 @@ public class IamServiceImpl implements IamService {
     }
 
     @Override
+    public boolean isCreator(Long userId) {
+        return listRole(userId, 0L).contains(IamRole.CREATOR);
+    }
+
+    @Override
     public boolean addRole(Long userId, Long dataId, IamRole iamRole) {
         return iamHelper.addRole(userId, dataId, iamRole);
     }

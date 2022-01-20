@@ -22,7 +22,16 @@ public interface IamService {
     boolean hasAuth(List<IamRole> roles, IamAuth iamAuth);
 
     /**
+     * 是否是造物主
+     *
+     * @param userId
+     * @return
+     */
+    boolean isCreator(Long userId);
+
+    /**
      * 授予权限
+     *
      * @param userId
      * @param dataId
      * @param iamRole

@@ -10,8 +10,9 @@ import tech.qijin.util4j.lang.constant.EnumValue;
 public enum IamAuth implements EnumValue<String> {
 
     // SOCIAL
-    GROUP_CREATE("创建俱乐部权限"),
-    GROUP_MANAGE("管理俱乐部权限"),
+    GROUP_CREATE("创建群组权限"),
+    GROUP_MANAGE("管理群组权限"),
+    GROUP_AUDIT("审核群组权限"),
     ORGANIZER_MANAGE("活动管理员管理权限"),
     ACTIVITY_MANAGE("创建/编辑活动权限"),
     ACTIVITY_CREATE("创建/编辑活动权限"),
