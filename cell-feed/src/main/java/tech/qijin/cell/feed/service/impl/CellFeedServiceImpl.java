@@ -154,7 +154,7 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
         MAssert.notNull(feed, ResEnum.INVALID_PARAM);
         MAssert.isTrue(NumberUtil.gtZero(feed.getUserId()), ResEnum.INVALID_PARAM);
         MAssert.isTrue(StringUtils.isNotBlank(feed.getText()) || CollectionUtils.isNotEmpty(cellFeedBo.getImages()), ResEnum.INVALID_PARAM);
-        MAssert.isTrue(CollectionUtils.isNotEmpty(cellFeedBo.getGroupIds()), ResEnum.INVALID_PARAM);
+//        MAssert.isTrue(CollectionUtils.isNotEmpty(cellFeedBo.getGroupIds()), ResEnum.INVALID_PARAM);
     }
 
 }

@@ -1,6 +1,7 @@
 package tech.qijin.cell.feed.service.impl;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
@@ -64,6 +65,7 @@ public class CellInteractionServiceImpl implements CellInteractionService {
                                   Long fromUserId,
                                   Long commentId) {
 
+        if (userId.equals(fromUserId)) return true;
         incrUnread(userId);
         String format = format(kind, userId, fromUserId, feedId, commentId);
         FeedInteraction interaction = cellInteractionHelper.getInteraction(format);
@@ -111,6 +113,7 @@ public class CellInteractionServiceImpl implements CellInteractionService {
                                   Long userId,
                                   Long fromUserId,
                                   Long commentId) {
+        if (userId.equals(fromUserId)) return true;
         decrUnread(userId);
         String format = format(kind, userId, fromUserId, feedId, commentId);
         FeedInteraction interaction = cellInteractionHelper.getInteraction(format);
@@ -122,6 +125,7 @@ public class CellInteractionServiceImpl implements CellInteractionService {
     @Override
     public List<FeedInteractionBo> pageInteraction(Long userId, PageVo pageVo) {
         pageVo = PageVo.check(pageVo, null);
+        clearUnread(userId);
         List<FeedInteraction> interactions = cellInteractionHelper.pageInteraction(userId, pageVo.getPageNo(), pageVo.getPageSize());
         if (CollectionUtils.isEmpty(interactions)) return Collections.emptyList();
         Set<Long> feedIds = interactions.stream().map(FeedInteraction::getFeedId).collect(Collectors.toSet());
@@ -131,20 +135,33 @@ public class CellInteractionServiceImpl implements CellInteractionService {
                 .collect(Collectors.toMap(feedBo -> feedBo.getFeed().getId(), Function.identity()));
 
         Set<Long> commentIds = interactions.stream()
-                .filter(interaction -> NumberUtil.gtZero(interaction.getCommentId()))
                 .map(FeedInteraction::getCommentId)
+                .filter(NumberUtil::gtZero)
                 .collect(Collectors.toSet());
         Map<Long, FeedComment> commentMap = cellCommentService.mapComment(Lists.newArrayList(commentIds));
+        Set<Long> toCommentIds = commentMap.entrySet().stream().map(entry -> {
+            FeedComment c = entry.getValue();
+            if (NumberUtil.gtZero(c.getToSubCommentId())) return c.getToSubCommentId();
+            if (NumberUtil.gtZero(c.getToCommentId())) return c.getToCommentId();
+            return 0L;
+        }).collect(Collectors.toSet());
+        Map<Long, FeedComment> toCommentMap = cellCommentService.mapComment(Lists.newArrayList(toCommentIds));
 
-        clearUnread(userId);
-
-        return interactions.stream().map(interaction ->
-                FeedInteractionBo.builder()
-                        .interaction(interaction)
-                        .feedBo(feedBoMap.get(interaction.getFeedId()))
-                        .comment(commentMap.get(interaction.getCommentId()))
-                        .build())
-                .collect(Collectors.toList());
+        return interactions.stream().map(interaction -> {
+            FeedComment comment = commentMap.get(interaction.getCommentId());
+            FeedComment toComment = null;
+            if (comment != null) {
+                toComment = toCommentMap.get(NumberUtil.gtZero(comment.getToSubCommentId())
+                        ? comment.getToSubCommentId()
+                        : comment.getToCommentId());
+            }
+            return FeedInteractionBo.builder()
+                    .interaction(interaction)
+                    .feedBo(feedBoMap.get(interaction.getFeedId()))
+                    .comment(comment)
+                    .toComment(toComment)
+                    .build();
+        }).collect(Collectors.toList());
     }
 
     @Override

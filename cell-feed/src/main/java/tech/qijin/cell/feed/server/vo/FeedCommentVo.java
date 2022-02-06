@@ -38,6 +38,8 @@ public class FeedCommentVo {
 
     private Boolean hasLiked;
 
+    private boolean deleted;
+
 
 
     /**
@@ -53,7 +55,7 @@ public class FeedCommentVo {
             commentVo.setProfile(ProfileVo.from(profile));
             commentVo.setCreateTime(DateUtil.formatSocial(comment.getCreateTime()));
         }
-        return commentVo;
+        return handleDeleted(commentVo, comment);
     }
 
     public static List<FeedCommentVo> from(List<FeedComment> comments, Map<Long, UserProfile> profileMap) {
@@ -72,7 +74,7 @@ public class FeedCommentVo {
         commentVo.setCreateTime(DateUtil.formatSocial(feedCommentBo.getComment().getCreateTime()));
         commentVo.setHasLiked(feedCommentBo.getHasLiked());
         commentVo.setLikeCount(feedCommentBo.getLikeCount());
-        return commentVo;
+        return handleDeleted(commentVo, feedCommentBo.getComment());
     }
 
     public static List<FeedCommentVo> fromBo(List<FeedCommentBo> feedCommentBos, Map<Long, UserProfile> profileMap) {
@@ -96,8 +98,18 @@ public class FeedCommentVo {
                         commentVo.setCommentReplies(CommentReplyVo.from(commentRepliesBo.getCommentReplies(), profileMap));
                         commentVo.setReplyCount(commentRepliesBo.getReplyCount());
                     }
-                    return commentVo;
+                    return handleDeleted(commentVo, commentBo.getComment());
                 })
                 .collect(Collectors.toList());
+    }
+
+    private static FeedCommentVo handleDeleted(FeedCommentVo commentVo, FeedComment comment) {
+        if (commentVo == null) return null;
+        if (!comment.getValid()) {
+            commentVo.setDeleted(true);
+            commentVo.setContentText("");
+            commentVo.setContentImage("");
+        }
+        return commentVo;
     }
 }

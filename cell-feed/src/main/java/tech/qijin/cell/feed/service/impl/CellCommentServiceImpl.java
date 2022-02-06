@@ -48,7 +48,7 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
         MAssert.isTrue(NumberUtil.gtZero(commentId), ResEnum.INVALID_PARAM);
         FeedComment comment = new FeedComment();
         comment.setUserId(userId);
-        comment.setFeedId(feedId);
+//        comment.setFeedId(feedId);
         comment.setContentText(commentText);
         comment.setContentImage(commentImage);
         comment.setToCommentId(commentId);

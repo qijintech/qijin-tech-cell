@@ -18,7 +18,9 @@ public class FeedInteractionVo {
     private ProfileVo fromUser;
     private FeedVo feed;
     private boolean isLike;
+    private FeedInteractionKind kind;
     private FeedCommentVo comment;
+    private FeedCommentVo toComment;
 
     public static FeedInteractionVo from(FeedInteractionBo interactionBo, Map<Long, UserProfile> profileMap) {
         if (interactionBo == null) return null;
@@ -28,6 +30,8 @@ public class FeedInteractionVo {
                 .feed(FeedVo.from(interactionBo.getFeedBo(), null))
                 .isLike(interactionBo.getInteraction().getKind().isLike())
                 .comment(FeedCommentVo.from(interactionBo.getComment(), null))
+                .toComment(FeedCommentVo.from(interactionBo.getToComment(), null))
+                .kind(interactionBo.getInteraction().getKind())
                 .build();
     }
 

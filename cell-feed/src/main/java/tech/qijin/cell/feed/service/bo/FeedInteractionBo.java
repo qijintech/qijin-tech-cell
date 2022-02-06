@@ -11,4 +11,5 @@ public class FeedInteractionBo {
     private FeedInteraction interaction;
     private FeedBo feedBo;
     private FeedComment comment;
+    private FeedComment toComment;
 }
