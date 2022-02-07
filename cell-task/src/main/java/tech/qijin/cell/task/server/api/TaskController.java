@@ -57,6 +57,7 @@ public class TaskController {
             cellTaskService.triggerTask(UserUtil.getUserId());
             taskBo = cellTaskService.getClaimableTask(UserUtil.getUserId());
         }
+        if (taskBo == null) return null;
         DropsBo dropsBo = cellDropsService.getDropsDetail(taskBo.getTaskRecord().getRewardId());
         TaskVo taskVo = TaskVo.from(taskBo);
         if (taskVo != null && dropsBo != null) {

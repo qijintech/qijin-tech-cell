@@ -92,7 +92,7 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
         if (CollectionUtils.isEmpty(feedByGroups)) return Collections.emptyList();
         List<Long> feedIds = feedByGroups.stream().map(FeedByGroup::getFeedId).collect(Collectors.toList());
         List<Feed> feeds = cellFeedHelper.listFeedByIds(feedIds);
-        feeds.sort(Comparator.comparing(Feed::getCreateTime).reversed());
+        feeds.sort(Comparator.comparing(Feed::getId).reversed());
         return feeds;
     }
 
