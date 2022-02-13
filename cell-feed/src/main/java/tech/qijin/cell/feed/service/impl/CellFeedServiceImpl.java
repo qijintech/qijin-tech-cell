@@ -25,10 +25,7 @@ import tech.qijin.util4j.lang.vo.PageVo;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -90,8 +87,8 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
         pageVo = checkPage(pageVo, null);
         List<FeedByGroup> feedByGroups = cellFeedHelper.pageFeedByGroups(groupIds, pageVo.getPageNo(), pageVo.getPageSize());
         if (CollectionUtils.isEmpty(feedByGroups)) return Collections.emptyList();
-        List<Long> feedIds = feedByGroups.stream().map(FeedByGroup::getFeedId).collect(Collectors.toList());
-        List<Feed> feeds = cellFeedHelper.listFeedByIds(feedIds);
+        Set<Long> feedIds = feedByGroups.stream().map(FeedByGroup::getFeedId).collect(Collectors.toSet());
+        List<Feed> feeds = cellFeedHelper.listFeedByIds(Lists.newArrayList(feedIds));
         feeds.sort(Comparator.comparing(Feed::getId).reversed());
         return feeds;
     }
