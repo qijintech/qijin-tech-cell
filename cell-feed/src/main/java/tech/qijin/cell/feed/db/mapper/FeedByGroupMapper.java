@@ -32,11 +32,11 @@ public interface FeedByGroupMapper {
 
     @Insert({
         "insert into feed_by_group (channel, group_id, ",
-        "feed_id, valid, update_time, ",
-        "create_time)",
+        "user_id, feed_id, valid, ",
+        "update_time, create_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{groupId,jdbcType=BIGINT}, ",
-        "#{feedId,jdbcType=BIGINT}, #{valid,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{userId,jdbcType=BIGINT}, #{feedId,jdbcType=BIGINT}, #{valid,jdbcType=TINYINT}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(FeedByGroup record);
@@ -50,6 +50,7 @@ public interface FeedByGroupMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="group_id", property="groupId", jdbcType=JdbcType.BIGINT),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -59,7 +60,7 @@ public interface FeedByGroupMapper {
 
     @Select({
         "select",
-        "id, channel, group_id, feed_id, valid, update_time, create_time",
+        "id, channel, group_id, user_id, feed_id, valid, update_time, create_time",
         "from feed_by_group",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -67,6 +68,7 @@ public interface FeedByGroupMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="group_id", property="groupId", jdbcType=JdbcType.BIGINT),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="feed_id", property="feedId", jdbcType=JdbcType.BIGINT),
         @Result(column="valid", property="valid", jdbcType=JdbcType.TINYINT),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -87,6 +89,7 @@ public interface FeedByGroupMapper {
         "update feed_by_group",
         "set channel = #{channel,jdbcType=VARCHAR},",
           "group_id = #{groupId,jdbcType=BIGINT},",
+          "user_id = #{userId,jdbcType=BIGINT},",
           "feed_id = #{feedId,jdbcType=BIGINT},",
           "valid = #{valid,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",

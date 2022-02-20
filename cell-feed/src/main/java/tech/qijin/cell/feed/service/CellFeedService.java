@@ -24,15 +24,18 @@ public interface CellFeedService {
 
     /**
      * 分页返回feed，根据group区分
+     *
      * @param groupId
      * @param pageVo
      * @return
      */
     List<Feed> pageFeedByGroup(Long groupId, PageVo pageVo);
+
     List<Feed> pageFeedByGroups(List<Long> groupIds, PageVo pageVo);
 
     /**
      * 分页获取单个用户发布的feed
+     *
      * @param userId
      * @param pageVo
      * @return
@@ -45,6 +48,7 @@ public interface CellFeedService {
 
     /**
      * 删除指定feed
+     *
      * @param feedId
      * @param userId
      * @return
@@ -52,6 +56,7 @@ public interface CellFeedService {
     boolean deleteFeed(Long feedId, Long userId);
 
     List<FeedImage> getFeedImages(Long feedId);
+
     Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds);
 
     /**
@@ -60,4 +65,22 @@ public interface CellFeedService {
     List<FeedTopic> pageFeedTopic(PageVo pageVo);
 
     List<FeedBo> withFeedImage(List<Feed> feeds);
+
+    /**
+     * 用户进入群组后，将用户之前发的feed添加到新群组中
+     *
+     * @param userId
+     * @param groupId
+     * @return
+     */
+    boolean copyFeedIntoGroup(Long userId, Long groupId);
+
+    /**
+     * 用户退群后，将用户之前发的feed从群组中移除
+     *
+     * @param userId
+     * @param groupId
+     * @return
+     */
+    long removeFeedFromGroup(Long userId, Long groupId);
 }

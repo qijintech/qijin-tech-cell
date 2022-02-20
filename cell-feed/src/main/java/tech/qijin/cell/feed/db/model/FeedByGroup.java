@@ -10,6 +10,8 @@ public class FeedByGroup {
 
     private Long groupId;
 
+    private Long userId;
+
     private Long feedId;
 
     private Boolean valid;
@@ -40,6 +42,14 @@ public class FeedByGroup {
 
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getFeedId() {

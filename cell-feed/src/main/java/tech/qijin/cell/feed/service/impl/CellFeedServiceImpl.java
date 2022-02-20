@@ -63,6 +63,7 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
             FeedByGroup group = new FeedByGroup();
             group.setFeedId(feed.getId());
             group.setGroupId(groupId);
+            group.setUserId(feed.getUserId());
             MAssert.isTrue(cellFeedHelper.insertFeedGroup(group), ResEnum.BAD_GATEWAY);
         });
 
@@ -143,6 +144,36 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
                         .images(feedImagesMap.get(feed.getId()))
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean copyFeedIntoGroup(Long userId, Long groupId) {
+        Integer pageNo = 1;
+        Integer pageSize = 50;
+        Integer total = 0;
+        while (true) {
+            List<Feed> feeds = cellFeedHelper.pageFeedByUser(userId, FeedType.PUBLISHED, pageNo, pageSize);
+            if (CollectionUtils.isEmpty(feeds)) break;
+            pageNo++;
+            List<FeedByGroup> feedByGroups = feeds.stream().map(feed -> {
+                FeedByGroup fg = new FeedByGroup();
+                fg.setUserId(feed.getUserId());
+                fg.setFeedId(feed.getId());
+                fg.setGroupId(groupId);
+                fg.setCreateTime(feed.getCreateTime());
+                fg.setUpdateTime(feed.getUpdateTime());
+                return fg;
+            }).collect(Collectors.toList());
+            total += feedByGroups.size();
+            cellFeedHelper.batchInsertFeedGroup(feedByGroups);
+        }
+        log.info("copyFeedIntoGroup userId={}, groupId={}, total={}", userId, groupId, total);
+        return true;
+    }
+
+    @Override
+    public long removeFeedFromGroup(Long userId, Long groupId) {
+        return cellFeedHelper.removeFeedGroup(userId, groupId);
     }
 
     private void checkFeedItem(CellFeedBo cellFeedBo) {

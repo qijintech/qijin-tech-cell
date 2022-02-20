@@ -41,6 +41,24 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     }
 
     @Override
+    public boolean batchInsertFeedGroup(List<FeedByGroup> feedGroups) {
+        if (CollectionUtils.isEmpty(feedGroups)) return true;
+        return feedByGroupDao.batchInsert(feedGroups) > 0;
+    }
+
+    @Override
+    public long removeFeedGroup(Long userId, Long groupId) {
+        FeedByGroup update = new FeedByGroup();
+        update.setValid(false);
+
+        FeedByGroupExample example = new FeedByGroupExample();
+        example.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andGroupIdEqualTo(groupId);
+        return feedByGroupDao.updateByExample(update, example);
+    }
+
+    @Override
     public boolean insertFeedImages(List<FeedImage> images) {
         return feedImageDao.batchInsert(images) > 0;
     }

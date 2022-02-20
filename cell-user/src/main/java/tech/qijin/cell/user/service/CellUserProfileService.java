@@ -12,6 +12,12 @@ import java.util.Map;
  */
 public interface CellUserProfileService {
 
+    default UserProfile defaultProfile(){
+        UserProfile profile = new UserProfile();
+        profile.setName("匿名用户");
+        return profile;
+    }
+
     boolean updateProfile(UserProfile profile);
 
     UserProfile getProfile(Long userId);

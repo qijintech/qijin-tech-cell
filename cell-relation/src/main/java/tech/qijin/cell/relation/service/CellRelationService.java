@@ -17,6 +17,18 @@ public interface CellRelationService {
      */
     boolean addRelation(Long userId, Long peerUserId, RelationKind kind);
 
+    boolean removeRelation(Long userId, Long peerUserId, RelationKind kind);
+
+    /**
+     * 判断两个人是否有某种关系
+     *
+     * @param userId
+     * @param peerUserId
+     * @param kind
+     * @return
+     */
+    boolean hasRelation(Long userId, Long peerUserId, RelationKind kind);
+
     /**
      * 查询关系
      *
@@ -44,6 +56,7 @@ public interface CellRelationService {
      */
     Long countRelation(Long userId, RelationKind kind);
 
+
     /**
      * 获取未读数
      *
@@ -60,6 +73,8 @@ public interface CellRelationService {
      * @param kind
      */
     void incrUnread(Long userId, RelationKind kind);
+
+    void decrUnread(Long userId, RelationKind kind);
 
     /**
      * 减少未读数

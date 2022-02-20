@@ -15,6 +15,7 @@ import tech.qijin.util4j.redis.RedisUtil;
 import tech.qijin.util4j.utils.NumberUtil;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -27,6 +28,7 @@ public class CellRelationServiceImpl implements CellRelationService {
 
     @Override
     public boolean addRelation(Long userId, Long peerUserId, RelationKind kind) {
+        if (userId.equals(peerUserId)) return true;
         Relation existedRelation = cellRelationHelper.getRelation(userId, peerUserId, kind);
         if (existedRelation == null) {
             Relation relation = new Relation();
@@ -51,6 +53,34 @@ public class CellRelationServiceImpl implements CellRelationService {
             return false;
         }
         return false;
+    }
+
+    @Override
+    public boolean removeRelation(Long userId, Long peerUserId, RelationKind kind) {
+        if (userId.equals(peerUserId)) return true;
+        Relation existedRelation = cellRelationHelper.getRelation(userId, peerUserId, kind);
+        if (existedRelation == null) {
+            return true;
+        }
+        if (RelationStatus.DELETED.equals(existedRelation.getStatus())) {
+            return true;
+        }
+        if (RelationStatus.NORMAL.equals(existedRelation.getStatus())) {
+            if (cellRelationHelper.updateRelationStatus(existedRelation, RelationStatus.DELETED)) {
+                decrUnread(userId, kind);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasRelation(Long userId, Long peerUserId, RelationKind kind) {
+        if (userId.equals(peerUserId)) return false;
+        Relation existedRelation = cellRelationHelper.getRelation(userId, peerUserId, kind);
+        if (existedRelation == null) return false;
+        return RelationStatus.NORMAL.equals(existedRelation.getStatus());
     }
 
     @Override
@@ -83,6 +113,14 @@ public class CellRelationServiceImpl implements CellRelationService {
     public void incrUnread(Long userId, RelationKind kind) {
         String key = CacheKey.INSTANCE.unreadCountKey(userId, kind);
         redisUtil.increment(key, 1L);
+        redisUtil.setExpire(key, 100, TimeUnit.DAYS);
+    }
+
+    @Override
+    public void decrUnread(Long userId, RelationKind kind) {
+        String key = CacheKey.INSTANCE.unreadCountKey(userId, kind);
+        redisUtil.decrement(key, 1L);
+        redisUtil.setExpire(key, 100, TimeUnit.DAYS);
     }
 
     @Override

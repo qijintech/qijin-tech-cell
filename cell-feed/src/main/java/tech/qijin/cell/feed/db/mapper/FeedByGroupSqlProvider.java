@@ -36,6 +36,10 @@ public class FeedByGroupSqlProvider {
             sql.VALUES("group_id", "#{groupId,jdbcType=BIGINT}");
         }
         
+        if (record.getUserId() != null) {
+            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
+        }
+        
         if (record.getFeedId() != null) {
             sql.VALUES("feed_id", "#{feedId,jdbcType=BIGINT}");
         }
@@ -64,6 +68,7 @@ public class FeedByGroupSqlProvider {
         }
         sql.SELECT("channel");
         sql.SELECT("group_id");
+        sql.SELECT("user_id");
         sql.SELECT("feed_id");
         sql.SELECT("valid");
         sql.SELECT("update_time");
@@ -97,6 +102,10 @@ public class FeedByGroupSqlProvider {
             sql.SET("group_id = #{record.groupId,jdbcType=BIGINT}");
         }
         
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        }
+        
         if (record.getFeedId() != null) {
             sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         }
@@ -124,6 +133,7 @@ public class FeedByGroupSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("group_id = #{record.groupId,jdbcType=BIGINT}");
+        sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("feed_id = #{record.feedId,jdbcType=BIGINT}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -144,6 +154,10 @@ public class FeedByGroupSqlProvider {
         
         if (record.getGroupId() != null) {
             sql.SET("group_id = #{groupId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
         }
         
         if (record.getFeedId() != null) {
