@@ -71,5 +71,15 @@
             <columnOverride column="status" property="status"
                             javaType="tech.qijin.cell.message.base.MessageDropsStatus"/>
         </table>
+        <table tableName="feedback">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+        </table>
+        <table tableName="feedback_image">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+        </table>
     </context>
 </generatorConfiguration>
