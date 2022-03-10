@@ -260,7 +260,7 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
 
     @Override
     public String getOpenid(Long userId) {
-        return null;
+        return cellUserAccountHelper.getOpenid(userId);
     }
 
     private String getCaptchaKey(String mobile, String captcha) {
