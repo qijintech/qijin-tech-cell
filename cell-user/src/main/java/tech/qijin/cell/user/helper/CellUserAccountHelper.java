@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface CellUserAccountHelper {
     UserAccount createUserAccount(UserAccount userAccount);
+
     UserAccount getUserAccount(Long userId);
 
     Optional<UserAccount> getUserAccountByUserName(String userName);
@@ -29,14 +30,24 @@ public interface CellUserAccountHelper {
     UserAccountMini createUserAccountMini(String openid, String sessionKey, Long userId);
 
     UserAccountMini getUserAccountMini(String openid);
+
     UserAccountMini getUserAccountMini(Long userId);
 
     /**
      * 更新session_key
+     *
      * @param openid
      * @param sessionKey
      * @return
      */
     boolean updateSessionKey(String openid, String sessionKey);
+
+    /**
+     * 获取 openid
+     *
+     * @param userId
+     * @return
+     */
+    String getOpenid(Long userId);
 
 }

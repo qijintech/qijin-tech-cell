@@ -99,4 +99,15 @@ public class CellUserAccountHelperImpl implements CellUserAccountHelper {
         example.createCriteria().andOpenidEqualTo(openid);
         return userAccountMiniDao.updateByExampleSelective(record, example) > 0;
     }
+
+    @Override
+    public String getOpenid(Long userId) {
+        UserAccountMiniExample example = new UserAccountMiniExample();
+        example.createCriteria()
+                .andUserIdEqualTo(userId);
+        return userAccountMiniDao.selectByExample(example).stream()
+                .map(UserAccountMini::getOpenid)
+                .findFirst()
+                .orElse("");
+    }
 }

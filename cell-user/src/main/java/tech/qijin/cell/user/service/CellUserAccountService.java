@@ -19,10 +19,19 @@ public interface CellUserAccountService {
 
     /**
      * 微信小程序解码手机号
+     *
      * @param userId
      * @param encryptedData
      * @param iv
      * @return
      */
     String decodePhoneNumber(Long userId, String encryptedData, String iv);
+
+    /**
+     * 获取用户openid
+     *
+     * @param userId
+     * @return
+     */
+    String getOpenid(Long userId);
 }

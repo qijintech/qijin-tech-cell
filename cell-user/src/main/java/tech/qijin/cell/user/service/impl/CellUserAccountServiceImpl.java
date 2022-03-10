@@ -258,6 +258,11 @@ public class CellUserAccountServiceImpl implements CellUserAccountService {
         return userPhoneInfo.getPurePhoneNumber();
     }
 
+    @Override
+    public String getOpenid(Long userId) {
+        return null;
+    }
+
     private String getCaptchaKey(String mobile, String captcha) {
         return String.format("%s:%s", mobile, captcha);
     }
