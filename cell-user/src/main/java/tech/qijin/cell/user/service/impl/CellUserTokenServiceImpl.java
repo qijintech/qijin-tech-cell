@@ -52,7 +52,10 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
                     .withClaim("userId", userId)
                     .withExpiresAt(expireAt)
                     .sign(algorithm);
-            return UserToken.builder().token(token).build();
+            return UserToken.builder()
+                    .token(token)
+                    .expire((long) expire)
+                    .build();
         } catch (JWTCreationException exception) {
             log.error(LogFormat.builder().message("jwt error").build());
             MAssert.isTrue(false, ResEnum.BAD_GATEWAY);
@@ -84,14 +87,24 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
             }
             Claim userIdClaim = claimMap.get("userId");
             MAssert.notNull(userIdClaim, ResEnum.UNAUTHORIZED);
+            checkToken(userIdClaim.asLong(), token);
             return userIdClaim.asLong();
         } catch (JWTVerificationException exception) {
             log.error(LogFormat.builder()
                     .message("JWT auth failed")
                     .put("token", token).build());
-                MAssert.isTrue(false, ResEnum.UNAUTHORIZED);
+            MAssert.isTrue(false, ResEnum.UNAUTHORIZED);
         }
         return null;
+    }
+
+    private void checkToken(Long userId, String token) {
+        String cachedToken = redisUtil.getString(userTokenKey(userId));
+        MAssert.isTrue(token.equals(cachedToken), ResEnum.UNAUTHORIZED);
+    }
+
+    private String userTokenKey(Long userId) {
+        return String.format("user:token:%d", userId);
     }
 
     private String getTokenKey(String token) {
