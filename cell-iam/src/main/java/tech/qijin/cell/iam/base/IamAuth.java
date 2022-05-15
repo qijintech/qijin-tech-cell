@@ -15,7 +15,6 @@ public enum IamAuth implements EnumValue<String> {
     GROUP_AUDIT("审核群组权限"),
     ORGANIZER_MANAGE("活动管理员管理权限"),
     ACTIVITY_MANAGE("创建/编辑活动权限"),
-    ACTIVITY_CREATE("创建/编辑活动权限"),
     ACTIVITY_INFO("读取活动权限"),
     ;
 

@@ -38,4 +38,6 @@ public interface IamService {
      * @return
      */
     boolean addRole(Long userId, Long dataId, IamRole iamRole);
+
+    List<Long> listDataIdByAuth(Long userId, IamAuth iamAuth);
 }

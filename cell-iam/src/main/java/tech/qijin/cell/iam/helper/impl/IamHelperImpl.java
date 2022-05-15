@@ -29,6 +29,14 @@ public class IamHelperImpl implements IamHelper {
     private RoleAuthDao roleAuthDao;
 
     @Override
+    public List<UserRole> listUserRole(Long userId) {
+        UserRoleExample example = new UserRoleExample();
+        example.createCriteria()
+                .andUserIdEqualTo(userId);
+        return userRoleDao.selectByExample(example);
+    }
+
+    @Override
     public List<IamRole> listRole(Long userId, Long dataId) {
         UserRoleExample example = new UserRoleExample();
         example.createCriteria()

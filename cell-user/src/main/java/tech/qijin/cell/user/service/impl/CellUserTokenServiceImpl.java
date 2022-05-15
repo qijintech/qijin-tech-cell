@@ -52,6 +52,7 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
                     .withClaim("userId", userId)
                     .withExpiresAt(expireAt)
                     .sign(algorithm);
+            redisUtil.setString(userTokenKey(userId), token);
             return UserToken.builder()
                     .token(token)
                     .expire((long) expire)

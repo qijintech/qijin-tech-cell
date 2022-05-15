@@ -48,6 +48,14 @@ public class UserProfileSqlProvider {
             sql.VALUES("gender", "#{gender,jdbcType=VARCHAR}");
         }
         
+        if (record.getWechatName() != null) {
+            sql.VALUES("wechat_name", "#{wechatName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatAvatar() != null) {
+            sql.VALUES("wechat_avatar", "#{wechatAvatar,jdbcType=VARCHAR}");
+        }
+        
         if (record.getMobile() != null) {
             sql.VALUES("mobile", "#{mobile,jdbcType=CHAR}");
         }
@@ -115,6 +123,8 @@ public class UserProfileSqlProvider {
         sql.SELECT("name");
         sql.SELECT("avatar");
         sql.SELECT("gender");
+        sql.SELECT("wechat_name");
+        sql.SELECT("wechat_avatar");
         sql.SELECT("mobile");
         sql.SELECT("wechat");
         sql.SELECT("birthday");
@@ -167,6 +177,14 @@ public class UserProfileSqlProvider {
         
         if (record.getGender() != null) {
             sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatName() != null) {
+            sql.SET("wechat_name = #{record.wechatName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatAvatar() != null) {
+            sql.SET("wechat_avatar = #{record.wechatAvatar,jdbcType=VARCHAR}");
         }
         
         if (record.getMobile() != null) {
@@ -235,6 +253,8 @@ public class UserProfileSqlProvider {
         sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
         sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
+        sql.SET("wechat_name = #{record.wechatName,jdbcType=VARCHAR}");
+        sql.SET("wechat_avatar = #{record.wechatAvatar,jdbcType=VARCHAR}");
         sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
         sql.SET("wechat = #{record.wechat,jdbcType=VARCHAR}");
         sql.SET("birthday = #{record.birthday,jdbcType=TIMESTAMP}");
@@ -276,6 +296,14 @@ public class UserProfileSqlProvider {
         
         if (record.getGender() != null) {
             sql.SET("gender = #{gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatName() != null) {
+            sql.SET("wechat_name = #{wechatName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatAvatar() != null) {
+            sql.SET("wechat_avatar = #{wechatAvatar,jdbcType=VARCHAR}");
         }
         
         if (record.getMobile() != null) {

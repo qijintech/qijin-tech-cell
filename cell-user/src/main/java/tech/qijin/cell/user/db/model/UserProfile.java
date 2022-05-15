@@ -18,6 +18,10 @@ public class UserProfile {
 
     private Gender gender;
 
+    private String wechatName;
+
+    private String wechatAvatar;
+
     private String mobile;
 
     private String wechat;
@@ -90,6 +94,22 @@ public class UserProfile {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public String getWechatName() {
+        return wechatName;
+    }
+
+    public void setWechatName(String wechatName) {
+        this.wechatName = wechatName == null ? null : wechatName.trim();
+    }
+
+    public String getWechatAvatar() {
+        return wechatAvatar;
+    }
+
+    public void setWechatAvatar(String wechatAvatar) {
+        this.wechatAvatar = wechatAvatar == null ? null : wechatAvatar.trim();
     }
 
     public String getMobile() {
