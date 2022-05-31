@@ -3,10 +3,10 @@ package tech.qijin.cell.relation.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.misc.Cache;
 import tech.qijin.cell.relation.base.CacheKey;
 import tech.qijin.cell.relation.base.RelationKind;
 import tech.qijin.cell.relation.base.RelationStatus;
+import tech.qijin.cell.relation.bo.OpRelationBo;
 import tech.qijin.cell.relation.db.model.Relation;
 import tech.qijin.cell.relation.helper.CellRelationHelper;
 import tech.qijin.cell.relation.service.CellRelationService;
@@ -27,8 +27,10 @@ public class CellRelationServiceImpl implements CellRelationService {
     private RedisUtil redisUtil;
 
     @Override
-    public boolean addRelation(Long userId, Long peerUserId, RelationKind kind) {
-        if (userId.equals(peerUserId)) return true;
+    public OpRelationBo addRelation(Long userId, Long peerUserId, RelationKind kind) {
+        Long dailyAddCount = getDailyAddCount(userId, kind);
+        OpRelationBo opRelationBo = OpRelationBo.of(dailyAddCount);
+        if (userId.equals(peerUserId)) return opRelationBo;
         Relation existedRelation = cellRelationHelper.getRelation(userId, peerUserId, kind);
         if (existedRelation == null) {
             Relation relation = new Relation();
@@ -38,41 +40,47 @@ public class CellRelationServiceImpl implements CellRelationService {
             relation.setFormat(format(userId, peerUserId, kind));
             if (cellRelationHelper.insertRelation(relation)) {
                 incrUnread(userId, kind);
-                return true;
+                return OpRelationBo.builder()
+                        .opDailyCount(incrDailyAddCount(userId, kind))
+                        .build();
             }
-            return false;
+            return opRelationBo;
         }
         if (RelationStatus.NORMAL.equals(existedRelation.getStatus())) {
-            return true;
+            return opRelationBo;
         }
         if (RelationStatus.DELETED.equals(existedRelation.getStatus())) {
             if (cellRelationHelper.updateRelationStatus(existedRelation, RelationStatus.NORMAL)) {
                 incrUnread(userId, kind);
-                return true;
+                return OpRelationBo.builder()
+                        .opDailyCount(incrDailyAddCount(userId, kind))
+                        .build();
             }
-            return false;
+            return opRelationBo;
         }
-        return false;
+        return opRelationBo;
     }
 
     @Override
-    public boolean removeRelation(Long userId, Long peerUserId, RelationKind kind) {
-        if (userId.equals(peerUserId)) return true;
+    public OpRelationBo removeRelation(Long userId, Long peerUserId, RelationKind kind) {
+        Long dailyRemoveCount = getDailyRemoveCount(userId, kind);
+        OpRelationBo opRelationBo = OpRelationBo.of(dailyRemoveCount);
+        if (userId.equals(peerUserId)) return opRelationBo;
         Relation existedRelation = cellRelationHelper.getRelation(userId, peerUserId, kind);
         if (existedRelation == null) {
-            return true;
+            return opRelationBo;
         }
         if (RelationStatus.DELETED.equals(existedRelation.getStatus())) {
-            return true;
+            return opRelationBo;
         }
         if (RelationStatus.NORMAL.equals(existedRelation.getStatus())) {
             if (cellRelationHelper.updateRelationStatus(existedRelation, RelationStatus.DELETED)) {
                 decrUnread(userId, kind);
-                return true;
+                return OpRelationBo.of(incrDailyRemoveCount(userId, kind));
             }
-            return false;
+            return opRelationBo;
         }
-        return false;
+        return opRelationBo;
     }
 
     @Override
@@ -127,6 +135,22 @@ public class CellRelationServiceImpl implements CellRelationService {
     public void clearUnread(Long userId, RelationKind kind) {
         String key = CacheKey.INSTANCE.unreadCountKey(userId, kind);
         redisUtil.delete(key);
+    }
+
+    private Long getDailyAddCount(Long userId, RelationKind kind) {
+        return redisUtil.getLong(CacheKey.INSTANCE.dailyAddCountKey(userId, kind));
+    }
+    private long incrDailyAddCount(Long userId, RelationKind kind) {
+        String key = CacheKey.INSTANCE.dailyAddCountKey(userId, kind);
+        return redisUtil.increment(key, 1);
+    }
+
+    private Long getDailyRemoveCount(Long userId, RelationKind kind) {
+        return redisUtil.getLong(CacheKey.INSTANCE.dailyMinusCountKey(userId, kind));
+    }
+    private long incrDailyRemoveCount(Long userId, RelationKind kind) {
+        String key = CacheKey.INSTANCE.dailyMinusCountKey(userId, kind);
+        return redisUtil.increment(key, 1);
     }
 
     private String format(Long userId, Long peerUserId, RelationKind kind) {

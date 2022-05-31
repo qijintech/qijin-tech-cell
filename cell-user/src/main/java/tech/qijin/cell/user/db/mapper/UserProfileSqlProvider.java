@@ -44,6 +44,10 @@ public class UserProfileSqlProvider {
             sql.VALUES("avatar", "#{avatar,jdbcType=VARCHAR}");
         }
         
+        if (record.getCover() != null) {
+            sql.VALUES("cover", "#{cover,jdbcType=VARCHAR}");
+        }
+        
         if (record.getGender() != null) {
             sql.VALUES("gender", "#{gender,jdbcType=VARCHAR}");
         }
@@ -122,6 +126,7 @@ public class UserProfileSqlProvider {
         sql.SELECT("user_id");
         sql.SELECT("name");
         sql.SELECT("avatar");
+        sql.SELECT("cover");
         sql.SELECT("gender");
         sql.SELECT("wechat_name");
         sql.SELECT("wechat_avatar");
@@ -173,6 +178,10 @@ public class UserProfileSqlProvider {
         
         if (record.getAvatar() != null) {
             sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCover() != null) {
+            sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
         }
         
         if (record.getGender() != null) {
@@ -252,6 +261,7 @@ public class UserProfileSqlProvider {
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
+        sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
         sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
         sql.SET("wechat_name = #{record.wechatName,jdbcType=VARCHAR}");
         sql.SET("wechat_avatar = #{record.wechatAvatar,jdbcType=VARCHAR}");
@@ -292,6 +302,10 @@ public class UserProfileSqlProvider {
         
         if (record.getAvatar() != null) {
             sql.SET("avatar = #{avatar,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCover() != null) {
+            sql.SET("cover = #{cover,jdbcType=VARCHAR}");
         }
         
         if (record.getGender() != null) {

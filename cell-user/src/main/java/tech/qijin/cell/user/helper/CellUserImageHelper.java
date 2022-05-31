@@ -15,4 +15,6 @@ public interface CellUserImageHelper {
     boolean updateUserImageUrl(Long userId, Long id, String url);
 
     boolean deleteUserImage(Long userId, Long id);
+
+    UserImage getFirstImage(Long userId);
 }

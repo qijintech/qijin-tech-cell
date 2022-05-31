@@ -22,4 +22,6 @@ public interface CellUserImageService {
     boolean replaceImage(Long userId, Long id, String url);
 
     boolean deleteImage(Long userId, Long id);
+
+    UserImage getFirstImage(Long userId);
 }

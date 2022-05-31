@@ -46,4 +46,9 @@ public class CellUserImageServiceImpl implements CellUserImageService {
     public boolean deleteImage(Long userId, Long id) {
         return cellUserImageHelper.deleteUserImage(userId, id);
     }
+
+    @Override
+    public UserImage getFirstImage(Long userId) {
+        return cellUserImageHelper.getFirstImage(userId);
+    }
 }

@@ -13,6 +13,7 @@ import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class CellUserImageHelperImpl implements CellUserImageHelper {
     public UserImage insertUserImage(UserImage userImage) {
         MAssert.isTrue(NumberUtil.gtZero(userImage.getUserId()) && StringUtils.isNotBlank(userImage.getUrl()),
                 ResEnum.INVALID_PARAM);
-        if (userImage.getStatus() == null){
+        if (userImage.getStatus() == null) {
             userImage.setStatus(ImageStatus.SHOW);
         }
         userImageDao.insertSelective(userImage);
@@ -74,5 +75,17 @@ public class CellUserImageHelperImpl implements CellUserImageHelper {
         UserImage record = new UserImage();
         record.setStatus(ImageStatus.HIDE);
         return userImageDao.updateByExampleSelective(record, example) > 0;
+    }
+
+    @Override
+    public UserImage getFirstImage(Long userId) {
+        UserImageExample example = new UserImageExample();
+        example.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andStatusEqualTo(ImageStatus.SHOW);
+        return userImageDao.selectByExample(example)
+                .stream()
+                .min(Comparator.comparingLong(UserImage::getId))
+                .orElse(null);
     }
 }

@@ -1,6 +1,7 @@
 package tech.qijin.cell.relation.service;
 
 import tech.qijin.cell.relation.base.RelationKind;
+import tech.qijin.cell.relation.bo.OpRelationBo;
 import tech.qijin.cell.relation.db.model.Relation;
 import tech.qijin.util4j.lang.vo.PageVo;
 
@@ -15,9 +16,9 @@ public interface CellRelationService {
      * @param kind
      * @return
      */
-    boolean addRelation(Long userId, Long peerUserId, RelationKind kind);
+    OpRelationBo addRelation(Long userId, Long peerUserId, RelationKind kind);
 
-    boolean removeRelation(Long userId, Long peerUserId, RelationKind kind);
+    OpRelationBo removeRelation(Long userId, Long peerUserId, RelationKind kind);
 
     /**
      * 判断两个人是否有某种关系

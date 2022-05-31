@@ -5,7 +5,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.qijin.cell.relation.base.RelationKind;
+import tech.qijin.cell.relation.bo.OpRelationBo;
 import tech.qijin.cell.relation.db.model.Relation;
+import tech.qijin.cell.relation.server.vo.OpRelationVo;
 import tech.qijin.cell.relation.server.vo.RelationReqVo;
 import tech.qijin.cell.relation.server.vo.RelationVo;
 import tech.qijin.cell.relation.server.vo.RelationsVo;
@@ -72,13 +74,14 @@ public class CellRelationController {
     }
 
     @PostMapping("/add")
-    public boolean addRelation(@RequestBody RelationReqVo relationReqVo) {
+    public OpRelationVo addRelation(@RequestBody RelationReqVo relationReqVo) {
         MAssert.notNull(relationReqVo, ResEnum.INVALID_PARAM);
         MAssert.isTrue(NumberUtil.gtZero(relationReqVo.getPeerUserId()), ResEnum.INVALID_PARAM);
         MAssert.notNull(relationReqVo.getKind(), ResEnum.INVALID_PARAM);
-        return cellRelationService.addRelation(UserUtil.getUserId(),
+        OpRelationBo opRelationBo = cellRelationService.addRelation(UserUtil.getUserId(),
                 relationReqVo.getPeerUserId(),
                 relationReqVo.getKind());
+        return OpRelationVo.from(opRelationBo);
     }
 
     @GetMapping("/count")

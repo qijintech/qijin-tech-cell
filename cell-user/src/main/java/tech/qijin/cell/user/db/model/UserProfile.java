@@ -16,6 +16,8 @@ public class UserProfile {
 
     private String avatar;
 
+    private String cover;
+
     private Gender gender;
 
     private String wechatName;
@@ -86,6 +88,14 @@ public class UserProfile {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover == null ? null : cover.trim();
     }
 
     public Gender getGender() {
