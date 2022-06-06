@@ -9,6 +9,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,7 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
 
     @Override
     public Long auth(String token) {
+        if (StringUtils.isBlank(token)) return 0L;
         Optional<String> jwtSecretOpt = kmsBean.getRaw("jwt", "secret");
         MAssert.isTrue(jwtSecretOpt.isPresent(), ResEnum.BAD_GATEWAY);
 
@@ -74,7 +76,6 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
             JWTVerifier verifier = JWT.require(algorithm)
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
-            String payload = jwt.getPayload();
             Map<String, Claim> claimMap = jwt.getClaims();
             Claim expClaim = claimMap.get("exp");
             Long expireAt = expClaim.asLong();
@@ -84,12 +85,17 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
                         .put("token", token)
                         .put("exp", expireAt)
                         .build());
-                MAssert.isTrue(false, ResEnum.UNAUTHORIZED);
+                return 0L;
             }
             Claim userIdClaim = claimMap.get("userId");
-            MAssert.notNull(userIdClaim, ResEnum.UNAUTHORIZED);
-            checkToken(userIdClaim.asLong(), token);
-            return userIdClaim.asLong();
+            if (userIdClaim == null) {
+                log.error(LogFormat.builder()
+                        .message("JWT error, claim is null")
+                        .put("token", token)
+                        .build());
+                return 0L;
+            }
+            return checkToken(userIdClaim.asLong(), token);
         } catch (JWTVerificationException exception) {
             log.error(LogFormat.builder()
                     .message("JWT auth failed")
@@ -99,9 +105,17 @@ public class CellUserTokenServiceImpl implements CellUserTokenService {
         return null;
     }
 
-    private void checkToken(Long userId, String token) {
+    private Long checkToken(Long userId, String token) {
         String cachedToken = redisUtil.getString(userTokenKey(userId));
-        MAssert.isTrue(token.equals(cachedToken), ResEnum.UNAUTHORIZED);
+        if (!token.equals(cachedToken)) {
+            log.warn(LogFormat.builder()
+                    .message("JWT token overwrite")
+                    .put("old token", cachedToken)
+                    .put("new token", token)
+                    .build());
+            return 0L;
+        }
+        return userId;
     }
 
     private String userTokenKey(Long userId) {
