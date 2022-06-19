@@ -65,4 +65,6 @@ public interface CellCommentService {
     Map<Long, List<FeedComment>> mapCommentReplies(List<Long> toCommentIds);
 
     FeedComment getCommentById(Long commentId);
+
+    boolean deleteComment(Long commentId);
 }

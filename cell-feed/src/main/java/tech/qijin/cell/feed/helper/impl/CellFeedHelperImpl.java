@@ -11,6 +11,9 @@ import tech.qijin.cell.feed.db.dao.FeedImageDao;
 import tech.qijin.cell.feed.db.dao.FeedTopicDao;
 import tech.qijin.cell.feed.db.model.*;
 import tech.qijin.cell.feed.helper.CellFeedHelper;
+import tech.qijin.util4j.lang.constant.ResEnum;
+import tech.qijin.util4j.utils.MAssert;
+import tech.qijin.util4j.utils.NumberUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,6 +50,12 @@ public class CellFeedHelperImpl implements CellFeedHelper {
     }
 
     @Override
+    public boolean updateFeed(Feed record) {
+        MAssert.isTrue(NumberUtil.gtZero(record.getId()), ResEnum.INVALID_PARAM);
+        return feedItemDao.updateByPrimaryKeySelective(record) > 0;
+    }
+
+    @Override
     public long removeFeedGroup(Long userId, Long groupId) {
         FeedByGroup update = new FeedByGroup();
         update.setValid(false);
@@ -55,7 +64,7 @@ public class CellFeedHelperImpl implements CellFeedHelper {
         example.createCriteria()
                 .andUserIdEqualTo(userId)
                 .andGroupIdEqualTo(groupId);
-        return feedByGroupDao.updateByExample(update, example);
+        return feedByGroupDao.updateByExampleSelective(update, example);
     }
 
     @Override

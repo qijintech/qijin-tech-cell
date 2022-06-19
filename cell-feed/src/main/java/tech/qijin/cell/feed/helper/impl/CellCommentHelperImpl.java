@@ -81,8 +81,7 @@ public class CellCommentHelperImpl implements CellCommentHelper {
         if (CollectionUtils.isEmpty(commentIds)) return Collections.emptyMap();
         FeedCommentExample example = new FeedCommentExample();
         example.createCriteria()
-                .andIdIn(commentIds)
-                .andValidEqualTo(true);
+                .andIdIn(commentIds);
         return feedCommentDao.selectByExample(example).stream()
                 .collect(Collectors.toMap(FeedComment::getId, Function.identity()));
     }

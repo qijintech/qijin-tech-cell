@@ -16,6 +16,8 @@ public interface CellFeedHelper {
     boolean insertFeedGroup(FeedByGroup feedGroup);
     boolean batchInsertFeedGroup(List<FeedByGroup> feedGroups);
 
+    boolean updateFeed(Feed record);
+
     long removeFeedGroup(Long userId, Long groupId);
 
     boolean insertFeedImages(List<FeedImage> images);

@@ -1,10 +1,12 @@
 package tech.qijin.cell.feed.service.impl;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.qijin.cell.counting.service.CellCountingService;
@@ -14,6 +16,8 @@ import tech.qijin.cell.feed.db.model.Feed;
 import tech.qijin.cell.feed.db.model.FeedByGroup;
 import tech.qijin.cell.feed.db.model.FeedImage;
 import tech.qijin.cell.feed.db.model.FeedTopic;
+import tech.qijin.cell.feed.event.FeedEvent;
+import tech.qijin.cell.feed.event.FeedEventType;
 import tech.qijin.cell.feed.helper.CellFeedHelper;
 import tech.qijin.cell.feed.service.CellFeedService;
 import tech.qijin.cell.feed.service.CellLikeService;
@@ -36,7 +40,7 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
     @Autowired
     private CellCountingService cellCountingService;
     @Autowired
-    private CellLikeService cellLikeService;
+    private ApplicationEventPublisher eventPublisher;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -67,6 +71,11 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
             MAssert.isTrue(cellFeedHelper.insertFeedGroup(group), ResEnum.BAD_GATEWAY);
         });
 
+        eventPublisher.publishEvent(FeedEvent.builder()
+                .type(FeedEventType.CREATE)
+                .feedId(feed.getId())
+                .build()
+                .extra("groupIds", groupIds));
         cellCountingService.onEvent(FeedPublishEvent.builder()
                 .userId(cellFeedBo.getFeed().getUserId())
                 .build());
@@ -112,6 +121,23 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
 
     @Override
     public boolean deleteFeed(Long feedId, Long userId) {
+        Feed feed = cellFeedHelper.getFeedById(feedId);
+        MAssert.isTrue(feed != null, ResEnum.FORBIDDEN);
+        MAssert.isTrue(feed.getUserId().equals(userId), ResEnum.FORBIDDEN);
+        if (!FeedType.PUBLISHED.equals(feed.getType())) {
+            log.warn("deleteFeed feed not published, feedId={}", feedId);
+            return true;
+        }
+        Feed record = new Feed();
+        record.setId(feed.getId());
+        record.setType(FeedType.DELETED);
+        if (cellFeedHelper.updateFeed(record)) {
+            eventPublisher.publishEvent(FeedEvent.builder()
+                    .type(FeedEventType.DELETE)
+                    .feedId(feedId)
+                    .build());
+            return true;
+        }
         return false;
     }
 

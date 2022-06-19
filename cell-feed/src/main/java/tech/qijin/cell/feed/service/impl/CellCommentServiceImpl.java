@@ -12,6 +12,7 @@ import tech.qijin.util4j.lang.vo.PageVo;
 import tech.qijin.util4j.utils.DateUtil;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
+import tech.qijin.util4j.web.util.UserUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -40,11 +41,11 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
 
     @Override
     public FeedComment replyComment(Long userId,
-                                Long feedId,
-                                Long commentId,
-                                Long subCommentId,
-                                String commentText,
-                                String commentImage) {
+                                    Long feedId,
+                                    Long commentId,
+                                    Long subCommentId,
+                                    String commentText,
+                                    String commentImage) {
         MAssert.isTrue(NumberUtil.gtZero(commentId), ResEnum.INVALID_PARAM);
         FeedComment comment = new FeedComment();
         comment.setUserId(userId);
@@ -98,4 +99,12 @@ public class CellCommentServiceImpl extends CommonService implements CellComment
         return cellCommentHelper.getComment(commentId);
     }
 
+    @Override
+    public boolean deleteComment(Long commentId) {
+        FeedComment comment = cellCommentHelper.getComment(commentId);
+        MAssert.isTrue(comment != null, ResEnum.FORBIDDEN);
+        if (!comment.getValid()) return true;
+        MAssert.isTrue(comment.getUserId().equals(UserUtil.getUserId()), ResEnum.FORBIDDEN);
+        return cellCommentHelper.delComment(commentId);
+    }
 }
