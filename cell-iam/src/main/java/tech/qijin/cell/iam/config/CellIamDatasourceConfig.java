@@ -58,6 +58,7 @@ public class CellIamDatasourceConfig {
         ChannelInterceptor channelInterceptor = new ChannelInterceptor();
         Properties channelProperties = new Properties();
         channelProperties.put("tenantColumnName", "channel");
+        channelProperties.put("excludedTables", "role_auth");
         channelInterceptor.setProperties(channelProperties);
         configuration.addInterceptor(channelInterceptor);
         sqlSessionFactoryBean.setConfiguration(configuration);

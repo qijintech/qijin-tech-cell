@@ -12,10 +12,12 @@ import tech.qijin.cell.feed.db.dao.FeedTopicDao;
 import tech.qijin.cell.feed.db.model.*;
 import tech.qijin.cell.feed.helper.CellFeedHelper;
 import tech.qijin.util4j.lang.constant.ResEnum;
+import tech.qijin.util4j.lang.vo.PageVo;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -124,6 +126,17 @@ public class CellFeedHelperImpl implements CellFeedHelper {
         example.createCriteria()
                 .andTypeEqualTo(type)
                 .andUserIdEqualTo(userId);
+        return feedItemDao.selectByExample(example);
+    }
+
+    @Override
+    public List<Feed> pageFeedByUserAndDate(Long userId, FeedType type, PageVo pageVo, Date timeLimit) {
+        FeedExample example = new FeedExample();
+        example.setOrderByClause(pageVo.orderBy("create_time"));
+        example.createCriteria()
+                .andTypeEqualTo(type)
+                .andUserIdEqualTo(userId)
+                .andCreateTimeGreaterThanOrEqualTo(timeLimit);
         return feedItemDao.selectByExample(example);
     }
 

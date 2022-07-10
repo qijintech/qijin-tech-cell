@@ -26,6 +26,7 @@ import tech.qijin.cell.feed.service.bo.FeedBo;
 import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.lang.event.FeedPublishEvent;
 import tech.qijin.util4j.lang.vo.PageVo;
+import tech.qijin.util4j.utils.DateUtil;
 import tech.qijin.util4j.utils.MAssert;
 import tech.qijin.util4j.utils.NumberUtil;
 
@@ -177,8 +178,9 @@ public class CellFeedServiceImpl extends CommonService implements CellFeedServic
         Integer pageNo = 1;
         Integer pageSize = 50;
         Integer total = 0;
+        Date timeLimit = DateUtil.plusDays(DateUtil.now(), -30);
         while (true) {
-            List<Feed> feeds = cellFeedHelper.pageFeedByUser(userId, FeedType.PUBLISHED, pageNo, pageSize);
+            List<Feed> feeds = cellFeedHelper.pageFeedByUserAndDate(userId, FeedType.PUBLISHED, new PageVo(pageNo, pageSize), timeLimit);
             if (CollectionUtils.isEmpty(feeds)) break;
             pageNo++;
             List<FeedByGroup> feedByGroups = feeds.stream().map(feed -> {

@@ -39,5 +39,9 @@ public interface IamService {
      */
     boolean addRole(Long userId, Long dataId, IamRole iamRole);
 
+    boolean rmRole(Long userId, Long dataId, IamRole iamRole);
+
     List<Long> listDataIdByAuth(Long userId, IamAuth iamAuth);
+
+    List<Long> listUserIdByData(Long dataId, IamAuth iamAuth);
 }

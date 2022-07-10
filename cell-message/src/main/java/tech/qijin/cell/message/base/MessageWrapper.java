@@ -14,11 +14,13 @@ public class MessageWrapper {
     // 当站内信中有奖励时，drops才会有值
     private List<DropsWrapper> drops;
 
+    private static final String MSG = "欢迎来到桃花岛！";
+
     public static MessageWrapper welcome() {
         return MessageWrapper.builder()
                 .kind(MessageKind.SYSTEM)
-                .brief("欢迎来到桃花岛！")
-                .content("欢迎来到桃花岛！")
+                .brief(MSG)
+                .content(MSG)
                 .build();
     }
 }

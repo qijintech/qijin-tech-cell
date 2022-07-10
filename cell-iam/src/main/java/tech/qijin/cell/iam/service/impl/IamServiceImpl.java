@@ -1,5 +1,6 @@
 package tech.qijin.cell.iam.service.impl;
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,11 @@ public class IamServiceImpl implements IamService {
     }
 
     @Override
+    public boolean rmRole(Long userId, Long dataId, IamRole iamRole) {
+        return iamHelper.rmRole(userId, dataId, iamRole);
+    }
+
+    @Override
     public List<Long> listDataIdByAuth(Long userId, IamAuth iamAuth) {
         List<UserRole> userRoles = iamHelper.listUserRole(userId);
         if (CollectionUtils.isEmpty(userRoles)) return Collections.emptyList();
@@ -57,5 +63,15 @@ public class IamServiceImpl implements IamService {
                 .filter(userRole -> iamHelper.listAuthByRole(userRole.getRole()).contains(iamAuth))
                 .map(UserRole::getDataId)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Long> listUserIdByData(Long dataId, IamAuth iamAuth) {
+        List<IamRole> roles = iamHelper.listRoleByAuth(iamAuth);
+        if (CollectionUtils.isEmpty(roles)) return Lists.newArrayList();
+        List<UserRole> userRoles = iamHelper.listUserIdByRoleAndData(dataId, roles);
+        return Lists.newArrayList(userRoles.stream()
+                .map(UserRole::getUserId)
+                .collect(Collectors.toSet()));
     }
 }

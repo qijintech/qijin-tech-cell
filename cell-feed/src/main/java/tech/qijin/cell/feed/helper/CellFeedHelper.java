@@ -5,7 +5,9 @@ import tech.qijin.cell.feed.db.model.Feed;
 import tech.qijin.cell.feed.db.model.FeedByGroup;
 import tech.qijin.cell.feed.db.model.FeedImage;
 import tech.qijin.cell.feed.db.model.FeedTopic;
+import tech.qijin.util4j.lang.vo.PageVo;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ public interface CellFeedHelper {
     boolean insertFeed(Feed feed);
 
     boolean insertFeedGroup(FeedByGroup feedGroup);
+
     boolean batchInsertFeedGroup(List<FeedByGroup> feedGroups);
 
     boolean updateFeed(Feed record);
@@ -36,7 +39,10 @@ public interface CellFeedHelper {
 
     List<Feed> pageFeedByUser(Long userId, FeedType type, Integer pageNo, Integer pageSize);
 
+    List<Feed> pageFeedByUserAndDate(Long userId, FeedType type, PageVo pageVo, Date timeLimit);
+
     List<FeedImage> listFeedImages(List<Long> feedIds);
+
     Map<Long, List<FeedImage>> mapFeedImages(List<Long> feedIds);
 
     /**
