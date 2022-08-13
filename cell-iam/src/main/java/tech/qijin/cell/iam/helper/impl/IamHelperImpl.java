@@ -56,6 +56,17 @@ public class IamHelperImpl implements IamHelper {
     }
 
     @Override
+    public Set<IamRole> listRole(Long userId) {
+        UserRoleExample example = new UserRoleExample();
+        example.createCriteria()
+                .andUserIdEqualTo(userId);
+        return userRoleDao.selectByExample(example)
+                .stream()
+                .map(UserRole::getRole)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
     public List<IamRole> listRole(Long userId, Long dataId) {
         UserRoleExample example = new UserRoleExample();
         example.createCriteria()

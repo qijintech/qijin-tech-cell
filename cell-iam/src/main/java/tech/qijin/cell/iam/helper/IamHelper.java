@@ -5,10 +5,12 @@ import tech.qijin.cell.iam.base.IamRole;
 import tech.qijin.cell.iam.db.model.UserRole;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IamHelper {
     List<UserRole> listUserRole(Long userId);
 
+    Set<IamRole> listRole(Long userId);
     List<IamRole> listRole(Long userId, Long dataId);
 
     List<IamAuth> listAuth(Long userId, Long dataId);

@@ -13,6 +13,7 @@ import tech.qijin.cell.iam.service.IamService;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,6 +38,15 @@ public class IamServiceImpl implements IamService {
     @Override
     public boolean hasAuth(Long userId, Long dataId, IamAuth iamAuth) {
         return hasAuth(iamHelper.listRole(userId, dataId), iamAuth);
+    }
+
+    @Override
+    public boolean hasAuth(Long userId, IamAuth iamAuth) {
+        Set<IamRole> roles = iamHelper.listRole(userId);
+        return iamHelper.listAuthByRoles(Lists.newArrayList(roles))
+                .stream()
+                .collect(Collectors.toSet())
+                .contains(iamAuth);
     }
 
     @Override

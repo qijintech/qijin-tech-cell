@@ -19,6 +19,8 @@ public interface IamService {
      */
     boolean hasAuth(Long userId, Long dataId, IamAuth iamAuth);
 
+    boolean hasAuth(Long userId, IamAuth iamAuth);
+
     boolean hasAuth(List<IamRole> roles, IamAuth iamAuth);
 
     /**
