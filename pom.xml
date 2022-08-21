@@ -29,6 +29,7 @@
 		<module>cell-task</module>
 		<module>cell-counting</module>
 		<module>cell-account</module>
+		<module>cell-config</module>
   </modules>
 
 	<properties>
