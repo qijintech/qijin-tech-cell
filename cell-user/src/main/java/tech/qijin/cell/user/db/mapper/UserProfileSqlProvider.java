@@ -40,24 +40,16 @@ public class UserProfileSqlProvider {
             sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getNickname() != null) {
+            sql.VALUES("nickname", "#{nickname,jdbcType=VARCHAR}");
+        }
+        
         if (record.getAvatar() != null) {
             sql.VALUES("avatar", "#{avatar,jdbcType=VARCHAR}");
         }
         
-        if (record.getCover() != null) {
-            sql.VALUES("cover", "#{cover,jdbcType=VARCHAR}");
-        }
-        
         if (record.getGender() != null) {
             sql.VALUES("gender", "#{gender,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getWechatName() != null) {
-            sql.VALUES("wechat_name", "#{wechatName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getWechatAvatar() != null) {
-            sql.VALUES("wechat_avatar", "#{wechatAvatar,jdbcType=VARCHAR}");
         }
         
         if (record.getMobile() != null) {
@@ -112,6 +104,18 @@ public class UserProfileSqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getCover() != null) {
+            sql.VALUES("cover", "#{cover,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatName() != null) {
+            sql.VALUES("wechat_name", "#{wechatName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatAvatar() != null) {
+            sql.VALUES("wechat_avatar", "#{wechatAvatar,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -125,11 +129,9 @@ public class UserProfileSqlProvider {
         sql.SELECT("channel");
         sql.SELECT("user_id");
         sql.SELECT("name");
+        sql.SELECT("nickname");
         sql.SELECT("avatar");
-        sql.SELECT("cover");
         sql.SELECT("gender");
-        sql.SELECT("wechat_name");
-        sql.SELECT("wechat_avatar");
         sql.SELECT("mobile");
         sql.SELECT("wechat");
         sql.SELECT("birthday");
@@ -143,6 +145,9 @@ public class UserProfileSqlProvider {
         sql.SELECT("marital_status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("cover");
+        sql.SELECT("wechat_name");
+        sql.SELECT("wechat_avatar");
         sql.FROM("user_profile");
         applyWhere(sql, example, false);
         
@@ -176,24 +181,16 @@ public class UserProfileSqlProvider {
             sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
+        if (record.getNickname() != null) {
+            sql.SET("nickname = #{record.nickname,jdbcType=VARCHAR}");
+        }
+        
         if (record.getAvatar() != null) {
             sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
         }
         
-        if (record.getCover() != null) {
-            sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
-        }
-        
         if (record.getGender() != null) {
             sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getWechatName() != null) {
-            sql.SET("wechat_name = #{record.wechatName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getWechatAvatar() != null) {
-            sql.SET("wechat_avatar = #{record.wechatAvatar,jdbcType=VARCHAR}");
         }
         
         if (record.getMobile() != null) {
@@ -248,6 +245,18 @@ public class UserProfileSqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getCover() != null) {
+            sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatName() != null) {
+            sql.SET("wechat_name = #{record.wechatName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatAvatar() != null) {
+            sql.SET("wechat_avatar = #{record.wechatAvatar,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -260,11 +269,9 @@ public class UserProfileSqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("nickname = #{record.nickname,jdbcType=VARCHAR}");
         sql.SET("avatar = #{record.avatar,jdbcType=VARCHAR}");
-        sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
         sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
-        sql.SET("wechat_name = #{record.wechatName,jdbcType=VARCHAR}");
-        sql.SET("wechat_avatar = #{record.wechatAvatar,jdbcType=VARCHAR}");
         sql.SET("mobile = #{record.mobile,jdbcType=CHAR}");
         sql.SET("wechat = #{record.wechat,jdbcType=VARCHAR}");
         sql.SET("birthday = #{record.birthday,jdbcType=TIMESTAMP}");
@@ -278,6 +285,9 @@ public class UserProfileSqlProvider {
         sql.SET("marital_status = #{record.maritalStatus,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("cover = #{record.cover,jdbcType=VARCHAR}");
+        sql.SET("wechat_name = #{record.wechatName,jdbcType=VARCHAR}");
+        sql.SET("wechat_avatar = #{record.wechatAvatar,jdbcType=VARCHAR}");
         
         UserProfileExample example = (UserProfileExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -300,24 +310,16 @@ public class UserProfileSqlProvider {
             sql.SET("name = #{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getNickname() != null) {
+            sql.SET("nickname = #{nickname,jdbcType=VARCHAR}");
+        }
+        
         if (record.getAvatar() != null) {
             sql.SET("avatar = #{avatar,jdbcType=VARCHAR}");
         }
         
-        if (record.getCover() != null) {
-            sql.SET("cover = #{cover,jdbcType=VARCHAR}");
-        }
-        
         if (record.getGender() != null) {
             sql.SET("gender = #{gender,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getWechatName() != null) {
-            sql.SET("wechat_name = #{wechatName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getWechatAvatar() != null) {
-            sql.SET("wechat_avatar = #{wechatAvatar,jdbcType=VARCHAR}");
         }
         
         if (record.getMobile() != null) {
@@ -370,6 +372,18 @@ public class UserProfileSqlProvider {
         
         if (record.getUpdateTime() != null) {
             sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCover() != null) {
+            sql.SET("cover = #{cover,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatName() != null) {
+            sql.SET("wechat_name = #{wechatName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWechatAvatar() != null) {
+            sql.SET("wechat_avatar = #{wechatAvatar,jdbcType=VARCHAR}");
         }
         
         sql.WHERE("id = #{id,jdbcType=BIGINT}");

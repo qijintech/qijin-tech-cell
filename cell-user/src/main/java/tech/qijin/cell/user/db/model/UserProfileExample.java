@@ -368,6 +368,76 @@ public class UserProfileExample {
             return (Criteria) this;
         }
 
+        public Criteria andNicknameIsNull() {
+            addCriterion("nickname is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameIsNotNull() {
+            addCriterion("nickname is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameEqualTo(String value) {
+            addCriterion("nickname =", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameNotEqualTo(String value) {
+            addCriterion("nickname <>", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameGreaterThan(String value) {
+            addCriterion("nickname >", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameGreaterThanOrEqualTo(String value) {
+            addCriterion("nickname >=", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameLessThan(String value) {
+            addCriterion("nickname <", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameLessThanOrEqualTo(String value) {
+            addCriterion("nickname <=", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameLike(String value) {
+            addCriterion("nickname like", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameNotLike(String value) {
+            addCriterion("nickname not like", value, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameIn(List<String> values) {
+            addCriterion("nickname in", values, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameNotIn(List<String> values) {
+            addCriterion("nickname not in", values, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameBetween(String value1, String value2) {
+            addCriterion("nickname between", value1, value2, "nickname");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicknameNotBetween(String value1, String value2) {
+            addCriterion("nickname not between", value1, value2, "nickname");
+            return (Criteria) this;
+        }
+
         public Criteria andAvatarIsNull() {
             addCriterion("avatar is null");
             return (Criteria) this;
@@ -438,76 +508,6 @@ public class UserProfileExample {
             return (Criteria) this;
         }
 
-        public Criteria andCoverIsNull() {
-            addCriterion("cover is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverIsNotNull() {
-            addCriterion("cover is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverEqualTo(String value) {
-            addCriterion("cover =", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverNotEqualTo(String value) {
-            addCriterion("cover <>", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverGreaterThan(String value) {
-            addCriterion("cover >", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverGreaterThanOrEqualTo(String value) {
-            addCriterion("cover >=", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverLessThan(String value) {
-            addCriterion("cover <", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverLessThanOrEqualTo(String value) {
-            addCriterion("cover <=", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverLike(String value) {
-            addCriterion("cover like", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverNotLike(String value) {
-            addCriterion("cover not like", value, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverIn(List<String> values) {
-            addCriterion("cover in", values, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverNotIn(List<String> values) {
-            addCriterion("cover not in", values, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverBetween(String value1, String value2) {
-            addCriterion("cover between", value1, value2, "cover");
-            return (Criteria) this;
-        }
-
-        public Criteria andCoverNotBetween(String value1, String value2) {
-            addCriterion("cover not between", value1, value2, "cover");
-            return (Criteria) this;
-        }
-
         public Criteria andGenderIsNull() {
             addCriterion("gender is null");
             return (Criteria) this;
@@ -575,146 +575,6 @@ public class UserProfileExample {
 
         public Criteria andGenderNotBetween(Gender value1, Gender value2) {
             addCriterion("gender not between", value1, value2, "gender");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameIsNull() {
-            addCriterion("wechat_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameIsNotNull() {
-            addCriterion("wechat_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameEqualTo(String value) {
-            addCriterion("wechat_name =", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameNotEqualTo(String value) {
-            addCriterion("wechat_name <>", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameGreaterThan(String value) {
-            addCriterion("wechat_name >", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameGreaterThanOrEqualTo(String value) {
-            addCriterion("wechat_name >=", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameLessThan(String value) {
-            addCriterion("wechat_name <", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameLessThanOrEqualTo(String value) {
-            addCriterion("wechat_name <=", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameLike(String value) {
-            addCriterion("wechat_name like", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameNotLike(String value) {
-            addCriterion("wechat_name not like", value, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameIn(List<String> values) {
-            addCriterion("wechat_name in", values, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameNotIn(List<String> values) {
-            addCriterion("wechat_name not in", values, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameBetween(String value1, String value2) {
-            addCriterion("wechat_name between", value1, value2, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatNameNotBetween(String value1, String value2) {
-            addCriterion("wechat_name not between", value1, value2, "wechatName");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarIsNull() {
-            addCriterion("wechat_avatar is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarIsNotNull() {
-            addCriterion("wechat_avatar is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarEqualTo(String value) {
-            addCriterion("wechat_avatar =", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarNotEqualTo(String value) {
-            addCriterion("wechat_avatar <>", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarGreaterThan(String value) {
-            addCriterion("wechat_avatar >", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarGreaterThanOrEqualTo(String value) {
-            addCriterion("wechat_avatar >=", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarLessThan(String value) {
-            addCriterion("wechat_avatar <", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarLessThanOrEqualTo(String value) {
-            addCriterion("wechat_avatar <=", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarLike(String value) {
-            addCriterion("wechat_avatar like", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarNotLike(String value) {
-            addCriterion("wechat_avatar not like", value, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarIn(List<String> values) {
-            addCriterion("wechat_avatar in", values, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarNotIn(List<String> values) {
-            addCriterion("wechat_avatar not in", values, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarBetween(String value1, String value2) {
-            addCriterion("wechat_avatar between", value1, value2, "wechatAvatar");
-            return (Criteria) this;
-        }
-
-        public Criteria andWechatAvatarNotBetween(String value1, String value2) {
-            addCriterion("wechat_avatar not between", value1, value2, "wechatAvatar");
             return (Criteria) this;
         }
 
@@ -1595,6 +1455,216 @@ public class UserProfileExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverIsNull() {
+            addCriterion("cover is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverIsNotNull() {
+            addCriterion("cover is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverEqualTo(String value) {
+            addCriterion("cover =", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotEqualTo(String value) {
+            addCriterion("cover <>", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverGreaterThan(String value) {
+            addCriterion("cover >", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverGreaterThanOrEqualTo(String value) {
+            addCriterion("cover >=", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverLessThan(String value) {
+            addCriterion("cover <", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverLessThanOrEqualTo(String value) {
+            addCriterion("cover <=", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverLike(String value) {
+            addCriterion("cover like", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotLike(String value) {
+            addCriterion("cover not like", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverIn(List<String> values) {
+            addCriterion("cover in", values, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotIn(List<String> values) {
+            addCriterion("cover not in", values, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverBetween(String value1, String value2) {
+            addCriterion("cover between", value1, value2, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotBetween(String value1, String value2) {
+            addCriterion("cover not between", value1, value2, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameIsNull() {
+            addCriterion("wechat_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameIsNotNull() {
+            addCriterion("wechat_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameEqualTo(String value) {
+            addCriterion("wechat_name =", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameNotEqualTo(String value) {
+            addCriterion("wechat_name <>", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameGreaterThan(String value) {
+            addCriterion("wechat_name >", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameGreaterThanOrEqualTo(String value) {
+            addCriterion("wechat_name >=", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameLessThan(String value) {
+            addCriterion("wechat_name <", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameLessThanOrEqualTo(String value) {
+            addCriterion("wechat_name <=", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameLike(String value) {
+            addCriterion("wechat_name like", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameNotLike(String value) {
+            addCriterion("wechat_name not like", value, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameIn(List<String> values) {
+            addCriterion("wechat_name in", values, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameNotIn(List<String> values) {
+            addCriterion("wechat_name not in", values, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameBetween(String value1, String value2) {
+            addCriterion("wechat_name between", value1, value2, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatNameNotBetween(String value1, String value2) {
+            addCriterion("wechat_name not between", value1, value2, "wechatName");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarIsNull() {
+            addCriterion("wechat_avatar is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarIsNotNull() {
+            addCriterion("wechat_avatar is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarEqualTo(String value) {
+            addCriterion("wechat_avatar =", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarNotEqualTo(String value) {
+            addCriterion("wechat_avatar <>", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarGreaterThan(String value) {
+            addCriterion("wechat_avatar >", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarGreaterThanOrEqualTo(String value) {
+            addCriterion("wechat_avatar >=", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarLessThan(String value) {
+            addCriterion("wechat_avatar <", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarLessThanOrEqualTo(String value) {
+            addCriterion("wechat_avatar <=", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarLike(String value) {
+            addCriterion("wechat_avatar like", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarNotLike(String value) {
+            addCriterion("wechat_avatar not like", value, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarIn(List<String> values) {
+            addCriterion("wechat_avatar in", values, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarNotIn(List<String> values) {
+            addCriterion("wechat_avatar not in", values, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarBetween(String value1, String value2) {
+            addCriterion("wechat_avatar between", value1, value2, "wechatAvatar");
+            return (Criteria) this;
+        }
+
+        public Criteria andWechatAvatarNotBetween(String value1, String value2) {
+            addCriterion("wechat_avatar not between", value1, value2, "wechatAvatar");
             return (Criteria) this;
         }
     }

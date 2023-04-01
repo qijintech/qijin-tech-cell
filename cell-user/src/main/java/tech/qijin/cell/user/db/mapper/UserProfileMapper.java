@@ -32,25 +32,25 @@ public interface UserProfileMapper {
 
     @Insert({
         "insert into user_profile (channel, user_id, ",
-        "name, avatar, cover, ",
-        "gender, wechat_name, ",
-        "wechat_avatar, mobile, ",
-        "wechat, birthday, ",
+        "name, nickname, ",
+        "avatar, gender, ",
+        "mobile, wechat, birthday, ",
         "born_city, live_city, ",
         "edu, edu_degree, ",
         "job, height, weight, ",
         "marital_status, create_time, ",
-        "update_time)",
+        "update_time, cover, ",
+        "wechat_name, wechat_avatar)",
         "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
-        "#{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, ",
-        "#{gender,jdbcType=VARCHAR}, #{wechatName,jdbcType=VARCHAR}, ",
-        "#{wechatAvatar,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, ",
-        "#{wechat,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
+        "#{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, ",
+        "#{avatar,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, ",
+        "#{mobile,jdbcType=CHAR}, #{wechat,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
         "#{bornCity,jdbcType=VARCHAR}, #{liveCity,jdbcType=VARCHAR}, ",
         "#{edu,jdbcType=VARCHAR}, #{eduDegree,jdbcType=VARCHAR}, ",
         "#{job,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, ",
         "#{maritalStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP})"
+        "#{updateTime,jdbcType=TIMESTAMP}, #{cover,jdbcType=VARCHAR}, ",
+        "#{wechatName,jdbcType=VARCHAR}, #{wechatAvatar,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserProfile record);
@@ -65,11 +65,9 @@ public interface UserProfileMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="nickname", property="nickname", jdbcType=JdbcType.VARCHAR),
         @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
-        @Result(column="cover", property="cover", jdbcType=JdbcType.VARCHAR),
         @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
-        @Result(column="wechat_name", property="wechatName", jdbcType=JdbcType.VARCHAR),
-        @Result(column="wechat_avatar", property="wechatAvatar", jdbcType=JdbcType.VARCHAR),
         @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
         @Result(column="wechat", property="wechat", jdbcType=JdbcType.VARCHAR),
         @Result(column="birthday", property="birthday", jdbcType=JdbcType.TIMESTAMP),
@@ -82,15 +80,18 @@ public interface UserProfileMapper {
         @Result(column="weight", property="weight", jdbcType=JdbcType.VARCHAR),
         @Result(column="marital_status", property="maritalStatus", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="cover", property="cover", jdbcType=JdbcType.VARCHAR),
+        @Result(column="wechat_name", property="wechatName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="wechat_avatar", property="wechatAvatar", jdbcType=JdbcType.VARCHAR)
     })
     List<UserProfile> selectByExample(UserProfileExample example);
 
     @Select({
         "select",
-        "id, channel, user_id, name, avatar, cover, gender, wechat_name, wechat_avatar, ",
-        "mobile, wechat, birthday, born_city, live_city, edu, edu_degree, job, height, ",
-        "weight, marital_status, create_time, update_time",
+        "id, channel, user_id, name, nickname, avatar, gender, mobile, wechat, birthday, ",
+        "born_city, live_city, edu, edu_degree, job, height, weight, marital_status, ",
+        "create_time, update_time, cover, wechat_name, wechat_avatar",
         "from user_profile",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -99,11 +100,9 @@ public interface UserProfileMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="nickname", property="nickname", jdbcType=JdbcType.VARCHAR),
         @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
-        @Result(column="cover", property="cover", jdbcType=JdbcType.VARCHAR),
         @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
-        @Result(column="wechat_name", property="wechatName", jdbcType=JdbcType.VARCHAR),
-        @Result(column="wechat_avatar", property="wechatAvatar", jdbcType=JdbcType.VARCHAR),
         @Result(column="mobile", property="mobile", jdbcType=JdbcType.CHAR),
         @Result(column="wechat", property="wechat", jdbcType=JdbcType.VARCHAR),
         @Result(column="birthday", property="birthday", jdbcType=JdbcType.TIMESTAMP),
@@ -116,7 +115,10 @@ public interface UserProfileMapper {
         @Result(column="weight", property="weight", jdbcType=JdbcType.VARCHAR),
         @Result(column="marital_status", property="maritalStatus", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="cover", property="cover", jdbcType=JdbcType.VARCHAR),
+        @Result(column="wechat_name", property="wechatName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="wechat_avatar", property="wechatAvatar", jdbcType=JdbcType.VARCHAR)
     })
     UserProfile selectByPrimaryKey(Long id);
 
@@ -134,11 +136,9 @@ public interface UserProfileMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "name = #{name,jdbcType=VARCHAR},",
+          "nickname = #{nickname,jdbcType=VARCHAR},",
           "avatar = #{avatar,jdbcType=VARCHAR},",
-          "cover = #{cover,jdbcType=VARCHAR},",
           "gender = #{gender,jdbcType=VARCHAR},",
-          "wechat_name = #{wechatName,jdbcType=VARCHAR},",
-          "wechat_avatar = #{wechatAvatar,jdbcType=VARCHAR},",
           "mobile = #{mobile,jdbcType=CHAR},",
           "wechat = #{wechat,jdbcType=VARCHAR},",
           "birthday = #{birthday,jdbcType=TIMESTAMP},",
@@ -151,7 +151,10 @@ public interface UserProfileMapper {
           "weight = #{weight,jdbcType=VARCHAR},",
           "marital_status = #{maritalStatus,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
-          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
+          "update_time = #{updateTime,jdbcType=TIMESTAMP},",
+          "cover = #{cover,jdbcType=VARCHAR},",
+          "wechat_name = #{wechatName,jdbcType=VARCHAR},",
+          "wechat_avatar = #{wechatAvatar,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserProfile record);

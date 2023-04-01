@@ -14,15 +14,11 @@ public class UserProfile {
 
     private String name;
 
+    private String nickname;
+
     private String avatar;
 
-    private String cover;
-
     private Gender gender;
-
-    private String wechatName;
-
-    private String wechatAvatar;
 
     private String mobile;
 
@@ -49,6 +45,12 @@ public class UserProfile {
     private Date createTime;
 
     private Date updateTime;
+
+    private String cover;
+
+    private String wechatName;
+
+    private String wechatAvatar;
 
     public Long getId() {
         return id;
@@ -82,6 +84,14 @@ public class UserProfile {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
+    }
+
     public String getAvatar() {
         return avatar;
     }
@@ -90,36 +100,12 @@ public class UserProfile {
         this.avatar = avatar == null ? null : avatar.trim();
     }
 
-    public String getCover() {
-        return cover;
-    }
-
-    public void setCover(String cover) {
-        this.cover = cover == null ? null : cover.trim();
-    }
-
     public Gender getGender() {
         return gender;
     }
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public String getWechatName() {
-        return wechatName;
-    }
-
-    public void setWechatName(String wechatName) {
-        this.wechatName = wechatName == null ? null : wechatName.trim();
-    }
-
-    public String getWechatAvatar() {
-        return wechatAvatar;
-    }
-
-    public void setWechatAvatar(String wechatAvatar) {
-        this.wechatAvatar = wechatAvatar == null ? null : wechatAvatar.trim();
     }
 
     public String getMobile() {
@@ -224,5 +210,29 @@ public class UserProfile {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover == null ? null : cover.trim();
+    }
+
+    public String getWechatName() {
+        return wechatName;
+    }
+
+    public void setWechatName(String wechatName) {
+        this.wechatName = wechatName == null ? null : wechatName.trim();
+    }
+
+    public String getWechatAvatar() {
+        return wechatAvatar;
+    }
+
+    public void setWechatAvatar(String wechatAvatar) {
+        this.wechatAvatar = wechatAvatar == null ? null : wechatAvatar.trim();
     }
 }
