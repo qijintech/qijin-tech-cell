@@ -11,6 +11,7 @@ public enum MaritalStatus implements EnumValue<String> {
     SINGLE("单身"),
     DIVORCED("离异"),
     WIDOWED("丧偶"),
+    NOSINGLE("非单身"),
     ;
 
 
